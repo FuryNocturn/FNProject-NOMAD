@@ -1,0 +1,362 @@
+{
+  "common": {
+    "na": "N/D",
+    "moreInfo": "Más información",
+    "save": "Guardar",
+    "saveSchedule": "Guardar horario",
+    "windowStart": "Inicio de la ventana",
+    "windowEnd": "Fin de la ventana",
+    "localServerTime": "Hora local del servidor",
+    "cooloffPeriod": "Periodo de espera",
+    "updateWindow": "Ventana de actualización: ",
+    "lastRun": "Última ejecución: ",
+    "lastError": "Último error: ",
+    "upToDate": "(actualizado)",
+    "insideWindow": "dentro de la ventana ahora",
+    "outsideWindow": "fuera de la ventana ahora",
+    "cooloff": {
+      "h24": "24 horas (1 día)",
+      "h48": "48 horas (2 días)",
+      "h72": "72 horas (3 días)",
+      "h168": "7 días"
+    }
+  },
+  "system": {
+    "title": "Información del sistema",
+    "subtitle": "Monitorización y diagnóstico en tiempo real • Última actualización: {{time}} • Los datos se actualizan cada 30 segundos",
+    "highMemory": {
+      "title": "Uso de memoria muy alto",
+      "message": "El uso de memoria del sistema supera el 90 %. El rendimiento podría verse afectado."
+    },
+    "resourceUsage": "Uso de recursos",
+    "cpuUsage": "Uso de CPU",
+    "memoryUsage": "Uso de memoria",
+    "swapUsage": "Uso de swap",
+    "cores_one": "{{count}} núcleo",
+    "cores_other": "{{count}} núcleos",
+    "systemDetails": "Detalles del sistema",
+    "os": {
+      "title": "Sistema operativo",
+      "distribution": "Distribución",
+      "kernel": "Versión del kernel",
+      "architecture": "Arquitectura",
+      "hostname": "Nombre del equipo",
+      "platform": "Plataforma"
+    },
+    "processor": {
+      "title": "Procesador",
+      "manufacturer": "Fabricante",
+      "brand": "Marca",
+      "cores": "Núcleos",
+      "physicalCores": "Núcleos físicos",
+      "virtualization": "Virtualización",
+      "enabled": "Activada",
+      "disabled": "Desactivada"
+    },
+    "aiAssistant": "Asistente de IA",
+    "graphics": {
+      "title": "Gráficos",
+      "model": "Modelo",
+      "vendor": "Fabricante",
+      "vram": "VRAM",
+      "modelN": "Modelo de GPU {{n}}",
+      "vendorN": "Fabricante de GPU {{n}}",
+      "vramN": "VRAM de GPU {{n}}"
+    },
+    "memoryAllocation": "Asignación de memoria",
+    "totalRam": "RAM total",
+    "usedRam": "RAM usada",
+    "availableRam": "RAM disponible",
+    "utilized": "{{percent}} % en uso",
+    "storageDevices": "Dispositivos de almacenamiento",
+    "storageNormal": "Normal",
+    "storageWarning": "Aviso: uso elevado",
+    "storageCritical": "Crítico: disco casi lleno",
+    "noStorage": "No se han detectado dispositivos de almacenamiento",
+    "systemStatus": "Estado del sistema",
+    "uptime": "Tiempo de actividad",
+    "cpuCores": "Núcleos de CPU"
+  },
+  "advanced": {
+    "pageTitle": "Ajustes avanzados | Project NOMAD",
+    "title": "Avanzado",
+    "intro": "Configuración avanzada para operadores. Estos ajustes son opcionales: los valores por defecto sirven para la mayoría de las instalaciones.",
+    "connectivity": "Conectividad",
+    "connectivityDescription": "NOMAD comprueba periódicamente si tiene acceso a internet. Por defecto sondea el endpoint de utilidad de Cloudflare con algunas alternativas. Define abajo un endpoint personalizado si tu red bloquea los predeterminados. Déjalo en blanco para usar los valores integrados.",
+    "envOverrideTitle": "Gestionado por variable de entorno",
+    "envOverrideMessage": "La variable de entorno INTERNET_STATUS_TEST_URL está definida y tiene prioridad sobre este ajuste. Elimínala para gestionar aquí la URL de prueba.",
+    "testUrlLabel": "URL de prueba del estado de internet",
+    "testUrlHelp": "Una única URL http(s) para comprobar la conectividad. Cualquier respuesta HTTP cuenta como conectado.",
+    "errorProtocol": "La URL de prueba debe usar http o https.",
+    "errorInvalid": "La URL de prueba debe ser una URL válida (p. ej. \"https://example.com\").",
+    "updated": "Ajuste actualizado correctamente.",
+    "updateFailed": "Ha habido un error al actualizar el ajuste. Inténtalo de nuevo."
+  },
+  "legal": {
+    "pageTitle": "Avisos legales | Project NOMAD",
+    "title": "Avisos legales",
+    "license": {
+      "title": "Acuerdo de licencia",
+      "copyright": "Copyright 2024-2026 Crosstalk Solutions, LLC",
+      "p1": "Licenciado bajo la Licencia Apache, Versión 2.0 (la \"Licencia\"); no puedes usar este archivo excepto en cumplimiento de la Licencia. Puedes obtener una copia de la Licencia en",
+      "p2": "Salvo que lo exija la ley aplicable o se acuerde por escrito, el software distribuido bajo la Licencia se distribuye \"TAL CUAL\", SIN GARANTÍAS NI CONDICIONES DE NINGÚN TIPO, ya sean expresas o implícitas. Consulta la Licencia para conocer el texto específico que regula los permisos y las limitaciones."
+    },
+    "thirdParty": {
+      "title": "Atribución de software de terceros",
+      "intro": "Project NOMAD™ integra los siguientes proyectos de código abierto. Agradecemos a sus desarrolladores y comunidades:",
+      "kiwix": "- Lector offline de Wikipedia y otros contenidos (licencia GPL-3.0)",
+      "kolibri": "- Plataforma de aprendizaje offline de Learning Equality (licencia MIT)",
+      "ollama": "- Entorno de ejecución local de grandes modelos de lenguaje (licencia MIT)",
+      "cyberchef": "- Kit de análisis y codificación de datos de GCHQ (licencia Apache 2.0)",
+      "flatnotes": "- Aplicación de notas autoalojada (licencia MIT)",
+      "qdrant": "- Motor de búsqueda vectorial para la base de conocimiento de IA (licencia Apache 2.0)"
+    },
+    "privacy": {
+      "title": "Declaración de privacidad",
+      "intro": "Project NOMAD está diseñado con la privacidad como principio fundamental:",
+      "telemetry": "<b>Cero telemetría:</b> NOMAD no recopila, transmite ni almacena datos de uso, analíticas ni telemetría.",
+      "localFirst": "<b>Primero lo local:</b> todos tus datos, contenidos descargados, conversaciones con la IA y notas permanecen en tu dispositivo.",
+      "noAccounts": "<b>Sin cuentas:</b> NOMAD funciona por defecto sin cuentas de usuario ni autenticación.",
+      "networkOptional": "<b>Red opcional:</b> solo se necesita conexión a internet para descargar contenidos o actualizaciones. Todas las funciones instaladas funcionan totalmente offline."
+    },
+    "content": {
+      "title": "Aviso sobre el contenido",
+      "p1": "Project NOMAD ofrece herramientas para descargar y acceder a contenido de fuentes de terceros, como Wikipedia, Wikibooks, referencias médicas, plataformas educativas y otros recursos de acceso público.",
+      "p2": "Crosstalk Solutions, LLC no crea, controla, verifica ni garantiza la exactitud, integridad o fiabilidad de ningún contenido de terceros. La inclusión de cualquier contenido no implica su aprobación.",
+      "p3": "Los usuarios son responsables de evaluar la idoneidad y la exactitud de cualquier contenido que descarguen y utilicen."
+    },
+    "medical": {
+      "title": "Aviso sobre información médica y de emergencia",
+      "p1": "Parte del contenido disponible a través de NOMAD incluye referencias médicas, guías de primeros auxilios e información de preparación ante emergencias. Este contenido se ofrece únicamente con fines informativos generales.",
+      "notSubstitute": "Esta información NO sustituye el consejo, diagnóstico o tratamiento médico profesional.",
+      "i1": "Consulta siempre a profesionales sanitarios cualificados ante cualquier duda sobre una afección médica.",
+      "i2": "Nunca ignores el consejo médico profesional ni retrases la consulta por algo que hayas leído en contenido offline.",
+      "i3": "En una emergencia médica, llama de inmediato a los servicios de emergencia si es posible.",
+      "i4": "La información médica puede quedar obsoleta. Cuando puedas, verifica la información crítica con fuentes profesionales actuales."
+    },
+    "storage": {
+      "title": "Almacenamiento de datos",
+      "intro": "Todos los datos asociados a Project NOMAD se almacenan localmente en tu dispositivo:",
+      "installDir": "<b>Directorio de instalación:</b> /opt/project-nomad",
+      "downloaded": "<b>Contenido descargado:</b> /opt/project-nomad/storage",
+      "appData": "<b>Datos de las aplicaciones:</b> se guardan en volúmenes de Docker en tu sistema local",
+      "outro": "Tienes control total sobre tus datos. Desinstalar NOMAD o borrar estos directorios eliminará de forma permanente todos los datos asociados."
+    }
+  },
+  "support": {
+    "pageTitle": "Apoya el proyecto | Project NOMAD",
+    "title": "Apoya el proyecto",
+    "intro": "Project NOMAD es 100 % gratuito y de código abierto: sin suscripciones, sin muros de pago, sin letra pequeña. Si quieres ayudar a que el proyecto siga adelante, aquí tienes algunas formas de apoyarlo.",
+    "coffee": {
+      "title": "Invítanos a un café",
+      "description": "Cada aportación ayuda a financiar el desarrollo, los costes de servidor y los nuevos paquetes de contenido de NOMAD. Incluso una pequeña donación se agradece mucho.",
+      "button": "Apoyar en Ko-fi"
+    },
+    "rogue": {
+      "title": "¿Necesitas ayuda con tu red doméstica?",
+      "bannerAlt": "Rogue Support — Conquer Your Home Network",
+      "description": "Rogue Support es un servicio de consultoría de redes para usuarios domésticos. Piensa en él como el Uber de las redes informáticas: ayuda experta cuando la necesitas.",
+      "visit": "Visitar Rogue.Support"
+    },
+    "other": {
+      "title": "Otras formas de ayudar",
+      "starLink": "Dale una estrella al proyecto en GitHub",
+      "starText": "— ayuda a que más gente descubra NOMAD",
+      "issuesLink": "Informa de errores y sugiere funciones",
+      "issuesText": "— cada informe mejora NOMAD",
+      "share": "Comparte NOMAD con alguien a quien le pueda servir: el boca a boca es el mejor marketing",
+      "discordLink": "Únete a la comunidad de Discord",
+      "discordText": "— pasa un rato, enseña tu montaje y ayuda a otros usuarios"
+    }
+  },
+  "update": {
+    "pageTitle": "Actualización del sistema",
+    "title": "Actualización del sistema",
+    "subtitle": "Mantén tu instancia de Project NOMAD al día con las últimas funciones y mejoras.",
+    "stage": {
+      "idle": "Preparando actualización",
+      "starting": "Iniciando actualización",
+      "pulling": "Descargando imágenes",
+      "pulled": "Imágenes descargadas",
+      "recreating": "Recreando contenedores",
+      "complete": "Actualización completada",
+      "error": "Error en la actualización"
+    },
+    "errors": {
+      "title": "Error en la actualización",
+      "startFailed": "No se pudo iniciar la actualización",
+      "logsFailed": "No se pudieron obtener los registros de la actualización",
+      "checkFailed": "No se pudo buscar actualizaciones"
+    },
+    "restarting": {
+      "title": "Reiniciando contenedor",
+      "message": "El contenedor de administración se está reiniciando. Esta página se recargará automáticamente cuando termine la actualización."
+    },
+    "connectionLost": {
+      "title": "Conexión perdida temporalmente (esperado)",
+      "message": "Puede que veas notificaciones de error mientras el backend se reinicia durante la actualización. Es completamente normal y esperado. La conexión debería restablecerse en un momento."
+    },
+    "updateAvailable": "Actualización disponible",
+    "upToDate": "Sistema actualizado",
+    "newVersionAvailable": "Hay una nueva versión ({{version}}) disponible para tu instancia de Project NOMAD.",
+    "runningLatest": "¡Tu sistema ya tiene la última versión!",
+    "currentVersion": "Versión actual",
+    "latestVersion": "Última versión",
+    "percentComplete": "{{progress}} % completado",
+    "startUpdate": "Iniciar actualización",
+    "noUpdateAvailable": "No hay actualizaciones",
+    "checkAgain": "Comprobar de nuevo",
+    "whatHappens": "¿Qué ocurre durante una actualización?",
+    "steps": {
+      "pull": {
+        "title": "Descargar las últimas imágenes",
+        "description": "Descarga las imágenes de Docker más recientes de todos los contenedores principales"
+      },
+      "recreate": {
+        "title": "Recrear contenedores",
+        "description": "Detiene y recrea de forma segura todos los contenedores principales con las nuevas imágenes"
+      },
+      "reload": {
+        "title": "Recarga automática",
+        "description": "Esta página se recargará automáticamente cuando termine la actualización"
+      }
+    },
+    "viewLogs": "Ver registros de la actualización",
+    "backup": {
+      "title": "Recordatorio de copia de seguridad",
+      "message": "Aunque las actualizaciones están pensadas para ser seguras, siempre se recomienda hacer una copia de seguridad de los datos críticos antes de continuar."
+    },
+    "downtime": {
+      "title": "Interrupción temporal",
+      "message": "Los servicios no estarán disponibles durante unos instantes mientras se actualiza. Normalmente tarda entre 2 y 5 minutos, según tu conexión a internet."
+    },
+    "earlyAccess": {
+      "title": "Acceso anticipado",
+      "label": "Activar acceso anticipado",
+      "description": "Recibe versiones candidatas (RC) antes de su lanzamiento oficial. Ten en cuenta que las versiones RC pueden contener errores y no se recomiendan en entornos donde la estabilidad y la integridad de los datos sean críticas."
+    },
+    "notify": {
+      "updateAvailable": "Actualización disponible: {{version}}",
+      "upToDate": "El sistema está actualizado",
+      "settingUpdated": "Ajuste actualizado correctamente.",
+      "settingFailed": "Ha habido un error al actualizar el ajuste. Inténtalo de nuevo.",
+      "subscribed": "¡Te has suscrito a las notas de versión!",
+      "subscribeFailed": "No se pudo completar la suscripción: {{error}}",
+      "subscribeError": "Error al suscribirse a las notas de versión: {{error}}",
+      "unknownError": "Error desconocido"
+    },
+    "subscribe": {
+      "heading": "¿Quieres estar al día de las novedades de Project NOMAD? Suscríbete para recibir las notas de versión directamente en tu correo. Puedes darte de baja cuando quieras.",
+      "placeholder": "Tu correo electrónico",
+      "button": "Suscribirme",
+      "privacy": "Nos importa tu privacidad. Project NOMAD nunca compartirá tu correo con terceros ni te enviará spam."
+    },
+    "logs": {
+      "title": "Registros de la actualización",
+      "empty": "Aún no hay registros disponibles...",
+      "close": "Cerrar"
+    }
+  },
+  "coreAuto": {
+    "title": "Actualizaciones automáticas del núcleo",
+    "disabledTitle": "Actualizaciones automáticas del núcleo desactivadas",
+    "disabledDefault": "Las actualizaciones automáticas del núcleo se desactivaron tras varios fallos seguidos.",
+    "enable": "Activar actualizaciones automáticas del núcleo",
+    "description": "Instala automáticamente las actualizaciones menores y de parche durante la ventana que elijas. Las versiones mayores siempre requieren una actualización manual por su posible carácter disruptivo.",
+    "cooloffHelp": "Retraso tras publicarse una versión",
+    "toggleFailed": "No se pudo actualizar el ajuste de actualización automática.",
+    "enabled": "Actualizaciones automáticas activadas.",
+    "disabled": "Actualizaciones automáticas desactivadas.",
+    "saved": "Horario de actualización automática guardado.",
+    "saveFailed": "No se pudo guardar el horario de actualización automática.",
+    "statusLabel": "Estado: ",
+    "eligible": "Actualización elegible lista: {{version}}",
+    "noEligible": "No hay actualizaciones elegibles: el sistema está al día o la última versión es mayor / sigue en periodo de espera.",
+    "inWindow": "Ahora mismo dentro de la ventana",
+    "outOfWindow": "Ahora mismo fuera de la ventana",
+    "lastCheck": "Última comprobación: "
+  },
+  "appAuto": {
+    "title": "Actualizaciones automáticas de aplicaciones",
+    "enable": "Activar actualizaciones automáticas de aplicaciones",
+    "description": "Instala automáticamente las actualizaciones menores y de parche de las aplicaciones que hayas incluido (actívalo en cada aplicación desde Supply Depot). Las versiones mayores siempre requieren una actualización manual. Usa la misma ventana de actualización y el mismo periodo de espera que el horario del núcleo de arriba.",
+    "enabled": "Actualizaciones automáticas de aplicaciones activadas.",
+    "disabled": "Actualizaciones automáticas de aplicaciones desactivadas.",
+    "failed": "No se pudo actualizar el ajuste de actualización automática de aplicaciones.",
+    "summary": "{{start}}–{{end}} ({{window}}); periodo de espera {{hours}} h.",
+    "none": "Aún no hay aplicaciones incluidas. Activa la actualización automática en cada aplicación desde Supply Depot."
+  },
+  "contentAuto": {
+    "title": "Actualizaciones automáticas de contenido",
+    "disabledTitle": "Actualizaciones automáticas de contenido desactivadas",
+    "disabledDefault": "Las actualizaciones automáticas de contenido se desactivaron tras varios fallos seguidos.",
+    "enable": "Activar actualizaciones automáticas de contenido",
+    "description": "Descarga automáticamente las versiones más recientes del contenido instalado de la Biblioteca de información (archivos ZIM) y de los mapas durante la ventana que elijas. Las descargas de contenido pueden ser muy grandes, así que define un límite de datos por ventana para controlar cuánto se descarga de una vez. Recomendamos permitir al menos 0,5 GB por ventana de actualización para que la mayoría de las actualizaciones se puedan descargar a tiempo, pero puedes poner un límite menor si tienes un ancho de banda muy limitado y no te importa que se omitan algunas actualizaciones (seguirán apareciendo en la interfaz y podrás actualizarlas manualmente). Si una actualización falla repetidamente al descargarse dentro de la ventana, se desactivará automáticamente y habrá que volver a activarla a mano.",
+    "cooloffHelp": "Retraso tras aparecer una nueva versión",
+    "dataCap": "Límite de datos (GB)",
+    "dataCapHelp": "Por ventana. 0 = sin límite",
+    "enabled": "Actualizaciones automáticas de contenido activadas.",
+    "disabled": "Actualizaciones automáticas de contenido desactivadas.",
+    "toggleFailed": "No se pudo actualizar el ajuste de actualización automática de contenido.",
+    "invalidCap": "El límite de datos debe ser 0 o un número positivo de GB.",
+    "saved": "Horario de actualización de contenido guardado.",
+    "saveFailed": "No se pudo guardar el horario de actualización de contenido.",
+    "summaryUnlimited": "{{start}}–{{end}} ({{window}}); periodo de espera {{hours}} h; límite de datos: sin límite.",
+    "summaryCapped": "{{start}}–{{end}} ({{window}}); periodo de espera {{hours}} h; límite de datos {{cap}} ({{used}} usados en esta ventana).",
+    "allUpToDate": "Todo el contenido instalado está actualizado. Las nuevas versiones aparecerán aquí cuando se detecten.",
+    "skipped": "Omitida: supera el límite de datos, actualiza manualmente"
+  },
+  "contentUpdates": {
+    "title": "Actualizaciones manuales de contenido",
+    "description": "Comprueba si hay versiones más recientes de tus archivos ZIM y mapas instalados.",
+    "check": "Buscar actualizaciones de contenido",
+    "checkFailed": "No se pudo buscar actualizaciones de contenido",
+    "issueTitle": "Problema al buscar actualizaciones",
+    "allUpToDateTitle": "Todo el contenido está actualizado",
+    "allUpToDateMessage": "Todo tu contenido instalado tiene la última versión disponible.",
+    "available_one": "{{count}} actualización disponible",
+    "available_other": "{{count}} actualizaciones disponibles",
+    "updateAll": "Actualizar todo ({{count}})",
+    "colTitle": "Título",
+    "colType": "Tipo",
+    "colSize": "Tamaño",
+    "colVersion": "Versión",
+    "typeMap": "Mapa",
+    "update": "Actualizar",
+    "started": "Actualización iniciada para {{id}}",
+    "startFailed": "No se pudo iniciar la actualización",
+    "startFailedFor": "No se pudo iniciar la actualización de {{id}}",
+    "startedCount": "Se han iniciado {{count}} actualizaciones",
+    "failedCount": "No se pudieron iniciar {{count}} actualizaciones",
+    "applyFailed": "No se pudieron aplicar las actualizaciones",
+    "lastChecked": "Última comprobación: {{time}}"
+  },
+  "gpu": {
+    "reinstalled": "{{name}} se está reinstalando con soporte de GPU. Esta página se recargará en breve.",
+    "reinstallFailed": "No se pudo reinstalar: {{error}}",
+    "forceFailed": "Falló la reinstalación forzada",
+    "unknownError": "Error desconocido",
+    "reinstallTitle": "¿Reinstalar {{name}}?",
+    "reinstall": "Reinstalar",
+    "reinstallBody": "Se recreará el contenedor de {{name}} con el soporte de GPU activado. Tus modelos descargados se conservarán. El servicio no estará disponible durante unos instantes mientras se reinstala.",
+    "amdUnsupported": "Tu sistema tiene una GPU AMD, pero {{name}} solo se está ejecutando en CPU. Reinstalar no lo solucionará: la GPU{{target}} no está en la lista de compatibles de ROCm y necesita una anulación de la versión GFX.",
+    "amdUnsupportedTarget": " ({{target}})",
+    "amdMissing": "Tu sistema tiene una GPU AMD, pero {{name}} no puede acceder a ella. La IA se ejecuta solo en CPU, que es bastante más lento.",
+    "nvidiaMissing": "Tu sistema tiene una GPU NVIDIA, pero {{name}} no puede acceder a ella. La IA se ejecuta solo en CPU, que es bastante más lento.",
+    "alertTitle": "La GPU no es accesible para {{name}}",
+    "fixOverride": "Solucionar: definir anulación de GFX",
+    "fixReinstall": "Solucionar: reinstalar {{name}}",
+    "saveFailed": "No se pudo guardar la anulación de GFX: {{error}}",
+    "overrideTitle": "Definir anulación de GFX de AMD",
+    "saveAndReinstall": "Guardar y reinstalar",
+    "overrideIntro": "ROCm incluye kernels de GPU para una lista fija de chips AMD. Las GPU Radeon integradas que no estén en esa lista se ejecutan en CPU, salvo que ROCm las trate como un chip compatible, algo que se configura con HSA_OVERRIDE_GFX_VERSION.",
+    "chip780": "Radeon 780M / 760M (gfx1103): 11.0.0",
+    "chip680": "Radeon 680M / 660M y otras iGPU RDNA 2 (gfx1031 a gfx1036): 10.3.0",
+    "detected": "GPU detectada: {{gpu}}. Anulación actual: {{override}}.",
+    "detectedRecommended": "GPU detectada: {{gpu}}. Anulación actual: {{override}}. Recomendada para esta GPU: {{value}}.",
+    "notReported": "no informada por Ollama",
+    "none": "ninguna",
+    "overrideLabel": "Anulación de la versión GFX",
+    "overrideHelp": "Al guardar se recrea el contenedor de {{name}} con esta anulación. Los modelos descargados se conservan."
+  }
+}

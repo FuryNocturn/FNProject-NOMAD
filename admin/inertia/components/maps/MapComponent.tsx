@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import Map, {
   FullscreenControl,
   Marker,
@@ -139,6 +140,7 @@ export default function MapComponent({
   const animationFrameRef = useRef<number | null>(null)
   const handledMapCommandIdRef = useRef<number | null>(null)
 
+  const { t } = useTranslation()
   const { markers, addMarker, updateMarker, deleteMarker } = useMapMarkers()
 
   const [targetIndicator, setTargetIndicator] = useState<{ lng: number; lat: number } | null>(null)
@@ -188,8 +190,8 @@ export default function MapComponent({
 
   const confirmDiscardMarkerChanges = useCallback(() => {
     if (!hasUnsavedMarkerChanges) return true
-    return window.confirm('Discard unsaved marker changes?')
-  }, [hasUnsavedMarkerChanges])
+    return window.confirm(t('maps.discardChanges'))
+  }, [hasUnsavedMarkerChanges, t])
 
   useEffect(() => {
     const protocol = new Protocol()

@@ -1,4 +1,5 @@
 import { Head } from '@inertiajs/react'
+import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 import SettingsLayout from '~/layouts/SettingsLayout'
 import StyledButton from '~/components/StyledButton'
@@ -15,6 +16,7 @@ export default function AdvancedPage(props: {
     internetStatusTestUrlEnvOverride: boolean
   }
 }) {
+  const { t } = useTranslation()
   const { addNotification } = useNotifications()
   const { internetStatusTestUrlEnvOverride } = props.advanced
 
@@ -30,10 +32,10 @@ export default function AdvancedPage(props: {
     try {
       const url = new URL(value)
       if (url.protocol !== 'http:' && url.protocol !== 'https:') {
-        return 'Test URL must use http or https.'
+        return t('settingsSystem.advanced.errorProtocol')
       }
     } catch {
-      return 'Test URL must be a valid URL (e.g. "https://example.com").'
+      return t('settingsSystem.advanced.errorInvalid')
     }
     return null
   }
@@ -43,13 +45,13 @@ export default function AdvancedPage(props: {
       return await api.updateSetting('system.internetStatusTestUrl', value)
     },
     onSuccess: () => {
-      addNotification({ message: 'Setting updated successfully.', type: 'success' })
+      addNotification({ message: t('settingsSystem.advanced.updated'), type: 'success' })
     },
     onError: (error: any) => {
       const msg =
         error?.response?.data?.message ||
         error?.message ||
-        'There was an error updating the setting. Please try again.'
+        t('settingsSystem.advanced.updateFailed')
       setTestUrlError(msg)
       addNotification({ message: msg, type: 'error' })
     },
@@ -68,29 +70,26 @@ export default function AdvancedPage(props: {
 
   return (
     <SettingsLayout>
-      <Head title="Advanced Settings | Project NOMAD" />
+      <Head title={t('settingsSystem.advanced.pageTitle')} />
       <div className="xl:pl-72 w-full">
         <main className="px-12 py-6">
-          <h1 className="text-4xl font-semibold mb-4">Advanced</h1>
+          <h1 className="text-4xl font-semibold mb-4">{t('settingsSystem.advanced.title')}</h1>
           <p className="text-text-muted mb-4">
-            Advanced configuration for operators. These settings are optional — the defaults work
-            for most deployments.
+            {t('settingsSystem.advanced.intro')}
           </p>
 
-          <StyledSectionHeader title="Connectivity" className="mt-8 mb-4" />
+          <StyledSectionHeader title={t('settingsSystem.advanced.connectivity')} className="mt-8 mb-4" />
           <div className="bg-surface-primary rounded-lg border-2 border-border-subtle p-6">
             <p className="text-sm text-text-secondary mb-4">
-              NOMAD periodically checks whether it can reach the internet. By default it probes
-              Cloudflare's utility endpoint with a few fallbacks. Set a custom endpoint below if your
-              network blocks the defaults. Leave blank to use the built-in defaults.
+              {t('settingsSystem.advanced.connectivityDescription')}
             </p>
 
             {internetStatusTestUrlEnvOverride && (
               <Alert
                 type="info"
                 variant="bordered"
-                title="Managed by environment variable"
-                message="The INTERNET_STATUS_TEST_URL environment variable is set and takes precedence over this setting. Remove it to manage the test URL here."
+                title={t('settingsSystem.advanced.envOverrideTitle')}
+                message={t('settingsSystem.advanced.envOverrideMessage')}
                 className="!mb-4"
               />
             )}
@@ -99,8 +98,8 @@ export default function AdvancedPage(props: {
               <div className="flex-1">
                 <Input
                   name="internetStatusTestUrl"
-                  label="Internet Status Test URL"
-                  helpText="A single http(s) URL used to check connectivity. Any HTTP response counts as online."
+                  label={t('settingsSystem.advanced.testUrlLabel')}
+                  helpText={t('settingsSystem.advanced.testUrlHelp')}
                   placeholder="https://1.1.1.1/cdn-cgi/trace"
                   value={internetStatusTestUrl}
                   disabled={internetStatusTestUrlEnvOverride}
@@ -119,7 +118,7 @@ export default function AdvancedPage(props: {
                 disabled={updateTestUrlMutation.isPending || internetStatusTestUrlEnvOverride}
                 className="mb-0.5"
               >
-                Save
+                {t('settingsSystem.common.save')}
               </StyledButton>
             </div>
           </div>

@@ -14,6 +14,8 @@ export const updateSettingSchema = vine.compile(vine.object({
 }))
 
 const HHMM_PATTERN = /^([01]\d|2[0-3]):[0-5]\d$/
+// BCP 47 short form, e.g. "es" or "pt-BR"
+const LANGUAGE_PATTERN = /^[a-z]{2,3}(-[A-Z]{2})?$/
 
 /**
  * Validate the *value* for keys that have format constraints beyond the generic
@@ -22,6 +24,11 @@ const HHMM_PATTERN = /^([01]\d|2[0-3]):[0-5]\d$/
  */
 export function validateSettingValue(key: KVStoreKey, value: unknown): string | null {
     switch (key) {
+        case 'ui.language':
+            if (typeof value !== 'string' || !LANGUAGE_PATTERN.test(value)) {
+                return 'Language must be a language code such as "en" or "es".'
+            }
+            return null
         case 'autoUpdate.windowStart':
         case 'autoUpdate.windowEnd':
         case 'contentAutoUpdate.windowStart':

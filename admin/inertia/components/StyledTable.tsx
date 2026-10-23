@@ -2,6 +2,7 @@ import { capitalizeFirstLetter } from '~/lib/util'
 import classNames from '~/lib/classNames'
 import LoadingSpinner from '~/components/LoadingSpinner'
 import React, { RefObject, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 export type StyledTableProps<T extends { [key: string]: any }> = {
   loading?: boolean
@@ -43,7 +44,7 @@ function StyledTable<T extends { [key: string]: any }>({
   tableBodyClassName = '',
   tableBodyStyle = {},
   data = [],
-  noDataText = 'No records found',
+  noDataText,
   onRowClick,
   columns = [],
   className = '',
@@ -53,6 +54,7 @@ function StyledTable<T extends { [key: string]: any }>({
   compact = false,
   expandable,
 }: StyledTableProps<T>) {
+  const { t } = useTranslation()
   const { className: tableClassName, ...restTableProps } = tableProps
 
   const [expandedRowKeys, setExpandedRowKeys] = useState<(string | number)[]>(
@@ -190,7 +192,7 @@ function StyledTable<T extends { [key: string]: any }>({
           {!loading && data.length === 0 && (
             <tr>
               <td colSpan={columns.length + (expandable ? 1 : 0)} className="!text-center py-8 text-text-muted">
-                {noDataText}
+                {noDataText ?? t('common.noRecords')}
               </td>
             </tr>
           )}

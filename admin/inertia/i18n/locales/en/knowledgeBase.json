@@ -1,0 +1,231 @@
+{
+  "modal": {
+    "title": "Knowledge Base",
+    "close": "Close",
+    "offline": "<strong>Knowledge Base unavailable:</strong> The Qdrant vector database is offline.",
+    "starting": "Starting…",
+    "startQdrant": "Start Qdrant",
+    "collectionLabel": "Collection:",
+    "upload": "Upload",
+    "whyTitle": "Why upload documents to your Knowledge Base?",
+    "why1Title": "{{name}} Knowledge Base Integration",
+    "why1Body": "When you upload documents to your Knowledge Base, NOMAD processes and embeds the content, making it directly accessible to {{name}}. This allows {{name}} to reference your specific documents during conversations, providing more accurate and personalized responses based on your uploaded data.",
+    "why2Title": "Enhanced Document Processing with OCR",
+    "why2Body": "NOMAD includes built-in Optical Character Recognition (OCR) capabilities, allowing it to extract text from image-based documents such as scanned PDFs or photos. This means that even if your documents are not in a standard text format, NOMAD can still process and embed their content for AI access.",
+    "why3Title": "Information Library Integration",
+    "why3Body": "NOMAD will automatically discover and extract any content you save to your Information Library (if installed), making it instantly available to {{name}} without any extra steps.",
+    "autoIndexTitle": "Auto-index new content for AI?",
+    "autoIndexHint": "Indexed content typically uses 5–10× the original file size on disk. Changes apply to new content added after this setting changes.",
+    "ingestPolicyAria": "Ingest policy",
+    "policy": {
+      "Always": "Always",
+      "Manual": "Manual"
+    },
+    "processingQueue": "Processing Queue",
+    "cleanUpFailed": "Clean Up Failed",
+    "cancelAllJobs": "Cancel All Jobs",
+    "cancelAllJobsTitle": "Stop and clear every embedding job regardless of state, including stuck or in-progress ones. Deletes the uploaded source files for those jobs.",
+    "storedFiles": "Stored Knowledge Base Files",
+    "searchIn": "Search in:",
+    "all": "All",
+    "uncategorized": "Uncategorized",
+    "manageCollections": "Manage Collections",
+    "resetRebuild": "Reset & Rebuild",
+    "resetRebuildTitle": "Drop the entire embeddings collection and re-embed everything from scratch. Permanently removes vectors for files no longer on disk. Destructive: requires typing RESET to confirm.",
+    "reembedAll": "Re-embed All",
+    "reembedAllTitle": "Re-embed every file on disk, replacing existing vectors file-by-file. Vectors for files no longer on disk are preserved. Use this if the chunker or embedding model has changed.",
+    "syncStorage": "Sync Storage",
+    "syncStorageTitle": "Scan storage for new files and queue any that haven't been embedded yet. Safe to run anytime; won't touch already-embedded content.",
+    "warningsUnavailable": "File warnings unavailable — couldn't read storage state. Retrying…",
+    "columns": {
+      "fileName": "File Name",
+      "size": "Size",
+      "uploaded": "Uploaded",
+      "collection": "Collection",
+      "active": "Active"
+    },
+    "managedByNomad": "Managed by NOMAD",
+    "removeConfirm": "Remove from knowledge base?",
+    "deleting": "Deleting…",
+    "delete": "Delete",
+    "view": "View",
+    "download": "Download",
+    "state": {
+      "indexed": "Indexed",
+      "notIndexed": "Not Indexed",
+      "failed": "Failed",
+      "stalled": "Stalled"
+    },
+    "actions": {
+      "reembed": "Re-embed",
+      "index": "Index",
+      "retry": "Retry"
+    },
+    "warnings": {
+      "zeroChunks": "Embedded 0 chunks — this file has no text content. {{name}} cannot reference it.",
+      "partialStall": "Only {{embedded}} of est. {{expected}} chunks embedded — ingestion may have stalled."
+    },
+    "toasts": {
+      "policyAlways": "New content will be auto-indexed for AI.",
+      "policyManual": "New content will wait for you to opt in.",
+      "policyFailed": "Failed to update indexing policy.",
+      "collectionUpdated": "Collection updated.",
+      "collectionUpdateFailed": "Failed to update collection.",
+      "activeUpdated": "Active state updated.",
+      "activeUpdateFailed": "Failed to update active state.",
+      "collectionActiveUpdated": "Collection active state updated.",
+      "collectionActiveUpdateFailed": "Failed to update collection active state.",
+      "fileRemoved": "File removed from knowledge base.",
+      "deleteFailed": "Failed to delete file.",
+      "fileQueued": "File queued for embedding.",
+      "queueFailed": "Failed to queue file.",
+      "failedCleaned": "Failed jobs cleaned up.",
+      "cleanupFailed": "Failed to clean up jobs.",
+      "allCancelled": "All embedding jobs cancelled.",
+      "cancelFailed": "Failed to cancel jobs.",
+      "qdrantStartFailed": "Failed to start Qdrant.",
+      "synced": "Storage synced successfully. If new files were found, they have been queued for processing.",
+      "syncFailed": "Failed to sync storage",
+      "reembedDone": "Re-embed completed.",
+      "reembedFailed": "Failed to re-embed knowledge base.",
+      "resetDone": "Reset complete.",
+      "resetFailed": "Failed to reset knowledge base.",
+      "uploadQueued_one": "{{count}} file queued for processing.",
+      "uploadQueued_other": "{{count}} files queued for processing.",
+      "uploadFailed": "Failed to upload: {{name}}"
+    },
+    "cancelAllModal": {
+      "title": "Cancel All Embedding Jobs?",
+      "confirm": "Cancel All Jobs",
+      "cancel": "Keep Jobs",
+      "body": "This stops <strong>every</strong> embedding job — including ones still in progress or stuck — and clears the processing queue. The uploaded source files for those jobs are deleted, so you'll need to re-upload anything you still want indexed. Stored files that already finished embedding are not affected. Are you sure you want to proceed?"
+    },
+    "syncModal": {
+      "title": "Confirm Sync?",
+      "confirm": "Confirm Sync",
+      "body": "This will scan the NOMAD's storage directories for any new files and queue them for processing. This is useful if you've manually added files to the storage or want to ensure everything is up to date. This may cause a temporary increase in resource usage if new files are found and being processed. Are you sure you want to proceed?"
+    },
+    "reembedAllModal": {
+      "title": "Re-embed All Documents?",
+      "confirming": "Re-embedding…",
+      "intro_one": "This will re-process every document currently in your knowledge base — about <strong>{{count}} file</strong>. For each file, NOMAD will delete the existing embeddings from Qdrant and queue a fresh embedding job using the current chunking and embedding model.",
+      "intro_other": "This will re-process every document currently in your knowledge base — about <strong>{{count}} files</strong>. For each file, NOMAD will delete the existing embeddings from Qdrant and queue a fresh embedding job using the current chunking and embedding model.",
+      "purposeTitle": "What this is for",
+      "purposeBody": "Use this when the embedding model or chunking logic has changed, or when you suspect stored vectors are stale. Files on disk are <em>not</em> deleted, and any orphan points whose source file is no longer present will be preserved untouched (see <em>Reset & Rebuild</em> if you want a fully clean slate).",
+      "headsUp": "Heads up",
+      "warn1_one": "Embedding {{count}} file may take a long time, especially for large PDFs or ZIM archives.",
+      "warn1_other": "Embedding {{count}} files may take a long time, especially for large PDFs or ZIM archives.",
+      "warn2": "On systems without GPU acceleration, expect sustained high CPU usage for the duration.",
+      "warn3": "Knowledge Base search results may be incomplete until every file finishes re-embedding.",
+      "warn4": "If embed jobs are already in progress, this action will be refused — wait for the queue to drain first."
+    },
+    "resetModal": {
+      "title": "Reset & Rebuild Knowledge Base?",
+      "confirm": "Wipe & Rebuild",
+      "confirming": "Resetting…",
+      "intro_one": "This will <strong>permanently delete every point</strong> in the <code>nomad_knowledge_base</code> Qdrant collection and rebuild from the <strong>{{count}} file</strong> currently on disk. The collection is dropped, recreated, and every file is re-queued for embedding.",
+      "intro_other": "This will <strong>permanently delete every point</strong> in the <code>nomad_knowledge_base</code> Qdrant collection and rebuild from the <strong>{{count}} files</strong> currently on disk. The collection is dropped, recreated, and every file is re-queued for embedding.",
+      "differsTitle": "How this differs from Re-embed All",
+      "differs1": "<strong>Re-embed All</strong> replaces vectors file-by-file. Any orphan points (vectors whose source file was deleted from disk at some point) are preserved.",
+      "differs2": "<strong>Reset & Rebuild</strong> drops the entire collection. Orphan points are <strong>gone forever</strong>. Only files currently on disk will exist in Qdrant afterwards.",
+      "destructiveTitle": "This action is destructive and cannot be undone",
+      "destructive1": "Knowledge Base search will be empty until embedding finishes (potentially hours on CPU-only systems).",
+      "destructive2": "For a few seconds during the reset, the Qdrant collection does not exist — any chat-with-RAG queries in that window may return a \"collection not found\" error. Avoid using chat until the rebuild has begun.",
+      "destructive3": "If embed jobs are already in progress, this action will be refused — wait for the queue to drain first.",
+      "typeToConfirm": "Type <code>RESET</code> to confirm:",
+      "typeExactly": "Type RESET exactly (uppercase, no spaces) to enable the confirm button."
+    },
+    "reembedFileModal": {
+      "title": "Re-embed this file?",
+      "confirm": "Re-embed",
+      "confirming": "Queuing…",
+      "body": "This will delete the existing embeddings for <strong>{{name}}</strong> and queue a fresh embedding job. The file on disk is not touched.",
+      "headsUp": "Heads up",
+      "warn1": "For large ZIM archives this can take a long time, especially on CPU-only systems.",
+      "warn2": "Search results that referenced this file will be incomplete until the new embedding finishes.",
+      "warn3": "If a job for this file is already running, the re-embed will be refused — wait for it to finish first."
+    },
+    "viewer": {
+      "loadError": "Couldn't load file. It may have been moved or its type isn't viewable."
+    }
+  },
+  "policyBanner": {
+    "title_one": "Index your existing file for {{name}}?",
+    "title_other": "Index your {{count, number}} existing files for {{name}}?",
+    "body": "When indexed, {{name}} can reference them while answering your questions.",
+    "indexExisting": "Index existing content",
+    "maybeLater": "Maybe later",
+    "indexStarted": "{{name}} will index your existing content. You can track progress in the Knowledge Base panel.",
+    "indexFailed": "Could not start indexing. Try again from the Knowledge Base panel.",
+    "laterSaved": "Your content stays unindexed for now. You can opt in any time from the Knowledge Base panel.",
+    "laterFailed": "Could not save your choice. Try again."
+  },
+  "collections": {
+    "title": "Manage Collections",
+    "close": "Close",
+    "intro": "Rename or remove collections. Removing a collection doesn't delete any files — they're simply moved back to Uncategorized so you can re-sort them.",
+    "empty": "No collections yet. Assign a file to a collection from the Knowledge Base table to create one.",
+    "save": "Save",
+    "rename": "Rename",
+    "removeConfirm": "Remove \"{{name}}\"? Files move to Uncategorized.",
+    "renamed": "Collection renamed.",
+    "renameFailed": "Failed to rename collection.",
+    "removed": "Collection removed.",
+    "removeFailed": "Failed to remove collection."
+  },
+  "combobox": {
+    "uncategorized": "Uncategorized",
+    "create": "+ Create \"{{name}}\"",
+    "noMatches": "No matches"
+  },
+  "nomadMd": {
+    "intro": "Custom instructions passed to {{name}} as a system prompt on every chat.",
+    "tip": "Tip: this file is also stored on disk at <code>storage/NOMAD.md</code> and can be edited directly.",
+    "save": "Save",
+    "saved": "NOMAD.md saved. It applies to new messages.",
+    "saveFailed": "Failed to save NOMAD.md.",
+    "closeAria": "Close",
+    "template": "# NOMAD.md\n\n<!--\nThis file holds custom instructions for your AI assistant. Everything here is\nsent to the assistant as a system prompt on every chat — use it to set persona,\ntone, priorities, and standing rules.\n\nIt is also stored on disk at storage/NOMAD.md, so you can edit it directly.\nReplace this template with your own instructions, then click Save.\n-->\n\n## About me\n\n- (e.g. I'm setting up an off-grid homestead in a cold climate.)\n\n## How the assistant should respond\n\n- Be concise and practical.\n- Prioritize safety and proven methods.\n"
+  },
+  "guardrail": {
+    "title": "Confirm large AI indexing operation",
+    "body": "Indexing this batch for the AI Assistant will use approximately <strong>{{size}}</strong> of disk space for embeddings, on top of the raw downloads.",
+    "freeDisk": "That's more than 10% of your remaining free disk space ({{free}} free). Embedding can take several hours and is hard to interrupt cleanly once started.",
+    "manualHint": "If you'd rather review per-item before indexing, cancel here and switch your Auto-index setting to <strong>Manual</strong> from the Knowledge Base panel.",
+    "proceed": "Proceed anyway"
+  },
+  "jobs": {
+    "processingQueue": "Processing Queue",
+    "empty": "No files are currently being processed",
+    "lastActivity": "· last activity {{time}}",
+    "chunks": "· {{count}} chunks",
+    "health": {
+      "waiting": {
+        "label": "Waiting",
+        "aria": "Job is queued and waiting to start"
+      },
+      "healthy": {
+        "label": "Active",
+        "aria": "Job is embedding at a normal rate"
+      },
+      "slow": {
+        "label": "Slow",
+        "aria": "Job has not made progress for at least 2 minutes"
+      },
+      "stalled": {
+        "label": "Stalled",
+        "aria": "Job has not made progress for at least 5 minutes"
+      },
+      "failed": {
+        "label": "Failed",
+        "aria": "Job failed"
+      }
+    },
+    "timeAgo": {
+      "justNow": "just now",
+      "seconds": "{{count}}s ago",
+      "minutes": "{{count}}m ago",
+      "hours": "{{count}}h ago"
+    }
+  }
+}

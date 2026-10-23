@@ -1,9 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { usePage } from '@inertiajs/react'
+import { useTranslation } from 'react-i18next'
 import { IconBrain } from '@tabler/icons-react'
 import api from '~/lib/api'
 import StyledButton from '~/components/StyledButton'
 import { useNotifications } from '~/context/NotificationContext'
+import { useAiAssistantName } from '~/hooks/useAiAssistantName'
 
 /**
  * First-chat onboarding banner (RFC #883 Phase 3 task 12).
@@ -26,13 +27,10 @@ import { useNotifications } from '~/context/NotificationContext'
  */
 export default function KbPolicyPromptBanner() {
   const queryClient = useQueryClient()
+  const { t } = useTranslation()
   const { addNotification } = useNotifications()
-  // Inertia injects `aiAssistantName` as a shared page prop on chat-mounted
-  // pages so the banner pulls the user-set name when surfaced. Default to
-  // "AI Assistant" when accessed outside that context (no-op for chat pages,
-  // but keeps the component safe for future reuse elsewhere).
-  const aiAssistantName =
-    usePage<{ aiAssistantName?: string }>().props?.aiAssistantName || 'AI Assistant'
+  // The user-set assistant name, or the translated default.
+  const aiAssistantName = useAiAssistantName()
 
   const { data: promptState } = useQuery({
     queryKey: ['kbPolicyPromptState'],
@@ -48,7 +46,7 @@ export default function KbPolicyPromptBanner() {
     onSuccess: () => {
       addNotification({
         type: 'success',
-        message: `${aiAssistantName} will index your existing content. You can track progress in the Knowledge Base panel.`,
+        message: t('knowledgeBase.policyBanner.indexStarted', { name: aiAssistantName }),
       })
       queryClient.invalidateQueries({ queryKey: ['kbPolicyPromptState'] })
       queryClient.invalidateQueries({ queryKey: ['ingestPolicy'] })
@@ -58,7 +56,7 @@ export default function KbPolicyPromptBanner() {
     onError: (error: any) => {
       addNotification({
         type: 'error',
-        message: error?.message || 'Could not start indexing. Try again from the Knowledge Base panel.',
+        message: error?.message || t('knowledgeBase.policyBanner.indexFailed'),
       })
     },
   })
@@ -68,7 +66,7 @@ export default function KbPolicyPromptBanner() {
     onSuccess: () => {
       addNotification({
         type: 'success',
-        message: 'Your content stays unindexed for now. You can opt in any time from the Knowledge Base panel.',
+        message: t('knowledgeBase.policyBanner.laterSaved'),
       })
       queryClient.invalidateQueries({ queryKey: ['kbPolicyPromptState'] })
       queryClient.invalidateQueries({ queryKey: ['ingestPolicy'] })
@@ -76,7 +74,7 @@ export default function KbPolicyPromptBanner() {
     onError: (error: any) => {
       addNotification({
         type: 'error',
-        message: error?.message || 'Could not save your choice. Try again.',
+        message: error?.message || t('knowledgeBase.policyBanner.laterFailed'),
       })
     },
   })
@@ -93,11 +91,9 @@ export default function KbPolicyPromptBanner() {
         <div className="flex-1 min-w-0">
           <p className="text-sm text-text-primary">
             <strong>
-              {fileCount === 1
-                ? `Index your existing file for ${aiAssistantName}?`
-                : `Index your ${fileCount.toLocaleString()} existing files for ${aiAssistantName}?`}
+              {t('knowledgeBase.policyBanner.title', { count: fileCount, name: aiAssistantName })}
             </strong>
-            {' '}When indexed, {aiAssistantName} can reference them while answering your questions.
+            {' '}{t('knowledgeBase.policyBanner.body', { name: aiAssistantName })}
           </p>
         </div>
         <div className="flex gap-2 flex-shrink-0">
@@ -108,7 +104,7 @@ export default function KbPolicyPromptBanner() {
             disabled={isBusy}
             loading={indexNowMutation.isPending}
           >
-            Index existing content
+            {t('knowledgeBase.policyBanner.indexExisting')}
           </StyledButton>
           <StyledButton
             onClick={() => maybeLaterMutation.mutate()}
@@ -117,7 +113,7 @@ export default function KbPolicyPromptBanner() {
             disabled={isBusy}
             loading={maybeLaterMutation.isPending}
           >
-            Maybe later
+            {t('knowledgeBase.policyBanner.maybeLater')}
           </StyledButton>
         </div>
       </div>

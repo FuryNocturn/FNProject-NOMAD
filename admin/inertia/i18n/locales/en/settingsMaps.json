@@ -1,0 +1,102 @@
+{
+  "page": {
+    "headTitle": "Maps Manager",
+    "title": "Maps Manager",
+    "subtitle": "Manage your stored map files and explore new regions!",
+    "baseAssetsMissing": "The base map assets have not been installed. Please download them first to enable map functionality.",
+    "downloadBaseAssets": "Download Base Assets",
+    "worldBasemapMissingTitle": "World base map not downloaded",
+    "worldBasemapMissingMessage": "The low-zoom world base map (~15 MB) hasn't been downloaded yet, so the map appears blank outside any regions you've downloaded. Connect this NOMAD to the internet and download it once for offline use.",
+    "downloadBaseMap": "Download Base Map",
+    "globalInstalledTitle": "Global Map Installed",
+    "globalInstalledMessage": "Your global map build {{date}} ({{size}}) is stored locally and ready for offline use.",
+    "downloadLatestBuild": "Download latest build",
+    "globalAvailableTitle": "Global Map Coverage Available",
+    "globalAvailableMessage": "Download a complete worldwide map from Protomaps ({{size}}, build {{date}}). This is a large file but covers the entire planet — no individual region downloads needed.",
+    "downloadGlobalMap": "Download Global Map",
+    "countryAlertTitle": "Download by country or region",
+    "countryAlertMessage": "Pick the countries you actually need — from a single country to a whole continent — and we'll pull just those tiles from the global Protomaps archive. Much smaller than the full 125 GB global map.",
+    "chooseCountries": "Choose Countries",
+    "curatedRegions": "Curated Map Regions",
+    "forceRefresh": "Force Refresh Collections",
+    "noCollections": "No curated collections available.",
+    "storedFiles": "Stored Map Files",
+    "downloadCustom": "Download a Custom Map File",
+    "columnName": "Name",
+    "columnActions": "Actions",
+    "delete": "Delete",
+    "downloadMapFileTitle": "Download Map File",
+    "suggestedUrl": "e.g. https://github.com/Crosstalk-Solutions/project-nomad-maps/raw/refs/heads/master/pmtiles/california.pmtiles"
+  },
+  "confirmDelete": {
+    "title": "Confirm Delete?",
+    "message": "Are you sure you want to delete {{name}}? This action cannot be undone.",
+    "confirm": "Delete"
+  },
+  "confirmDownload": {
+    "title": "Confirm Download?",
+    "message": "Are you sure you want to download <strong>{{name}}</strong>? It may take some time for it to be available depending on the file size and your internet connection.",
+    "confirm": "Download"
+  },
+  "confirmGlobal": {
+    "title": "Download Global Map?",
+    "message": "This will download the full Protomaps global map ({{size}}, build {{date}}). Covers the entire planet so you won't need individual region files. Make sure you have enough disk space.",
+    "confirm": "Download"
+  },
+  "notifications": {
+    "baseMapDownloaded": "Base map downloaded successfully.",
+    "baseMapFailed": "Could not download the base map. Please connect this NOMAD to the internet and try again.",
+    "globalQueued": "Global map download has been queued. This is a large file (~125 GB) and may take a while.",
+    "globalFailed": "Failed to start the global map download. Please try again.",
+    "baseAssetsDownloaded": "Base map assets downloaded successfully.",
+    "baseAssetsFailed": "An error occurred while downloading the base map assets. Please try again.",
+    "baseAssetsUnknown": "An unknown error occurred while downloading base assets.",
+    "collectionQueued": "Download for collection \"{{name}}\" has been queued.",
+    "collectionAlreadyInstalled": "All resources in the collection \"{{name}}\" have already been downloaded.",
+    "downloadQueued": "Download has been queued.",
+    "fileDeleted": "{{name}} has been deleted.",
+    "fileDeleteFailed": "Failed to delete {{name}}. Please try again.",
+    "countryDownloadQueued": "Download queued. Watch progress below.",
+    "manifestsRefreshed": "Successfully refreshed map collections."
+  },
+  "downloadUrl": {
+    "description": "Enter the URL of the map region file you wish to download. The URL must be publicly reachable and end with .pmtiles. A preflight check will be run to verify the file's availability, type, and approximate size.",
+    "placeholder": "Enter download URL...",
+    "confirm": "Download",
+    "running": "Running preflight check for URL: {{url}}",
+    "unknownError": "An unknown error occurred during the preflight check.",
+    "passed": "Preflight check passed. Filename: {{filename}}, Size: {{size}} MB",
+    "failed": "Preflight check failed: {{error}}"
+  },
+  "card": {
+    "allDownloaded": "All items downloaded",
+    "stats": "Items: {{items}} | Size: {{size}}"
+  },
+  "countryPicker": {
+    "title": "Download map by country or region",
+    "confirm": "Start Download",
+    "searchPlaceholder_one": "Search {{count}} country...",
+    "searchPlaceholder_other": "Search {{count}} countries...",
+    "clearAll": "Clear all",
+    "quickPicks": "Quick picks",
+    "noMatch": "No countries match \"{{search}}\".",
+    "installed": "Installed",
+    "installedTitle": "Already downloaded — re-select to update with a different zoom",
+    "selectedCount_one": "{{count}} selected",
+    "selectedCount_other": "{{count}} selected",
+    "removeCountry": "Remove {{name}}",
+    "maxZoom": "Max zoom level: <code>{{zoom}}</code>",
+    "zoomWorld": "z{{zoom}} (world)",
+    "zoomStreet": "z{{zoom}} (street)",
+    "zoomHint": "Lower zoom = smaller file, less detail. Zoom 15 shows individual streets; zoom 10 shows city-level detail.",
+    "pickAtLeastOne": "Pick at least one country before downloading.",
+    "stillEstimating": "Still estimating size — hold on a moment.",
+    "estimateFailed": "Estimate failed",
+    "downloadFailed": "Download failed",
+    "preflightNoData": "Preflight returned no data",
+    "estimating": "Estimating size…",
+    "pickToEstimate": "Pick at least one country to estimate size.",
+    "result": "{{tiles}} tiles, ~{{size}}",
+    "sourceBuild": "(source build {{date}})"
+  }
+}

@@ -1,4 +1,5 @@
 import { Head } from '@inertiajs/react'
+import { useTranslation } from 'react-i18next'
 import SettingsLayout from '~/layouts/SettingsLayout'
 import { SystemInformationResponse } from '../../../types/system'
 import { formatBytes } from '~/lib/util'
@@ -15,6 +16,7 @@ import { IconCpu, IconDatabase, IconServer, IconDeviceDesktop, IconComponents } 
 export default function SettingsPage(props: {
   system: { info: SystemInformationResponse | undefined }
 }) {
+  const { t } = useTranslation()
   const { data: info } = useSystemInfo({
     initialData: props.system.info,
   })
@@ -47,22 +49,21 @@ export default function SettingsPage(props: {
 
   return (
     <SettingsLayout>
-      <Head title="System Information" />
+      <Head title={t('settingsSystem.system.title')} />
       <div className="xl:pl-72 w-full">
         <main className="px-6 lg:px-12 py-6 lg:py-8">
           <div className="mb-8">
-            <h1 className="text-4xl font-bold text-desert-green mb-2">System Information</h1>
+            <h1 className="text-4xl font-bold text-desert-green mb-2">{t('settingsSystem.system.title')}</h1>
             <p className="text-desert-stone-dark">
-              Real-time monitoring and diagnostics • Last updated: {new Date().toLocaleString()} •
-              Refreshing data every 30 seconds
+              {t('settingsSystem.system.subtitle', { time: new Date().toLocaleString() })}
             </p>
           </div>
           {Number(memoryUsagePercent) > 90 && (
             <div className="mb-6">
               <Alert
                 type="error"
-                title="Very High Memory Usage Detected"
-                message="System memory usage exceeds 90%. Performance degradation may occur."
+                title={t('settingsSystem.system.highMemory.title')}
+                message={t('settingsSystem.system.highMemory.message')}
                 variant="bordered"
               />
             </div>
@@ -70,24 +71,24 @@ export default function SettingsPage(props: {
           <section className="mb-12">
             <h2 className="text-2xl font-bold text-desert-green mb-6 flex items-center gap-2">
               <div className="w-1 h-6 bg-desert-green" />
-              Resource Usage
+              {t('settingsSystem.system.resourceUsage')}
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <div className="bg-desert-white rounded-lg p-6 border border-desert-stone-light shadow-sm hover:shadow-lg transition-shadow">
                 <CircularGauge
                   value={info?.currentLoad.currentLoad || 0}
-                  label="CPU Usage"
+                  label={t('settingsSystem.system.cpuUsage')}
                   size="lg"
                   variant="cpu"
-                  subtext={`${info?.cpu.cores || 0} cores`}
+                  subtext={t('settingsSystem.system.cores', { count: info?.cpu.cores || 0 })}
                   icon={<IconCpu className="w-8 h-8" />}
                 />
               </div>
               <div className="bg-desert-white rounded-lg p-6 border border-desert-stone-light shadow-sm hover:shadow-lg transition-shadow">
                 <CircularGauge
                   value={Number(memoryUsagePercent)}
-                  label="Memory Usage"
+                  label={t('settingsSystem.system.memoryUsage')}
                   size="lg"
                   variant="memory"
                   subtext={`${formatBytes(memoryUsed)} / ${formatBytes(info?.mem.total || 0)}`}
@@ -97,7 +98,7 @@ export default function SettingsPage(props: {
               <div className="bg-desert-white rounded-lg p-6 border border-desert-stone-light shadow-sm hover:shadow-lg transition-shadow">
                 <CircularGauge
                   value={Number(swapUsagePercent)}
-                  label="Swap Usage"
+                  label={t('settingsSystem.system.swapUsage')}
                   size="lg"
                   variant="disk"
                   subtext={`${formatBytes(info?.mem.swapused || 0)} / ${formatBytes(info?.mem.swaptotal || 0)}`}
@@ -109,53 +110,65 @@ export default function SettingsPage(props: {
           <section className="mb-12">
             <h2 className="text-2xl font-bold text-desert-green mb-6 flex items-center gap-2">
               <div className="w-1 h-6 bg-desert-green" />
-              System Details
+              {t('settingsSystem.system.systemDetails')}
             </h2>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <InfoCard
-                title="Operating System"
+                title={t('settingsSystem.system.os.title')}
                 icon={<IconDeviceDesktop className="w-6 h-6" />}
                 variant="elevated"
                 data={[
-                  { label: 'Distribution', value: info?.os.distro },
-                  { label: 'Kernel Version', value: info?.os.kernel },
-                  { label: 'Architecture', value: info?.os.arch },
-                  { label: 'Hostname', value: info?.os.hostname },
-                  { label: 'Platform', value: info?.os.platform },
+                  { label: t('settingsSystem.system.os.distribution'), value: info?.os.distro },
+                  { label: t('settingsSystem.system.os.kernel'), value: info?.os.kernel },
+                  { label: t('settingsSystem.system.os.architecture'), value: info?.os.arch },
+                  { label: t('settingsSystem.system.os.hostname'), value: info?.os.hostname },
+                  { label: t('settingsSystem.system.os.platform'), value: info?.os.platform },
                 ]}
               />
               <InfoCard
-                title="Processor"
+                title={t('settingsSystem.system.processor.title')}
                 icon={<IconCpu className="w-6 h-6" />}
                 variant="elevated"
                 data={[
-                  { label: 'Manufacturer', value: info?.cpu.manufacturer },
-                  { label: 'Brand', value: info?.cpu.brand },
-                  { label: 'Cores', value: info?.cpu.cores },
-                  { label: 'Physical Cores', value: info?.cpu.physicalCores },
+                  { label: t('settingsSystem.system.processor.manufacturer'), value: info?.cpu.manufacturer },
+                  { label: t('settingsSystem.system.processor.brand'), value: info?.cpu.brand },
+                  { label: t('settingsSystem.system.processor.cores'), value: info?.cpu.cores },
+                  { label: t('settingsSystem.system.processor.physicalCores'), value: info?.cpu.physicalCores },
                   {
-                    label: 'Virtualization',
-                    value: info?.cpu.virtualization ? 'Enabled' : 'Disabled',
+                    label: t('settingsSystem.system.processor.virtualization'),
+                    value: info?.cpu.virtualization
+                      ? t('settingsSystem.system.processor.enabled')
+                      : t('settingsSystem.system.processor.disabled'),
                   },
                 ]}
               />
               {info?.gpuHealth?.status === 'passthrough_failed' && (
                 <div className="lg:col-span-2">
-                  <GpuPassthroughAlert gpuHealth={info.gpuHealth} assistantName="AI Assistant" />
+                  <GpuPassthroughAlert gpuHealth={info.gpuHealth} assistantName={t('settingsSystem.system.aiAssistant')} />
                 </div>
               )}
               {info?.graphics?.controllers && info.graphics.controllers.length > 0 && (
                 <InfoCard
-                  title="Graphics"
+                  title={t('settingsSystem.system.graphics.title')}
                   icon={<IconComponents className="w-6 h-6" />}
                   variant="elevated"
                   data={info.graphics.controllers.map((gpu, i) => {
-                    const prefix = info.graphics.controllers.length > 1 ? `GPU ${i + 1} ` : ''
+                    const multi = info.graphics.controllers.length > 1
+                    const n = i + 1
                     return [
-                      { label: `${prefix}Model`, value: gpu.model },
-                      { label: `${prefix}Vendor`, value: gpu.vendor },
-                      { label: `${prefix}VRAM`, value: gpu.vram ? `${gpu.vram} MB` : 'N/A' },
+                      {
+                        label: multi ? t('settingsSystem.system.graphics.modelN', { n }) : t('settingsSystem.system.graphics.model'),
+                        value: gpu.model,
+                      },
+                      {
+                        label: multi ? t('settingsSystem.system.graphics.vendorN', { n }) : t('settingsSystem.system.graphics.vendor'),
+                        value: gpu.vendor,
+                      },
+                      {
+                        label: multi ? t('settingsSystem.system.graphics.vramN', { n }) : t('settingsSystem.system.graphics.vram'),
+                        value: gpu.vram ? `${gpu.vram} MB` : t('settingsSystem.common.na'),
+                      },
                     ]
                   }).flat()}
                 />
@@ -165,7 +178,7 @@ export default function SettingsPage(props: {
           <section className="mb-12">
             <h2 className="text-2xl font-bold text-desert-green mb-6 flex items-center gap-2">
               <div className="w-1 h-6 bg-desert-green" />
-              Memory Allocation
+              {t('settingsSystem.system.memoryAllocation')}
             </h2>
             <div className="bg-desert-white rounded-lg p-8 border border-desert-stone-light shadow-sm hover:shadow-lg transition-shadow">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
@@ -174,7 +187,7 @@ export default function SettingsPage(props: {
                     {formatBytes(info?.mem.total || 0)}
                   </div>
                   <div className="text-sm text-desert-stone-dark uppercase tracking-wide">
-                    Total RAM
+                    {t('settingsSystem.system.totalRam')}
                   </div>
                 </div>
                 <div className="text-center">
@@ -182,7 +195,7 @@ export default function SettingsPage(props: {
                     {formatBytes(memoryUsed)}
                   </div>
                   <div className="text-sm text-desert-stone-dark uppercase tracking-wide">
-                    Used RAM
+                    {t('settingsSystem.system.usedRam')}
                   </div>
                 </div>
                 <div className="text-center">
@@ -190,7 +203,7 @@ export default function SettingsPage(props: {
                     {formatBytes(info?.mem.available || 0)}
                   </div>
                   <div className="text-sm text-desert-stone-dark uppercase tracking-wide">
-                    Available RAM
+                    {t('settingsSystem.system.availableRam')}
                   </div>
                 </div>
               </div>
@@ -201,7 +214,7 @@ export default function SettingsPage(props: {
                 ></div>
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span className="text-sm font-bold text-white drop-shadow-md z-10">
-                    {memoryUsagePercent}% Utilized
+                    {t('settingsSystem.system.utilized', { percent: memoryUsagePercent })}
                   </span>
                 </div>
               </div>
@@ -210,7 +223,7 @@ export default function SettingsPage(props: {
           <section className="mb-12">
             <h2 className="text-2xl font-bold text-desert-green mb-6 flex items-center gap-2">
               <div className="w-1 h-6 bg-desert-green" />
-              Storage Devices
+              {t('settingsSystem.system.storageDevices')}
             </h2>
 
             <div className="bg-desert-white rounded-lg p-8 border border-desert-stone-light shadow-sm hover:shadow-lg transition-shadow">
@@ -220,17 +233,17 @@ export default function SettingsPage(props: {
                   progressiveBarColor={true}
                   statuses={[
                     {
-                      label: 'Normal',
+                      label: t('settingsSystem.system.storageNormal'),
                       min_threshold: 0,
                       color_class: 'bg-desert-olive',
                     },
                     {
-                      label: 'Warning - Usage High',
+                      label: t('settingsSystem.system.storageWarning'),
                       min_threshold: 75,
                       color_class: 'bg-desert-orange',
                     },
                     {
-                      label: 'Critical - Disk Almost Full',
+                      label: t('settingsSystem.system.storageCritical'),
                       min_threshold: 90,
                       color_class: 'bg-desert-red',
                     },
@@ -238,7 +251,7 @@ export default function SettingsPage(props: {
                 />
               ) : (
                 <div className="text-center text-desert-stone-dark py-8">
-                  No storage devices detected
+                  {t('settingsSystem.system.noStorage')}
                 </div>
               )}
             </div>
@@ -246,12 +259,12 @@ export default function SettingsPage(props: {
           <section>
             <h2 className="text-2xl font-bold text-desert-green mb-6 flex items-center gap-2">
               <div className="w-1 h-6 bg-desert-green" />
-              System Status
+              {t('settingsSystem.system.systemStatus')}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              <StatusCard title="System Uptime" value={uptimeDisplay} />
-              <StatusCard title="CPU Cores" value={info?.cpu.cores || 0} />
-              <StatusCard title="Storage Devices" value={storageItems.length} />
+              <StatusCard title={t('settingsSystem.system.uptime')} value={uptimeDisplay} />
+              <StatusCard title={t('settingsSystem.system.cpuCores')} value={info?.cpu.cores || 0} />
+              <StatusCard title={t('settingsSystem.system.storageDevices')} value={storageItems.length} />
             </div>
           </section>
         </main>

@@ -1,0 +1,16 @@
+{
+  "backToHome": "Back to Home",
+  "debugInfo": "Debug Info",
+  "version": "Project NOMAD™ Command Center v{{version}}",
+  "commandCenter": "Command Center",
+  "logoAlt": "Project NOMAD Logo",
+  "goToSettings": "Go to Settings",
+  "remove": "Remove",
+  "cancel": "Cancel",
+  "confirm": "Confirm",
+  "loading": "Loading...",
+  "loadingShort": "Loading",
+  "dismissAlert": "Dismiss alert",
+  "noRecords": "No records found",
+  "internalError": "An internal error occurred. Please try again or check the console for details. {{detail}}"
+}

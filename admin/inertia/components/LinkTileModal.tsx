@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import StyledModal from './StyledModal'
 import Input from './inputs/Input'
 import LinkTileIconPicker from './LinkTileIconPicker'
@@ -32,6 +33,7 @@ export default function LinkTileModal({
   onSaved,
   showError,
 }: LinkTileModalProps) {
+  const { t } = useTranslation()
   const [name, setName] = useState('')
   const [url, setUrl] = useState('')
   const [description, setDescription] = useState('')
@@ -77,8 +79,8 @@ export default function LinkTileModal({
     if (!result?.success) {
       showError(
         isEdit
-          ? 'Failed to save this link.'
-          : 'Failed to add this link. A link with that name may already exist.'
+          ? t('apps.linkTile.errors.saveFailed')
+          : t('apps.linkTile.errors.addFailed')
       )
       return
     }
@@ -87,28 +89,26 @@ export default function LinkTileModal({
 
   return (
     <StyledModal
-      title={isEdit ? 'Edit Link' : 'Add a Link'}
+      title={isEdit ? t('apps.linkTile.editTitle') : t('apps.linkTile.addTitle')}
       open={open}
       onCancel={onClose}
       onClose={onClose}
-      cancelText="Cancel"
       onConfirm={handleSave}
       confirmVariant="primary"
-      confirmText={isEdit ? 'Save' : 'Add Link'}
+      confirmText={isEdit ? t('apps.linkTile.save') : t('apps.linkTile.addLink')}
       confirmIcon="IconCheck"
       confirmLoading={submitting}
       confirmDisabled={!canSave}
     >
       <div className="space-y-4 text-sm">
         <p className="text-text-muted">
-          Add a shortcut to something you already run, on this machine or anywhere else on your
-          network. NOMAD does not manage it, it just puts a button on your dashboard.
+          {t('apps.linkTile.intro')}
         </p>
 
         <Input
           name="linkName"
-          label="Name"
-          placeholder="Living room NAS"
+          label={t('apps.linkTile.name')}
+          placeholder={t('apps.linkTile.namePlaceholder')}
           value={name}
           onChange={(e) => setName(e.target.value)}
           maxLength={60}
@@ -117,21 +117,21 @@ export default function LinkTileModal({
         <div>
           <Input
             name="linkUrl"
-            label="URL"
-            placeholder="192.168.1.50:8080"
+            label={t('apps.linkTile.url')}
+            placeholder={t('apps.linkTile.urlPlaceholder')}
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             error={urlInvalid}
           />
           {urlInvalid ? (
             <p className="mt-1.5 text-xs text-red-500">
-              Enter a valid URL, for example 192.168.1.50:8080 or https://nas.local.
+              {t('apps.linkTile.urlInvalid')}
             </p>
           ) : (
             <p className="mt-1.5 text-xs text-text-muted">
-              Opens as:{' '}
+              {t('apps.linkTile.opensAs')}{' '}
               <span className="font-mono break-all text-text-primary">
-                {normalized || 'not set yet'}
+                {normalized || t('apps.linkTile.notSet')}
               </span>
             </p>
           )}
@@ -139,8 +139,8 @@ export default function LinkTileModal({
 
         <Input
           name="linkDescription"
-          label="Description (optional)"
-          placeholder="Photos and backups"
+          label={t('apps.linkTile.description')}
+          placeholder={t('apps.linkTile.descriptionPlaceholder')}
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           maxLength={200}
@@ -148,7 +148,7 @@ export default function LinkTileModal({
 
         <div>
           <p className="mb-1.5 flex items-center gap-2 font-medium text-text-primary">
-            Icon
+            {t('apps.linkTile.icon')}
             <span className="text-text-secondary">
               <DynamicIcon icon={icon as DynamicIconName} className="!size-5" />
             </span>
@@ -157,14 +157,14 @@ export default function LinkTileModal({
         </div>
 
         <div>
-          <p className="mb-1.5 font-medium text-text-primary">Color</p>
+          <p className="mb-1.5 font-medium text-text-primary">{t('apps.linkTile.color')}</p>
           <div className="flex items-center gap-2">
             {LINK_TILE_COLORS.map((option) => (
               <button
                 key={option.id}
                 type="button"
-                title={option.label}
-                aria-label={option.label}
+                title={t(`apps.linkTile.colors.${option.id}`, { defaultValue: option.label })}
+                aria-label={t(`apps.linkTile.colors.${option.id}`, { defaultValue: option.label })}
                 aria-pressed={color === option.id}
                 onClick={() => setColor(option.id)}
                 className={`h-7 w-7 rounded transition-transform ${option.swatch} ${
@@ -176,8 +176,7 @@ export default function LinkTileModal({
             ))}
           </div>
           <p className="mt-1.5 text-xs text-text-muted">
-            Links stay outlined rather than filled whichever color you pick, so they
-            are distinguishable from apps NOMAD manages.
+            {t('apps.linkTile.colorHint')}
           </p>
         </div>
       </div>

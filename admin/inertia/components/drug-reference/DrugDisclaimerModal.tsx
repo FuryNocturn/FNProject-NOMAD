@@ -1,5 +1,6 @@
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
 import { IconAlertTriangle } from '@tabler/icons-react'
+import { Trans, useTranslation } from 'react-i18next'
 import StyledButton from '~/components/StyledButton'
 
 /**
@@ -25,6 +26,7 @@ export function hasAcknowledgedDrugDisclaimer(): boolean {
  * this browser — other browsers/devices see it on their first open.
  */
 export default function DrugDisclaimerModal({ open, onAcknowledge }: { open: boolean; onAcknowledge: () => void }) {
+  const { t } = useTranslation()
   const acknowledge = () => {
     try {
       window.localStorage.setItem(DRUG_DISCLAIMER_ACK_KEY, 'ack')
@@ -45,44 +47,35 @@ export default function DrugDisclaimerModal({ open, onAcknowledge }: { open: boo
                 <IconAlertTriangle size={26} />
               </span>
               <DialogTitle as="h3" className="mt-4 text-lg font-bold text-text-primary">
-                Before you use the Drug Reference
+                {t('medical.disclaimer.title')}
               </DialogTitle>
             </div>
 
             <div className="mt-4 space-y-3 text-sm text-text-secondary">
               <p>
-                This tool shows general health information from official <strong>FDA drug labels</strong> and
-                matches symptoms to over-the-counter options. It is provided for <strong>information only</strong>.
+                <Trans i18nKey="medical.disclaimer.intro" components={{ strong: <strong /> }} />
               </p>
               <ul className="list-disc space-y-1.5 pl-5">
                 <li>
-                  It is <strong>not medical advice</strong> and not a substitute for a doctor, pharmacist, or nurse.
+                  <Trans i18nKey="medical.disclaimer.notAdvice" components={{ strong: <strong /> }} />
                 </li>
                 <li>
-                  It is <strong>not a drug-interaction checker</strong>. Always read each product&rsquo;s full label
-                  and check with a professional before combining medicines.
+                  <Trans i18nKey="medical.disclaimer.notChecker" components={{ strong: <strong /> }} />
+                </li>
+                <li>{t('medical.disclaimer.matches')}</li>
+                <li>
+                  <Trans i18nKey="medical.disclaimer.followProduct" components={{ strong: <strong /> }} />
                 </li>
                 <li>
-                  Situation matches come from label text, not clinical recommendations — they can be incomplete or
-                  include products you wouldn&rsquo;t expect.
-                </li>
-                <li>
-                  Always follow the directions on the <strong>actual product you have</strong>; dosages and warnings
-                  differ between products.
-                </li>
-                <li>
-                  In an emergency, or if symptoms are severe, worsening, or you&rsquo;re unsure,{' '}
-                  <strong>contact a medical professional or call emergency services</strong>.
+                  <Trans i18nKey="medical.disclaimer.emergency" components={{ strong: <strong /> }} />
                 </li>
               </ul>
-              <p className="text-xs text-text-muted">
-                Data is from openFDA (U.S. FDA, public domain). NOMAD is not affiliated with or endorsed by the FDA.
-              </p>
+              <p className="text-xs text-text-muted">{t('medical.disclaimer.source')}</p>
             </div>
 
             <div className="mt-6">
               <StyledButton variant="action" fullWidth onClick={acknowledge}>
-                I understand — continue
+                {t('medical.disclaimer.continue')}
               </StyledButton>
             </div>
           </DialogPanel>

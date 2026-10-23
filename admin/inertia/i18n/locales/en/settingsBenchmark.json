@@ -1,0 +1,198 @@
+{
+  "title": "System Benchmark",
+  "subtitle": "Measure your server's performance and compare with the NOMAD community",
+  "na": "N/A",
+  "yes": "Yes",
+  "no": "No",
+  "unknown": "Unknown",
+  "types": {
+    "full": "full",
+    "system": "system",
+    "ai": "ai"
+  },
+  "errors": {
+    "benchmarkFailed": "Benchmark failed",
+    "failedToStart": "Failed to start benchmark",
+    "updateTagFailed": "Failed to update builder tag",
+    "submitFailed": "Failed to submit benchmark",
+    "alreadySubmitted": "A benchmark for this system with the same or higher score has already been submitted."
+  },
+  "run": {
+    "title": "Run Benchmark",
+    "compilingReportLower": "Compiling report...",
+    "failedTitle": "Benchmark Failed",
+    "aiRequiredTitle": "{{name}} Required",
+    "aiRequiredMessage": "Full benchmark requires {{name}} to be installed. Install it to measure your complete NOMAD capability and share results with the community.",
+    "goToApps": "Go to Apps to install {{name}} →",
+    "intro": "Run a benchmark to measure your system's CPU, memory, disk, and AI inference performance. The benchmark takes approximately 3-6 minutes to complete.",
+    "full": "Run Full Benchmark",
+    "systemOnly": "System Only",
+    "aiOnly": "AI Only",
+    "aiOnlyDisabled": "{{name}} must be installed to run AI benchmark",
+    "aiNotInstalledNote": "<note>Note:</note> {{name}} is not installed. <installLink>Install it</installLink> to run full benchmarks and share results with the community.",
+    "aiInference": "AI Inference",
+    "tokensPerSecond": "Tokens per Second",
+    "firstTokenIn": "First token in {{ms}} ms",
+    "waitingFirstToken": "Waiting for first token...",
+    "utilization": "Utilization",
+    "vramOf": "VRAM (of {{total}} GB)",
+    "diskRead": "Disk Read",
+    "diskWrite": "Disk Write",
+    "benchmarkThroughput": "Benchmark throughput",
+    "systemDiskActivity": "System disk activity",
+    "compilingReport": "Compiling Report",
+    "calculatingScore": "Calculating your NOMAD Score...",
+    "identifyingHardware": "Identifying Hardware",
+    "detectingSystem": "Detecting your system...",
+    "memoryThroughput": "Memory Throughput",
+    "cpuLoad": "CPU Load",
+    "eventsPerSecond": "Events per second",
+    "overall": "Overall",
+    "temperature": "Temperature",
+    "cpuPackage": "CPU package",
+    "disk": "Disk",
+    "read": "Read",
+    "write": "Write",
+    "runningBenchmark": "Running benchmark..."
+  },
+  "stages": {
+    "idle": "Idle",
+    "starting": "Starting",
+    "detecting_hardware": "Detecting Hardware",
+    "running_cpu": "CPU Benchmark",
+    "running_memory": "Memory Benchmark",
+    "running_disk_read": "Disk Read Test",
+    "running_disk_write": "Disk Write Test",
+    "downloading_ai_model": "Downloading AI Model",
+    "running_ai": "AI Inference Test",
+    "calculating_score": "Calculating Score",
+    "completed": "Complete",
+    "error": "Error"
+  },
+  "cores": {
+    "threadLoad": "Thread {{n}}: {{load}}%",
+    "threads_one": "{{count}} thread",
+    "threads_other": "{{count}} threads",
+    "perCell": "({{count}}/cell)"
+  },
+  "results": {
+    "soFar": "Results so far",
+    "partial": {
+      "running_cpu": "CPU",
+      "running_memory": "Memory",
+      "running_disk_read": "Read",
+      "running_disk_write": "Write",
+      "running_ai": "AI"
+    }
+  },
+  "reveal": {
+    "report": "Report",
+    "continue": "Continue"
+  },
+  "builderTag": {
+    "randomize": "Randomize",
+    "yourTag": "Your Builder Tag:"
+  },
+  "gauges": {
+    "cpu": "CPU",
+    "memory": "Memory",
+    "diskRead": "Disk Read",
+    "diskWrite": "Disk Write",
+    "aiScore": "AI Score"
+  },
+  "score": {
+    "nomadScore": "NOMAD Score",
+    "systemScore": "System Score",
+    "aiScore": "AI Score",
+    "legacyScore": "Legacy Score",
+    "partial": "Partial",
+    "outOf100": "out of 100",
+    "v2Tooltip": "NOMAD Score v2 is an uncapped index versus the NOMAD Reference Build, which scores exactly 1000. Higher is better, and there is no ceiling.",
+    "referenceBuild": "Reference Build = 1000.",
+    "legacyScale": "Legacy scale: {{score}} / 100",
+    "partialCta": "This is a partial result, not your NOMAD Score. Run a Full Benchmark to get your NOMAD Score.",
+    "compositeDesc": "Your NOMAD Score is a weighted composite of all benchmark results."
+  },
+  "share": {
+    "title": "Share with Community",
+    "description": "Share your benchmark on the community leaderboard. Choose a Builder Tag to claim your spot, or share anonymously.",
+    "yourBuilderTag": "Your Builder Tag",
+    "anonymously": "Share anonymously (no Builder Tag shown on leaderboard)",
+    "submitting": "Submitting...",
+    "failedTitle": "Submission Failed",
+    "partialTitle": "Partial Benchmark",
+    "partialMessage": "This {{type}} benchmark cannot be shared with the community. Run a Full Benchmark with {{name}} installed to share your results.",
+    "sharedTitle": "Shared with Community",
+    "sharedMessage": "Your benchmark has been submitted to the community leaderboard. Thanks for contributing!",
+    "viewLeaderboard": "View the leaderboard →"
+  },
+  "perf": {
+    "title": "System Performance"
+  },
+  "ai": {
+    "title": "AI Performance",
+    "tokensPerSecond": "Tokens per Second",
+    "tokensTooltip": "How fast the AI generates text. Higher is better. 30+ tokens/sec feels responsive, 60+ feels instant.",
+    "ttft": "Time to First Token",
+    "ttftTooltip": "How quickly the AI starts responding after you send a message. Lower is better. Under 500ms feels instant.",
+    "noDataTitle": "No AI Benchmark Data",
+    "noDataMessage": "Run a Full Benchmark or AI Only benchmark to measure AI inference performance."
+  },
+  "hardware": {
+    "title": "Hardware Information",
+    "processor": "Processor",
+    "model": "Model",
+    "cores": "Cores",
+    "threads": "Threads",
+    "system": "System",
+    "ram": "RAM",
+    "diskType": "Disk Type",
+    "notDetected": "Not detected"
+  },
+  "details": {
+    "title": "Benchmark Details",
+    "benchmarkId": "Benchmark ID",
+    "type": "Type",
+    "date": "Date",
+    "rawScores": "Raw Scores",
+    "cpuScore": "CPU Score",
+    "memoryScore": "Memory Score",
+    "diskReadScore": "Disk Read Score",
+    "diskWriteScore": "Disk Write Score",
+    "aiTokensSec": "AI Tokens/sec",
+    "aiTtft": "AI Time to First Token",
+    "info": "Benchmark Info",
+    "fullId": "Full Benchmark ID",
+    "benchmarkType": "Benchmark Type",
+    "runDate": "Run Date",
+    "builderTag": "Builder Tag",
+    "notSet": "Not set",
+    "aiModelUsed": "AI Model Used",
+    "submittedToRepo": "Submitted to Repository",
+    "repoId": "Repository ID",
+    "measuredV2": "Measured Performance (v2)",
+    "cpuSingle": "CPU single-thread",
+    "cpuMulti": "CPU multi-thread ({{threads}}T)",
+    "memoryThreads": "Memory ({{threads}}T)",
+    "diskReadDirect": "Disk read (O_DIRECT)",
+    "diskWriteDirect": "Disk write (O_DIRECT)",
+    "eventsPerSec": "events/s",
+    "opsPerSec": "ops/s",
+    "environment": "Environment",
+    "runEnvironment": "Run environment",
+    "storageBackend": "Storage backend",
+    "gpuCompute": "GPU compute",
+    "detected": "Detected"
+  },
+  "history": {
+    "title": "Benchmark History",
+    "recorded_one": "{{count}} benchmark recorded",
+    "recorded_other": "{{count}} benchmarks recorded",
+    "score": "Score",
+    "shared": "Shared"
+  },
+  "empty": {
+    "title": "No Benchmark Results",
+    "message": "Run your first benchmark to see your server's performance scores."
+  }
+}

@@ -1,0 +1,198 @@
+{
+  "title": "Benchmark del sistema",
+  "subtitle": "Mide el rendimiento de tu servidor y compáralo con la comunidad de NOMAD",
+  "na": "N/D",
+  "yes": "Sí",
+  "no": "No",
+  "unknown": "Desconocido",
+  "types": {
+    "full": "completo",
+    "system": "sistema",
+    "ai": "IA"
+  },
+  "errors": {
+    "benchmarkFailed": "El benchmark ha fallado",
+    "failedToStart": "No se pudo iniciar el benchmark",
+    "updateTagFailed": "No se pudo actualizar la Builder Tag",
+    "submitFailed": "No se pudo enviar el benchmark",
+    "alreadySubmitted": "Ya se ha enviado un benchmark de este sistema con la misma puntuación o una superior."
+  },
+  "run": {
+    "title": "Ejecutar benchmark",
+    "compilingReportLower": "Compilando informe...",
+    "failedTitle": "El benchmark ha fallado",
+    "aiRequiredTitle": "Se necesita {{name}}",
+    "aiRequiredMessage": "El benchmark completo requiere tener {{name}} instalado. Instálalo para medir toda la capacidad de tu NOMAD y compartir los resultados con la comunidad.",
+    "goToApps": "Ve a Apps para instalar {{name}} →",
+    "intro": "Ejecuta un benchmark para medir el rendimiento de la CPU, la memoria, el disco y la inferencia de IA de tu sistema. Tarda unos 3-6 minutos en completarse.",
+    "full": "Ejecutar benchmark completo",
+    "systemOnly": "Solo sistema",
+    "aiOnly": "Solo IA",
+    "aiOnlyDisabled": "Hay que instalar {{name}} para ejecutar el benchmark de IA",
+    "aiNotInstalledNote": "<note>Nota:</note> {{name}} no está instalado. <installLink>Instálalo</installLink> para ejecutar benchmarks completos y compartir los resultados con la comunidad.",
+    "aiInference": "Inferencia de IA",
+    "tokensPerSecond": "Tokens por segundo",
+    "firstTokenIn": "Primer token en {{ms}} ms",
+    "waitingFirstToken": "Esperando el primer token...",
+    "utilization": "Uso",
+    "vramOf": "VRAM (de {{total}} GB)",
+    "diskRead": "Lectura de disco",
+    "diskWrite": "Escritura de disco",
+    "benchmarkThroughput": "Rendimiento del benchmark",
+    "systemDiskActivity": "Actividad del disco del sistema",
+    "compilingReport": "Compilando informe",
+    "calculatingScore": "Calculando tu NOMAD Score...",
+    "identifyingHardware": "Identificando hardware",
+    "detectingSystem": "Detectando tu sistema...",
+    "memoryThroughput": "Rendimiento de memoria",
+    "cpuLoad": "Carga de CPU",
+    "eventsPerSecond": "Eventos por segundo",
+    "overall": "Total",
+    "temperature": "Temperatura",
+    "cpuPackage": "Paquete de CPU",
+    "disk": "Disco",
+    "read": "Lectura",
+    "write": "Escritura",
+    "runningBenchmark": "Ejecutando benchmark..."
+  },
+  "stages": {
+    "idle": "Inactivo",
+    "starting": "Iniciando",
+    "detecting_hardware": "Detectando hardware",
+    "running_cpu": "Benchmark de CPU",
+    "running_memory": "Benchmark de memoria",
+    "running_disk_read": "Prueba de lectura de disco",
+    "running_disk_write": "Prueba de escritura de disco",
+    "downloading_ai_model": "Descargando modelo de IA",
+    "running_ai": "Prueba de inferencia de IA",
+    "calculating_score": "Calculando puntuación",
+    "completed": "Completado",
+    "error": "Error"
+  },
+  "cores": {
+    "threadLoad": "Hilo {{n}}: {{load}}%",
+    "threads_one": "{{count}} hilo",
+    "threads_other": "{{count}} hilos",
+    "perCell": "({{count}}/celda)"
+  },
+  "results": {
+    "soFar": "Resultados hasta ahora",
+    "partial": {
+      "running_cpu": "CPU",
+      "running_memory": "Memoria",
+      "running_disk_read": "Lectura",
+      "running_disk_write": "Escritura",
+      "running_ai": "IA"
+    }
+  },
+  "reveal": {
+    "report": "Informe",
+    "continue": "Continuar"
+  },
+  "builderTag": {
+    "randomize": "Aleatorio",
+    "yourTag": "Tu Builder Tag:"
+  },
+  "gauges": {
+    "cpu": "CPU",
+    "memory": "Memoria",
+    "diskRead": "Lectura de disco",
+    "diskWrite": "Escritura de disco",
+    "aiScore": "Puntuación de IA"
+  },
+  "score": {
+    "nomadScore": "NOMAD Score",
+    "systemScore": "Puntuación del sistema",
+    "aiScore": "Puntuación de IA",
+    "legacyScore": "Puntuación heredada",
+    "partial": "Parcial",
+    "outOf100": "sobre 100",
+    "v2Tooltip": "NOMAD Score v2 es un índice sin límite respecto a la NOMAD Reference Build, que puntúa exactamente 1000. Cuanto más alto, mejor, y no hay techo.",
+    "referenceBuild": "Reference Build = 1000.",
+    "legacyScale": "Escala heredada: {{score}} / 100",
+    "partialCta": "Este es un resultado parcial, no tu NOMAD Score. Ejecuta un benchmark completo para obtener tu NOMAD Score.",
+    "compositeDesc": "Tu NOMAD Score es una combinación ponderada de todos los resultados del benchmark."
+  },
+  "share": {
+    "title": "Compartir con la comunidad",
+    "description": "Comparte tu benchmark en la clasificación de la comunidad. Elige una Builder Tag para reservar tu puesto o compártelo de forma anónima.",
+    "yourBuilderTag": "Tu Builder Tag",
+    "anonymously": "Compartir de forma anónima (no se muestra la Builder Tag en la clasificación)",
+    "submitting": "Enviando...",
+    "failedTitle": "Error al enviar",
+    "partialTitle": "Benchmark parcial",
+    "partialMessage": "Este benchmark de tipo {{type}} no se puede compartir con la comunidad. Ejecuta un benchmark completo con {{name}} instalado para compartir tus resultados.",
+    "sharedTitle": "Compartido con la comunidad",
+    "sharedMessage": "Tu benchmark se ha enviado a la clasificación de la comunidad. ¡Gracias por contribuir!",
+    "viewLeaderboard": "Ver la clasificación →"
+  },
+  "perf": {
+    "title": "Rendimiento del sistema"
+  },
+  "ai": {
+    "title": "Rendimiento de IA",
+    "tokensPerSecond": "Tokens por segundo",
+    "tokensTooltip": "Lo rápido que genera texto la IA. Cuanto más alto, mejor. Con más de 30 tokens/s se siente ágil y con más de 60 es instantáneo.",
+    "ttft": "Tiempo hasta el primer token",
+    "ttftTooltip": "Lo rápido que empieza a responder la IA tras enviar un mensaje. Cuanto más bajo, mejor. Por debajo de 500 ms se siente instantáneo.",
+    "noDataTitle": "Sin datos de benchmark de IA",
+    "noDataMessage": "Ejecuta un benchmark completo o solo de IA para medir el rendimiento de la inferencia de IA."
+  },
+  "hardware": {
+    "title": "Información del hardware",
+    "processor": "Procesador",
+    "model": "Modelo",
+    "cores": "Núcleos",
+    "threads": "Hilos",
+    "system": "Sistema",
+    "ram": "RAM",
+    "diskType": "Tipo de disco",
+    "notDetected": "No detectada"
+  },
+  "details": {
+    "title": "Detalles del benchmark",
+    "benchmarkId": "ID del benchmark",
+    "type": "Tipo",
+    "date": "Fecha",
+    "rawScores": "Puntuaciones en bruto",
+    "cpuScore": "Puntuación de CPU",
+    "memoryScore": "Puntuación de memoria",
+    "diskReadScore": "Puntuación de lectura de disco",
+    "diskWriteScore": "Puntuación de escritura de disco",
+    "aiTokensSec": "Tokens/s de IA",
+    "aiTtft": "Tiempo hasta el primer token de IA",
+    "info": "Información del benchmark",
+    "fullId": "ID completo del benchmark",
+    "benchmarkType": "Tipo de benchmark",
+    "runDate": "Fecha de ejecución",
+    "builderTag": "Builder Tag",
+    "notSet": "Sin definir",
+    "aiModelUsed": "Modelo de IA usado",
+    "submittedToRepo": "Enviado al repositorio",
+    "repoId": "ID del repositorio",
+    "measuredV2": "Rendimiento medido (v2)",
+    "cpuSingle": "CPU monohilo",
+    "cpuMulti": "CPU multihilo ({{threads}}T)",
+    "memoryThreads": "Memoria ({{threads}}T)",
+    "diskReadDirect": "Lectura de disco (O_DIRECT)",
+    "diskWriteDirect": "Escritura de disco (O_DIRECT)",
+    "eventsPerSec": "eventos/s",
+    "opsPerSec": "ops/s",
+    "environment": "Entorno",
+    "runEnvironment": "Entorno de ejecución",
+    "storageBackend": "Backend de almacenamiento",
+    "gpuCompute": "Cómputo en GPU",
+    "detected": "Detectado"
+  },
+  "history": {
+    "title": "Historial de benchmarks",
+    "recorded_one": "{{count}} benchmark registrado",
+    "recorded_other": "{{count}} benchmarks registrados",
+    "score": "Puntuación",
+    "shared": "Compartido"
+  },
+  "empty": {
+    "title": "Sin resultados de benchmark",
+    "message": "Ejecuta tu primer benchmark para ver las puntuaciones de rendimiento de tu servidor."
+  }
+}

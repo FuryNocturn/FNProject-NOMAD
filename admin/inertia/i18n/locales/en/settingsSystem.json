@@ -1,0 +1,362 @@
+{
+  "common": {
+    "na": "N/A",
+    "moreInfo": "More information",
+    "save": "Save",
+    "saveSchedule": "Save Schedule",
+    "windowStart": "Window Start",
+    "windowEnd": "Window End",
+    "localServerTime": "Local server time",
+    "cooloffPeriod": "Cool-off Period",
+    "updateWindow": "Update window: ",
+    "lastRun": "Last run: ",
+    "lastError": "Last error: ",
+    "upToDate": "(up to date)",
+    "insideWindow": "currently inside",
+    "outsideWindow": "currently outside",
+    "cooloff": {
+      "h24": "24 hours (1 day)",
+      "h48": "48 hours (2 days)",
+      "h72": "72 hours (3 days)",
+      "h168": "7 days"
+    }
+  },
+  "system": {
+    "title": "System Information",
+    "subtitle": "Real-time monitoring and diagnostics • Last updated: {{time}} • Refreshing data every 30 seconds",
+    "highMemory": {
+      "title": "Very High Memory Usage Detected",
+      "message": "System memory usage exceeds 90%. Performance degradation may occur."
+    },
+    "resourceUsage": "Resource Usage",
+    "cpuUsage": "CPU Usage",
+    "memoryUsage": "Memory Usage",
+    "swapUsage": "Swap Usage",
+    "cores_one": "{{count}} core",
+    "cores_other": "{{count}} cores",
+    "systemDetails": "System Details",
+    "os": {
+      "title": "Operating System",
+      "distribution": "Distribution",
+      "kernel": "Kernel Version",
+      "architecture": "Architecture",
+      "hostname": "Hostname",
+      "platform": "Platform"
+    },
+    "processor": {
+      "title": "Processor",
+      "manufacturer": "Manufacturer",
+      "brand": "Brand",
+      "cores": "Cores",
+      "physicalCores": "Physical Cores",
+      "virtualization": "Virtualization",
+      "enabled": "Enabled",
+      "disabled": "Disabled"
+    },
+    "aiAssistant": "AI Assistant",
+    "graphics": {
+      "title": "Graphics",
+      "model": "Model",
+      "vendor": "Vendor",
+      "vram": "VRAM",
+      "modelN": "GPU {{n}} Model",
+      "vendorN": "GPU {{n}} Vendor",
+      "vramN": "GPU {{n}} VRAM"
+    },
+    "memoryAllocation": "Memory Allocation",
+    "totalRam": "Total RAM",
+    "usedRam": "Used RAM",
+    "availableRam": "Available RAM",
+    "utilized": "{{percent}}% Utilized",
+    "storageDevices": "Storage Devices",
+    "storageNormal": "Normal",
+    "storageWarning": "Warning - Usage High",
+    "storageCritical": "Critical - Disk Almost Full",
+    "noStorage": "No storage devices detected",
+    "systemStatus": "System Status",
+    "uptime": "System Uptime",
+    "cpuCores": "CPU Cores"
+  },
+  "advanced": {
+    "pageTitle": "Advanced Settings | Project NOMAD",
+    "title": "Advanced",
+    "intro": "Advanced configuration for operators. These settings are optional — the defaults work for most deployments.",
+    "connectivity": "Connectivity",
+    "connectivityDescription": "NOMAD periodically checks whether it can reach the internet. By default it probes Cloudflare's utility endpoint with a few fallbacks. Set a custom endpoint below if your network blocks the defaults. Leave blank to use the built-in defaults.",
+    "envOverrideTitle": "Managed by environment variable",
+    "envOverrideMessage": "The INTERNET_STATUS_TEST_URL environment variable is set and takes precedence over this setting. Remove it to manage the test URL here.",
+    "testUrlLabel": "Internet Status Test URL",
+    "testUrlHelp": "A single http(s) URL used to check connectivity. Any HTTP response counts as online.",
+    "errorProtocol": "Test URL must use http or https.",
+    "errorInvalid": "Test URL must be a valid URL (e.g. \"https://example.com\").",
+    "updated": "Setting updated successfully.",
+    "updateFailed": "There was an error updating the setting. Please try again."
+  },
+  "legal": {
+    "pageTitle": "Legal Notices | Project NOMAD",
+    "title": "Legal Notices",
+    "license": {
+      "title": "License Agreement",
+      "copyright": "Copyright 2024-2026 Crosstalk Solutions, LLC",
+      "p1": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with the License. You may obtain a copy of the License at",
+      "p2": "Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License."
+    },
+    "thirdParty": {
+      "title": "Third-Party Software Attribution",
+      "intro": "Project NOMAD™ integrates the following open source projects. We are grateful to their developers and communities:",
+      "kiwix": "- Offline Wikipedia and content reader (GPL-3.0 License)",
+      "kolibri": "- Offline learning platform by Learning Equality (MIT License)",
+      "ollama": "- Local large language model runtime (MIT License)",
+      "cyberchef": "- Data analysis and encoding toolkit by GCHQ (Apache 2.0 License)",
+      "flatnotes": "- Self-hosted note-taking application (MIT License)",
+      "qdrant": "- Vector search engine for AI knowledge base (Apache 2.0 License)"
+    },
+    "privacy": {
+      "title": "Privacy Statement",
+      "intro": "Project NOMAD is designed with privacy as a core principle:",
+      "telemetry": "<b>Zero Telemetry:</b> NOMAD does not collect, transmit, or store any usage data, analytics, or telemetry.",
+      "localFirst": "<b>Local-First:</b> All your data, downloaded content, AI conversations, and notes remain on your device.",
+      "noAccounts": "<b>No Accounts Required:</b> NOMAD operates without user accounts or authentication by default.",
+      "networkOptional": "<b>Network Optional:</b> An internet connection is only required to download content or updates. All installed features work fully offline."
+    },
+    "content": {
+      "title": "Content Disclaimer",
+      "p1": "Project NOMAD provides tools to download and access content from third-party sources including Wikipedia, Wikibooks, medical references, educational platforms, and other publicly available resources.",
+      "p2": "Crosstalk Solutions, LLC does not create, control, verify, or guarantee the accuracy, completeness, or reliability of any third-party content. The inclusion of any content does not constitute an endorsement.",
+      "p3": "Users are responsible for evaluating the appropriateness and accuracy of any content they download and use."
+    },
+    "medical": {
+      "title": "Medical and Emergency Information Disclaimer",
+      "p1": "Some content available through NOMAD includes medical references, first aid guides, and emergency preparedness information. This content is provided for general informational purposes only.",
+      "notSubstitute": "This information is NOT a substitute for professional medical advice, diagnosis, or treatment.",
+      "i1": "Always seek the advice of qualified health providers with questions about medical conditions.",
+      "i2": "Never disregard professional medical advice or delay seeking it because of something you read in offline content.",
+      "i3": "In a medical emergency, call emergency services immediately if available.",
+      "i4": "Medical information may become outdated. Verify critical information with current professional sources when possible."
+    },
+    "storage": {
+      "title": "Data Storage",
+      "intro": "All data associated with Project NOMAD is stored locally on your device:",
+      "installDir": "<b>Installation Directory:</b> /opt/project-nomad",
+      "downloaded": "<b>Downloaded Content:</b> /opt/project-nomad/storage",
+      "appData": "<b>Application Data:</b> Stored in Docker volumes on your local system",
+      "outro": "You maintain full control over your data. Uninstalling NOMAD or deleting these directories will permanently remove all associated data."
+    }
+  },
+  "support": {
+    "pageTitle": "Support the Project | Project NOMAD",
+    "title": "Support the Project",
+    "intro": "Project NOMAD is 100% free and open source — no subscriptions, no paywalls, no catch. If you'd like to help keep the project going, here are a few ways to show your support.",
+    "coffee": {
+      "title": "Buy Us a Coffee",
+      "description": "Every contribution helps fund development, server costs, and new content packs for NOMAD. Even a small donation goes a long way.",
+      "button": "Support on Ko-fi"
+    },
+    "rogue": {
+      "title": "Need Help With Your Home Network?",
+      "bannerAlt": "Rogue Support — Conquer Your Home Network",
+      "description": "Rogue Support is a networking consultation service for home users. Think of it as Uber for computer networking — expert help when you need it.",
+      "visit": "Visit Rogue.Support"
+    },
+    "other": {
+      "title": "Other Ways to Help",
+      "starLink": "Star the project on GitHub",
+      "starText": "— it helps more people discover NOMAD",
+      "issuesLink": "Report bugs and suggest features",
+      "issuesText": "— every report makes NOMAD better",
+      "share": "Share NOMAD with someone who'd use it — word of mouth is the best marketing",
+      "discordLink": "Join the Discord community",
+      "discordText": "— hang out, share your build, help other users"
+    }
+  },
+  "update": {
+    "pageTitle": "System Update",
+    "title": "System Update",
+    "subtitle": "Keep your Project NOMAD instance up to date with the latest features and improvements.",
+    "stage": {
+      "idle": "Preparing Update",
+      "starting": "Starting Update",
+      "pulling": "Pulling Images",
+      "pulled": "Images Pulled",
+      "recreating": "Recreating Containers",
+      "complete": "Update Complete",
+      "error": "Update Failed"
+    },
+    "errors": {
+      "title": "Update Failed",
+      "startFailed": "Failed to start update",
+      "logsFailed": "Failed to fetch update logs",
+      "checkFailed": "Failed to check for updates"
+    },
+    "restarting": {
+      "title": "Container Restarting",
+      "message": "The admin container is restarting. This page will reload automatically when the update is complete."
+    },
+    "connectionLost": {
+      "title": "Connection Temporarily Lost (Expected)",
+      "message": "You may see error notifications while the backend restarts during the update. This is completely normal and expected. Connection should be restored momentarily."
+    },
+    "updateAvailable": "Update Available",
+    "upToDate": "System Up to Date",
+    "newVersionAvailable": "A new version ({{version}}) is available for your Project NOMAD instance.",
+    "runningLatest": "Your system is running the latest version!",
+    "currentVersion": "Current Version",
+    "latestVersion": "Latest Version",
+    "percentComplete": "{{progress}}% complete",
+    "startUpdate": "Start Update",
+    "noUpdateAvailable": "No Update Available",
+    "checkAgain": "Check Again",
+    "whatHappens": "What happens during an update?",
+    "steps": {
+      "pull": {
+        "title": "Pull Latest Images",
+        "description": "Downloads the newest Docker images for all core containers"
+      },
+      "recreate": {
+        "title": "Recreate Containers",
+        "description": "Safely stops and recreates all core containers with the new images"
+      },
+      "reload": {
+        "title": "Automatic Reload",
+        "description": "This page will automatically reload when the update is complete"
+      }
+    },
+    "viewLogs": "View Update Logs",
+    "backup": {
+      "title": "Backup Reminder",
+      "message": "While updates are designed to be safe, it's always recommended to backup any critical data before proceeding."
+    },
+    "downtime": {
+      "title": "Temporary Downtime",
+      "message": "Services will be briefly unavailable during the update process. This typically takes 2-5 minutes depending on your internet connection."
+    },
+    "earlyAccess": {
+      "title": "Early Access",
+      "label": "Enable Early Access",
+      "description": "Receive release candidate (RC) versions before they are officially released. Note: RC versions may contain bugs and are not recommended for environments where stability and data integrity are critical."
+    },
+    "notify": {
+      "updateAvailable": "Update available: {{version}}",
+      "upToDate": "System is up to date",
+      "settingUpdated": "Setting updated successfully.",
+      "settingFailed": "There was an error updating the setting. Please try again.",
+      "subscribed": "Successfully subscribed to release notes!",
+      "subscribeFailed": "Failed to subscribe: {{error}}",
+      "subscribeError": "Error subscribing to release notes: {{error}}",
+      "unknownError": "Unknown error"
+    },
+    "subscribe": {
+      "heading": "Want to stay updated with the latest from Project NOMAD? Subscribe to receive release notes directly to your inbox. Unsubscribe anytime.",
+      "placeholder": "Your email address",
+      "button": "Subscribe",
+      "privacy": "We care about your privacy. Project NOMAD will never share your email with third parties or send you spam."
+    },
+    "logs": {
+      "title": "Update Logs",
+      "empty": "No logs available yet...",
+      "close": "Close"
+    }
+  },
+  "coreAuto": {
+    "title": "Automatic Core Updates",
+    "disabledTitle": "Automatic Core Updates Disabled",
+    "disabledDefault": "Automatic core updates were disabled after repeated failures.",
+    "enable": "Enable Automatic Core Updates",
+    "description": "Automatically install minor and patch updates during your chosen window. Major versions always require a manual update due to their potentially breaking nature.",
+    "cooloffHelp": "Delay after a release is published",
+    "toggleFailed": "Failed to update auto-update setting.",
+    "enabled": "Automatic updates enabled.",
+    "disabled": "Automatic updates disabled.",
+    "saved": "Auto-update schedule saved.",
+    "saveFailed": "Failed to save auto-update schedule.",
+    "statusLabel": "Status: ",
+    "eligible": "Eligible update ready: {{version}}",
+    "noEligible": "No eligible update — system is current or the latest release is a major version / still in cool-off.",
+    "inWindow": "Currently inside the window",
+    "outOfWindow": "Currently outside the window",
+    "lastCheck": "Last check: "
+  },
+  "appAuto": {
+    "title": "Automatic App Updates",
+    "enable": "Enable Automatic App Updates",
+    "description": "Automatically install minor and patch updates for apps you've opted in (toggle each app in Supply Depot). Major versions always require a manual update. Uses the same update window and cool-off period as the core schedule above.",
+    "enabled": "App automatic updates enabled.",
+    "disabled": "App automatic updates disabled.",
+    "failed": "Failed to update app auto-update setting.",
+    "summary": "{{start}}–{{end}} ({{window}}); cool-off {{hours}}h.",
+    "none": "No apps are opted in yet. Enable auto-update on individual apps from the Supply Depot."
+  },
+  "contentAuto": {
+    "title": "Automatic Content Updates",
+    "disabledTitle": "Automatic Content Updates Disabled",
+    "disabledDefault": "Automatic content updates were disabled after repeated failures.",
+    "enable": "Enable Automatic Content Updates",
+    "description": "Automatically download newer versions of your installed Information Library content (ZIM files) and maps during your chosen window. Content downloads can be very large, so set a per-window data cap to limit how much is pulled at once. We recommend allowing at least 0.5 GB per update window to ensure most updates can be pulled in a timely manner, but you can set a lower cap if you have very limited bandwidth and don't mind some updates being skipped (they will still appear in the UI and can be updated manually). If an update repeatedly fails to download within the window, it will be automatically disabled and require manual intervention to re-enable.",
+    "cooloffHelp": "Delay after a new version appears",
+    "dataCap": "Data Cap (GB)",
+    "dataCapHelp": "Per window. 0 = unlimited",
+    "enabled": "Automatic content updates enabled.",
+    "disabled": "Automatic content updates disabled.",
+    "toggleFailed": "Failed to update content auto-update setting.",
+    "invalidCap": "Data cap must be 0 or a positive number of GB.",
+    "saved": "Content update schedule saved.",
+    "saveFailed": "Failed to save content update schedule.",
+    "summaryUnlimited": "{{start}}–{{end}} ({{window}}); cool-off {{hours}}h; data cap unlimited.",
+    "summaryCapped": "{{start}}–{{end}} ({{window}}); cool-off {{hours}}h; data cap {{cap}} ({{used}} used this window).",
+    "allUpToDate": "All installed content is up to date. New versions will appear here when detected.",
+    "skipped": "Skipped — exceeds data cap, update manually"
+  },
+  "contentUpdates": {
+    "title": "Manual Content Updates",
+    "description": "Check if newer versions of your installed ZIM files and maps are available.",
+    "check": "Check for Content Updates",
+    "checkFailed": "Failed to check for content updates",
+    "issueTitle": "Update Check Issue",
+    "allUpToDateTitle": "All Content Up to Date",
+    "allUpToDateMessage": "All your installed content is running the latest available version.",
+    "available_one": "{{count}} update available",
+    "available_other": "{{count}} updates available",
+    "updateAll": "Update All ({{count}})",
+    "colTitle": "Title",
+    "colType": "Type",
+    "colSize": "Size",
+    "colVersion": "Version",
+    "typeMap": "Map",
+    "update": "Update",
+    "started": "Update started for {{id}}",
+    "startFailed": "Failed to start update",
+    "startFailedFor": "Failed to start update for {{id}}",
+    "startedCount": "Started {{count}} update(s)",
+    "failedCount": "{{count}} update(s) could not be started",
+    "applyFailed": "Failed to apply updates",
+    "lastChecked": "Last checked: {{time}}"
+  },
+  "gpu": {
+    "reinstalled": "{{name}} is being reinstalled with GPU support. This page will reload shortly.",
+    "reinstallFailed": "Failed to reinstall: {{error}}",
+    "forceFailed": "Force reinstall failed",
+    "unknownError": "Unknown error",
+    "reinstallTitle": "Reinstall {{name}}?",
+    "reinstall": "Reinstall",
+    "reinstallBody": "This will recreate the {{name}} container with GPU support enabled. Your downloaded models will be preserved. The service will be briefly unavailable during reinstall.",
+    "amdUnsupported": "Your system has an AMD GPU, but {{name}} is running on CPU only. Reinstalling won't fix this: the GPU{{target}} isn't on ROCm's supported list and needs a GFX version override.",
+    "amdUnsupportedTarget": " ({{target}})",
+    "amdMissing": "Your system has an AMD GPU, but {{name}} can't access it. AI is running on CPU only, which is significantly slower.",
+    "nvidiaMissing": "Your system has an NVIDIA GPU, but {{name}} can't access it. AI is running on CPU only, which is significantly slower.",
+    "alertTitle": "GPU Not Accessible to {{name}}",
+    "fixOverride": "Fix: Set GFX Override",
+    "fixReinstall": "Fix: Reinstall {{name}}",
+    "saveFailed": "Failed to save the GFX override: {{error}}",
+    "overrideTitle": "Set AMD GFX Override",
+    "saveAndReinstall": "Save and Reinstall",
+    "overrideIntro": "ROCm ships GPU kernels for a fixed list of AMD chips. Integrated Radeon GPUs outside that list run on CPU unless ROCm treats them as a supported chip, set through HSA_OVERRIDE_GFX_VERSION.",
+    "chip780": "Radeon 780M / 760M (gfx1103): 11.0.0",
+    "chip680": "Radeon 680M / 660M and other RDNA 2 iGPUs (gfx1031 to gfx1036): 10.3.0",
+    "detected": "Detected GPU: {{gpu}}. Current override: {{override}}.",
+    "detectedRecommended": "Detected GPU: {{gpu}}. Current override: {{override}}. Recommended for this GPU: {{value}}.",
+    "notReported": "not reported by Ollama",
+    "none": "none",
+    "overrideLabel": "GFX version override",
+    "overrideHelp": "Saving recreates the {{name}} container with this override. Downloaded models are preserved."
+  }
+}

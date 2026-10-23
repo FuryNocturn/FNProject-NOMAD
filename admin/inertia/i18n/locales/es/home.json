@@ -1,0 +1,44 @@
+{
+  "tiles": {
+    "maps": {
+      "label": "Mapas",
+      "description": "Consulta mapas sin conexión"
+    },
+    "drugReference": {
+      "label": "Referencia de fármacos",
+      "description": "Prospectos de la FDA sin conexión. Busca por nombre del fármaco o por síntoma"
+    },
+    "easySetup": {
+      "label": "Configuración rápida",
+      "description": "¿No sabes por dónde empezar? Usa el asistente para configurar tu NOMAD en pocos pasos"
+    },
+    "supplyDepot": {
+      "label": "Supply Depot",
+      "description": "Explora e instala aplicaciones seleccionadas, o añade tu propio contenedor Docker"
+    },
+    "docs": {
+      "label": "Documentación",
+      "description": "Lee los manuales y guías de Project NOMAD"
+    },
+    "settings": {
+      "label": "Ajustes",
+      "description": "Configura tu NOMAD"
+    }
+  },
+  "updateAvailable": "¡Hay una actualización disponible para Project NOMAD!",
+  "benchmarkRerun": {
+    "title": "Tu benchmark se puede volver a puntuar con Score v2",
+    "message": "Hemos mejorado el sistema de puntuación del benchmark. Vuelve a ejecutarlo para obtener tu resultado Score v2 en la clasificación de la comunidad.",
+    "button": "Repetir benchmark"
+  },
+  "startHere": "¡Empieza aquí!",
+  "poweredBy": "Con la tecnología de {{name}}",
+  "accessApp": "Abrir la aplicación {{name}}",
+  "opensInNewTab": "Se abre en una pestaña nueva",
+  "linkTileHint": "Un acceso directo que has añadido tú. NOMAD no lo gestiona.",
+  "editLink": "Editar este enlace",
+  "removeLink": "Quitar este enlace",
+  "removeLinkFailed": "No se pudo quitar este enlace.",
+  "addLink": "Añadir un enlace",
+  "addLinkHint": "Un acceso directo a otra cosa de tu red"
+}

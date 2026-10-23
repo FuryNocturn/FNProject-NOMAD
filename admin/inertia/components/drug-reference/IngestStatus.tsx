@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
+import { Trans, useTranslation } from 'react-i18next'
+import type { TFunction } from 'i18next'
 import type {
   DrugIngestStatus,
   DrugDownloadStatus,
@@ -110,35 +112,37 @@ function PhaseBlock({
 }
 
 /** Download-phase explainer copy. */
-function downloadExplainer(d: DrugDownloadStatus): string {
-  if (d.state === 'failed') {
-    return 'The download failed — it retries automatically; if it stays failed, press "Download FDA data" to restart. Finished parts are kept and resume where they left off.'
-  }
-  if (d.state === 'completed') {
-    return 'All parts are on disk. Indexing them into search next.'
-  }
+function downloadExplainer(d: DrugDownloadStatus, t: TFunction): string {
+  if (d.state === 'failed') return t('medical.ingest.dlFailed')
+  if (d.state === 'completed') return t('medical.ingest.dlCompleted')
   if (d.state === 'running') {
     return d.totalParts > 0
-      ? `Pulling part ${d.partsDone + 1} of ${d.totalParts} — ~1.7 GB total across all parts.`
-      : 'Reading the openFDA download manifest…'
+      ? t('medical.ingest.dlRunningParts', { part: d.partsDone + 1, total: d.totalParts })
+      : t('medical.ingest.dlRunningManifest')
   }
-  return 'Not started.'
+  return t('medical.ingest.dlIdle')
 }
 
 /** Ingest-phase explainer copy. */
-function ingestExplainer(i: DrugIngestPhaseStatus, rowCount: number): string {
-  if (i.state === 'failed') {
-    return 'Indexing failed — press "Ingest into search" to retry from the downloaded files (no re-download). Already-indexed labels are kept (the refresh is idempotent).'
-  }
+function ingestExplainer(
+  i: DrugIngestPhaseStatus,
+  rowCount: number,
+  t: TFunction,
+  lang: string
+): string {
+  if (i.state === 'failed') return t('medical.ingest.ingFailed')
   if (i.state === 'completed') {
-    return `${rowCount.toLocaleString()} labels are now searchable offline.`
+    return t('medical.ingest.ingCompleted', {
+      count: rowCount,
+      formatted: rowCount.toLocaleString(lang),
+    })
   }
   if (i.state === 'running') {
     return i.totalParts > 0
-      ? `Writing part ${i.partsDone + 1} of ${i.totalParts} into the offline database.`
-      : 'Writing labels into the offline database.'
+      ? t('medical.ingest.ingRunningParts', { part: i.partsDone + 1, total: i.totalParts })
+      : t('medical.ingest.ingRunningNoParts')
   }
-  return 'Waiting for downloaded data.'
+  return t('medical.ingest.ingIdle')
 }
 
 /**
@@ -151,6 +155,7 @@ function ingestExplainer(i: DrugIngestPhaseStatus, rowCount: number): string {
  * polls.
  */
 export default function IngestStatus({ status, onRefresh, pollIntervalMs = 3000 }: Props) {
+  const { t, i18n } = useTranslation()
   const pollRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const [now, setNow] = useState<number>(() => Date.now())
 
@@ -207,18 +212,22 @@ export default function IngestStatus({ status, onRefresh, pollIntervalMs = 3000 
   const downloadTiming =
     status.phase === 'downloading' && elapsedMs !== null ? (
       <div className="flex flex-wrap items-center gap-x-3 text-xs text-text-secondary tabular-nums">
-        <span>Elapsed {fmtDuration(elapsedMs)}</span>
-        {dlBytes && <span>{dlBytes} this part</span>}
+        <span>{t('medical.ingest.elapsed', { duration: fmtDuration(elapsedMs) })}</span>
+        {dlBytes && <span>{t('medical.ingest.thisPart', { size: dlBytes })}</span>}
       </div>
     ) : null
 
   const ingestTiming =
     status.phase === 'ingesting' && elapsedMs !== null ? (
       <div className="flex flex-wrap items-center gap-x-3 text-xs text-text-secondary tabular-nums">
-        <span>Elapsed {fmtDuration(elapsedMs)}</span>
+        <span>{t('medical.ingest.elapsed', { duration: fmtDuration(elapsedMs) })}</span>
         {etaMs !== null && (
           <span>
-            ~{fmtDuration(etaMs)} left <span className="text-text-muted">(estimate)</span>
+            <Trans
+              i18nKey="medical.ingest.etaLeft"
+              values={{ duration: fmtDuration(etaMs) }}
+              components={{ muted: <span className="text-text-muted" /> }}
+            />
           </span>
         )}
       </div>
@@ -228,10 +237,10 @@ export default function IngestStatus({ status, onRefresh, pollIntervalMs = 3000 
     <div className="text-left space-y-4">
       {/* Download phase */}
       <PhaseBlock
-        title="Download FDA data"
+        title={t('medical.ingest.downloadTitle')}
         state={download.state}
         pct={dlPct}
-        explainer={downloadExplainer(download)}
+        explainer={downloadExplainer(download, t)}
         accentRunning="text-blue-700"
         timing={downloadTiming}
         failedReason={download.failedReason}
@@ -239,19 +248,21 @@ export default function IngestStatus({ status, onRefresh, pollIntervalMs = 3000 
 
       {/* Ingest phase */}
       <PhaseBlock
-        title="Ingest into search"
+        title={t('medical.ingest.ingestTitle')}
         state={ingest.state}
         pct={ingPct}
-        explainer={ingestExplainer(ingest, status.rowCount)}
+        explainer={ingestExplainer(ingest, status.rowCount, t, i18n.language)}
         accentRunning="text-indigo-700"
         counterLeft={
           ingest.state === 'running' || ingest.state === 'completed' ? (
             <span>
               <span className="text-sm font-semibold text-text-primary">
-                {ingest.records.toLocaleString()}
+                {ingest.records.toLocaleString(i18n.language)}
               </span>
               {expected > 0 && (
-                <span className="text-text-muted"> of ~{expected.toLocaleString()} labels</span>
+                <span className="text-text-muted">
+                  {t('medical.ingest.ofLabels', { total: expected.toLocaleString(i18n.language) })}
+                </span>
               )}
             </span>
           ) : undefined
@@ -263,14 +274,15 @@ export default function IngestStatus({ status, onRefresh, pollIntervalMs = 3000 
       {/* Reassurance while busy */}
       {busy && (
         <p className="text-xs text-text-muted">
-          Runs in the background — you can leave this page and it keeps going. Search turns on
-          automatically when ingest finishes.
+          {t('medical.ingest.background')}
         </p>
       )}
 
       {/* Ready footer */}
       {status.phase === 'ready' && status.lastUpdated && (
-        <p className="text-xs text-text-secondary">FDA data version {status.lastUpdated}.</p>
+        <p className="text-xs text-text-secondary">
+          {t('medical.ingest.dataVersion', { version: status.lastUpdated })}
+        </p>
       )}
     </div>
   )
