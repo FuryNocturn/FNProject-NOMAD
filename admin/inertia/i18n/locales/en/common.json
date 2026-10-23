@@ -11,5 +11,6 @@
   "loading": "Loading...",
   "loadingShort": "Loading",
   "dismissAlert": "Dismiss alert",
-  "noRecords": "No records found"
+  "noRecords": "No records found",
+  "internalError": "An internal error occurred. Please try again or check the console for details. {{detail}}"
 }

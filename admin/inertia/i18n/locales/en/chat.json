@@ -1,0 +1,73 @@
+{
+  "page": {
+    "headTitle": "{{name}}"
+  },
+  "main": {
+    "clearHistoryTitle": "Clear All Chat History?",
+    "clearHistoryBody": "Are you sure you want to delete all chat sessions? This action cannot be undone and all conversations will be permanently deleted.",
+    "clearAll": "Clear All",
+    "noResponse": "Sorry, I could not generate a response.",
+    "requestError": "Sorry, there was an error processing your request. Please try again.",
+    "startError": "Sorry, there was an error starting this chat. Please try again.",
+    "newChat": "New Chat",
+    "switchTitle": "Switch to {{model}}?",
+    "switchConfirm": "Switch & New Chat",
+    "switchBody": "Switching to <strong>{{model}}</strong> will start a new chat. Your current conversation stays available in the sidebar.",
+    "closeSidebar": "Close conversation sidebar",
+    "openSidebar": "Open conversation sidebar",
+    "remoteDisconnected": "Remote Disconnected",
+    "remoteConnected": "Remote Connected",
+    "searchIn": "Search in:",
+    "all": "All",
+    "model": "Model:",
+    "loadingModels": "Loading models...",
+    "noModels": "No models installed",
+    "knowledgeBase": "Knowledge Base:",
+    "knowledgeBaseTooltip": "When on, the assistant searches your knowledge base for relevant documents before answering. Turning this off is faster and lighter on hardware, which helps when your knowledge base is small or empty. This is the same setting as in AI Assistant settings.",
+    "thinking": "Thinking:",
+    "thinkingTooltip": "When on, this model works through its reasoning before answering. Slower, but often better on tricky questions. Your choice is remembered for this model; the default for other models is set in AI Assistant settings.",
+    "closeChat": "Close chat"
+  },
+  "interface": {
+    "tooManyImages": "You can attach up to {{max}} images.",
+    "unsupportedImage": "{{name}} is not supported. Use JPEG, PNG, or WebP.",
+    "imageTooLarge": "{{name}} exceeds the 8 MB per-image limit.",
+    "onlyFirstAttached_one": "Only the first selected image was attached.",
+    "onlyFirstAttached_other": "Only the first {{count}} selected images were attached.",
+    "startTitle": "Start a conversation",
+    "startBody": "Interact with your installed language models directly in the Command Center.",
+    "suggestions": "Suggestions:",
+    "thinking": "Thinking",
+    "inspiration": "Need some inspiration? Enable chat suggestions in settings to get started with example prompts.",
+    "attachedImages": "Attached images",
+    "removeImage": "Remove {{name}}",
+    "attachImages": "Attach images",
+    "placeholder": "Type your message to {{name}}... (Shift+Enter for new line)"
+  },
+  "bubble": {
+    "reasoning": "Reasoning",
+    "thoughtFor": "Thought for {{seconds}}s",
+    "truncated": "This answer hit the length limit and was cut off.",
+    "continue": "Continue",
+    "sources": "Sources"
+  },
+  "sidebar": {
+    "ariaLabel": "Chat conversations",
+    "newChat": "New Chat",
+    "noChats": "No previous chats",
+    "logoAlt": "Project NOMAD Logo",
+    "openFullChat": "Open Full Chat",
+    "backToHome": "Back to Home",
+    "modelsSettings": "Models & Settings",
+    "knowledgeBase": "Knowledge Base",
+    "clearHistory": "Clear History"
+  },
+  "button": {
+    "open": "Open chat"
+  },
+  "vision": {
+    "temporary": "Images are sent only with this request. They are not saved and will disappear after you send them or reload this page.",
+    "unsupported": "This model cannot use images. Choose a model marked “Supports images” in Models & Settings.",
+    "unknown": "NOMAD cannot confirm whether this model accepts images. You can try an image, but the request will fail if the model is text-only."
+  }
+}

@@ -49,6 +49,8 @@ i18n.use(initReactI18next).init({
   fallbackLng: DEFAULT_LANGUAGE,
   // React already escapes rendered text
   interpolation: { escapeValue: false },
+  // Skip the library's promotional console.info on every page load
+  showSupportNotice: false,
 })
 
 document.documentElement.lang = i18n.language

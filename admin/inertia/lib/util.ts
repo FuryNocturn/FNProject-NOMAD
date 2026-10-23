@@ -1,4 +1,5 @@
 import { Notification } from "~/context/NotificationContext"
+import i18n from "~/i18n"
 
 // Global notification callback that can be set by the NotificationProvider
 let globalNotificationCallback: ((notification: Notification) => void) | null = null
@@ -78,7 +79,9 @@ export function catchInternal<Fn extends (...args: any[]) => any>(fn: Fn): (...a
       console.error('Internal error caught:', error)
 
       if (globalNotificationCallback) {
-        const errorMessage = 'An internal error occurred. Please try again or check the console for details. ' + (error instanceof Error ? String(error.message).slice(0, 50) : '')
+        const errorMessage = i18n.t('common.internalError', {
+          detail: error instanceof Error ? String(error.message).slice(0, 50) : '',
+        })
         globalNotificationCallback({
           message: errorMessage,
           type: 'error',

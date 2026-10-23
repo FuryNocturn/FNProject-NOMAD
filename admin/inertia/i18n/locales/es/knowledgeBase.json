@@ -1,0 +1,231 @@
+{
+  "modal": {
+    "title": "Base de conocimiento",
+    "close": "Cerrar",
+    "offline": "<strong>Base de conocimiento no disponible:</strong> la base de datos vectorial Qdrant está desconectada.",
+    "starting": "Iniciando…",
+    "startQdrant": "Iniciar Qdrant",
+    "collectionLabel": "Colección:",
+    "upload": "Subir",
+    "whyTitle": "¿Por qué subir documentos a tu base de conocimiento?",
+    "why1Title": "Integración de la base de conocimiento con {{name}}",
+    "why1Body": "Cuando subes documentos a tu base de conocimiento, NOMAD procesa e indexa el contenido (embeddings) y lo deja accesible directamente para {{name}}. Así, {{name}} puede consultar tus documentos durante las conversaciones y dar respuestas más precisas y personalizadas basadas en tus datos.",
+    "why2Title": "Procesamiento de documentos mejorado con OCR",
+    "why2Body": "NOMAD incluye reconocimiento óptico de caracteres (OCR), que le permite extraer texto de documentos basados en imágenes, como PDF escaneados o fotos. Así, aunque tus documentos no estén en un formato de texto estándar, NOMAD puede procesar e indexar su contenido para que la IA acceda a él.",
+    "why3Title": "Integración con la biblioteca de información",
+    "why3Body": "NOMAD descubrirá y extraerá automáticamente cualquier contenido que guardes en tu biblioteca de información (si está instalada) y lo pondrá al instante a disposición de {{name}} sin pasos adicionales.",
+    "autoIndexTitle": "¿Indexar automáticamente el contenido nuevo para la IA?",
+    "autoIndexHint": "El contenido indexado suele ocupar entre 5 y 10 veces el tamaño original del archivo en disco. Los cambios se aplican al contenido que añadas después de modificar este ajuste.",
+    "ingestPolicyAria": "Política de indexado",
+    "policy": {
+      "Always": "Siempre",
+      "Manual": "Manual"
+    },
+    "processingQueue": "Cola de procesamiento",
+    "cleanUpFailed": "Limpiar fallidos",
+    "cancelAllJobs": "Cancelar todos los trabajos",
+    "cancelAllJobsTitle": "Detiene y borra todos los trabajos de indexado sea cual sea su estado, incluidos los atascados o en curso. Elimina los archivos de origen subidos para esos trabajos.",
+    "storedFiles": "Archivos de la base de conocimiento",
+    "searchIn": "Buscar en:",
+    "all": "Todas",
+    "uncategorized": "Sin categoría",
+    "manageCollections": "Gestionar colecciones",
+    "resetRebuild": "Restablecer y reconstruir",
+    "resetRebuildTitle": "Elimina toda la colección de embeddings y vuelve a indexar todo desde cero. Borra de forma permanente los vectores de los archivos que ya no están en el disco. Es destructivo: hay que escribir RESET para confirmar.",
+    "reembedAll": "Reindexar todo",
+    "reembedAllTitle": "Vuelve a indexar cada archivo del disco y sustituye los vectores existentes archivo por archivo. Se conservan los vectores de los archivos que ya no están en el disco. Úsalo si ha cambiado el fragmentador o el modelo de embeddings.",
+    "syncStorage": "Sincronizar almacenamiento",
+    "syncStorageTitle": "Busca archivos nuevos en el almacenamiento y pone en cola los que aún no se han indexado. Es seguro ejecutarlo en cualquier momento; no toca el contenido ya indexado.",
+    "warningsUnavailable": "Avisos de archivos no disponibles: no se pudo leer el estado del almacenamiento. Reintentando…",
+    "columns": {
+      "fileName": "Nombre del archivo",
+      "size": "Tamaño",
+      "uploaded": "Subido",
+      "collection": "Colección",
+      "active": "Activo"
+    },
+    "managedByNomad": "Gestionado por NOMAD",
+    "removeConfirm": "¿Quitar de la base de conocimiento?",
+    "deleting": "Eliminando…",
+    "delete": "Eliminar",
+    "view": "Ver",
+    "download": "Descargar",
+    "state": {
+      "indexed": "Indexado",
+      "notIndexed": "Sin indexar",
+      "failed": "Fallido",
+      "stalled": "Atascado"
+    },
+    "actions": {
+      "reembed": "Reindexar",
+      "index": "Indexar",
+      "retry": "Reintentar"
+    },
+    "warnings": {
+      "zeroChunks": "Se indexaron 0 fragmentos: este archivo no tiene contenido de texto. {{name}} no puede consultarlo.",
+      "partialStall": "Solo se han indexado {{embedded}} de unos {{expected}} fragmentos: puede que el proceso se haya atascado."
+    },
+    "toasts": {
+      "policyAlways": "El contenido nuevo se indexará automáticamente para la IA.",
+      "policyManual": "El contenido nuevo esperará a que lo autorices.",
+      "policyFailed": "No se pudo actualizar la política de indexado.",
+      "collectionUpdated": "Colección actualizada.",
+      "collectionUpdateFailed": "No se pudo actualizar la colección.",
+      "activeUpdated": "Estado de activación actualizado.",
+      "activeUpdateFailed": "No se pudo actualizar el estado de activación.",
+      "collectionActiveUpdated": "Estado de activación de la colección actualizado.",
+      "collectionActiveUpdateFailed": "No se pudo actualizar el estado de activación de la colección.",
+      "fileRemoved": "Archivo quitado de la base de conocimiento.",
+      "deleteFailed": "No se pudo eliminar el archivo.",
+      "fileQueued": "Archivo en cola para indexar.",
+      "queueFailed": "No se pudo poner el archivo en cola.",
+      "failedCleaned": "Trabajos fallidos limpiados.",
+      "cleanupFailed": "No se pudieron limpiar los trabajos.",
+      "allCancelled": "Todos los trabajos de indexado cancelados.",
+      "cancelFailed": "No se pudieron cancelar los trabajos.",
+      "qdrantStartFailed": "No se pudo iniciar Qdrant.",
+      "synced": "Almacenamiento sincronizado correctamente. Si se encontraron archivos nuevos, se han puesto en cola para procesarlos.",
+      "syncFailed": "No se pudo sincronizar el almacenamiento",
+      "reembedDone": "Reindexado completado.",
+      "reembedFailed": "No se pudo reindexar la base de conocimiento.",
+      "resetDone": "Restablecimiento completado.",
+      "resetFailed": "No se pudo restablecer la base de conocimiento.",
+      "uploadQueued_one": "{{count}} archivo en cola para procesar.",
+      "uploadQueued_other": "{{count}} archivos en cola para procesar.",
+      "uploadFailed": "No se pudo subir: {{name}}"
+    },
+    "cancelAllModal": {
+      "title": "¿Cancelar todos los trabajos de indexado?",
+      "confirm": "Cancelar todos los trabajos",
+      "cancel": "Mantener trabajos",
+      "body": "Esto detiene <strong>todos</strong> los trabajos de indexado, incluidos los que siguen en curso o atascados, y vacía la cola de procesamiento. Los archivos de origen subidos para esos trabajos se eliminan, así que tendrás que volver a subir lo que quieras indexar. Los archivos que ya terminaron de indexarse no se ven afectados. ¿Seguro que quieres continuar?"
+    },
+    "syncModal": {
+      "title": "¿Confirmar sincronización?",
+      "confirm": "Confirmar sincronización",
+      "body": "Se analizarán los directorios de almacenamiento de NOMAD en busca de archivos nuevos y se pondrán en cola para procesarlos. Es útil si has añadido archivos manualmente al almacenamiento o quieres asegurarte de que todo esté al día. Si se encuentran archivos nuevos y se procesan, el uso de recursos puede aumentar temporalmente. ¿Seguro que quieres continuar?"
+    },
+    "reembedAllModal": {
+      "title": "¿Reindexar todos los documentos?",
+      "confirming": "Reindexando…",
+      "intro_one": "Se volverá a procesar cada documento de tu base de conocimiento: unos <strong>{{count}} archivo</strong>. Por cada archivo, NOMAD eliminará los embeddings existentes de Qdrant y pondrá en cola un nuevo trabajo de indexado con el fragmentado y el modelo de embeddings actuales.",
+      "intro_other": "Se volverá a procesar cada documento de tu base de conocimiento: unos <strong>{{count}} archivos</strong>. Por cada archivo, NOMAD eliminará los embeddings existentes de Qdrant y pondrá en cola un nuevo trabajo de indexado con el fragmentado y el modelo de embeddings actuales.",
+      "purposeTitle": "Para qué sirve",
+      "purposeBody": "Úsalo cuando haya cambiado el modelo de embeddings o la lógica de fragmentado, o cuando sospeches que los vectores almacenados están obsoletos. Los archivos del disco <em>no</em> se eliminan, y los puntos huérfanos cuyo archivo de origen ya no existe se conservarán intactos (consulta <em>Restablecer y reconstruir</em> si quieres empezar totalmente de cero).",
+      "headsUp": "Ten en cuenta",
+      "warn1_one": "Indexar {{count}} archivo puede tardar mucho, sobre todo con PDF grandes o archivos ZIM.",
+      "warn1_other": "Indexar {{count}} archivos puede tardar mucho, sobre todo con PDF grandes o archivos ZIM.",
+      "warn2": "En sistemas sin aceleración por GPU, espera un uso elevado y sostenido de la CPU mientras dure.",
+      "warn3": "Los resultados de búsqueda de la base de conocimiento pueden estar incompletos hasta que termine de reindexarse cada archivo.",
+      "warn4": "Si ya hay trabajos de indexado en curso, esta acción se rechazará: espera a que la cola se vacíe."
+    },
+    "resetModal": {
+      "title": "¿Restablecer y reconstruir la base de conocimiento?",
+      "confirm": "Borrar y reconstruir",
+      "confirming": "Restableciendo…",
+      "intro_one": "Se <strong>eliminarán de forma permanente todos los puntos</strong> de la colección <code>nomad_knowledge_base</code> de Qdrant y se reconstruirá a partir del <strong>{{count}} archivo</strong> que hay actualmente en el disco. La colección se elimina y se vuelve a crear, y cada archivo se pone de nuevo en cola para indexarse.",
+      "intro_other": "Se <strong>eliminarán de forma permanente todos los puntos</strong> de la colección <code>nomad_knowledge_base</code> de Qdrant y se reconstruirá a partir de los <strong>{{count}} archivos</strong> que hay actualmente en el disco. La colección se elimina y se vuelve a crear, y cada archivo se pone de nuevo en cola para indexarse.",
+      "differsTitle": "En qué se diferencia de Reindexar todo",
+      "differs1": "<strong>Reindexar todo</strong> sustituye los vectores archivo por archivo. Los puntos huérfanos (vectores cuyo archivo de origen se borró del disco en algún momento) se conservan.",
+      "differs2": "<strong>Restablecer y reconstruir</strong> elimina la colección entera. Los puntos huérfanos <strong>se pierden para siempre</strong>. Después, en Qdrant solo existirán los archivos que haya en el disco.",
+      "destructiveTitle": "Esta acción es destructiva y no se puede deshacer",
+      "destructive1": "La búsqueda en la base de conocimiento estará vacía hasta que termine el indexado (puede llevar horas en sistemas solo con CPU).",
+      "destructive2": "Durante unos segundos del restablecimiento, la colección de Qdrant no existe: las consultas del chat con RAG en ese intervalo pueden devolver el error «colección no encontrada». Evita usar el chat hasta que haya empezado la reconstrucción.",
+      "destructive3": "Si ya hay trabajos de indexado en curso, esta acción se rechazará: espera a que la cola se vacíe.",
+      "typeToConfirm": "Escribe <code>RESET</code> para confirmar:",
+      "typeExactly": "Escribe RESET exactamente (en mayúsculas y sin espacios) para activar el botón de confirmar."
+    },
+    "reembedFileModal": {
+      "title": "¿Reindexar este archivo?",
+      "confirm": "Reindexar",
+      "confirming": "Poniendo en cola…",
+      "body": "Se eliminarán los embeddings existentes de <strong>{{name}}</strong> y se pondrá en cola un nuevo trabajo de indexado. El archivo del disco no se toca.",
+      "headsUp": "Ten en cuenta",
+      "warn1": "Con archivos ZIM grandes puede tardar mucho, sobre todo en sistemas solo con CPU.",
+      "warn2": "Los resultados de búsqueda que hacían referencia a este archivo estarán incompletos hasta que termine el nuevo indexado.",
+      "warn3": "Si ya hay un trabajo en marcha para este archivo, el reindexado se rechazará: espera a que termine."
+    },
+    "viewer": {
+      "loadError": "No se pudo cargar el archivo. Puede que se haya movido o que su tipo no se pueda visualizar."
+    }
+  },
+  "policyBanner": {
+    "title_one": "¿Indexar tu archivo existente para {{name}}?",
+    "title_other": "¿Indexar tus {{count, number}} archivos existentes para {{name}}?",
+    "body": "Una vez indexados, {{name}} podrá consultarlos al responder a tus preguntas.",
+    "indexExisting": "Indexar contenido existente",
+    "maybeLater": "Quizá más tarde",
+    "indexStarted": "{{name}} indexará tu contenido existente. Puedes seguir el progreso en el panel de la base de conocimiento.",
+    "indexFailed": "No se pudo iniciar el indexado. Inténtalo de nuevo desde el panel de la base de conocimiento.",
+    "laterSaved": "Por ahora tu contenido seguirá sin indexar. Puedes activarlo cuando quieras desde el panel de la base de conocimiento.",
+    "laterFailed": "No se pudo guardar tu elección. Inténtalo de nuevo."
+  },
+  "collections": {
+    "title": "Gestionar colecciones",
+    "close": "Cerrar",
+    "intro": "Cambia el nombre de las colecciones o quítalas. Quitar una colección no elimina ningún archivo: simplemente vuelven a Sin categoría para que puedas reordenarlos.",
+    "empty": "Aún no hay colecciones. Asigna un archivo a una colección desde la tabla de la base de conocimiento para crear una.",
+    "save": "Guardar",
+    "rename": "Renombrar",
+    "removeConfirm": "¿Quitar «{{name}}»? Los archivos pasan a Sin categoría.",
+    "renamed": "Colección renombrada.",
+    "renameFailed": "No se pudo renombrar la colección.",
+    "removed": "Colección quitada.",
+    "removeFailed": "No se pudo quitar la colección."
+  },
+  "combobox": {
+    "uncategorized": "Sin categoría",
+    "create": "+ Crear «{{name}}»",
+    "noMatches": "Sin coincidencias"
+  },
+  "nomadMd": {
+    "intro": "Instrucciones personalizadas que se envían a {{name}} como prompt del sistema en cada chat.",
+    "tip": "Consejo: este archivo también se guarda en el disco en <code>storage/NOMAD.md</code> y se puede editar directamente.",
+    "save": "Guardar",
+    "saved": "NOMAD.md guardado. Se aplica a los mensajes nuevos.",
+    "saveFailed": "No se pudo guardar NOMAD.md.",
+    "closeAria": "Cerrar",
+    "template": "# NOMAD.md\n\n<!--\nEste archivo contiene instrucciones personalizadas para tu asistente de IA. Todo\nlo que hay aquí se envía al asistente como prompt del sistema en cada chat:\núsalo para definir su personalidad, tono, prioridades y normas permanentes.\n\nTambién se guarda en el disco en storage/NOMAD.md, así que puedes editarlo\ndirectamente. Sustituye esta plantilla por tus propias instrucciones y pulsa Guardar.\n-->\n\n## Sobre mí\n\n- (p. ej., estoy montando una granja autosuficiente en un clima frío.)\n\n## Cómo debe responder el asistente\n\n- Ser conciso y práctico.\n- Priorizar la seguridad y los métodos probados.\n"
+  },
+  "guardrail": {
+    "title": "Confirma la operación de indexado de IA de gran tamaño",
+    "body": "Indexar este lote para el asistente de IA usará aproximadamente <strong>{{size}}</strong> de espacio en disco para embeddings, además de las descargas originales.",
+    "freeDisk": "Es más del 10 % de tu espacio libre en disco ({{free}} libres). El indexado puede tardar varias horas y es difícil de interrumpir limpiamente una vez iniciado.",
+    "manualHint": "Si prefieres revisar elemento por elemento antes de indexar, cancela aquí y cambia el ajuste de Indexado automático a <strong>Manual</strong> desde el panel de la base de conocimiento.",
+    "proceed": "Continuar de todos modos"
+  },
+  "jobs": {
+    "processingQueue": "Cola de procesamiento",
+    "empty": "No se está procesando ningún archivo",
+    "lastActivity": "· última actividad {{time}}",
+    "chunks": "· {{count}} fragmentos",
+    "health": {
+      "waiting": {
+        "label": "En espera",
+        "aria": "El trabajo está en cola esperando a empezar"
+      },
+      "healthy": {
+        "label": "Activo",
+        "aria": "El trabajo se está indexando a un ritmo normal"
+      },
+      "slow": {
+        "label": "Lento",
+        "aria": "El trabajo no ha avanzado en al menos 2 minutos"
+      },
+      "stalled": {
+        "label": "Atascado",
+        "aria": "El trabajo no ha avanzado en al menos 5 minutos"
+      },
+      "failed": {
+        "label": "Fallido",
+        "aria": "El trabajo ha fallado"
+      }
+    },
+    "timeAgo": {
+      "justNow": "ahora mismo",
+      "seconds": "hace {{count}} s",
+      "minutes": "hace {{count}} min",
+      "hours": "hace {{count}} h"
+    }
+  }
+}

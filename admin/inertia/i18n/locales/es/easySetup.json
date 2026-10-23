@@ -1,0 +1,156 @@
+{
+  "headTitle": "Asistente de configuración rápida",
+  "offline": {
+    "title": "Sin conexión a internet",
+    "message": "Necesitas conexión a internet para continuar. Conéctate e inténtalo de nuevo."
+  },
+  "steps": {
+    "apps": "Aplicaciones",
+    "maps": "Mapas",
+    "content": "Contenido",
+    "creatorPacks": "Packs de creadores",
+    "ai": "IA",
+    "review": "Resumen"
+  },
+  "progress": "Progreso",
+  "capabilities": {
+    "information": {
+      "name": "Biblioteca de información",
+      "description": "Acceso sin conexión a Wikipedia, referencias médicas, guías prácticas y enciclopedias",
+      "feature1": "Wikipedia completa sin conexión",
+      "feature2": "Referencias médicas y guías de primeros auxilios",
+      "feature3": "Guías de reparación y contenido práctico de bricolaje",
+      "feature4": "Libros y literatura del Proyecto Gutenberg"
+    },
+    "education": {
+      "name": "Plataforma educativa",
+      "description": "Plataforma de aprendizaje interactiva con cursos en vídeo y ejercicios",
+      "feature1": "Cursos de matemáticas y ciencias de Khan Academy",
+      "feature2": "Contenido del currículo escolar (K-12)",
+      "feature3": "Ejercicios y cuestionarios interactivos",
+      "feature4": "Seguimiento del progreso de los alumnos"
+    },
+    "ai": {
+      "description": "Chat de IA local que funciona por completo en tu equipo, sin necesidad de internet",
+      "feature1": "Conversaciones privadas que nunca salen de tu dispositivo",
+      "feature2": "No necesita conexión a internet tras la configuración",
+      "feature3": "Haz preguntas, pide ayuda para escribir y busca ideas",
+      "feature4": "Funciona en tu propio equipo con modelos de IA locales"
+    },
+    "installed": "Instalada",
+    "poweredBy": "Con la tecnología de {{name}}"
+  },
+  "step1": {
+    "title": "¿Qué quieres que haga NOMAD?",
+    "subtitle": "Elige las funciones que necesitas. Siempre podrás añadir más después.",
+    "allInstalled": "¡Todas las funciones disponibles ya están instaladas!",
+    "manageApps": "Gestionar aplicaciones",
+    "coreCapabilities": "Funciones principales",
+    "useRemoteOllama": "Usar una instancia remota de Ollama",
+    "moreApps": {
+      "title": "¿Buscas más aplicaciones?",
+      "description": "Las notas, las herramientas de datos y el catálogo completo de aplicaciones adicionales están disponibles en cualquier momento en Supply Depot.",
+      "button": "Abrir Supply Depot"
+    },
+    "confirmDisableAi": "Si desactivas la IA, se descartarán los modelos de IA que has elegido, la política de indexación y la configuración de Ollama remoto. ¿Quieres continuar?"
+  },
+  "step2": {
+    "title": "Elige regiones de mapas",
+    "subtitle": "Elige las colecciones de regiones de mapas que quieres descargar para usarlas sin conexión. Siempre podrás descargar más regiones después.",
+    "hint": "¿Solo necesitas un país concreto o quieres el mundo entero? Puedes instalar países sueltos y un mapa global completo en cualquier momento desde el <link>Gestor de mapas</link>.",
+    "empty": "Ahora mismo no hay colecciones de mapas disponibles."
+  },
+  "step3": {
+    "title": "Elige el contenido",
+    "subtitleInformation": "Elige categorías de contenido para tener conocimiento sin conexión.",
+    "subtitleOther": "Configura el contenido de las funciones que has elegido.",
+    "additionalContent": "Contenido adicional",
+    "additionalContentHint": "Colecciones seleccionadas para consultar sin conexión",
+    "noContent": "No has elegido ninguna función que use contenido. Puedes saltarte este paso o volver atrás para elegir funciones que lo necesiten."
+  },
+  "creatorPacks": {
+    "title": "Packs de creadores",
+    "subtitle": "Colecciones de vídeo de marca de creadores, descargadas para verlas sin conexión en Kiwix.",
+    "empty": "Ahora mismo no hay packs de creadores disponibles."
+  },
+  "ai": {
+    "title": "Configura {{name}}",
+    "subtitle": "Elige los modelos que quieres descargar y cómo debe tratar {{name}} el contenido nuevo.",
+    "modelsTitle": "Modelos de IA",
+    "modelsHint": "Elige los modelos que quieres descargar para usar la IA sin conexión",
+    "remoteTitle": "Ollama remoto seleccionado",
+    "remoteMessage": "Los modelos se gestionan en el equipo remoto. Cuando termines la configuración, podrás añadir modelos desde Ajustes > Asistente de IA. Ten en cuenta que esto solo funciona con Ollama, no con LM Studio ni otros programas con API de OpenAI.",
+    "size": "Tamaño: {{size}}",
+    "supportsImages": "Admite imágenes",
+    "noModels": "Ahora mismo no hay modelos de IA recomendados disponibles.",
+    "autoIndexTitle": "¿Indexar automáticamente el contenido nuevo para {{name}}?",
+    "autoIndexDescription": "Cuando añadas nuevos ZIM, documentos o contenido seleccionado, ¿quieres que {{name}} los indexe automáticamente para poder buscar en ellos al responder a tus preguntas?",
+    "always": "Sí, siempre",
+    "manual": "Preguntarme antes",
+    "changeLater": "Puedes cambiarlo en cualquier momento desde el panel de base de conocimiento del chat de IA."
+  },
+  "review": {
+    "title": "Revisa tu selección",
+    "subtitle": "Revisa tus elecciones antes de empezar la configuración.",
+    "noSelectionsTitle": "No has elegido nada",
+    "noSelectionsMessage": "No has elegido nada para instalar o descargar. Puedes volver atrás para elegir o volver a la página de inicio.",
+    "capabilities": "Funciones que se instalarán",
+    "mapCollections": "Colecciones de mapas que se descargarán ({{total}})",
+    "creatorPacks": "Packs de creadores que se instalarán ({{total}})",
+    "contentCategories": "Categorías de contenido ({{total}})",
+    "files_one": "({{count}} archivo)",
+    "files_other": "({{count}} archivos)",
+    "wikipedia": "Wikipedia",
+    "noDownload": "Sin descarga",
+    "aiModels": "Modelos de IA que se descargarán ({{total}})",
+    "autoIndexSetting": "Indexación automática",
+    "autoIndexAlways": "El contenido nuevo <strong>se indexará automáticamente</strong> al llegar para que {{name}} pueda buscar en él.",
+    "autoIndexManual": "El contenido nuevo <strong>esperará a que lo autorices</strong> desde el panel de base de conocimiento antes de que {{name}} lo indexe.",
+    "readyTitle": "Todo listo para empezar",
+    "readyMessage": "Pulsa «Completar configuración» para empezar a instalar aplicaciones y descargar contenido. Puede tardar un rato, según tu conexión a internet y el tamaño de las descargas."
+  },
+  "footer": {
+    "capabilities_one": "{{count}} función",
+    "capabilities_other": "{{count}} funciones",
+    "mapRegions_one": "{{count}} región de mapa",
+    "mapRegions_other": "{{count}} regiones de mapa",
+    "categories_one": "{{count}} categoría de contenido",
+    "categories_other": "{{count}} categorías de contenido",
+    "creatorPacks_one": "{{count}} pack de creadores",
+    "creatorPacks_other": "{{count}} packs de creadores",
+    "aiModels_one": "{{count}} modelo de IA",
+    "aiModels_other": "{{count}} modelos de IA",
+    "summary": "Seleccionado: {{capabilities}}, {{maps}}, {{categories}}, {{aiModels}}",
+    "summaryWithPacks": "Seleccionado: {{capabilities}}, {{maps}}, {{categories}}, {{packs}}, {{aiModels}}",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "cancel": "Cancelar e ir al inicio",
+    "complete": "Completar configuración"
+  },
+  "notifications": {
+    "needInternet": "Necesitas conexión a internet para completar la configuración.",
+    "remoteFailed": "No se pudo configurar Ollama remoto.",
+    "completed": "¡Asistente completado! Estamos procesando tu selección.",
+    "error": "Se ha producido un error durante la configuración. Puede que algunos elementos no se hayan procesado."
+  },
+  "complete": {
+    "headTitle": "Configuración rápida completada",
+    "offlineMessage": "Parece que no tienes conexión a internet. Para instalar aplicaciones y descargar contenido necesitas conexión.",
+    "activityTitle": "Actividad de instalación de aplicaciones",
+    "backgroundTitle": "En segundo plano",
+    "backgroundMessage": "Puedes salir de esta página cuando quieras: las instalaciones y descargas continuarán en segundo plano. Ten en cuenta que la Biblioteca de información (si la has instalado) puede no estar disponible hasta que terminen todas las descargas iniciales.",
+    "goHome": "Ir al inicio"
+  },
+  "storage": {
+    "title": "Almacenamiento",
+    "selectedInline": "(+{{size}} seleccionados)",
+    "current": "Actual ({{size}})",
+    "selected": "Seleccionado (+{{size}})",
+    "exceeds": "Supera el espacio disponible en {{size}}",
+    "remaining": "Quedarán {{size}} libres"
+  },
+  "disk": {
+    "nasStorage": "Almacenamiento NAS",
+    "unknown": "Desconocido"
+  }
+}

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Trans, useTranslation } from 'react-i18next'
 import StyledModal from './StyledModal'
 import StyledButton from './StyledButton'
 import Alert from './Alert'
@@ -45,34 +46,36 @@ interface CustomAppModalProps {
   initial?: CustomAppInitial | null
 }
 
-const CATEGORY_OPTIONS = [
-  { value: 'custom', label: 'Custom' },
-  { value: 'productivity', label: 'Productivity' },
-  { value: 'media', label: 'Media' },
-  { value: 'security', label: 'Security' },
-  { value: 'networking', label: 'Networking' },
-  { value: 'utility', label: 'Utility' },
-  { value: 'ai', label: 'AI' },
-  { value: 'education', label: 'Education' },
+// Labels are resolved at render time via apps.categories.<value>
+const CATEGORY_VALUES = [
+  'custom',
+  'productivity',
+  'media',
+  'security',
+  'networking',
+  'utility',
+  'ai',
+  'education',
 ]
 
 // Curated subset of the DynamicIcon map suitable for custom apps.
-const ICON_OPTIONS = [
-  { value: 'IconBrandDocker', label: 'Docker (default)' },
-  { value: 'IconBox', label: 'Box' },
-  { value: 'IconServer', label: 'Server' },
-  { value: 'IconDatabase', label: 'Database' },
-  { value: 'IconCode', label: 'Code' },
-  { value: 'IconTool', label: 'Tool' },
-  { value: 'IconWorld', label: 'Web' },
-  { value: 'IconShieldLock', label: 'Security' },
-  { value: 'IconMovie', label: 'Media' },
-  { value: 'IconBook', label: 'Book' },
-  { value: 'IconNotes', label: 'Notes' },
-  { value: 'IconCpu', label: 'Compute' },
-  { value: 'IconRobot', label: 'AI / Bot' },
-  { value: 'IconWifi', label: 'Network' },
-  { value: 'IconHome', label: 'Home' },
+// Labels are resolved at render time via apps.customApp.icons.<value>
+const ICON_VALUES = [
+  'IconBrandDocker',
+  'IconBox',
+  'IconServer',
+  'IconDatabase',
+  'IconCode',
+  'IconTool',
+  'IconWorld',
+  'IconShieldLock',
+  'IconMovie',
+  'IconBook',
+  'IconNotes',
+  'IconCpu',
+  'IconRobot',
+  'IconWifi',
+  'IconHome',
 ]
 
 export default function CustomAppModal({
@@ -83,7 +86,10 @@ export default function CustomAppModal({
   mode = 'create',
   initial = null,
 }: CustomAppModalProps) {
+  const { t } = useTranslation()
   const isEdit = mode === 'edit'
+  const categoryOptions = CATEGORY_VALUES.map((value) => ({ value, label: t(`apps.categories.${value}`) }))
+  const iconOptions = ICON_VALUES.map((value) => ({ value, label: t(`apps.customApp.icons.${value}`) }))
   const [friendlyName, setFriendlyName] = useState('')
   const [image, setImage] = useState('')
   const [category, setCategory] = useState('custom')
@@ -223,11 +229,11 @@ export default function CustomAppModal({
   // ── Submit ────────────────────────────────────────────────────────────────
   async function handleSubmit() {
     if (!friendlyName.trim() || !image.trim()) {
-      showError('Name and image are required.')
+      showError(t('apps.customApp.errors.required'))
       return
     }
     if (blocked.length > 0) {
-      showError('Resolve the blocked issues before installing.')
+      showError(t('apps.customApp.errors.blocked'))
       return
     }
 
@@ -269,11 +275,11 @@ export default function CustomAppModal({
         if (result?.message?.toLowerCase().includes('port') || result?.message?.toLowerCase().includes('conflict')) {
           showError(result.message)
         } else {
-          showError(result?.message || 'Failed to create custom app.')
+          showError(result?.message || t('apps.customApp.errors.createFailed'))
         }
       }
     } catch (err: any) {
-      showError(err?.message || 'Unexpected error creating custom app.')
+      showError(err?.message || t('apps.customApp.errors.unexpected'))
     } finally {
       setSubmitting(false)
     }
@@ -286,13 +292,12 @@ export default function CustomAppModal({
 
   return (
     <StyledModal
-      title={isEdit ? 'Edit App' : 'Add Custom App'}
+      title={isEdit ? t('apps.customApp.editTitle') : t('apps.customApp.addTitle')}
       open={open}
       onCancel={handleClose}
-      cancelText="Cancel"
       onConfirm={handleSubmit}
       confirmVariant='primary'
-      confirmText={isEdit ? 'Save & Recreate' : 'Install'}
+      confirmText={isEdit ? t('apps.customApp.saveRecreate') : t('apps.customApp.install')}
       confirmIcon="IconBrandDocker"
       confirmLoading={submitting}
       confirmDisabled={!canSubmit}
@@ -303,16 +308,16 @@ export default function CustomAppModal({
         <div className="grid grid-cols-2 gap-4">
           <Input
             name='image'
-            label="Docker Image"
-            placeholder="e.g. nginx:latest"
+            label={t('apps.customApp.dockerImage')}
+            placeholder={t('apps.customApp.imagePlaceholder')}
             value={image}
             onChange={(e) => setImage(e.target.value)}
             required
           />
           <Input
             name='friendlyName'
-            label="Display Name"
-            placeholder="My App"
+            label={t('apps.customApp.displayName')}
+            placeholder={t('apps.customApp.namePlaceholder')}
             value={friendlyName}
             onChange={(e) => setFriendlyName(e.target.value)}
             required
@@ -323,25 +328,25 @@ export default function CustomAppModal({
         <div className="grid grid-cols-2 gap-4 items-start">
           <Select
             name='category'
-            label='Category'
-            helpText='Select the most relevant category for this app. This helps with visual organization and filtering.'
+            label={t('apps.customApp.category')}
+            helpText={t('apps.customApp.categoryHelp')}
             value={category}
             onChange={(newVal) => setCategory(newVal)}
-            options={CATEGORY_OPTIONS}
+            options={categoryOptions}
           />
           <div className="flex items-end gap-2">
             <Select
               name='icon'
-              label='Icon'
-              helpText='Pick an icon shown on the app card.'
+              label={t('apps.customApp.icon')}
+              helpText={t('apps.customApp.iconHelp')}
               value={icon}
               onChange={(newVal) => setIcon(newVal)}
-              options={ICON_OPTIONS}
+              options={iconOptions}
               className="flex-1 min-w-0"
             />
             <div
               className="flex-shrink-0 flex items-center justify-center h-[42px] w-[42px] rounded-md border border-border-default bg-surface-secondary"
-              title="Icon preview"
+              title={t('apps.customApp.iconPreview')}
             >
               <DynamicIcon icon={icon as DynamicIconName} className="h-6 w-6 text-desert-green" />
             </div>
@@ -351,11 +356,11 @@ export default function CustomAppModal({
         {/* Port Mappings */}
         <div>
           <div className="flex items-center justify-between">
-            <label className="text-sm font-medium">Port Mappings</label>
-            <StyledButton size="sm" variant="ghost" icon="IconPlus" onClick={addPort}>Add Port</StyledButton>
+            <label className="text-sm font-medium">{t('apps.customApp.portMappings')}</label>
+            <StyledButton size="sm" variant="ghost" icon="IconPlus" onClick={addPort}>{t('apps.customApp.addPort')}</StyledButton>
           </div>
           {ports.length === 0 && (
-            <p className="text-xs italic">No port mappings — the app won't be accessible from a browser.</p>
+            <p className="text-xs italic">{t('apps.customApp.noPorts')}</p>
           )}
           <div className="space-y-2">
             {ports.map((p, idx) => (
@@ -364,7 +369,7 @@ export default function CustomAppModal({
                   name={`containerPort${idx}`}
                   label=''
                   type="number"
-                  placeholder="Container port"
+                  placeholder={t('apps.customApp.containerPort')}
                   value={p.container}
                   onChange={(e) => updatePort(idx, 'container', e.target.value)}
                   className='w-full'
@@ -374,7 +379,7 @@ export default function CustomAppModal({
                   name={`hostPort${idx}`}
                   label=''
                   type="number"
-                  placeholder="Host port (8600+)"
+                  placeholder={t('apps.customApp.hostPort')}
                   value={p.host}
                   onChange={(e) => updatePort(idx, 'host', e.target.value)}
                   className='w-full'
@@ -389,20 +394,20 @@ export default function CustomAppModal({
               </div>
             ))}
           </div>
-          <p className="text-xs mt-2">Host ports should be in the 8600+ range. Custom apps get ports starting at {suggestedPort ?? 8600}.</p>
+          <p className="text-xs mt-2">{t('apps.customApp.portsHint', { port: suggestedPort ?? 8600 })}</p>
           {checkingPreflight && (
-            <p className="text-xs mt-1 italic text-text-muted">Checking port availability…</p>
+            <p className="text-xs mt-1 italic text-text-muted">{t('apps.customApp.checkingPorts')}</p>
           )}
         </div>
 
         {/* Volume Mappings */}
         <div>
           <div className="flex items-center justify-between">
-            <label className="text-sm font-medium">Volume Mounts</label>
-            <StyledButton size="sm" variant="ghost" icon="IconPlus" onClick={addVolume}>Add Volume</StyledButton>
+            <label className="text-sm font-medium">{t('apps.customApp.volumeMounts')}</label>
+            <StyledButton size="sm" variant="ghost" icon="IconPlus" onClick={addVolume}>{t('apps.customApp.addVolume')}</StyledButton>
           </div>
           {volumes.length === 0 && (
-            <p className="text-xs italic">No volumes — data won't persist across restarts.</p>
+            <p className="text-xs italic">{t('apps.customApp.noVolumes')}</p>
           )}
           <div className="space-y-2">
             {volumes.map((v, idx) => (
@@ -411,7 +416,7 @@ export default function CustomAppModal({
                   name={`hostPath${idx}`}
                   label=''
                   type="text"
-                  placeholder="Host path (absolute)"
+                  placeholder={t('apps.customApp.hostPath')}
                   value={v.host_path}
                   onChange={(e) => updateVolume(idx, 'host_path', e.target.value)}
                   className='w-full'
@@ -421,7 +426,7 @@ export default function CustomAppModal({
                   name={`containerPath${idx}`}
                   label=''
                   type="text"
-                  placeholder="Container path"
+                  placeholder={t('apps.customApp.containerPath')}
                   value={v.container_path}
                   onChange={(e) => updateVolume(idx, 'container_path', e.target.value)}
                   className='w-full'
@@ -441,8 +446,8 @@ export default function CustomAppModal({
         {/* Environment Variables */}
         <div>
           <div className="flex items-center justify-between">
-            <label className="text-sm font-medium">Environment Variables</label>
-            <StyledButton size="sm" variant="ghost" icon="IconPlus" onClick={addEnv}>Add Variable</StyledButton>
+            <label className="text-sm font-medium">{t('apps.customApp.envVars')}</label>
+            <StyledButton size="sm" variant="ghost" icon="IconPlus" onClick={addEnv}>{t('apps.customApp.addVariable')}</StyledButton>
           </div>
           <div className="space-y-2">
             {envVars.map((e, idx) => (
@@ -465,20 +470,20 @@ export default function CustomAppModal({
               </div>
             ))}
             {envVars.length === 0 && (
-              <p className="text-xs italic">No environment variables provided.</p>
+              <p className="text-xs italic">{t('apps.customApp.noEnvVars')}</p>
             )}
           </div>
         </div>
 
         {/* Advanced: resource limits */}
         <div>
-          <label className="text-sm font-medium">Resource Limits (optional)</label>
+          <label className="text-sm font-medium">{t('apps.customApp.resourceLimits')}</label>
           <div className="grid grid-cols-2 gap-4 mt-1">
             <Input
               name='memoryMb'
               label=''
               type="number"
-              placeholder="Memory (MB) — default 1024"
+              placeholder={t('apps.customApp.memoryPlaceholder')}
               value={memoryMb}
               onChange={(e) => setMemoryMb(e.target.value)}
               className='w-full'
@@ -487,20 +492,20 @@ export default function CustomAppModal({
               name='cpus'
               label=''
               type="number"
-              placeholder="CPUs — default 1"
+              placeholder={t('apps.customApp.cpusPlaceholder')}
               value={cpus}
               onChange={(e) => setCpus(e.target.value)}
               className='w-full'
             />
           </div>
-          <p className="text-xs mt-1 italic">Caps prevent a runaway container from starving the host. Leave blank to use the defaults (1024 MB / 1 CPU).</p>
+          <p className="text-xs mt-1 italic">{t('apps.customApp.limitsHint')}</p>
         </div>
 
         {/* Hard blocks — must be resolved before installing */}
         {hasBlocks && (
           <div className="space-y-2">
             {blocked.map((b, i) => (
-              <Alert key={i} type="error" title="Not allowed" message={b} />
+              <Alert key={i} type="error" title={t('apps.customApp.notAllowed')} message={b} />
             ))}
           </div>
         )}
@@ -512,12 +517,12 @@ export default function CustomAppModal({
               <Alert
                 key={c.port}
                 type="warning"
-                title={`Port ${c.port} is already in use`}
-                message={`Currently bound by: ${c.usedBy}. Installation may fail.`}
+                title={t('apps.customApp.portInUse', { port: c.port })}
+                message={t('apps.customApp.boundBy', { usedBy: c.usedBy })}
               />
             ))}
             {resourceWarnings.map((w, i) => (
-              <Alert key={i} type="warning" title="Resource warning" message={w} />
+              <Alert key={i} type="warning" title={t('apps.customApp.resourceWarning')} message={w} />
             ))}
             <label className="flex items-center gap-2 cursor-pointer select-none mt-1">
               <input
@@ -526,13 +531,16 @@ export default function CustomAppModal({
                 onChange={(e) => setForceInstall(e.target.checked)}
                 className="accent-desert-orange h-4 w-4 rounded"
               />
-              <span className="text-text-muted text-xs">I understand — install anyway</span>
+              <span className="text-text-muted text-xs">{t('apps.customApp.installAnyway')}</span>
             </label>
           </div>
         )}
 
         <p className="text-sm">
-          Containers are created with <code className="font-mono">--restart=unless-stopped</code>. Data is not persisted unless you add volume mounts above.
+          <Trans
+            i18nKey="apps.customApp.restartNote"
+            components={{ code: <code className="font-mono" /> }}
+          />
         </p>
       </div>
     </StyledModal>

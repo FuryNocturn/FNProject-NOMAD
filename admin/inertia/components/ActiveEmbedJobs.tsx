@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import useEmbedJobs from '~/hooks/useEmbedJobs'
 import HorizontalBarChart from './HorizontalBarChart'
 import StyledSectionHeader from './StyledSectionHeader'
@@ -13,6 +14,7 @@ interface ActiveEmbedJobsProps {
 }
 
 const ActiveEmbedJobs = ({ withHeader = false }: ActiveEmbedJobsProps) => {
+  const { t, i18n } = useTranslation()
   const { data: jobs } = useEmbedJobs()
 
   // Re-render every 5s to keep per-job "last activity Xs ago" timestamps fresh.
@@ -25,7 +27,7 @@ const ActiveEmbedJobs = ({ withHeader = false }: ActiveEmbedJobsProps) => {
   return (
     <>
       {withHeader && (
-        <StyledSectionHeader title="Processing Queue" className="mt-12 mb-4" />
+        <StyledSectionHeader title={t('knowledgeBase.jobs.processingQueue')} className="mt-12 mb-4" />
       )}
 
       <div className="space-y-4">
@@ -48,20 +50,22 @@ const ActiveEmbedJobs = ({ withHeader = false }: ActiveEmbedJobsProps) => {
                 <div className="flex items-center gap-3 mb-2">
                   <span
                     className={`inline-block w-2.5 h-2.5 rounded-full ${display.dot}`}
-                    aria-label={display.ariaLabel}
-                    title={display.ariaLabel}
+                    aria-label={t(display.ariaLabel)}
+                    title={t(display.ariaLabel)}
                   />
                   <span className="text-sm font-medium text-text-primary">
-                    {display.label}
+                    {t(display.label)}
                   </span>
                   {lastActivityMs !== undefined && (
                     <span className="text-xs text-text-muted">
-                      · last activity {formatTimeAgo(lastActivityMs, tick)}
+                      {t('knowledgeBase.jobs.lastActivity', {
+                        time: formatTimeAgo(lastActivityMs, tick, t),
+                      })}
                     </span>
                   )}
                   {typeof job.chunks === 'number' && job.chunks > 0 && (
                     <span className="text-xs text-text-muted">
-                      · {job.chunks.toLocaleString()} chunks
+                      {t('knowledgeBase.jobs.chunks', { count: job.chunks.toLocaleString(i18n.language) })}
                     </span>
                   )}
                 </div>
@@ -80,7 +84,7 @@ const ActiveEmbedJobs = ({ withHeader = false }: ActiveEmbedJobsProps) => {
             )
           })
         ) : (
-          <p className="text-text-muted">No files are currently being processed</p>
+          <p className="text-text-muted">{t('knowledgeBase.jobs.empty')}</p>
         )}
       </div>
     </>

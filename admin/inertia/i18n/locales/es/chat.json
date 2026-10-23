@@ -1,0 +1,73 @@
+{
+  "page": {
+    "headTitle": "{{name}}"
+  },
+  "main": {
+    "clearHistoryTitle": "¿Borrar todo el historial de chats?",
+    "clearHistoryBody": "¿Seguro que quieres eliminar todas las sesiones de chat? Esta acción no se puede deshacer y todas las conversaciones se eliminarán de forma permanente.",
+    "clearAll": "Borrar todo",
+    "noResponse": "Lo siento, no he podido generar una respuesta.",
+    "requestError": "Lo siento, se produjo un error al procesar tu solicitud. Inténtalo de nuevo.",
+    "startError": "Lo siento, se produjo un error al iniciar este chat. Inténtalo de nuevo.",
+    "newChat": "Nuevo chat",
+    "switchTitle": "¿Cambiar a {{model}}?",
+    "switchConfirm": "Cambiar y nuevo chat",
+    "switchBody": "Al cambiar a <strong>{{model}}</strong> se iniciará un chat nuevo. Tu conversación actual seguirá disponible en la barra lateral.",
+    "closeSidebar": "Cerrar la barra lateral de conversaciones",
+    "openSidebar": "Abrir la barra lateral de conversaciones",
+    "remoteDisconnected": "Remoto desconectado",
+    "remoteConnected": "Remoto conectado",
+    "searchIn": "Buscar en:",
+    "all": "Todas",
+    "model": "Modelo:",
+    "loadingModels": "Cargando modelos...",
+    "noModels": "No hay modelos instalados",
+    "knowledgeBase": "Base de conocimiento:",
+    "knowledgeBaseTooltip": "Si está activada, el asistente busca documentos relevantes en tu base de conocimiento antes de responder. Desactivarla es más rápido y exige menos al hardware, lo que ayuda cuando tu base de conocimiento es pequeña o está vacía. Es el mismo ajuste que en los ajustes del Asistente de IA.",
+    "thinking": "Razonamiento:",
+    "thinkingTooltip": "Si está activado, este modelo razona antes de responder. Es más lento, pero suele funcionar mejor en preguntas difíciles. Tu elección se recuerda para este modelo; el valor por defecto de los demás modelos se define en los ajustes del Asistente de IA.",
+    "closeChat": "Cerrar el chat"
+  },
+  "interface": {
+    "tooManyImages": "Puedes adjuntar hasta {{max}} imágenes.",
+    "unsupportedImage": "{{name}} no es compatible. Usa JPEG, PNG o WebP.",
+    "imageTooLarge": "{{name}} supera el límite de 8 MB por imagen.",
+    "onlyFirstAttached_one": "Solo se ha adjuntado la primera imagen seleccionada.",
+    "onlyFirstAttached_other": "Solo se han adjuntado las primeras {{count}} imágenes seleccionadas.",
+    "startTitle": "Empieza una conversación",
+    "startBody": "Interactúa con tus modelos de lenguaje instalados directamente desde el Centro de Mando.",
+    "suggestions": "Sugerencias:",
+    "thinking": "Pensando",
+    "inspiration": "¿Necesitas inspiración? Activa las sugerencias de chat en los ajustes para empezar con ejemplos de preguntas.",
+    "attachedImages": "Imágenes adjuntas",
+    "removeImage": "Quitar {{name}}",
+    "attachImages": "Adjuntar imágenes",
+    "placeholder": "Escribe tu mensaje para {{name}}... (Mayús+Intro para nueva línea)"
+  },
+  "bubble": {
+    "reasoning": "Razonamiento",
+    "thoughtFor": "Ha razonado durante {{seconds}} s",
+    "truncated": "Esta respuesta alcanzó el límite de longitud y se cortó.",
+    "continue": "Continuar",
+    "sources": "Fuentes"
+  },
+  "sidebar": {
+    "ariaLabel": "Conversaciones de chat",
+    "newChat": "Nuevo chat",
+    "noChats": "No hay chats anteriores",
+    "logoAlt": "Logotipo de Project NOMAD",
+    "openFullChat": "Abrir chat completo",
+    "backToHome": "Volver al inicio",
+    "modelsSettings": "Modelos y ajustes",
+    "knowledgeBase": "Base de conocimiento",
+    "clearHistory": "Borrar historial"
+  },
+  "button": {
+    "open": "Abrir chat"
+  },
+  "vision": {
+    "temporary": "Las imágenes solo se envían con esta petición. No se guardan y desaparecerán cuando las envíes o recargues la página.",
+    "unsupported": "Este modelo no puede usar imágenes. Elige un modelo marcado como «Admite imágenes» en Modelos y ajustes.",
+    "unknown": "NOMAD no puede confirmar si este modelo acepta imágenes. Puedes probar con una imagen, pero la petición fallará si el modelo solo admite texto."
+  }
+}

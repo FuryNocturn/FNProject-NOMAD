@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Trans, useTranslation } from 'react-i18next'
 import StyledModal from './StyledModal'
 import StyledButton from './StyledButton'
 import Input from './inputs/Input'
@@ -22,6 +23,7 @@ interface AppUrlModalProps {
  * reverts to the default host + port link. Works for both curated and custom apps.
  */
 export default function AppUrlModal({ open, service, onClose, onSaved, showError }: AppUrlModalProps) {
+  const { t } = useTranslation()
   const [value, setValue] = useState('')
   const [submitting, setSubmitting] = useState(false)
 
@@ -44,40 +46,46 @@ export default function AppUrlModal({ open, service, onClose, onSaved, showError
     const result = await api.setServiceCustomUrl(service.service_name, trimmed ? trimmed : null)
     setSubmitting(false)
     if (!result?.success) {
-      showError('Failed to save custom URL.')
+      showError(t('apps.urlModal.saveFailed'))
       return
     }
     onSaved()
   }
 
-  const appName = service?.friendly_name || service?.service_name || 'this app'
+  const appName = service?.friendly_name || service?.service_name || t('apps.urlModal.thisApp')
 
   return (
     <StyledModal
-      title="Set Custom URL"
+      title={t('apps.urlModal.title')}
       open={open}
       onCancel={onClose}
       onClose={onClose}
-      cancelText="Cancel"
       onConfirm={handleSave}
       confirmVariant="primary"
-      confirmText="Save"
+      confirmText={t('apps.urlModal.save')}
       confirmIcon="IconCheck"
       confirmLoading={submitting}
       confirmDisabled={isInvalid}
     >
       <div className="space-y-4 text-sm">
         <p className="text-text-muted">
-          Set where <span className="font-medium text-text-primary">{appName}</span> opens from — useful
-          if you reach it through a reverse proxy or local DNS. Leave this empty to use the default
-          address ({service?.ui_location ? `host + port ${service.ui_location}` : 'host + port'}).
+          <Trans
+            i18nKey="apps.urlModal.description"
+            values={{
+              name: appName,
+              address: service?.ui_location
+                ? t('apps.urlModal.hostPortWith', { location: service.ui_location })
+                : t('apps.urlModal.hostPort'),
+            }}
+            components={{ strong: <span className="font-medium text-text-primary" /> }}
+          />
         </p>
 
         <div>
           <div className="flex items-end gap-2">
             <Input
               name="customUrl"
-              label="Custom URL"
+              label={t('apps.urlModal.label')}
               placeholder="http://jellyfin.myhomelab.net"
               maxLength={255}
               value={value}
@@ -87,23 +95,26 @@ export default function AppUrlModal({ open, service, onClose, onSaved, showError
             />
             {value.length > 0 && (
               <StyledButton size="sm" variant="ghost" icon="IconX" onClick={() => setValue('')} className="mb-1.5">
-                Clear
+                {t('apps.urlModal.clear')}
               </StyledButton>
             )}
           </div>
           {isInvalid ? (
             <p className="mt-1.5 text-xs text-red-500">
-              Enter a valid http(s) address (e.g. https://jellyfin.myhomelab.net). A bare host like
-              "jellyfin.lan" becomes http://jellyfin.lan.
+              {t('apps.urlModal.invalid')}
             </p>
           ) : (
             <>
               <p className="mt-1.5 text-xs text-text-muted">
-                No scheme? We'll default to <span className="font-mono">http://</span>.</p>
+                <Trans
+                  i18nKey="apps.urlModal.noScheme"
+                  components={{ code: <span className="font-mono" /> }}
+                />
+              </p>
               <p className="mt-1.5 text-xs text-text-muted">
-                Opens as:{' '}
+                {t('apps.urlModal.opensAs')}{' '}
                 <span className="font-mono break-all text-text-primary">{previewLink}</span>
-                {usingDefault ? ' (default)' : ''}
+                {usingDefault ? ` ${t('apps.urlModal.default')}` : ''}
               </p>
             </>
           )}

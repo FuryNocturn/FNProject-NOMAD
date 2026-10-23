@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { router, usePage } from '@inertiajs/react'
 import Alert from '~/components/Alert'
 
@@ -16,14 +17,8 @@ import Alert from '~/components/Alert'
  */
 const WHATS_NEW = {
   version: '1.34',
-  title: "What's new in v1.34",
-  highlights: [
-    'Creator Packs - install curated video packs from your favorite creators and watch them fully offline.',
-    'Medication Reference - offline FDA drug-label lookup for quick, reliable medication information.',
-    'Benchmark Score v2 - a rebuilt scoring model, with live telemetry while the test runs and your score revealed at the end.',
-    'NOMAD.md - give your AI assistant standing instructions it follows in every conversation.',
-    'Knowledge Base collections - group what the assistant searches by subject, so answers stay on topic.',
-  ],
+  // Highlight texts live in apps.whatsNew.highlights.<id> (every language); replace them when bumping `version`.
+  highlights: ['creatorPacks', 'medicationReference', 'benchmarkV2', 'nomadMd', 'kbCollections'],
 }
 
 /** Extract the major.minor line (e.g. "1.34.2" -> "1.34"). Returns null for
@@ -34,6 +29,7 @@ function majorMinor(version: string | undefined | null): string | null {
 }
 
 export default function WhatsNewBanner() {
+  const { t } = useTranslation()
   const { appVersion } = usePage<{ appVersion: string }>().props
   const storageKey = `nomad:whatsnew-dismissed:${WHATS_NEW.version}`
 
@@ -64,7 +60,7 @@ export default function WhatsNewBanner() {
   return (
     <div className="flex justify-center items-center p-4 w-full">
       <Alert
-        title={WHATS_NEW.title}
+        title={t('apps.whatsNew.title', { version: WHATS_NEW.version })}
         type="info-inverted"
         variant="solid"
         className="w-full"
@@ -72,14 +68,14 @@ export default function WhatsNewBanner() {
         onDismiss={handleDismiss}
         buttonProps={{
           variant: 'primary',
-          children: 'See release notes',
+          children: t('apps.whatsNew.seeNotes'),
           icon: 'IconBook',
           onClick: () => router.visit('/docs/release-notes'),
         }}
       >
         <ul className="mt-1 list-disc list-inside space-y-1 text-white text-opacity-90 text-sm leading-relaxed">
           {WHATS_NEW.highlights.map((highlight) => (
-            <li key={highlight}>{highlight}</li>
+            <li key={highlight}>{t(`apps.whatsNew.highlights.${highlight}`)}</li>
           ))}
         </ul>
       </Alert>
