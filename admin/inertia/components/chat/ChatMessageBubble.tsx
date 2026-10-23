@@ -6,6 +6,8 @@ import { copyText } from '~/lib/util'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { ChatMessage } from '../../../types/chat'
+import useKiwixBaseUrl from '~/hooks/useKiwixBaseUrl'
+import { kiwixArticleUrl } from '~/lib/kiwix_links'
 
 export interface ChatMessageBubbleProps {
   message: ChatMessage
@@ -57,6 +59,7 @@ function CodeBlock({ children, ...props }: React.HTMLAttributes<HTMLPreElement>)
 
 export default function ChatMessageBubble({ message, onContinue }: ChatMessageBubbleProps) {
   const { t, i18n } = useTranslation()
+  const kiwixBaseUrl = useKiwixBaseUrl()
   return (
     <div
       className={classNames(
@@ -186,6 +189,29 @@ export default function ChatMessageBubble({ message, onContinue }: ChatMessageBu
               <li key={idx}>
                 {src.title}
                 {src.date && <span className="text-text-secondary"> ({src.date})</span>}
+                {src.articles && src.articles.length > 0 && (
+                  <ul className="ml-3 mt-0.5 space-y-0.5">
+                    {src.articles.map((article) => {
+                      const href = kiwixArticleUrl(kiwixBaseUrl, src.source, article.path)
+                      return (
+                        <li key={article.path}>
+                          {href ? (
+                            <a
+                              href={href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-desert-green underline hover:no-underline"
+                            >
+                              {article.title}
+                            </a>
+                          ) : (
+                            <span className="text-text-secondary">{article.title}</span>
+                          )}
+                        </li>
+                      )
+                    })}
+                  </ul>
+                )}
               </li>
             ))}
           </ul>
