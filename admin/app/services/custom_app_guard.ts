@@ -1,5 +1,9 @@
-import { dirname, normalize } from 'node:path'
+import { realpathSync } from 'node:fs'
+import { posix } from 'node:path'
 import env from '#start/env'
+
+// Host paths are Linux paths even when this code runs (e.g. in tests) on Windows
+const { dirname, normalize, relative, join } = posix
 
 /**
  * Security guardrails for user-defined ("custom app") containers.
@@ -17,8 +21,20 @@ export interface GuardEvaluation {
   warnings: string[]
 }
 
-/** Absolute host directories that must never be bind-mounted into a custom container. */
-const SYSTEM_BLOCK_PREFIXES = ['/etc', '/proc', '/sys', '/boot', '/dev', '/run', '/var/run']
+/**
+ * Absolute host directories that must never be bind-mounted into a custom container: writing to
+ * any of them (binaries, libraries, root's home, Docker's own state) is a host takeover.
+ */
+const SYSTEM_BLOCK_PREFIXES = [
+  '/etc', '/proc', '/sys', '/boot', '/dev', '/run', '/var/run',
+  '/usr', '/bin', '/sbin', '/lib', '/lib32', '/lib64', '/libx32', '/root', '/snap',
+  '/var/lib/docker', '/var/lib/containerd',
+]
+
+/** Where the admin container itself sees the storage root (the `/app/storage` bind in compose). */
+const ADMIN_STORAGE_VIEW = '/app/storage'
+
+type RealpathFn = (p: string) => string
 
 /** Registries we ship curated apps from; anything else is allowed but warned on. */
 const TRUSTED_REGISTRIES = ['docker.io', 'registry-1.docker.io', 'ghcr.io', 'lscr.io', 'quay.io']
@@ -39,12 +55,39 @@ function isWithin(child: string, ancestor: string): boolean {
 }
 
 /**
+ * True when a host path under the storage root really stays inside it once symlinks are resolved.
+ * Another container can write into storage, so `storage/app-a/x -> /` must not let a second app
+ * mount host `/`. Checked through the admin's own view of storage; a path that does not exist yet
+ * is judged by its nearest existing ancestor (Docker creates the rest as plain directories).
+ */
+function staysInsideStorage(host: string, storageRoot: string, realpath: RealpathFn): boolean {
+  let local = join(ADMIN_STORAGE_VIEW, relative(storageRoot, host))
+  let viewRoot: string
+  try {
+    viewRoot = realpath(ADMIN_STORAGE_VIEW)
+  } catch {
+    return true // not running inside the admin container (e.g. tests): nothing to resolve
+  }
+  while (true) {
+    try {
+      return isWithin(normalizeHostPath(realpath(local)), viewRoot)
+    } catch {
+      const parent = dirname(local)
+      if (parent === local) return false
+      local = parent
+    }
+  }
+}
+
+/**
  * Evaluate user-supplied bind mounts. Hard-blocks the Docker socket, core system directories,
- * and any mount at or above project-nomad's own install tree (which would expose its code/data).
- * Warns on any host path outside the managed storage root.
+ * project-nomad's own install tree (code, database, compose file with credentials) except the
+ * storage root, and storage paths that escape through a symlink.
+ * Warns on any other host path outside the managed storage root.
  */
 export function evaluateBindMounts(
-  volumes: { host_path: string; container_path: string }[]
+  volumes: { host_path: string; container_path: string }[],
+  realpath: RealpathFn = realpathSync.native
 ): GuardEvaluation {
   const blocked: string[] = []
   const warnings: string[] = []
@@ -83,8 +126,10 @@ export function evaluateBindMounts(
       continue
     }
 
-    // Core system directories.
-    if (host === '/' || SYSTEM_BLOCK_PREFIXES.some((p) => isWithin(host, p))) {
+    // Core system directories. The storage root itself is exempt: under Docker Desktop it lives
+    // at /run/desktop/mnt/host/<drive>/..., inside the blocked /run prefix.
+    const inStorage = isWithin(host, storageRoot)
+    if (host === '/' || (!inStorage && SYSTEM_BLOCK_PREFIXES.some((p) => isWithin(host, p)))) {
       blocked.push(`Mounting system directory "${hostPath}" is not allowed.`)
       continue
     }
@@ -93,6 +138,21 @@ export function evaluateBindMounts(
     if (host === installRoot || isWithin(installRoot, host)) {
       blocked.push(
         `Mounting "${hostPath}" would expose project-nomad's own files and is not allowed.`
+      )
+      continue
+    }
+
+    // Inside the install tree but not storage: the database, Redis data, compose.yml (credentials).
+    if (isWithin(host, installRoot) && !isWithin(host, storageRoot)) {
+      blocked.push(
+        `Mounting "${hostPath}" would expose project-nomad's own files and is not allowed.`
+      )
+      continue
+    }
+
+    if (isWithin(host, storageRoot) && !staysInsideStorage(host, storageRoot, realpath)) {
+      blocked.push(
+        `Volume "${hostPath}" leads outside the storage folder through a symbolic link and is not allowed.`
       )
       continue
     }
