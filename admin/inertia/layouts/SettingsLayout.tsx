@@ -14,7 +14,7 @@ import {
   IconWand,
   IconZoom
 } from '@tabler/icons-react'
-import { usePage } from '@inertiajs/react'
+import { useAiAssistantName } from '~/hooks/useAiAssistantName'
 import { useTranslation } from 'react-i18next'
 import StyledSidebar from '~/components/StyledSidebar'
 import { getServiceLink } from '~/lib/navigation'
@@ -24,7 +24,7 @@ import { SERVICE_NAMES } from '../../constants/service_names'
 
 export default function SettingsLayout({ children }: { children: React.ReactNode }) {
   const { t } = useTranslation()
-  const { aiAssistantName } = usePage<{ aiAssistantName: string }>().props
+  const aiAssistantName = useAiAssistantName()
   const aiAssistantInstallStatus = useServiceInstalledStatus(SERVICE_NAMES.OLLAMA)
   // Only show the Creator Packs entry on builds that can actually install packs
   // (release-injected key present) — a fork built from source has no key.

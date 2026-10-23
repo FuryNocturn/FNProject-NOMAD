@@ -1,0 +1,57 @@
+{
+  "nomad_kiwix_server": {
+    "name": "Information Library",
+    "description": "Offline access to Wikipedia, medical references, how-to guides, and encyclopedias"
+  },
+  "nomad_ollama": {
+    "name": "AI Assistant",
+    "description": "Local AI chat that runs entirely on your hardware - no internet required"
+  },
+  "nomad_cyberchef": {
+    "name": "Data Tools",
+    "description": "Swiss Army knife for data encoding, encryption, and analysis"
+  },
+  "nomad_flatnotes": {
+    "name": "Notes",
+    "description": "Simple note-taking app with local storage"
+  },
+  "nomad_kolibri_2": {
+    "name": "Education Platform (Gen 2)",
+    "description": "Interactive learning platform with video courses and exercises"
+  },
+  "nomad_stirling_pdf": {
+    "description": "Locally-hosted PDF manipulation tool — merge, split, compress, convert, and more"
+  },
+  "nomad_filebrowser": {
+    "name": "File Browser",
+    "description": "Web-based file manager — browse, upload, download, and organize files on your device"
+  },
+  "nomad_calibreweb": {
+    "description": "Web-based e-book reader and library manager for your Calibre collection"
+  },
+  "nomad_it_tools": {
+    "description": "Collection of handy utilities for developers — UUID, hash, encoding, formatters, and more"
+  },
+  "nomad_excalidraw": {
+    "description": "Virtual whiteboard for sketching hand-drawn-style diagrams — works fully offline"
+  },
+  "nomad_meshtastic_web": {
+    "description": "Browser-based client for managing Meshtastic mesh radio devices"
+  },
+  "nomad_meshcore_web": {
+    "description": "Browser-based client for MeshCore mesh radio devices"
+  },
+  "nomad_homebox": {
+    "description": "Home inventory and asset management — track everything you own"
+  },
+  "nomad_vaultwarden": {
+    "description": "Lightweight Bitwarden-compatible password manager server — secure your credentials offline"
+  },
+  "nomad_jellyfin": {
+    "description": "Open-source media server — stream your video, music, and photo libraries"
+  },
+  "nomad_translate": {
+    "name": "Translated Library",
+    "description": "Read the Information Library in another language. Machine translation that works offline, on CPU"
+  }
+}

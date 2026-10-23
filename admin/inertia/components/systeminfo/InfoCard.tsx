@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import classNames from '~/lib/classNames'
 
 interface InfoCardProps {
@@ -11,6 +12,7 @@ interface InfoCardProps {
 }
 
 export default function InfoCard({ title, icon, data, variant = 'default' }: InfoCardProps) {
+  const { t } = useTranslation()
   const getVariantStyles = () => {
     switch (variant) {
       case 'bordered':
@@ -65,7 +67,7 @@ export default function InfoCard({ title, icon, data, variant = 'default' }: Inf
                 {item.label}
               </dt>
               <dd className={classNames('text-sm font-semibold text-right text-desert-green-dark')}>
-                {item.value || 'N/A'}
+                {item.value || t('settingsSystem.common.na')}
               </dd>
             </div>
           ))}

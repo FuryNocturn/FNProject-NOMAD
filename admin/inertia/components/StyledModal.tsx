@@ -1,6 +1,7 @@
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
 import StyledButton, { StyledButtonProps } from './StyledButton'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import classNames from '~/lib/classNames'
 
 export type StyledModalProps = {
@@ -27,10 +28,10 @@ const StyledModal: React.FC<StyledModalProps> = ({
   title,
   open,
   onClose,
-  cancelText = 'Cancel',
+  cancelText: cancelTextProp,
   cancelIcon,
   cancelLoading = false,
-  confirmText = 'Confirm',
+  confirmText: confirmTextProp,
   confirmIcon,
   confirmVariant = 'action',
   confirmLoading = false,
@@ -40,6 +41,10 @@ const StyledModal: React.FC<StyledModalProps> = ({
   icon,
   large = false,
 }) => {
+  const { t } = useTranslation()
+  // An explicit '' still hides the button, as before
+  const cancelText = cancelTextProp ?? t('common.cancel')
+  const confirmText = confirmTextProp ?? t('common.confirm')
   return (
     <Dialog
       open={open}

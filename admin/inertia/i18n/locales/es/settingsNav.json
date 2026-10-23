@@ -1,0 +1,16 @@
+{
+  "title": "Ajustes",
+  "supplyDepot": "Supply Depot",
+  "benchmark": "Benchmark",
+  "contentExplorer": "Explorador de contenido",
+  "contentManager": "Gestor de contenido",
+  "creatorPacks": "Packs de creadores",
+  "mapsManager": "Gestor de mapas",
+  "serviceLogs": "Registros y métricas de servicios",
+  "checkForUpdates": "Buscar actualizaciones",
+  "system": "Sistema",
+  "advanced": "Avanzado",
+  "apiReference": "Referencia de la API",
+  "support": "Apoya el proyecto",
+  "legal": "Avisos legales"
+}

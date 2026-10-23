@@ -1,0 +1,57 @@
+{
+  "nomad_kiwix_server": {
+    "name": "Biblioteca de información",
+    "description": "Acceso sin conexión a Wikipedia, referencias médicas, guías prácticas y enciclopedias"
+  },
+  "nomad_ollama": {
+    "name": "Asistente de IA",
+    "description": "Chat de IA local que funciona por completo en tu equipo, sin necesidad de internet"
+  },
+  "nomad_cyberchef": {
+    "name": "Herramientas de datos",
+    "description": "Navaja suiza para codificar, cifrar y analizar datos"
+  },
+  "nomad_flatnotes": {
+    "name": "Notas",
+    "description": "Aplicación sencilla de notas con almacenamiento local"
+  },
+  "nomad_kolibri_2": {
+    "name": "Plataforma educativa (Gen 2)",
+    "description": "Plataforma de aprendizaje interactiva con cursos en vídeo y ejercicios"
+  },
+  "nomad_stirling_pdf": {
+    "description": "Herramienta local para trabajar con PDF: unir, dividir, comprimir, convertir y más"
+  },
+  "nomad_filebrowser": {
+    "name": "Explorador de archivos",
+    "description": "Gestor de archivos web: explora, sube, descarga y organiza los archivos de tu equipo"
+  },
+  "nomad_calibreweb": {
+    "description": "Lector de libros electrónicos y gestor de tu biblioteca de Calibre en el navegador"
+  },
+  "nomad_it_tools": {
+    "description": "Colección de utilidades para desarrolladores: UUID, hash, codificación, formateadores y más"
+  },
+  "nomad_excalidraw": {
+    "description": "Pizarra virtual para dibujar diagramas a mano alzada; funciona totalmente sin conexión"
+  },
+  "nomad_meshtastic_web": {
+    "description": "Cliente web para gestionar dispositivos de radio en malla Meshtastic"
+  },
+  "nomad_meshcore_web": {
+    "description": "Cliente web para dispositivos de radio en malla MeshCore"
+  },
+  "nomad_homebox": {
+    "description": "Inventario doméstico y gestión de bienes: controla todo lo que tienes"
+  },
+  "nomad_vaultwarden": {
+    "description": "Servidor ligero de contraseñas compatible con Bitwarden: protege tus credenciales sin conexión"
+  },
+  "nomad_jellyfin": {
+    "description": "Servidor multimedia de código abierto: reproduce tus bibliotecas de vídeo, música y fotos"
+  },
+  "nomad_translate": {
+    "name": "Biblioteca traducida",
+    "description": "Lee la Biblioteca de información en otro idioma. Traducción automática sin conexión, en CPU"
+  }
+}

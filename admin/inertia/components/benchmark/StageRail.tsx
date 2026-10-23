@@ -1,4 +1,5 @@
 import { IconCheck } from '@tabler/icons-react'
+import { useTranslation } from 'react-i18next'
 import classNames from '~/lib/classNames'
 import type { BenchmarkStageDescriptor, BenchmarkStatus } from '../../../types/benchmark'
 
@@ -14,6 +15,7 @@ interface StageRailProps {
 type NodeState = 'pending' | 'active' | 'complete' | 'error'
 
 export default function StageRail({ stages, stageIndex, status, progressPercent, message, elapsedLabel }: StageRailProps) {
+  const { t } = useTranslation()
   const done = status === 'completed'
   const pct = done ? 100 : Math.min(100, Math.max(0, progressPercent))
 
@@ -56,7 +58,7 @@ export default function StageRail({ stages, stageIndex, status, progressPercent,
                       state === 'active' ? 'text-desert-green font-semibold' : 'text-desert-stone-dark'
                     )}
                   >
-                    {stage.label}
+                    {t(`settingsBenchmark.stages.${stage.status}`, { defaultValue: stage.label })}
                   </span>
                 </div>
                 {i < stages.length - 1 && (

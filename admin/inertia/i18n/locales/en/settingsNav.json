@@ -1,0 +1,16 @@
+{
+  "title": "Settings",
+  "supplyDepot": "Supply Depot",
+  "benchmark": "Benchmark",
+  "contentExplorer": "Content Explorer",
+  "contentManager": "Content Manager",
+  "creatorPacks": "Creator Packs",
+  "mapsManager": "Maps Manager",
+  "serviceLogs": "Service Logs & Metrics",
+  "checkForUpdates": "Check for Updates",
+  "system": "System",
+  "advanced": "Advanced",
+  "apiReference": "API Reference",
+  "support": "Support the Project",
+  "legal": "Legal Notices"
+}

@@ -1,12 +1,11 @@
-import i18n from 'i18next'
+import i18n, { type Resource } from 'i18next'
 import { initReactI18next } from 'react-i18next'
-import en from './locales/en.json'
-import es from './locales/es.json'
 
 /**
- * UI languages. To add one: copy locales/en.json to locales/<code>.json,
- * translate the values, then add it here and to `resources` below.
- * Keys missing from a translation fall back to English.
+ * UI languages. Texts live in locales/<code>/<section>.json; each file name is
+ * the first part of its keys (home.json → t('home.…')).
+ * To add a language: copy the locales/en folder to locales/<code>, translate
+ * the values, then add it to this list. Missing keys fall back to English.
  */
 export const SUPPORTED_LANGUAGES = [
   { code: 'en', label: 'English' },
@@ -32,11 +31,20 @@ function getInitialLanguage(): Language {
   return isSupportedLanguage(browser) ? browser : DEFAULT_LANGUAGE
 }
 
+// Build { en: { translation: { home: {...}, common: {...} } }, es: ... } from the folders
+const localeFiles = import.meta.glob<Record<string, unknown>>('./locales/*/*.json', {
+  eager: true,
+  import: 'default',
+})
+const resources: Resource = {}
+for (const [path, texts] of Object.entries(localeFiles)) {
+  const [, lang, section] = path.match(/\.\/locales\/([^/]+)\/([^/]+)\.json$/)!
+  resources[lang] ??= { translation: {} }
+  ;(resources[lang].translation as Record<string, unknown>)[section] = texts
+}
+
 i18n.use(initReactI18next).init({
-  resources: {
-    en: { translation: en },
-    es: { translation: es },
-  },
+  resources,
   lng: getInitialLanguage(),
   fallbackLng: DEFAULT_LANGUAGE,
   // React already escapes rendered text

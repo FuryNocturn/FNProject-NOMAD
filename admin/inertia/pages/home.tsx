@@ -7,7 +7,8 @@ import {
   IconSettings,
   IconWifiOff,
 } from '@tabler/icons-react'
-import { Head, Link, router, usePage } from '@inertiajs/react'
+import { Head, Link, router } from '@inertiajs/react'
+import { useAiAssistantName } from '~/hooks/useAiAssistantName'
 import AppLayout from '~/layouts/AppLayout'
 import { getServiceLink } from '~/lib/navigation'
 import { ServiceSlim } from '../../types/services'
@@ -132,7 +133,7 @@ export default function Home(props: {
   })
   const rerunBanner = useBenchmarkRerunBanner()
   const queryClient = useQueryClient()
-  const { aiAssistantName } = usePage<{ aiAssistantName: string }>().props
+  const aiAssistantName = useAiAssistantName()
 
   // Link tile management. `editingTile` null with the modal open means "create".
   const [linkModalOpen, setLinkModalOpen] = useState(false)

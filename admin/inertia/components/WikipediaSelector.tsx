@@ -1,6 +1,7 @@
 import { formatBytes } from '~/lib/util'
 import { WikipediaOption, WikipediaCurrentSelection } from '../../types/downloads'
 import classNames from 'classnames'
+import { useTranslation } from 'react-i18next'
 import { IconCheck, IconDownload, IconWorld, IconAlertTriangle } from '@tabler/icons-react'
 import StyledButton from './StyledButton'
 import LoadingSpinner from './LoadingSpinner'
@@ -26,6 +27,7 @@ const WikipediaSelector: React.FC<WikipediaSelectorProps> = ({
   onSubmit,
   isSubmitting = false,
 }) => {
+  const { t } = useTranslation()
   // Determine which option to highlight
   const highlightedOptionId = selectedOptionId ?? currentSelection?.optionId ?? null
 
@@ -42,7 +44,7 @@ const WikipediaSelector: React.FC<WikipediaSelectorProps> = ({
         </div>
         <div>
           <h3 className="text-xl font-semibold text-text-primary">Wikipedia</h3>
-          <p className="text-sm text-text-muted">Select your preferred Wikipedia package</p>
+          <p className="text-sm text-text-muted">{t('settingsContent.wikipedia.subtitle')}</p>
         </div>
       </div>
 
@@ -51,7 +53,7 @@ const WikipediaSelector: React.FC<WikipediaSelectorProps> = ({
         <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg flex items-center gap-2">
           <LoadingSpinner fullscreen={false} iconOnly className="size-4" />
           <span className="text-sm text-blue-700">
-            Downloading Wikipedia... This may take a while for larger packages.
+            {t('settingsContent.wikipedia.downloading')}
           </span>
         </div>
       )}
@@ -62,7 +64,7 @@ const WikipediaSelector: React.FC<WikipediaSelectorProps> = ({
           <div className="flex items-center gap-2">
             <IconAlertTriangle className="w-5 h-5 text-red-600 flex-shrink-0" />
             <span className="text-sm text-red-700">
-              Wikipedia download failed. Select a package and try again.
+              {t('settingsContent.wikipedia.failedMessage')}
             </span>
           </div>
         </div>
@@ -101,24 +103,24 @@ const WikipediaSelector: React.FC<WikipediaSelectorProps> = ({
                 {isInstalled && (
                   <span className="text-xs bg-desert-green text-white px-2 py-0.5 rounded-full flex items-center gap-1">
                     <IconCheck size={12} />
-                    Installed
+                    {t('settingsContent.wikipedia.installed')}
                   </span>
                 )}
                 {isPending && !isInstalled && (
                   <span className="text-xs bg-lime-500 text-white px-2 py-0.5 rounded-full">
-                    Selected
+                    {t('settingsContent.wikipedia.selected')}
                   </span>
                 )}
                 {isCurrentDownloading && (
                   <span className="text-xs bg-blue-500 text-white px-2 py-0.5 rounded-full flex items-center gap-1">
                     <IconDownload size={12} />
-                    Downloading
+                    {t('settingsContent.wikipedia.badgeDownloading')}
                   </span>
                 )}
                 {isCurrentFailed && (
                   <span className="text-xs bg-red-500 text-white px-2 py-0.5 rounded-full flex items-center gap-1">
                     <IconAlertTriangle size={12} />
-                    Failed
+                    {t('settingsContent.wikipedia.failed')}
                   </span>
                 )}
               </div>
@@ -147,7 +149,7 @@ const WikipediaSelector: React.FC<WikipediaSelectorProps> = ({
                       option.size_mb === 0 ? 'bg-surface-secondary text-text-muted' : 'bg-surface-secondary text-text-secondary'
                     )}
                   >
-                    {option.size_mb === 0 ? 'No download' : formatBytes(option.size_mb * 1024 * 1024, 1)}
+                    {option.size_mb === 0 ? t('settingsContent.wikipedia.noDownload') : formatBytes(option.size_mb * 1024 * 1024, 1)}
                   </span>
                 </div>
               </div>
@@ -166,7 +168,7 @@ const WikipediaSelector: React.FC<WikipediaSelectorProps> = ({
             loading={isSubmitting}
             icon="IconDownload"
           >
-            {selectedOptionId === 'none' ? 'Remove Wikipedia' : 'Download Selected'}
+            {selectedOptionId === 'none' ? t('settingsContent.wikipedia.remove') : t('settingsContent.wikipedia.downloadSelected')}
           </StyledButton>
         </div>
       )}

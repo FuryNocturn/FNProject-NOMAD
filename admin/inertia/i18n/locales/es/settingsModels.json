@@ -1,0 +1,216 @@
+{
+  "models": {
+    "headTitle": "Ajustes de {{name}} | Project NOMAD",
+    "intro": "Gestiona fácilmente los ajustes de {{name}} y los modelos instalados. Te recomendamos empezar con modelos pequeños para ver cómo rinden en tu sistema antes de pasar a otros más grandes.",
+    "depsMissing": "Las dependencias de {{name}} no están instaladas. Instálalas para gestionar los modelos de IA.",
+    "sections": {
+      "settings": "Ajustes",
+      "installed": "Modelos instalados",
+      "remote": "Conexión remota",
+      "models": "Modelos"
+    },
+    "toasts": {
+      "remoteConfigFailed": "No se pudo configurar Ollama remoto.",
+      "remoteCleared": "Configuración de Ollama remoto borrada.",
+      "remoteClearFailed": "No se pudo borrar la configuración de Ollama remoto.",
+      "listRefreshed": "Lista de modelos actualizada desde el servidor remoto.",
+      "installStarted": "Se ha iniciado la descarga del modelo {{model}}. Puede tardar un poco en completarse.",
+      "installFailed": "Se produjo un error al instalar el modelo {{model}}. Inténtalo de nuevo.",
+      "deleted": "Modelo eliminado: {{model}}.",
+      "deleteFailed": "Se produjo un error al eliminar el modelo {{model}}. Inténtalo de nuevo.",
+      "settingUpdated": "Ajuste actualizado correctamente.",
+      "settingFailed": "Se produjo un error al actualizar el ajuste. Inténtalo de nuevo."
+    },
+    "deleteModal": {
+      "title": "¿Eliminar modelo?",
+      "confirm": "Eliminar",
+      "body": "¿Seguro que quieres eliminar este modelo? Tendrás que descargarlo de nuevo si quieres usarlo en el futuro."
+    },
+    "contextWindowOptions": {
+      "4096": "4K tokens",
+      "8192": "8K tokens",
+      "16384": "16K tokens",
+      "32768": "32K tokens",
+      "65536": "64K tokens",
+      "131072": "128K tokens",
+      "auto": "Auto (recomendado)"
+    },
+    "relevancePresets": {
+      "off": "Desactivado — usar todos los fragmentos recuperados",
+      "lenient": "Permisivo",
+      "balanced": "Equilibrado (recomendado)",
+      "strict": "Estricto"
+    },
+    "relevanceCustom": "Personalizado ({{value}})",
+    "responseStyles": {
+      "auto": "Auto (recomendado)",
+      "focused": "Centrado (factual, repetible)",
+      "creative": "Creativo (variado, exploratorio)",
+      "off": "Valores del backend (no enviar nada)"
+    },
+    "tasksModelDefault": "Usar el modelo del chat",
+    "tasksModelNotInstalled": "{{model}} (no instalado)",
+    "settings": {
+      "chatSuggestions": {
+        "label": "Sugerencias del chat",
+        "description": "Muestra en el chat sugerencias para iniciar conversaciones generadas por IA"
+      },
+      "flashAttention": {
+        "label": "Flash Attention",
+        "description": "Activa OLLAMA_FLASH_ATTENTION=1 para mejorar la eficiencia de memoria. Desactívalo si notas inestabilidad. Se aplica tras reinstalar el Asistente de IA."
+      },
+      "autoThinking": {
+        "label": "Usar el razonamiento automáticamente cuando el modelo lo admita",
+        "description": "Define el valor por defecto para los modelos que pueden razonar. Aun así, puedes activar o desactivar el razonamiento de cada modelo en la ventana del chat."
+      },
+      "rag": {
+        "label": "Recuperación de la base de conocimiento",
+        "description": "Busca documentos relevantes en tu base de conocimiento antes de responder. Desactívalo para ahorrar memoria y acelerar las respuestas si tu base de conocimiento es pequeña o está vacía. Es el mismo interruptor que el de la ventana del chat."
+      },
+      "assistantName": {
+        "label": "Nombre del asistente",
+        "help": "Dale a tu asistente de IA un nombre personalizado que se usará en el chat y en otras partes de la aplicación.",
+        "placeholder": "Asistente de IA"
+      },
+      "tasksModel": {
+        "label": "Modelo de tareas",
+        "help": "Modelo pequeño y rápido para tareas en segundo plano, como los títulos y las sugerencias del chat. Déjalo en el modelo del chat para usar el mismo que esté usando el chat. Evita aquí los modelos de razonamiento: son lentos en tareas cortas y accesorias."
+      },
+      "minRelevance": {
+        "label": "Relevancia de la base de conocimiento",
+        "help": "Cuánto debe coincidir un fragmento de la base de conocimiento con tu pregunta para usarse en una respuesta. Los ajustes más estrictos dejan fuera los fragmentos no relacionados; si son demasiado estrictos, también se descartan otros realmente útiles. Cuando nada supera el umbral, el asistente responde con su propio conocimiento."
+      },
+      "relevanceCheck": {
+        "label": "Verificar las coincidencias de la base de conocimiento",
+        "description": "Antes de responder, pregunta al modelo de tareas si los fragmentos encontrados tratan realmente de tu pregunta y los descarta (sin citarlos) si no es así. Ayuda sobre todo con bibliotecas grandes como Wikipedia o Project Gutenberg, donde siempre hay algo que parece similar. Requiere un modelo de tareas capaz (de unos 8B de parámetros o más); los modelos más pequeños rechazan demasiadas coincidencias buenas. Añade un pequeño retraso a cada respuesta."
+      },
+      "responseStyle": {
+        "label": "Estilo de respuesta",
+        "help": "Lo arriesgado que es el asistente al elegir la siguiente palabra. Auto sigue lo que recomiende el autor del modelo y completa el resto; es lo mejor para la mayoría. Centrado da respuestas más cortas, estables y repetibles, y es mejor para consultar datos. Creativo varía más su redacción, a costa de algo de precisión."
+      },
+      "contextWindow": {
+        "label": "Ventana de contexto",
+        "help": "Cuánta conversación y contexto de la base de conocimiento puede tener en cuenta cada respuesta. Auto lo ajusta por modelo según su límite de entrenamiento y la memoria disponible. Elegir un valor fija un máximo: puede reducir la ventana para ahorrar memoria, pero nunca la amplía más allá de lo que admite el modelo."
+      },
+      "inEffect": "Actualmente en vigor: {{windows}}. Los cambios se aplican a las conversaciones nuevas."
+    },
+    "installed": {
+      "empty": "No hay modelos instalados. Explora el catálogo de modelos de abajo para empezar.",
+      "model": "Modelo",
+      "parameters": "Parámetros",
+      "diskSize": "Tamaño en disco",
+      "action": "Acción",
+      "na": "N/D",
+      "delete": "Eliminar"
+    },
+    "remote": {
+      "description": "Conéctate a cualquier servidor de API compatible con OpenAI: Ollama, LM Studio, llama.cpp y otros.",
+      "ollamaHostNote": "En instancias remotas de Ollama, el host debe iniciarse con <code>OLLAMA_HOST=0.0.0.0</code>.",
+      "urlLabel": "URL de la API de Ollama/OpenAI remota",
+      "urlPlaceholder": "http://192.168.1.100:11434  (o :1234 para apps compatibles con la API de OpenAI)",
+      "saveTest": "Guardar y probar",
+      "clear": "Borrar"
+    },
+    "catalog": {
+      "alertTitle": "La descarga de modelos solo se admite con un backend de Ollama.",
+      "alertMessage": "Si estás conectado a un host de la API de OpenAI (p. ej., LM Studio), descarga los modelos directamente en esa aplicación.",
+      "searchPlaceholder": "Buscar modelos de lenguaje..",
+      "refresh": "Actualizar modelos",
+      "name": "Nombre",
+      "estimatedPulls": "Descargas estimadas",
+      "lastUpdated": "Última actualización",
+      "tag": "Etiqueta",
+      "inputType": "Tipo de entrada",
+      "contextSize": "Tamaño de contexto",
+      "modelSize": "Tamaño del modelo",
+      "action": "Acción",
+      "delete": "Eliminar",
+      "install": "Instalar",
+      "loadMore": "Cargar más"
+    }
+  },
+  "apps": {
+    "headTitle": "Ajustes de aplicaciones",
+    "title": "Aplicaciones",
+    "description": "Gestiona las aplicaciones disponibles en tu instancia de Project NOMAD. Las comprobaciones nocturnas detectan automáticamente cuándo hay nuevas versiones de estas aplicaciones.",
+    "checkUpdates": "Buscar actualizaciones",
+    "columns": {
+      "name": "Nombre",
+      "location": "Ubicación",
+      "installed": "Instalada",
+      "version": "Versión",
+      "actions": "Acciones"
+    },
+    "errors": {
+      "offlineCheck": "Necesitas una conexión a internet para buscar actualizaciones.",
+      "checkFailed": "No se pudo buscar actualizaciones: {{error}}",
+      "offlineInstall": "Necesitas una conexión a internet para instalar servicios.",
+      "installFailed": "No se pudo instalar el servicio: {{error}}",
+      "reinstallFailed": "No se pudo forzar la reinstalación del servicio: {{error}}",
+      "updateFailed": "No se pudo actualizar el servicio: {{error}}",
+      "unknown": "Error desconocido",
+      "startFailed": "No se pudo iniciar el servicio: {{error}}",
+      "stopFailed": "No se pudo detener el servicio: {{error}}",
+      "restartFailed": "No se pudo reiniciar el servicio: {{error}}",
+      "dispatchFailed": "no se pudo iniciar la comprobación"
+    },
+    "installModal": {
+      "title": "¿Instalar servicio?",
+      "confirm": "Instalar",
+      "body": "¿Seguro que quieres instalar {{name}}? Esto iniciará el servicio y lo dejará disponible en tu instancia de Project NOMAD. Puede tardar un poco en completarse."
+    },
+    "forceReinstall": {
+      "title": "¿Forzar reinstalación?",
+      "button": "Forzar reinstalación",
+      "body": "¿Seguro que quieres forzar la reinstalación de {{name}}? Esto <strong>BORRARÁ TODOS LOS DATOS</strong> de este servicio y no se puede deshacer. Hazlo solo si el servicio no funciona bien y el resto de soluciones han fallado."
+    },
+    "affectModal": {
+      "stopTitle": "¿Detener servicio?",
+      "startTitle": "¿Iniciar servicio?",
+      "stop": "Detener",
+      "start": "Iniciar",
+      "stopBody": "¿Seguro que quieres detener {{name}}?",
+      "startBody": "¿Seguro que quieres iniciar {{name}}?"
+    },
+    "restartModal": {
+      "title": "¿Reiniciar servicio?",
+      "button": "Reiniciar",
+      "body": "¿Seguro que quieres reiniciar {{name}}?"
+    },
+    "install": "Instalar",
+    "open": "Abrir",
+    "update": "Actualizar",
+    "updating": "Actualizando..."
+  },
+  "updateModal": {
+    "title": "Actualizar servicio",
+    "confirm": "Actualizar",
+    "body": "¿Actualizar <strong>{{name}}</strong> de <code>{{from}}</code> a <code>{{to}}</code>?",
+    "preserved": "Tus datos y tu configuración se conservarán durante la actualización.",
+    "viewReleaseNotes": "Ver notas de la versión",
+    "showVersions": "Mostrar versiones disponibles",
+    "hideVersions": "Ocultar versiones disponibles",
+    "loadingVersions": "Cargando versiones...",
+    "noVersions": "No hay otras versiones disponibles",
+    "latest": "Última",
+    "releaseNotes": "Notas de la versión",
+    "majorWarning": "No se recomienda actualizar a una nueva versión mayor (p. ej., 1.8.2 → 2.0.0) a menos que hayas comprobado su compatibilidad con tu configuración actual. Revisa siempre las notas de la versión y, si es posible, prueba antes en un entorno de pruebas.",
+    "loadFailed": "No se pudieron cargar las versiones disponibles"
+  },
+  "activity": {
+    "title": "Actividad de instalación"
+  },
+  "downloads": {
+    "title": "Descargas de modelos activas",
+    "empty": "No hay descargas de modelos activas",
+    "cancelTitle": "Cancelar descarga",
+    "downloading": "Descargando...",
+    "cancelModal": {
+      "title": "¿Cancelar descarga?",
+      "confirm": "Cancelar descarga",
+      "cancel": "Seguir descargando",
+      "stop": "¿Detener la descarga de <model>{{model}}</model>?",
+      "note": "Los datos ya descargados permanecerán en el disco. Si vuelves a descargar este modelo más tarde, se reanudará desde donde se quedó en lugar de empezar de cero."
+    }
+  }
+}
