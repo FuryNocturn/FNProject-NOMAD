@@ -110,3 +110,49 @@ test('evaluateImageReference accepts a digest-pinned image without a moving-tag 
   assert.equal(blocked.length, 0)
   assert.equal(warnings.length, 0)
 })
+
+// ── Hardening ────────────────────────────────────────────────────────────────
+
+test('evaluateBindMounts hard-blocks host binaries, libraries, root home and Docker state', () => {
+  for (const dir of ['/usr/lib/systemd/system', '/bin', '/lib64', '/root/.ssh', '/var/lib/docker/volumes']) {
+    const { blocked } = evaluateBindMounts([{ host_path: dir, container_path: '/data' }])
+    assert.equal(blocked.length, 1, `${dir} should be blocked`)
+  }
+})
+
+test('evaluateBindMounts hard-blocks project-nomad files outside storage (database, compose)', () => {
+  for (const dir of ['/opt/project-nomad/mysql', '/opt/project-nomad/compose.yml']) {
+    const { blocked } = evaluateBindMounts([{ host_path: dir, container_path: '/data' }])
+    assert.equal(blocked.length, 1, `${dir} should be blocked`)
+  }
+})
+
+test('evaluateBindMounts still only warns for user data folders like /home', () => {
+  const { blocked, warnings } = evaluateBindMounts([
+    { host_path: '/home/user/Videos', container_path: '/media' },
+  ])
+  assert.equal(blocked.length, 0)
+  assert.equal(warnings.length, 1)
+})
+
+test('evaluateBindMounts blocks a storage path that escapes through a symlink', () => {
+  // storage/app-a/escape is a symlink to host "/" created by another container
+  const realpath = (p: string) => {
+    if (p === '/app/storage') return '/app/storage'
+    if (p.startsWith('/app/storage/app-a/escape')) return '/' + p.slice('/app/storage/app-a/escape'.length).replace(/^\//, '')
+    if (p === '/app/storage/app-a') return p
+    throw new Error('ENOENT')
+  }
+  const escaping = evaluateBindMounts(
+    [{ host_path: '/opt/project-nomad/storage/app-a/escape/etc', container_path: '/data' }],
+    realpath
+  )
+  assert.equal(escaping.blocked.length, 1)
+
+  const normal = evaluateBindMounts(
+    [{ host_path: '/opt/project-nomad/storage/app-a/new-folder', container_path: '/data' }],
+    realpath
+  )
+  assert.equal(normal.blocked.length, 0)
+  assert.equal(normal.warnings.length, 0)
+})
