@@ -1,0 +1,129 @@
+{
+  "language": {
+    "select": "Idioma"
+  },
+  "common": {
+    "backToHome": "Volver al inicio",
+    "debugInfo": "Info de depuración",
+    "version": "Project NOMAD™ Centro de Mando v{{version}}",
+    "commandCenter": "Centro de Mando",
+    "logoAlt": "Logotipo de Project NOMAD",
+    "goToSettings": "Ir a Ajustes",
+    "remove": "Quitar",
+    "cancel": "Cancelar"
+  },
+  "theme": {
+    "dayOps": "Modo día",
+    "nightOps": "Modo noche",
+    "switchToDayOps": "Cambiar a modo día",
+    "switchToNightOps": "Cambiar a modo noche"
+  },
+  "settingsNav": {
+    "title": "Ajustes",
+    "supplyDepot": "Supply Depot",
+    "benchmark": "Benchmark",
+    "contentExplorer": "Explorador de contenido",
+    "contentManager": "Gestor de contenido",
+    "creatorPacks": "Packs de creadores",
+    "mapsManager": "Gestor de mapas",
+    "serviceLogs": "Registros y métricas de servicios",
+    "checkForUpdates": "Buscar actualizaciones",
+    "system": "Sistema",
+    "advanced": "Avanzado",
+    "apiReference": "Referencia de la API",
+    "support": "Apoya el proyecto",
+    "legal": "Avisos legales"
+  },
+  "home": {
+    "tiles": {
+      "maps": { "label": "Mapas", "description": "Consulta mapas sin conexión" },
+      "drugReference": {
+        "label": "Referencia de fármacos",
+        "description": "Prospectos de la FDA sin conexión. Busca por nombre del fármaco o por síntoma"
+      },
+      "easySetup": {
+        "label": "Configuración rápida",
+        "description": "¿No sabes por dónde empezar? Usa el asistente para configurar tu NOMAD en pocos pasos"
+      },
+      "supplyDepot": {
+        "label": "Supply Depot",
+        "description": "Explora e instala aplicaciones seleccionadas, o añade tu propio contenedor Docker"
+      },
+      "docs": { "label": "Documentación", "description": "Lee los manuales y guías de Project NOMAD" },
+      "settings": { "label": "Ajustes", "description": "Configura tu NOMAD" }
+    },
+    "updateAvailable": "¡Hay una actualización disponible para Project NOMAD!",
+    "benchmarkRerun": {
+      "title": "Tu benchmark se puede volver a puntuar con Score v2",
+      "message": "Hemos mejorado el sistema de puntuación del benchmark. Vuelve a ejecutarlo para obtener tu resultado Score v2 en la clasificación de la comunidad.",
+      "button": "Repetir benchmark"
+    },
+    "startHere": "¡Empieza aquí!",
+    "poweredBy": "Con la tecnología de {{name}}",
+    "accessApp": "Abrir la aplicación {{name}}",
+    "opensInNewTab": "Se abre en una pestaña nueva",
+    "linkTileHint": "Un acceso directo que has añadido tú. NOMAD no lo gestiona.",
+    "editLink": "Editar este enlace",
+    "removeLink": "Quitar este enlace",
+    "removeLinkFailed": "No se pudo quitar este enlace.",
+    "addLink": "Añadir un enlace",
+    "addLinkHint": "Un acceso directo a otra cosa de tu red"
+  },
+  "services": {
+    "nomad_kiwix_server": {
+      "name": "Biblioteca de información",
+      "description": "Acceso sin conexión a Wikipedia, referencias médicas, guías prácticas y enciclopedias"
+    },
+    "nomad_ollama": {
+      "name": "Asistente de IA",
+      "description": "Chat de IA local que funciona por completo en tu equipo, sin necesidad de internet"
+    },
+    "nomad_cyberchef": {
+      "name": "Herramientas de datos",
+      "description": "Navaja suiza para codificar, cifrar y analizar datos"
+    },
+    "nomad_flatnotes": {
+      "name": "Notas",
+      "description": "Aplicación sencilla de notas con almacenamiento local"
+    },
+    "nomad_kolibri_2": {
+      "name": "Plataforma educativa (Gen 2)",
+      "description": "Plataforma de aprendizaje interactiva con cursos en vídeo y ejercicios"
+    },
+    "nomad_stirling_pdf": {
+      "description": "Herramienta local para trabajar con PDF: unir, dividir, comprimir, convertir y más"
+    },
+    "nomad_filebrowser": {
+      "name": "Explorador de archivos",
+      "description": "Gestor de archivos web: explora, sube, descarga y organiza los archivos de tu equipo"
+    },
+    "nomad_calibreweb": {
+      "description": "Lector de libros electrónicos y gestor de tu biblioteca de Calibre en el navegador"
+    },
+    "nomad_it_tools": {
+      "description": "Colección de utilidades para desarrolladores: UUID, hash, codificación, formateadores y más"
+    },
+    "nomad_excalidraw": {
+      "description": "Pizarra virtual para dibujar diagramas a mano alzada; funciona totalmente sin conexión"
+    },
+    "nomad_meshtastic_web": {
+      "description": "Cliente web para gestionar dispositivos de radio en malla Meshtastic"
+    },
+    "nomad_meshcore_web": {
+      "description": "Cliente web para dispositivos de radio en malla MeshCore"
+    },
+    "nomad_homebox": {
+      "description": "Inventario doméstico y gestión de bienes: controla todo lo que tienes"
+    },
+    "nomad_vaultwarden": {
+      "description": "Servidor ligero de contraseñas compatible con Bitwarden: protege tus credenciales sin conexión"
+    },
+    "nomad_jellyfin": {
+      "description": "Servidor multimedia de código abierto: reproduce tus bibliotecas de vídeo, música y fotos"
+    },
+    "nomad_translate": {
+      "name": "Biblioteca traducida",
+      "description": "Lee la Biblioteca de información en otro idioma. Traducción automática sin conexión, en CPU"
+    }
+  }
+}

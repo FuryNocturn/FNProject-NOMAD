@@ -5,7 +5,9 @@ import { IconArrowLeft, IconBug } from '@tabler/icons-react'
 import { Link, usePage } from '@inertiajs/react'
 import { UsePageProps } from '../../types/system'
 import { IconMenu2, IconX } from '@tabler/icons-react'
+import { useTranslation } from 'react-i18next'
 import ThemeToggle from '~/components/ThemeToggle'
+import LanguageSelect from '~/components/LanguageSelect'
 import DebugInfoModal from './DebugInfoModal'
 
 type SidebarItem = {
@@ -24,6 +26,7 @@ interface StyledSidebarProps {
 const StyledSidebar: React.FC<StyledSidebarProps> = ({ title, items }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [debugModalOpen, setDebugModalOpen] = useState(false)
+  const { t } = useTranslation()
   const { appVersion } = usePage().props as unknown as UsePageProps
 
   const currentPath = useMemo(() => {
@@ -63,7 +66,7 @@ const StyledSidebar: React.FC<StyledSidebarProps> = ({ title, items }) => {
     return (
       <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-desert-sand px-6 ring-1 ring-white/5 pt-4 shadow-md">
         <div className="flex h-16 shrink-0 items-center">
-          <img src="/nomad-primary.svg" alt="Project NOMAD Logo" className="h-16 w-16 object-contain" />
+          <img src="/nomad-primary.svg" alt={t('common.logoAlt')} className="h-16 w-16 object-contain" />
           <h1 className="ml-3 text-xl font-semibold text-text-primary">{title}</h1>
         </div>
         <nav className="flex flex-1 flex-col">
@@ -79,7 +82,7 @@ const StyledSidebar: React.FC<StyledSidebarProps> = ({ title, items }) => {
                     className="flex flex-row items-center gap-x-3 text-desert-green text-sm font-semibold"
                   >
                     <IconArrowLeft aria-hidden="true" className="size-6 shrink-0" />
-                    Back to Home
+                    {t('common.backToHome')}
                   </Link>
                 </li>
               </ul>
@@ -87,15 +90,16 @@ const StyledSidebar: React.FC<StyledSidebarProps> = ({ title, items }) => {
           </ul>
         </nav>
         <div className="mb-4 flex flex-col items-center gap-1 text-sm text-text-secondary text-center">
-          <p>Project NOMAD&trade; Command Center v{appVersion}</p>
+          <p>{t('common.version', { version: appVersion })}</p>
           <button
             onClick={() => setDebugModalOpen(true)}
             className="text-gray-500 hover:text-desert-green inline-flex items-center gap-1 cursor-pointer"
           >
             <IconBug className="size-3.5" />
-            Debug Info
+            {t('common.debugInfo')}
           </button>
           <ThemeToggle />
+          <LanguageSelect />
         </div>
       </div>
     )
