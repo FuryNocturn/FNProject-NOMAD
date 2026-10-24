@@ -9,7 +9,7 @@ import WikipediaSelection from '#models/wikipedia_selection'
 import { QueueService } from './queue_service.js'
 import { RunDownloadJob } from '#jobs/run_download_job'
 import { zimCategoriesSpecSchema, mapsSpecSchema, wikipediaSpecSchema, creatorPacksSpecSchema } from '#validators/curated_collections'
-import { isGatedResource } from '../utils/hosted_content.js'
+import { collectGatedZimResourceIds } from '../utils/gated_resource_ids.js'
 import {
   ensureDirectoryExists,
   listDirectoryContents,
@@ -334,18 +334,11 @@ export class CollectionManifestService {
    * degrades to current behaviour rather than skipping every update.
    */
   async getGatedZimResourceIds(): Promise<Set<string>> {
-    const ids = new Set<string>()
-    const spec = await this.getCachedSpec<ZimCategoriesSpec>('zim_categories')
-    if (!spec) return ids
-
-    for (const category of spec.categories) {
-      for (const tier of category.tiers) {
-        for (const resource of tier.resources) {
-          if (isGatedResource(resource)) ids.add(resource.id)
-        }
-      }
-    }
-    return ids
+    // Creator Packs are included: they are hosted by our entitlement Worker too
+    return collectGatedZimResourceIds(
+      await this.getCachedSpec<ZimCategoriesSpec>('zim_categories'),
+      await this.getCachedSpec<CreatorPacksSpec>('creator_packs')
+    )
   }
 
   // ---- Tier resolution ----

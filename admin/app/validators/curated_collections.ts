@@ -81,16 +81,20 @@ export const wikipediaSpecSchema = vine.object({
 // Display metadata only — deliberately NO `url` field. The ZIM bytes are resolved
 // through the entitlement Worker at install time (CreatorPackService), never from
 // this public catalog. See project_content_creator_packs.
+const CREATOR_PACK_ID_PART = /^[a-z0-9._-]+$/i
+
 export const creatorPacksSpecSchema = vine.object({
   spec_version: vine.string(),
   packs: vine.array(
     vine.object({
-      id: vine.string(),
+      // id/version/resource_id become a filename (`${id}_${version}.zim`) and DB
+      // keys, so a fetched manifest must not be able to smuggle path separators.
+      id: vine.string().regex(CREATOR_PACK_ID_PART),
       name: vine.string(),
       creator: vine.string(),
       description: vine.string(),
-      version: vine.string(),
-      resource_id: vine.string(),
+      version: vine.string().regex(CREATOR_PACK_ID_PART),
+      resource_id: vine.string().regex(CREATOR_PACK_ID_PART),
       video_count: vine.number().min(0),
       size_mb: vine.number().min(0),
       license_id: vine.string(),

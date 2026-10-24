@@ -42,7 +42,8 @@ import { RagService } from './rag_service.js'
 import { OllamaService } from './ollama_service.js'
 import type { CategoryWithStatus } from '../../types/collections.js'
 import CustomLibrarySource from '#models/custom_library_source'
-import { assertNotPrivateUrl } from '#validators/common'
+import { assertNotPrivateUrl, ssrfSafeRequestOptions } from '#validators/common'
+import { filenameFromUrl, resolveInside } from '../utils/remote_filename.js'
 import { resolveZimDownload } from '../utils/zim_download_resolution.js'
 import { getHostedContentHeaders } from '../utils/hosted_content_auth.js'
 import { KIWIX_CATALOG_BASE_URL } from '../../constants/kiwix.js'
@@ -170,7 +171,7 @@ export class ZimService {
 
         // downloadLink['href'] ends with .meta4; strip that to get the actual .zim URL.
         const download_url = downloadLink['href'].substring(0, downloadLink['href'].length - 6)
-        const file_name = download_url.split('/').pop() || `${entry.title}.zim`
+        const file_name = filenameFromUrl(download_url) || `${entry.title}.zim`
         if (existingKeys.has(file_name)) continue
         if (seenIds.has(entry.id)) continue
         seenIds.add(entry.id)
@@ -264,8 +265,10 @@ export class ZimService {
   }
 
   async downloadRemote(url: string, metadata?: { title?: string; summary?: string; author?: string; size_bytes?: number }): Promise<{ filename: string; jobId?: string }> {
-    const parsed = new URL(url)
-    if (!parsed.pathname.endsWith('.zim')) {
+    // Name the file from the decoded pathname only (never ?query/#fragment), and
+    // re-check the extension on that name.
+    const filename = filenameFromUrl(url, '.zim')
+    if (!filename) {
       throw new Error(`Invalid ZIM file URL: ${url}. URL must end with .zim`)
     }
 
@@ -274,13 +277,7 @@ export class ZimService {
       throw new Error('A download for this URL is already in progress')
     }
 
-    // Extract the filename from the URL
-    const filename = url.split('/').pop()
-    if (!filename) {
-      throw new Error('Could not determine filename from URL')
-    }
-
-    const filepath = join(process.cwd(), ZIM_STORAGE_PATH, filename)
+    const filepath = resolveInside(join(process.cwd(), ZIM_STORAGE_PATH), filename)
 
     // Parse resource metadata for the download job
     const parsedFilename = CollectionManifestService.parseZimFilename(filename)
@@ -411,11 +408,11 @@ export class ZimService {
         continue
       }
 
-      const filename = resolved.url.split('/').pop()
+      const filename = filenameFromUrl(resolved.url, '.zim')
       if (!filename) continue
 
       downloadFilenames.push(filename)
-      const filepath = join(process.cwd(), ZIM_STORAGE_PATH, filename)
+      const filepath = resolveInside(join(process.cwd(), ZIM_STORAGE_PATH), filename)
 
       await RunDownloadJob.dispatch({
         url: resolved.url,
@@ -458,7 +455,7 @@ export class ZimService {
   async downloadRemoteSuccessCallback(urls: string[], restart = true) {
     const wikipediaOptionUrls = await this.wikipediaOptionUrls()
     const isSelectorWikipedia = (url: string) =>
-      isWikipediaSelectorFile(url.split('/').pop() ?? '', wikipediaOptionUrls)
+      isWikipediaSelectorFile(filenameFromUrl(url) ?? '', wikipediaOptionUrls)
 
     // Only the Wikipedia selector's own files update the selection; other wikipedia_en_* corpora
     // (e.g. the Medicine tier) are ordinary ZIMs
@@ -531,7 +528,7 @@ export class ZimService {
       // Skip the selector's Wikipedia files (managed separately)
       if (isSelectorWikipedia(url)) continue
 
-      const filename = url.split('/').pop()
+      const filename = filenameFromUrl(url)
       if (!filename) continue
 
       const parsed = CollectionManifestService.parseZimFilename(filename)
@@ -671,7 +668,7 @@ export class ZimService {
       if (manifest) {
         const spec = manifest.spec_data as { options: Array<{ id: string; url: string | null }> }
         const matchedOption = spec.options.find(
-          (opt) => opt.url && opt.url.split('/').pop() === filename
+          (opt) => opt.url && filenameFromUrl(opt.url) === filename
         )
         if (matchedOption && matchedOption.url) {
           const existing = await WikipediaSelection.query().first()
@@ -932,12 +929,12 @@ export class ZimService {
     }
 
     // Extract filename from URL
-    const filename = selectedOption.url.split('/').pop()
+    const filename = filenameFromUrl(selectedOption.url, '.zim')
     if (!filename) {
       throw new Error('Could not determine filename from URL')
     }
 
-    const filepath = join(process.cwd(), ZIM_STORAGE_PATH, filename)
+    const filepath = resolveInside(join(process.cwd(), ZIM_STORAGE_PATH), filename)
 
     // Update or create selection record to show downloading status
     let selection: WikipediaSelection
@@ -988,7 +985,7 @@ export class ZimService {
   }
 
   async onWikipediaDownloadComplete(url: string, success: boolean): Promise<void> {
-    const filename = url.split('/').pop() || ''
+    const filename = filenameFromUrl(url) || ''
     const selection = await this.getWikipediaSelection()
 
     // Determine which Wikipedia option this file belongs to: same variant stem, so a newer
@@ -1070,7 +1067,8 @@ export class ZimService {
   }
 
   async addCustomLibrary(name: string, baseUrl: string): Promise<CustomLibrarySource> {
-    const count = await CustomLibrarySource.query().count('* as total')
+    // The limit is on libraries the user added; the seeded default mirrors don't count
+    const count = await CustomLibrarySource.query().where('is_default', false).count('* as total')
     const total = Number(count[0].$extras.total)
     if (total >= 10) {
       throw new Error('Maximum of 10 custom libraries allowed')
@@ -1107,6 +1105,10 @@ export class ZimService {
     const res = await axios.get(normalizedUrl, {
       responseType: 'text',
       timeout: 15000,
+      // Resolved addresses and every redirect hop are re-checked; a listing page
+      // has no business being larger than a few MB.
+      ...ssrfSafeRequestOptions,
+      maxContentLength: 5 * 1024 * 1024,
       headers: {
         'Accept': 'text/html',
       },

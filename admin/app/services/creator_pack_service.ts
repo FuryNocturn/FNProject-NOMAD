@@ -6,6 +6,7 @@ import { ZimService } from '#services/zim_service'
 import { CollectionManifestService } from '#services/collection_manifest_service'
 import { RunDownloadJob } from '#jobs/run_download_job'
 import { ZIM_STORAGE_PATH } from '../utils/fs.js'
+import { resolveInside } from '../utils/remote_filename.js'
 import { SERVICE_NAMES } from '../../constants/service_names.js'
 import type { CreatorPacksSpec, CreatorPackWithStatus } from '../../types/collections.js'
 
@@ -110,7 +111,8 @@ export class CreatorPackService {
     await this.ensureKiwixInstalled()
 
     const filename = `${pack.id}_${pack.version}.zim`
-    const filepath = join(process.cwd(), ZIM_STORAGE_PATH, filename)
+    // The manifest is validated (no separators), but keep the write inside storage regardless.
+    const filepath = resolveInside(join(process.cwd(), ZIM_STORAGE_PATH), filename)
 
     await RunDownloadJob.dispatch({
       url,

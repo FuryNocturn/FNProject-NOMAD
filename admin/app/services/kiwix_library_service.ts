@@ -5,9 +5,18 @@ import { Archive } from '@openzim/libzim'
 import { KIWIX_LIBRARY_XML_PATH, ZIM_STORAGE_PATH, ensureDirectoryExists, isValidZimFile } from '../utils/fs.js'
 import logger from '@adonisjs/core/services/logger'
 import { randomUUID } from 'node:crypto'
+import { createCoalescedTask, createSerialQueue } from '../utils/serial_queue.js'
 
 const CONTAINER_DATA_PATH = '/data'
 const XML_DECLARATION = '<?xml version="1.0" encoding="UTF-8"?>\n'
+
+// Every library XML read-modify-write runs through this queue: unserialized, a rebuild and an
+// add/remove racing each other each write their own view and the last writer drops a book.
+// Module-level because the service is instantiated per call site.
+// shortcut: in-process only — the API and the queue worker are separate processes and can still
+// race each other; make it a file/Redis lock if a dropped book is seen after that.
+const libraryWrites = createSerialQueue()
+const requestFullRebuild = createCoalescedTask<number>(libraryWrites)
 
 interface KiwixBook {
   id: string
@@ -251,7 +260,18 @@ export class KiwixLibraryService {
     return true
   }
 
+  /**
+   * Rebuilds the library XML from the ZIMs on disk. Serialized with addBook/removeBook; plain
+   * rebuilds requested while one runs coalesce into exactly one more run afterwards.
+   */
   async rebuildFromDisk(opts?: { excludeFilenames?: string[] }): Promise<number> {
+    if (opts?.excludeFilenames?.length) {
+      return libraryWrites(() => this._rebuildFromDisk(opts))
+    }
+    return requestFullRebuild(() => this._rebuildFromDisk())
+  }
+
+  private async _rebuildFromDisk(opts?: { excludeFilenames?: string[] }): Promise<number> {
     const dirPath = join(process.cwd(), ZIM_STORAGE_PATH)
     await ensureDirectoryExists(dirPath)
 
@@ -289,6 +309,10 @@ export class KiwixLibraryService {
   }
 
   async addBook(filename: string): Promise<void> {
+    return libraryWrites(() => this._addBook(filename))
+  }
+
+  private async _addBook(filename: string): Promise<void> {
     const zimFilename = filename.endsWith('.zim') ? filename : `${filename}.zim`
     const containerPath = `${CONTAINER_DATA_PATH}/${zimFilename}`
 
@@ -301,7 +325,8 @@ export class KiwixLibraryService {
     } catch (err: any) {
       if (err.code === 'ENOENT') {
         // XML doesn't exist yet — rebuild from disk; the completed download is already there
-        await this.rebuildFromDisk()
+        // (unlocked variant: we already hold the library queue)
+        await this._rebuildFromDisk()
         return
       }
       throw err
@@ -333,6 +358,10 @@ export class KiwixLibraryService {
   }
 
   async removeBook(filename: string): Promise<void> {
+    return libraryWrites(() => this._removeBook(filename))
+  }
+
+  private async _removeBook(filename: string): Promise<void> {
     const zimFilename = filename.endsWith('.zim') ? filename : `${filename}.zim`
     const containerPath = `${CONTAINER_DATA_PATH}/${zimFilename}`
 

@@ -8,6 +8,11 @@ import logger from '@adonisjs/core/services/logger'
 import { DownloadProgressData } from '../../types/downloads.js'
 import { PMTILES_BINARY_PATH, buildPmtilesExtractArgs } from '../../constants/map_regions.js'
 import { deleteFileIfExists } from '../utils/fs.js'
+import { isSafeOldContentPath } from '../utils/superseded_resource.js'
+import { jobTargetPaths, shouldPruneOrphanPmtiles } from '../utils/download_targets.js'
+
+/** Maps live under `<cwd>/storage/maps`; mirrors RunDownloadJob. */
+const MAP_STORAGE_PATH = '/storage/maps'
 
 export interface RunExtractPmtilesJobParams {
   sourceUrl: string
@@ -74,6 +79,8 @@ export class RunExtractPmtilesJob {
     // pmtiles writes here; renamed to outputFilepath only on success, so a failed, cancelled or
     // crashed extract never replaces (or leaves a half-written) map that Kiwix/the UI would serve
     const stagingPath = outputFilepath + '.tmp'
+    // Orphan prune (onComplete) never touches files written after this point
+    const jobStartMs = Date.now()
 
     logger.info(
       `[RunExtractPmtilesJob] Starting extract: source=${sourceUrl} region=${regionFilepath} ` +
@@ -169,7 +176,7 @@ export class RunExtractPmtilesJob {
 
       // Reuse the HTTP download path's post-download hook so the file is registered and
       // the previous version (if any) is deleted
-      await this.onComplete(params)
+      await this.onComplete(params, job.id!, jobStartMs)
 
       logger.info(
         `[RunExtractPmtilesJob] Completed extract: out=${outputFilepath} size=${finalStat.size} bytes`
@@ -187,7 +194,7 @@ export class RunExtractPmtilesJob {
     }
   }
 
-  private async onComplete(params: RunExtractPmtilesJobParams) {
+  private async onComplete(params: RunExtractPmtilesJobParams, ownJobId: string, jobStartMs: number) {
     if (!params.resourceMetadata) return
 
     const [{ default: InstalledResource }, { DateTime }, fsUtils] = await Promise.all([
@@ -219,11 +226,19 @@ export class RunExtractPmtilesJob {
       }
     )
 
+    const mapRoot = join(process.cwd(), MAP_STORAGE_PATH)
     if (oldFilePath && oldFilePath !== params.outputFilepath) {
-      try {
-        await fsUtils.deleteFileIfExists(oldFilePath)
-      } catch (err) {
-        logger.warn(`[RunExtractPmtilesJob] Failed to delete old file ${oldFilePath}: ${err}`)
+      if (!isSafeOldContentPath(oldFilePath, params.resourceMetadata.resource_id, mapRoot)) {
+        logger.warn(
+          `[RunExtractPmtilesJob] Refusing to delete unexpected old file path for ` +
+            `${params.resourceMetadata.resource_id}: ${oldFilePath}`
+        )
+      } else {
+        try {
+          await fsUtils.deleteFileIfExists(oldFilePath)
+        } catch (err) {
+          logger.warn(`[RunExtractPmtilesJob] Failed to delete old file ${oldFilePath}: ${err}`)
+        }
       }
     }
 
@@ -236,13 +251,34 @@ export class RunExtractPmtilesJob {
     const keepName = basename(params.outputFilepath)
     const prefix = `${params.resourceMetadata.resource_id}_`
     try {
+      // Files other queued/running jobs will write (or are writing) are never orphans
+      const queueService = QueueService.getInstance()
+      const [extracts, downloads] = await Promise.all([
+        queueService.getQueue(RunExtractPmtilesJob.queue).getJobs(['active', 'waiting', 'delayed']),
+        // RunDownloadJob.queue; literal to avoid an import cycle through the map service
+        queueService.getQueue('downloads').getJobs(['active', 'waiting', 'delayed']),
+      ])
+      const activeTargets = jobTargetPaths(
+        [...extracts, ...downloads].filter((j) => j?.id !== ownJobId)
+      )
+
       const entries = await readdir(dir)
       for (const entry of entries) {
-        if (entry === keepName || !entry.endsWith('.pmtiles')) continue
-        if (!entry.startsWith(prefix)) continue
+        if (!entry.startsWith(prefix) || !entry.endsWith('.pmtiles')) continue
         const orphanPath = join(dir, entry)
-        if (orphanPath === oldFilePath) continue
         try {
+          const { mtimeMs } = await stat(orphanPath)
+          const prune = shouldPruneOrphanPmtiles({
+            entry,
+            fullPath: orphanPath,
+            keepName,
+            prefix,
+            oldFilePath,
+            mtimeMs,
+            jobStartMs,
+            activeTargets,
+          })
+          if (!prune) continue
           await fsUtils.deleteFileIfExists(orphanPath)
           logger.info(`[RunExtractPmtilesJob] Pruned orphan pmtiles ${orphanPath}`)
         } catch (err) {

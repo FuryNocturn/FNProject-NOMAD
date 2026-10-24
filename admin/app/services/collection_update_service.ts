@@ -5,6 +5,7 @@ import InstalledResource from '#models/installed_resource'
 import { RunDownloadJob } from '../jobs/run_download_job.js'
 import { ZIM_STORAGE_PATH } from '../utils/fs.js'
 import { join } from 'path'
+import { resolveInside } from '../utils/remote_filename.js'
 import type {
   ResourceUpdateInfo,
   ContentUpdateCheckResult,
@@ -193,9 +194,11 @@ export class CollectionUpdateService {
   }
 
   private buildFilepath(update: ResourceUpdateInfo, filename: string): string {
+    // resource_id/latest_version are validated, but they come from the client:
+    // never let the joined name escape the storage directory.
     if (update.resource_type === 'zim') {
-      return join(process.cwd(), ZIM_STORAGE_PATH, filename)
+      return resolveInside(join(process.cwd(), ZIM_STORAGE_PATH), filename)
     }
-    return join(process.cwd(), MAP_STORAGE_PATH, 'pmtiles', filename)
+    return resolveInside(join(process.cwd(), MAP_STORAGE_PATH, 'pmtiles'), filename)
   }
 }

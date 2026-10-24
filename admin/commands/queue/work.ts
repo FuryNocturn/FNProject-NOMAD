@@ -157,6 +157,23 @@ export default class QueueWork extends BaseCommand {
     await AppAutoUpdateJob.schedule()
     await ContentAutoUpdateJob.schedule()
 
+    // Delete abandoned `<file>.tmp` download/extract partials (can be many GB) at startup and
+    // every 6 hours. Runs in the worker that owns the downloads queue.
+    if (queuesToProcess.includes(RunDownloadJob.queue)) {
+      const sweepTmp = async () => {
+        try {
+          const { DownloadService } = await import('#services/download_service')
+          const { QueueService } = await import('#services/queue_service')
+          const deleted = await new DownloadService(QueueService.getInstance()).sweepOrphanTmpFiles()
+          if (deleted.length) this.logger.info(`Deleted orphaned partial downloads: ${deleted.join(', ')}`)
+        } catch (err: any) {
+          this.logger.error(`Orphaned partial download sweep failed: ${err?.message ?? err}`)
+        }
+      }
+      void sweepTmp()
+      setInterval(sweepTmp, 6 * 60 * 60 * 1000)
+    }
+
     // Safety net: log unhandled rejections instead of crashing the worker process.
     // Individual job errors are already caught by BullMQ; this catches anything that
     // escapes (e.g. a fire-and-forget promise in a callback that rejects unexpectedly).
