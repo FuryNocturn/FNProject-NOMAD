@@ -49,7 +49,9 @@
     "thoughtFor": "Ha razonado durante {{seconds}} s",
     "truncated": "Esta respuesta alcanzó el límite de longitud y se cortó.",
     "continue": "Continuar",
-    "sources": "Fuentes"
+    "sources": "Fuentes",
+    "copy": "Copiar",
+    "copied": "Copiado"
   },
   "sidebar": {
     "ariaLabel": "Conversaciones de chat",

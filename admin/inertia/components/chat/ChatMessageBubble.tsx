@@ -1,5 +1,8 @@
 import classNames from '~/lib/classNames'
+import { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { IconCheck, IconCopy } from '@tabler/icons-react'
+import { copyText } from '~/lib/util'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { ChatMessage } from '../../../types/chat'
@@ -8,6 +11,48 @@ export interface ChatMessageBubbleProps {
   message: ChatMessage
   // Offered on the latest answer when it was cut off at the length limit.
   onContinue?: () => void
+}
+
+function CopyButton({ getText, className }: { getText: () => string; className?: string }) {
+  const { t } = useTranslation()
+  const [copied, setCopied] = useState(false)
+  const label = copied ? t('chat.bubble.copied') : t('chat.bubble.copy')
+  return (
+    <button
+      type="button"
+      onClick={async () => {
+        if (await copyText(getText())) {
+          setCopied(true)
+          setTimeout(() => setCopied(false), 2000)
+        }
+      }}
+      title={label}
+      aria-label={label}
+      className={classNames(
+        'inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-xs focus:outline-none focus:ring-2 focus:ring-desert-green',
+        className
+      )}
+    >
+      {copied ? <IconCheck className="size-3.5" /> : <IconCopy className="size-3.5" />}
+      {label}
+    </button>
+  )
+}
+
+// Fenced code block with its own copy button (copies the code only)
+function CodeBlock({ children, ...props }: React.HTMLAttributes<HTMLPreElement>) {
+  const ref = useRef<HTMLPreElement>(null)
+  return (
+    <div className="relative group">
+      <pre ref={ref} {...props}>
+        {children}
+      </pre>
+      <CopyButton
+        getText={() => ref.current?.innerText ?? ''}
+        className="absolute top-2 right-2 bg-gray-700 text-gray-100 opacity-0 group-hover:opacity-100 focus:opacity-100 hover:bg-gray-600"
+      />
+    </div>
+  )
 }
 
 export default function ChatMessageBubble({ message, onContinue }: ChatMessageBubbleProps) {
@@ -85,6 +130,7 @@ export default function ChatMessageBubble({ message, onContinue }: ChatMessageBu
                   </code>
                 )
               },
+              pre: ({ node, ...props }: any) => <CodeBlock {...props} />,
               p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
               ul: ({ children }) => <ul className="list-disc pl-5 mb-2">{children}</ul>,
               ol: ({ children }) => <ol className="list-decimal pl-5 mb-2">{children}</ol>,
@@ -147,7 +193,7 @@ export default function ChatMessageBubble({ message, onContinue }: ChatMessageBu
       )}
       <div
         className={classNames(
-          'text-xs mt-2',
+          'text-xs mt-2 flex items-center gap-2',
           message.role === 'user' ? 'text-white/70' : 'text-text-muted'
         )}
       >
@@ -155,6 +201,13 @@ export default function ChatMessageBubble({ message, onContinue }: ChatMessageBu
           hour: '2-digit',
           minute: '2-digit',
         })}
+        {/* Copies the answer as markdown, without the sources or the time */}
+        {message.role === 'assistant' && !message.isStreaming && message.content && (
+          <CopyButton
+            getText={() => message.content}
+            className="text-text-muted hover:bg-surface-primary hover:text-text-primary"
+          />
+        )}
       </div>
     </div>
   )

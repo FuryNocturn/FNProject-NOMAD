@@ -1,3 +1,5 @@
+import { EMBEDDING_MODEL_NAME, EMBEDDING_MODELS } from '../../constants/ollama.js'
+
 export function formatSpeed(bytesPerSecond: number): string {
   if (bytesPerSecond < 1024) return `${bytesPerSecond.toFixed(0)} B/s`
   if (bytesPerSecond < 1024 * 1024) return `${(bytesPerSecond / 1024).toFixed(1)} KB/s`
@@ -10,6 +12,49 @@ export function toTitleCase(str: string): string {
     .split(' ')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ')
+}
+
+/**
+ * Resolve the knowledge-base embedding model from the `rag.embeddingModel`
+ * setting. An unset or unknown value falls back to the default model, so an
+ * unset setting leaves prior behaviour untouched.
+ */
+export function pickEmbeddingModel(configured: string | null | undefined) {
+  const trimmed = configured?.trim()
+  const name = trimmed && Object.hasOwn(EMBEDDING_MODELS, trimmed) ? trimmed : EMBEDDING_MODEL_NAME
+  return { name, ...EMBEDDING_MODELS[name] }
+}
+
+/**
+ * True for a model in EMBEDDING_MODELS, whose names don't all contain "embed"
+ * (bge-m3). Keeps them out of chat model lists. Any tag of a listed model
+ * counts (bge-m3:567m), as does the listed name itself.
+ */
+export function isEmbeddingModelName(model: string): boolean {
+  return Object.hasOwn(EMBEDDING_MODELS, model) || Object.hasOwn(EMBEDDING_MODELS, model.split(':')[0])
+}
+
+/**
+ * Whether an installed Ollama model (`installed`) can stand in for `wanted`.
+ * nomic-embed-text has always been accepted under any tag; other models must
+ * match exactly or as `:latest`, because other tags of the same family can be
+ * different models entirely (qwen3-embedding:8b is 4096-wide, :0.6b is 1024).
+ * LM Studio lists the same models as `text-embedding-<name>` with `-` for `:`
+ * (text-embedding-bge-m3, text-embedding-qwen3-embedding-0.6b), sometimes with a
+ * publisher prefix or `@<quant>` suffix; those are matched under the same rules.
+ */
+export function isInstalledTagOf(installed: string, wanted: string): boolean {
+  const name = installed.toLowerCase()
+  if (wanted === EMBEDDING_MODEL_NAME) return name.includes('nomic-embed-text')
+  if (name === wanted || name === `${wanted}:latest`) return true
+  const lmStudio = name
+    .replace(/^.*\//, '')
+    .replace(/@.*$/, '')
+    .replace(/^text-embedding-/, '')
+  const flat = wanted.replace(':', '-')
+  // An untagged family (embeddinggemma) may carry LM Studio's size suffix (-300m);
+  // a tagged one (qwen3-embedding:0.6b) must match its size exactly.
+  return lmStudio === flat || (!wanted.includes(':') && lmStudio.startsWith(`${flat}-`))
 }
 
 /**

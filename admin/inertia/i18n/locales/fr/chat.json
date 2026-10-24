@@ -49,7 +49,9 @@
     "thoughtFor": "Réflexion de {{seconds}} s",
     "truncated": "Cette réponse a atteint la limite de longueur et a été coupée.",
     "continue": "Continuer",
-    "sources": "Sources"
+    "sources": "Sources",
+    "copy": "Copier",
+    "copied": "Copié"
   },
   "sidebar": {
     "ariaLabel": "Conversations de discussion",

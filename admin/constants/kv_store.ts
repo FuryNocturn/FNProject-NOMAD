@@ -18,6 +18,7 @@ export const SETTINGS_KEYS: KVStoreKey[] = [
     'ai.responseStyle',
     'ai.amdHsaOverride',
     'rag.defaultIngestPolicy',
+    'rag.embeddingModel',
     'rag.enabled',
     'rag.minRelevance',
     'rag.relevanceCheck',
