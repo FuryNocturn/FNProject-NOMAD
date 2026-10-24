@@ -61,9 +61,15 @@ export default function SystemUpdatePage(props: { system: Props }) {
   useEffect(() => {
     if (!isUpdating) return
 
+    // done: stop after completion/error; inFlight: a slow tick must not overlap the next one
+    let done = false
+    let inFlight = false
     const interval = setInterval(async () => {
+      if (done || inFlight) return
+      inFlight = true
       try {
         const response = await api.getSystemUpdateStatus()
+        if (done) return
         if (!response) {
           throw new Error('Failed to fetch update status')
         }
@@ -85,6 +91,8 @@ export default function SystemUpdatePage(props: { system: Props }) {
           (response.stage === 'idle' && seenAdvancedStageRef.current)
 
         if (isComplete) {
+          done = true
+          clearInterval(interval)
           // Re-check version so the KV store clears the stale "update available" flag
           // before we reload, otherwise the banner shows "current → current"
           try {
@@ -96,6 +104,8 @@ export default function SystemUpdatePage(props: { system: Props }) {
             window.location.reload()
           }, 2000)
         } else if (response.stage === 'error') {
+          done = true
+          clearInterval(interval)
           setIsUpdating(false)
           setError(response.message)
         }
@@ -105,10 +115,15 @@ export default function SystemUpdatePage(props: { system: Props }) {
         setShowConnectionLostNotice(true)
         // Continue polling to detect when the container comes back up
         console.log('Polling update status (container may be restarting)...')
+      } finally {
+        inFlight = false
       }
     }, 2000)
 
-    return () => clearInterval(interval)
+    return () => {
+      done = true
+      clearInterval(interval)
+    }
   }, [isUpdating])
 
   const handleStartUpdate = async () => {

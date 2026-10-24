@@ -4,6 +4,7 @@ import KVStore from '#models/kv_store'
 import InstalledResource from '#models/installed_resource'
 import { DownloadService } from '#services/download_service'
 import { CollectionUpdateService } from '#services/collection_update_service'
+import { CollectionManifestService } from '#services/collection_manifest_service'
 import { DrugReferenceService } from '#services/drug_reference_service'
 import {
   KiwixCatalogService,
@@ -275,7 +276,13 @@ export class ContentAutoUpdateService {
       // download/ingest chain) don't fit the catalog-version model. They refresh
       // via `attemptDrugDataset()`, which the same content-update job runs under
       // the same master switch + window.
-      const installed = await InstalledResource.query().whereNot('resource_type', 'dataset')
+      // Content we host ourselves (gated ZIMs, Creator Packs) is versioned by the manifest, not
+      // the Kiwix catalog — excluded exactly as in CollectionUpdateService.checkForUpdates, so a
+      // resource-id collision can't let a third-party mirror overwrite it.
+      const gatedIds = await new CollectionManifestService().getGatedZimResourceIds()
+      const installed = (
+        await InstalledResource.query().whereNot('resource_type', 'dataset')
+      ).filter((r) => !(r.resource_type === 'zim' && gatedIds.has(r.resource_id)))
       const latestByKey = await this.catalog.getLatestForResources(
         // `dataset` rows are filtered out above, so the type narrows to ZIM/map.
         installed.map((r) => ({

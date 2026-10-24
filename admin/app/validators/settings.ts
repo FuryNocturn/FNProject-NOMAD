@@ -24,6 +24,10 @@ const LANGUAGE_PATTERN = /^[a-z]{2,3}(-[A-Z]{2})?$/
  */
 export function validateSettingValue(key: KVStoreKey, value: unknown): string | null {
     switch (key) {
+        case 'ai.remoteOllamaUrl':
+            // Readable through GET (the chat UI uses it), but writes must go through
+            // the dedicated endpoint, which validates URL, scheme and connectivity.
+            return 'Remote Ollama URL cannot be set here; use POST /api/ollama/configure-remote.'
         case 'ui.language':
             if (typeof value !== 'string' || !LANGUAGE_PATTERN.test(value)) {
                 return 'Language must be a language code such as "en" or "es".'

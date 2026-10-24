@@ -1,5 +1,6 @@
 import vine from '@vinejs/vine'
 import ipaddr from 'ipaddr.js'
+import { lookup as dnsLookup } from 'node:dns'
 
 /**
  * Checks whether a URL points to a loopback or link-local address.
@@ -28,29 +29,91 @@ export function assertNotPrivateUrl(urlString: string): void {
     .replace(/\.+$/, '')
 
   if (hostname === 'localhost') {
-    throw new Error(`Download URL must not point to a loopback or link-local address: ${hostname}`)
+    throw new UnsafeUrlError(`Download URL must not point to a loopback or link-local address: ${hostname}`)
   }
 
   // Anything that isn't a literal IP (DNS names, bare LAN hostnames like
-  // `nomad3`, external FQDNs) is allowed — LAN appliances need them, and DNS
-  // rebinding is a fetch-time concern outside this guard's scope. Classifying
-  // literal addresses with ipaddr.js (rather than a regex list) catches
-  // alternate encodings and normalizes address ranges correctly (#922).
+  // `nomad3`, external FQDNs) passes this synchronous check — LAN appliances
+  // need them. What they resolve to is checked at connect time by
+  // `publicOnlyLookup` on the requests that use it. Classifying literal
+  // addresses with ipaddr.js (rather than a regex list) catches alternate
+  // encodings and normalizes address ranges correctly (#922).
   if (!ipaddr.isValid(hostname)) return
 
-  let addr = ipaddr.parse(hostname)
+  if (isBlockedAddress(hostname)) {
+    throw new UnsafeUrlError(
+      `Download URL must not point to a loopback or link-local address: ${ipaddr.parse(hostname).toNormalizedString()}`
+    )
+  }
+}
+
+/** Thrown by the SSRF guards; `status` makes AdonisJS answer 400 instead of 500. */
+export class UnsafeUrlError extends Error {
+  status = 400
+}
+
+/**
+ * True for loopback, link-local (incl. 169.254.169.254), unspecified and the AWS
+ * IPv6 metadata address. RFC1918 stays allowed (see `assertNotPrivateUrl`).
+ * Expects a literal IP; anything unparsable counts as blocked.
+ */
+export function isBlockedAddress(ip: string): boolean {
+  if (!ipaddr.isValid(ip)) return true
+  let addr = ipaddr.parse(ip)
   if (addr.kind() === 'ipv6' && (addr as ipaddr.IPv6).isIPv4MappedAddress()) {
     // e.g. ::ffff:127.0.0.1 — classify by the embedded IPv4 so a mapped
     // loopback/link-local is blocked while a mapped public IP is allowed.
     addr = (addr as ipaddr.IPv6).toIPv4Address()
   }
-
   const range = addr.range()
-  if (range === 'loopback' || range === 'linkLocal' || range === 'unspecified') {
-    throw new Error(
-      `Download URL must not point to a loopback or link-local address: ${addr.toNormalizedString()}`
-    )
+  return (
+    range === 'loopback' ||
+    range === 'linkLocal' ||
+    range === 'unspecified' ||
+    BLOCKED_METADATA_IPV6.has(addr.toNormalizedString())
+  )
+}
+
+/**
+ * `lookup` for axios/http that refuses hostnames resolving to an address
+ * `isBlockedAddress` rejects. Runs on every connection, including redirect hops,
+ * so DNS names (and rebinding) can't reach loopback/metadata. Node skips lookup
+ * for literal IPs; those are covered by `assertNotPrivateUrl` / `safeRedirectGuard`.
+ */
+export function publicOnlyLookup(
+  hostname: string,
+  options: object,
+  callback: (err: Error | null, addresses: Array<{ address: string; family: 4 | 6 }>) => void
+): void {
+  dnsLookup(hostname, { ...options, all: true }, (err, addresses) => {
+    if (err) return callback(err, [])
+    const blocked = addresses.find((a) => isBlockedAddress(a.address))
+    if (blocked) {
+      return callback(
+        new UnsafeUrlError(
+          `Download URL must not point to a loopback or link-local address: ${hostname} → ${blocked.address}`
+        ),
+        []
+      )
+    }
+    callback(null, addresses.map((a) => ({ address: a.address, family: a.family === 6 ? 6 : 4 })))
+  })
+}
+
+/** axios `beforeRedirect`: re-runs the literal checks on every redirect target. */
+export function safeRedirectGuard(options: Record<string, any>): void {
+  const target = new URL(options.href)
+  if (target.protocol !== 'http:' && target.protocol !== 'https:') {
+    throw new UnsafeUrlError(`Redirect to a non-HTTP URL refused: ${target.protocol}`)
   }
+  assertNotPrivateUrl(target.toString())
+}
+
+/** Spread into axios config for requests to user-supplied URLs. */
+export const ssrfSafeRequestOptions = {
+  lookup: publicOnlyLookup,
+  beforeRedirect: safeRedirectGuard,
+  maxRedirects: 5,
 }
 
 /**
@@ -173,11 +236,16 @@ export const selectWikipediaValidator = vine.compile(
   })
 )
 
+/** One filename component: letters, digits, dot, underscore, dash (no separators). */
+export const SAFE_FILENAME_PART = /^[A-Za-z0-9._-]+$/
+
 const resourceUpdateInfoBase = vine.object({
-  resource_id: vine.string().trim().minLength(1),
+  // Both end up in a filename (`${resource_id}_${latest_version}.zim`), so no
+  // path separators: `1/../../app/x` would otherwise write outside storage.
+  resource_id: vine.string().trim().regex(SAFE_FILENAME_PART),
   resource_type: vine.enum(['zim', 'map'] as const),
   installed_version: vine.string().trim(),
-  latest_version: vine.string().trim().minLength(1),
+  latest_version: vine.string().trim().regex(SAFE_FILENAME_PART),
   download_url: vine.string().url({ require_tld: false }).trim(),
   size_bytes: vine.number().positive().optional(),
 })

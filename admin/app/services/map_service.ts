@@ -18,7 +18,8 @@ import urlJoin from 'url-join'
 import { RunDownloadJob } from '#jobs/run_download_job'
 import { RunExtractPmtilesJob } from '#jobs/run_extract_pmtiles_job'
 import logger from '@adonisjs/core/services/logger'
-import { assertNotPrivateUrl } from '#validators/common'
+import { assertNotPrivateUrl, ssrfSafeRequestOptions } from '#validators/common'
+import { filenameFromUrl, resolveInside } from '../utils/remote_filename.js'
 import InstalledResource from '#models/installed_resource'
 import { CollectionManifestService } from './collection_manifest_service.js'
 import { decideSupersededDeletion } from '../utils/superseded_resource.js'
@@ -163,14 +164,14 @@ export class MapService implements IMapService {
         continue
       }
 
-      const filename = resource.url.split('/').pop()
+      const filename = filenameFromUrl(resource.url, '.pmtiles')
       if (!filename) {
         logger.warn(`[MapService] Could not determine filename from URL ${resource.url}, skipping.`)
         continue
       }
 
       downloadFilenames.push(filename)
-      const filepath = join(process.cwd(), this.mapStoragePath, 'pmtiles', filename)
+      const filepath = resolveInside(join(process.cwd(), this.mapStoragePath, 'pmtiles'), filename)
 
       await RunDownloadJob.dispatch({
         url: resource.url,
@@ -194,7 +195,7 @@ export class MapService implements IMapService {
   async downloadRemoteSuccessCallback(urls: string[], _: boolean) {
     // Create InstalledResource entries for downloaded map files
     for (const url of urls) {
-      const filename = url.split('/').pop()
+      const filename = filenameFromUrl(url)
       if (!filename) continue
 
       const parsed = CollectionManifestService.parseMapFilename(filename)
@@ -256,8 +257,10 @@ export class MapService implements IMapService {
   }
 
   async downloadRemote(url: string): Promise<{ filename: string; jobId?: string }> {
-    const parsed = new URL(url)
-    if (!parsed.pathname.endsWith('.pmtiles')) {
+    // Name the file from the decoded pathname only (never ?query/#fragment), and
+    // re-check the extension on that name.
+    const filename = filenameFromUrl(url, '.pmtiles')
+    if (!filename) {
       throw new Error(`Invalid PMTiles file URL: ${url}. URL must end with .pmtiles`)
     }
 
@@ -266,12 +269,7 @@ export class MapService implements IMapService {
       throw new Error(`Download already in progress for URL ${url}`)
     }
 
-    const filename = url.split('/').pop()
-    if (!filename) {
-      throw new Error('Could not determine filename from URL')
-    }
-
-    const filepath = join(process.cwd(), this.mapStoragePath, 'pmtiles', filename)
+    const filepath = resolveInside(join(process.cwd(), this.mapStoragePath, 'pmtiles'), filename)
 
 
     // First, ensure base assets are present - regions depend on them
@@ -316,19 +314,15 @@ export class MapService implements IMapService {
   ): Promise<{ filename: string; size: number } | { message: string }> {
     try {
       assertNotPrivateUrl(url)
-      const parsed = new URL(url)
-      if (!parsed.pathname.endsWith('.pmtiles')) {
+      const filename = filenameFromUrl(url, '.pmtiles')
+      if (!filename) {
         throw new Error(`Invalid PMTiles file URL: ${url}. URL must end with .pmtiles`)
       }
 
-      const filename = url.split('/').pop()
-      if (!filename) {
-        throw new Error('Could not determine filename from URL')
-      }
-
-      // Perform a HEAD request to get the content length
+      // Perform a HEAD request to get the content length. Resolved addresses and
+      // every redirect hop are re-checked against the SSRF guard.
       const { default: axios } = await import('axios')
-      const response = await axios.head(url)
+      const response = await axios.head(url, { ...ssrfSafeRequestOptions, timeout: 15000 })
 
       if (response.status !== 200) {
         throw new Error(`Failed to fetch file info: ${response.status} ${response.statusText}`)

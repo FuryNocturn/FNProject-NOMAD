@@ -9,6 +9,7 @@ import { createWriteStream } from 'fs'
 import { rename } from 'fs/promises'
 import path from 'path'
 import logger from '@adonisjs/core/services/logger'
+import { ssrfSafeRequestOptions } from '../validators/common.js'
 import {
   checkDownloadedSize,
   DOWNLOAD_FREE_SPACE_HEADROOM_BYTES,
@@ -104,6 +105,9 @@ export async function doResumableDownload({
       signal,
       timeout,
       headers,
+      // Every connection and redirect hop is re-checked: a URL that passed the up-front guard
+      // must not be able to redirect (or DNS-rebind) to loopback or cloud metadata
+      ...ssrfSafeRequestOptions,
     })
   } catch (error: any) {
     // A 401/403 from a gated source is not a network problem and the raw axios
@@ -201,6 +205,7 @@ export async function doResumableDownload({
       headers,
       signal,
       timeout,
+      ...ssrfSafeRequestOptions,
     })
 
   let response = await fetchStream(headers)

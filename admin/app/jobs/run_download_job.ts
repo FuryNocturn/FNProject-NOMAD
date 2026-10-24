@@ -6,6 +6,7 @@ import {
   GatedContentAuthError,
   InsufficientDiskSpaceError,
 } from '../utils/downloads.js'
+import { isDiskFullError } from '../utils/disk_errors.js'
 import { createHash } from 'crypto'
 import { DockerService } from '#services/docker_service'
 import { ZimService } from '#services/zim_service'
@@ -13,32 +14,19 @@ import { MapService } from '#services/map_service'
 import { RagService } from '#services/rag_service'
 import { OllamaService } from '#services/ollama_service'
 import { EmbedFileJob } from './embed_file_job.js'
-import { basename, join, resolve, sep } from 'node:path'
+import { basename, join, resolve } from 'node:path'
 import { ZIM_STORAGE_PATH } from '../utils/fs.js'
+import { decideSupersededDeletion, isSafeOldContentPath } from '../utils/superseded_resource.js'
+import { findJobTargetingPath } from '../utils/download_targets.js'
 
 /** Maps live under `<cwd>/storage/maps/pmtiles`; no shared constant exists. */
 const MAP_STORAGE_PATH = '/storage/maps'
 
-/**
- * Guard for the outdated-file deletion in {@link RunDownloadJob} `onComplete`:
- * returns true only when `oldFilePath` sits under the expected content storage
- * root for its type AND its filename carries this resource's id prefix. This
- * makes the delete explicit and bounded — we only ever remove the replaced
- * resource's own previous file, never another file, even if the
- * InstalledResource row is stale or malformed.
- */
-function isSafeOldContentPath(
-  oldFilePath: string,
-  resourceId: string,
-  filetype: string
-): boolean {
-  const root =
-    filetype === 'zim'
-      ? join(process.cwd(), ZIM_STORAGE_PATH)
-      : join(process.cwd(), MAP_STORAGE_PATH)
-  const resolved = resolve(oldFilePath)
-  if (!resolved.startsWith(root + sep)) return false
-  return basename(resolved).startsWith(`${resourceId}_`)
+/** Content storage root a resource of this type must live under. */
+function contentStorageRoot(filetype: string): string {
+  return filetype === 'zim'
+    ? join(process.cwd(), ZIM_STORAGE_PATH)
+    : join(process.cwd(), MAP_STORAGE_PATH)
 }
 
 export class RunDownloadJob {
@@ -52,6 +40,9 @@ export class RunDownloadJob {
 
   /** In-memory registry of abort controllers for active download jobs */
   static abortControllers: Map<string, AbortController> = new Map()
+
+  /** Final paths being written by jobs running in this worker (all download jobs run here). */
+  static activeFilepaths: Set<string> = new Set()
 
   static getJobId(url: string): string {
     return createHash('sha256').update(url).digest('hex').slice(0, 16)
@@ -74,13 +65,28 @@ export class RunDownloadJob {
     const { url, filepath, timeout, allowedMimeTypes, forceNew, filetype, resourceMetadata, requestHeaders } =
       job.data as RunDownloadJobParams
 
+    // Two jobs writing the same file would append to the same `<file>.tmp` and corrupt it.
+    // dispatch() refuses a second job for a path already queued; this catches the rest (racing
+    // dispatches, a stalled job picked up again). Plain Error: retried once the other finishes.
+    const target = resolve(filepath)
+    if (RunDownloadJob.activeFilepaths.has(target)) {
+      throw new Error(`Another download is already writing ${basename(filepath)}; will retry`)
+    }
+    RunDownloadJob.activeFilepaths.add(target)
+
     // Register abort controller for this job
     const abortController = new AbortController()
     RunDownloadJob.abortControllers.set(job.id!, abortController)
 
     // Get Redis client for checking cancel signals from the API process
     const queueService = QueueService.getInstance()
-    const cancelRedis = await queueService.getQueue(RunDownloadJob.queue).client
+    const cancelRedis = await queueService
+      .getQueue(RunDownloadJob.queue)
+      .client.catch((error) => {
+        RunDownloadJob.abortControllers.delete(job.id!)
+        RunDownloadJob.activeFilepaths.delete(target)
+        throw error
+      })
 
     let lastKnownProgress: Pick<DownloadProgressData, 'downloadedBytes' | 'totalBytes'> = {
       downloadedBytes: 0,
@@ -184,27 +190,42 @@ export class RunDownloadJob {
                 }
               }
 
-              // Step 1: delete the OUTDATED file if it differs from the new one.
-              // Guarded by isSafeOldContentPath so we can ONLY ever delete the
-              // replaced resource's own previous file — never another resource's
-              // file, even if the InstalledResource row is stale/malformed.
-              if (oldFilePath && oldFilePath !== filepath) {
-                if (isSafeOldContentPath(oldFilePath, resourceMetadata.resource_id, filetype)) {
+              // Step 1: delete the OUTDATED file, only for a genuine upgrade (strictly newer
+              // version, new file on disk, old path inside the storage root) — a downgrade or
+              // re-install must not wipe the newer file — and only if it is this resource's own
+              // file (isSafeOldContentPath), even if the InstalledResource row is stale/malformed.
+              const storageRoot = contentStorageRoot(filetype)
+              const decision = decideSupersededDeletion({
+                existing: oldEntry
+                  ? { file_path: oldEntry.file_path, version: oldEntry.version }
+                  : null,
+                newFilePath: filepath,
+                newVersion: resourceMetadata.version,
+                newFileExists: !!stats,
+                storageBaseDir: storageRoot,
+              })
+              if (decision.delete && decision.path) {
+                if (isSafeOldContentPath(decision.path, resourceMetadata.resource_id, storageRoot)) {
                   try {
-                    await deleteFileIfExists(oldFilePath)
-                    console.log(`[RunDownloadJob] Deleted old file: ${oldFilePath}`)
+                    await deleteFileIfExists(decision.path)
+                    console.log(`[RunDownloadJob] Deleted old file: ${decision.path}`)
                   } catch (deleteError) {
                     console.warn(
-                      `[RunDownloadJob] Failed to delete old file ${oldFilePath}:`,
+                      `[RunDownloadJob] Failed to delete old file ${decision.path}:`,
                       deleteError
                     )
                   }
                 } else {
                   console.warn(
                     `[RunDownloadJob] Refusing to delete unexpected old file path for ` +
-                      `${resourceMetadata.resource_id} (${filetype}): ${oldFilePath}`
+                      `${resourceMetadata.resource_id} (${filetype}): ${decision.path}`
                   )
                 }
+              } else if (decision.reason !== 'first_install' && decision.reason !== 'same_file') {
+                console.log(
+                  `[RunDownloadJob] Kept old file ${oldFilePath} for ` +
+                    `${resourceMetadata.resource_id} (reason: ${decision.reason})`
+                )
               }
             }
 
@@ -328,7 +349,7 @@ export class RunDownloadJob {
         throw new UnrecoverableError(error.message)
       }
       // Retrying won't free space; fail now with the reason shown on the downloads page
-      if (error instanceof InsufficientDiskSpaceError || error?.code === 'ENOSPC') {
+      if (error instanceof InsufficientDiskSpaceError || isDiskFullError(error)) {
         throw new UnrecoverableError(error.message)
       }
       throw error
@@ -338,6 +359,7 @@ export class RunDownloadJob {
         cancelPollInterval = null
       }
       RunDownloadJob.abortControllers.delete(job.id!)
+      RunDownloadJob.activeFilepaths.delete(target)
     }
   }
 
@@ -375,6 +397,18 @@ export class RunDownloadJob {
     const queueService = QueueService.getInstance()
     const queue = queueService.getQueue(this.queue)
     const jobId = this.getJobId(params.url)
+
+    // The .tmp path comes from the file, not the URL: a different URL for the same file
+    // (another mirror or version string) must not get a second writer on that .tmp.
+    const inFlight = await queue.getJobs(['active', 'waiting', 'delayed'])
+    const sameFile = findJobTargetingPath(inFlight, params.filepath, jobId)
+    if (sameFile) {
+      return {
+        job: sameFile,
+        created: false,
+        message: `A download for ${basename(params.filepath)} is already in progress`,
+      }
+    }
 
     try {
       const job = await queue.add(this.key, params, {

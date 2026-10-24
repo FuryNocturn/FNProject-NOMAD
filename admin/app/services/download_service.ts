@@ -7,8 +7,13 @@ import { DownloadModelJob } from '#jobs/download_model_job'
 import { DownloadDrugDataJob } from '#jobs/download_drug_data_job'
 import { DownloadJobWithProgress, DownloadProgressData, RunDownloadJobParams } from '../../types/downloads.js'
 import type { Job, Queue } from 'bullmq'
-import { normalize } from 'path'
-import { deleteFileIfExists } from '../utils/fs.js'
+import { join, normalize } from 'path'
+import { deleteFileIfExists, ZIM_STORAGE_PATH } from '../utils/fs.js'
+import {
+  findJobTargetingPath,
+  jobTargetPaths,
+  sweepOrphanTmpFiles,
+} from '../utils/download_targets.js'
 import transmit from '@adonisjs/transmit/services/main'
 import { BROADCAST_CHANNELS } from '../../constants/broadcast.js'
 
@@ -160,6 +165,7 @@ export class DownloadService {
       const queue = this.queueService.getQueue(queueName)
       const job = await queue.getJob(jobId)
       if (job) {
+        const state = await job.getState().catch(() => 'unknown')
         try {
           await job.remove()
         } catch {
@@ -172,9 +178,48 @@ export class DownloadService {
             // Last resort: already removed or truly stuck
           }
         }
+        await this._deleteStagingFileOfDismissedJob(job, state, queue)
         return
       }
     }
+  }
+
+  /**
+   * A dismissed failed download/extract leaves its `<file>.tmp` partial behind (it is kept
+   * between retries so they can resume) — often many GB. Delete it, unless the job was still
+   * running or another queued job now writes the same file.
+   */
+  private async _deleteStagingFileOfDismissedJob(job: Job, state: string, queue: Queue) {
+    if (state === 'active' || state === 'waiting' || state === 'delayed') return
+    const target = job.data?.filepath ?? job.data?.outputFilepath
+    if (!target || (job.queueName !== RunDownloadJob.queue && job.queueName !== RunExtractPmtilesJob.queue)) {
+      return
+    }
+    try {
+      const inFlight = await queue.getJobs(['active', 'waiting', 'delayed'])
+      if (findJobTargetingPath(inFlight, target, job.id)) return
+      await deleteFileIfExists(target + '.tmp')
+    } catch {
+      // Best effort; the periodic sweep (sweepOrphanTmpFiles) catches what is left
+    }
+  }
+
+  /**
+   * Deletes `*.tmp` partials in the ZIM and pmtiles folders that no download/extract job
+   * (running, queued, retrying, or failed-but-retryable) targets and that have not been written
+   * to for `minAgeMs`. Run at worker startup and periodically (commands/queue/work.ts).
+   */
+  async sweepOrphanTmpFiles(minAgeMs = 60 * 60 * 1000): Promise<string[]> {
+    const states = ['active', 'waiting', 'delayed', 'failed'] as const
+    const [downloads, extracts] = await Promise.all([
+      this.queueService.getQueue(RunDownloadJob.queue).getJobs([...states]),
+      this.queueService.getQueue(RunExtractPmtilesJob.queue).getJobs([...states]),
+    ])
+    const dirs = [
+      join(process.cwd(), ZIM_STORAGE_PATH),
+      join(process.cwd(), '/storage/maps/pmtiles'),
+    ]
+    return sweepOrphanTmpFiles(dirs, jobTargetPaths([...downloads, ...extracts]), Date.now(), minAgeMs)
   }
 
   async retryFailedJob(jobId: string): Promise<{ success: boolean; message: string }> {

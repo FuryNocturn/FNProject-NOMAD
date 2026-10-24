@@ -1,4 +1,4 @@
-import { resolve, sep } from 'node:path'
+import { basename, resolve, sep } from 'node:path'
 
 /**
  * Decides whether a curated resource's PREVIOUSLY-installed file should be
@@ -69,4 +69,19 @@ export function decideSupersededDeletion(inputs: SupersededInputs): SupersededDe
   }
 
   return { delete: true, path: resolvedOld, reason: 'superseded' }
+}
+
+/**
+ * Extra guard before deleting a resource's previously-recorded file: it must sit under
+ * `storageRoot` AND its filename must carry this resource's id prefix, so a stale or
+ * malformed InstalledResource row can never point the delete at another resource's file.
+ */
+export function isSafeOldContentPath(
+  oldFilePath: string,
+  resourceId: string,
+  storageRoot: string
+): boolean {
+  const resolved = resolve(oldFilePath)
+  if (!resolved.startsWith(resolve(storageRoot) + sep)) return false
+  return basename(resolved).startsWith(`${resourceId}_`)
 }

@@ -164,6 +164,12 @@ export default class MapsController {
           message: `Map file with key ${payload.params.filename} not found`,
         })
       }
+      if (
+        error.message === 'Invalid filename' ||
+        error.message === 'The world basemap cannot be deleted'
+      ) {
+        return response.status(400).send({ message: error.message })
+      }
       throw error // Re-throw any other errors and let the global error handler catch
     }
 
