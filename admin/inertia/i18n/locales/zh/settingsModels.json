@@ -1,0 +1,216 @@
+{
+  "models": {
+    "headTitle": "{{name}} 设置",
+    "intro": "轻松管理 {{name}} 的设置和已安装的模型。我们建议先从较小的模型开始，了解它们在您的系统上的表现，然后再使用更大的模型。",
+    "depsMissing": "未安装 {{name}} 的依赖项。请安装后再管理 AI 模型。",
+    "sections": {
+      "settings": "设置",
+      "installed": "已安装的模型",
+      "remote": "远程连接",
+      "models": "模型"
+    },
+    "toasts": {
+      "remoteConfigFailed": "配置远程 Ollama 失败。",
+      "remoteCleared": "远程 Ollama 配置已清除。",
+      "remoteClearFailed": "清除远程 Ollama 失败。",
+      "listRefreshed": "已从远程刷新模型列表。",
+      "installStarted": "已开始下载模型 {{model}}。可能需要一些时间才能完成。",
+      "installFailed": "安装模型 {{model}} 时出错。请重试。",
+      "deleted": "模型已删除：{{model}}。",
+      "deleteFailed": "删除模型 {{model}} 时出错。请重试。",
+      "settingUpdated": "设置更新成功。",
+      "settingFailed": "更新设置时出错。请重试。"
+    },
+    "deleteModal": {
+      "title": "删除模型？",
+      "confirm": "删除",
+      "body": "确定要删除此模型吗？如果以后想再使用，需要重新下载。"
+    },
+    "contextWindowOptions": {
+      "4096": "4K 词元",
+      "8192": "8K 词元",
+      "16384": "16K 词元",
+      "32768": "32K 词元",
+      "65536": "64K 词元",
+      "131072": "128K 词元",
+      "auto": "自动（推荐）"
+    },
+    "relevancePresets": {
+      "off": "关闭 — 使用检索到的所有段落",
+      "lenient": "宽松",
+      "balanced": "均衡（推荐）",
+      "strict": "严格"
+    },
+    "relevanceCustom": "自定义（{{value}}）",
+    "responseStyles": {
+      "auto": "自动（推荐）",
+      "focused": "专注（基于事实，可重复）",
+      "creative": "创意（多样，探索性）",
+      "off": "后端默认值（不发送任何参数）"
+    },
+    "tasksModelDefault": "使用聊天模型",
+    "tasksModelNotInstalled": "{{model}}（未安装）",
+    "settings": {
+      "chatSuggestions": {
+        "label": "聊天建议",
+        "description": "在聊天界面中显示由 AI 生成的对话开场建议"
+      },
+      "flashAttention": {
+        "label": "Flash Attention",
+        "description": "启用 OLLAMA_FLASH_ATTENTION=1 以提高内存效率。如遇到不稳定，请禁用。重新安装 AI 助手后生效。"
+      },
+      "autoThinking": {
+        "label": "模型支持思考时自动使用思考",
+        "description": "设置可思考模型的默认行为。您仍可在聊天窗口中为单个模型开启或关闭思考。"
+      },
+      "rag": {
+        "label": "知识库检索",
+        "description": "在回答前先在知识库中搜索相关文档。当知识库较小或为空时，关闭此项可节省内存并加快回复速度。这与聊天窗口中的开关是同一个。"
+      },
+      "assistantName": {
+        "label": "助手名称",
+        "help": "为您的 AI 助手起一个自定义名称，将用于聊天界面和应用的其他位置。",
+        "placeholder": "AI 助手"
+      },
+      "tasksModel": {
+        "label": "任务模型",
+        "help": "用于聊天标题和建议等后台工作的小型快速模型。保持设置为聊天模型，则使用聊天当前所用的模型。请避免在此使用推理模型 — 它们处理简短的辅助任务时速度很慢。"
+      },
+      "minRelevance": {
+        "label": "知识库相关度",
+        "help": "知识库段落与您的问题的匹配程度达到多高，才会被用于回答。设置越严格，越能排除无关段落；但过于严格也会丢弃真正有用的段落。当没有任何内容达标时，助手会改用自身的知识来回答。"
+      },
+      "relevanceCheck": {
+        "label": "复核知识库匹配结果",
+        "description": "回答前，请任务模型判断找到的段落是否确实与您的问题相关，不相关时将其排除（且不引用）。对 Wikipedia 或 Project Gutenberg 这类大型资料库最有帮助，因为其中总会有看似相似的内容。需要能力较强的任务模型（约 8B 参数或更大）；较小的模型会拒绝过多良好的匹配。每次回复都会增加短暂的延迟。"
+      },
+      "responseStyle": {
+        "label": "回复风格",
+        "help": "助手在选择下一个词时的大胆程度。“自动”遵循模型作者的推荐并补全其余部分，适合大多数人。“专注”给出更简短、更稳定、更可重复的回答，更适合查询资料。“创意”措辞更多变，但会牺牲一些准确性。"
+      },
+      "contextWindow": {
+        "label": "上下文窗口",
+        "help": "每次回复可考虑的对话和知识库上下文量。“自动”会根据模型的训练上限和您的可用内存为每个模型确定大小。选择某个值即设定上限 — 它可以缩小窗口以节省内存，但绝不会超出模型所支持的范围。"
+      },
+      "inEffect": "当前生效：{{windows}}。更改将对新对话生效。"
+    },
+    "installed": {
+      "empty": "未安装模型。请浏览下方的模型目录开始使用。",
+      "model": "模型",
+      "parameters": "参数量",
+      "diskSize": "磁盘大小",
+      "action": "操作",
+      "na": "不适用",
+      "delete": "删除"
+    },
+    "remote": {
+      "description": "连接到任何兼容 OpenAI 的 API 服务器 — 支持 Ollama、LM Studio、llama.cpp 等。",
+      "ollamaHostNote": "对于远程 Ollama 实例，必须使用 <code>OLLAMA_HOST=0.0.0.0</code> 启动主机。",
+      "urlLabel": "远程 Ollama/OpenAI API URL",
+      "urlPlaceholder": "http://192.168.1.100:11434  （兼容 OpenAI API 的应用请使用 :1234）",
+      "saveTest": "保存并测试",
+      "clear": "清除"
+    },
+    "catalog": {
+      "alertTitle": "仅在使用 Ollama 后端时才支持下载模型。",
+      "alertMessage": "如果您连接的是 OpenAI API 主机（例如 LM Studio），请直接在该应用中下载模型。",
+      "searchPlaceholder": "搜索语言模型..",
+      "refresh": "刷新模型",
+      "name": "名称",
+      "estimatedPulls": "预估拉取次数",
+      "lastUpdated": "最后更新",
+      "tag": "标签",
+      "inputType": "输入类型",
+      "contextSize": "上下文大小",
+      "modelSize": "模型大小",
+      "action": "操作",
+      "delete": "删除",
+      "install": "安装",
+      "loadMore": "加载更多"
+    }
+  },
+  "apps": {
+    "headTitle": "应用设置",
+    "title": "应用",
+    "description": "管理您的 Project NOMAD 实例中可用的应用。每晚的更新检查会自动检测这些应用是否有新版本。",
+    "checkUpdates": "检查更新",
+    "columns": {
+      "name": "名称",
+      "location": "位置",
+      "installed": "已安装",
+      "version": "版本",
+      "actions": "操作"
+    },
+    "errors": {
+      "offlineCheck": "必须联网才能检查更新。",
+      "checkFailed": "检查更新失败：{{error}}",
+      "offlineInstall": "必须联网才能安装服务。",
+      "installFailed": "安装服务失败：{{error}}",
+      "reinstallFailed": "强制重新安装服务失败：{{error}}",
+      "updateFailed": "更新服务失败：{{error}}",
+      "unknown": "未知错误",
+      "startFailed": "启动服务失败：{{error}}",
+      "stopFailed": "停止服务失败：{{error}}",
+      "restartFailed": "重启服务失败：{{error}}",
+      "dispatchFailed": "发起更新检查失败"
+    },
+    "installModal": {
+      "title": "安装服务？",
+      "confirm": "安装",
+      "body": "确定要安装 {{name}} 吗？这将启动该服务，并使其在您的 Project NOMAD 实例中可用。可能需要一些时间才能完成。"
+    },
+    "forceReinstall": {
+      "title": "强制重新安装？",
+      "button": "强制重新安装",
+      "body": "确定要强制重新安装 {{name}} 吗？这将<strong>清除此服务的所有数据</strong>，且无法撤销。仅当服务出现故障且其他排查步骤均已失败时才应这样做。"
+    },
+    "affectModal": {
+      "stopTitle": "停止服务？",
+      "startTitle": "启动服务？",
+      "stop": "停止",
+      "start": "启动",
+      "stopBody": "确定要停止 {{name}} 吗？",
+      "startBody": "确定要启动 {{name}} 吗？"
+    },
+    "restartModal": {
+      "title": "重启服务？",
+      "button": "重启",
+      "body": "确定要重启 {{name}} 吗？"
+    },
+    "install": "安装",
+    "open": "打开",
+    "update": "更新",
+    "updating": "更新中..."
+  },
+  "updateModal": {
+    "title": "更新服务",
+    "confirm": "更新",
+    "body": "将 <strong>{{name}}</strong> 从 <code>{{from}}</code> 更新到 <code>{{to}}</code>？",
+    "preserved": "更新期间将保留您的数据和配置。",
+    "viewReleaseNotes": "查看发布说明",
+    "showVersions": "显示可用版本",
+    "hideVersions": "隐藏可用版本",
+    "loadingVersions": "正在加载版本...",
+    "noVersions": "没有其他可用版本",
+    "latest": "最新",
+    "releaseNotes": "发布说明",
+    "majorWarning": "除非您已验证与当前配置的兼容性，否则不建议升级到新的主版本（例如 1.8.2 → 2.0.0）。请务必查看发布说明，如有可能，请先在测试环境中验证。",
+    "loadFailed": "加载可用版本失败"
+  },
+  "activity": {
+    "title": "安装活动"
+  },
+  "downloads": {
+    "title": "进行中的模型下载",
+    "empty": "没有进行中的模型下载",
+    "cancelTitle": "取消下载",
+    "downloading": "下载中...",
+    "cancelModal": {
+      "title": "取消下载？",
+      "confirm": "取消下载",
+      "cancel": "继续下载",
+      "stop": "停止下载 <model>{{model}}</model>？",
+      "note": "已下载的数据将保留在磁盘上。如果您稍后重新下载此模型，将从中断处继续，而不是从头开始。"
+    }
+  }
+}

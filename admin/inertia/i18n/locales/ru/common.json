@@ -1,0 +1,16 @@
+{
+  "backToHome": "На главную",
+  "debugInfo": "Отладочная информация",
+  "version": "Project NOMAD™ Командный центр v{{version}}",
+  "commandCenter": "Командный центр",
+  "logoAlt": "Логотип Project NOMAD",
+  "goToSettings": "Перейти в настройки",
+  "remove": "Удалить",
+  "cancel": "Отмена",
+  "confirm": "Подтвердить",
+  "loading": "Загрузка...",
+  "loadingShort": "Загрузка",
+  "dismissAlert": "Закрыть уведомление",
+  "noRecords": "Записи не найдены",
+  "internalError": "Произошла внутренняя ошибка. Повторите попытку или посмотрите подробности в консоли. {{detail}}"
+}

@@ -1,0 +1,102 @@
+{
+  "page": {
+    "headTitle": "地図管理",
+    "title": "地図管理",
+    "subtitle": "保存済みの地図ファイルを管理し、新しい地域を探しましょう!",
+    "baseAssetsMissing": "ベースマップのアセットがインストールされていません。地図機能を有効にするには、先にダウンロードしてください。",
+    "downloadBaseAssets": "ベースアセットをダウンロード",
+    "worldBasemapMissingTitle": "世界のベースマップがダウンロードされていません",
+    "worldBasemapMissingMessage": "低ズームの世界ベースマップ (約 15 MB) がまだダウンロードされていないため、ダウンロード済みの地域以外では地図が空白に表示されます。この NOMAD をインターネットに接続し、オフライン利用のために一度ダウンロードしてください。",
+    "downloadBaseMap": "ベースマップをダウンロード",
+    "globalInstalledTitle": "全世界の地図をインストール済み",
+    "globalInstalledMessage": "全世界の地図 (ビルド {{date}}、{{size}}) がローカルに保存されており、オフラインで利用できます。",
+    "downloadLatestBuild": "最新のビルドをダウンロード",
+    "globalAvailableTitle": "全世界の地図を利用できます",
+    "globalAvailableMessage": "Protomaps から全世界の完全な地図をダウンロードします ({{size}}、ビルド {{date}})。サイズは大きいものの地球全体をカバーしており、個別の地域をダウンロードする必要はありません。",
+    "downloadGlobalMap": "全世界の地図をダウンロード",
+    "countryAlertTitle": "国または地域ごとにダウンロード",
+    "countryAlertMessage": "必要な国 (1 か国から大陸全体まで) を選択すると、Protomaps のグローバルアーカイブから該当するタイルだけを取得します。125 GB の全世界の地図よりもはるかに小さくなります。",
+    "chooseCountries": "国を選択",
+    "curatedRegions": "厳選された地図地域",
+    "forceRefresh": "コレクションを強制更新",
+    "noCollections": "利用できる厳選コレクションはありません。",
+    "storedFiles": "保存済みの地図ファイル",
+    "downloadCustom": "カスタム地図ファイルをダウンロード",
+    "columnName": "名前",
+    "columnActions": "操作",
+    "delete": "削除",
+    "downloadMapFileTitle": "地図ファイルをダウンロード",
+    "suggestedUrl": "例: https://github.com/Crosstalk-Solutions/project-nomad-maps/raw/refs/heads/master/pmtiles/california.pmtiles"
+  },
+  "confirmDelete": {
+    "title": "削除しますか?",
+    "message": "{{name}} を削除してもよろしいですか?この操作は元に戻せません。",
+    "confirm": "削除"
+  },
+  "confirmDownload": {
+    "title": "ダウンロードしますか?",
+    "message": "<strong>{{name}}</strong> をダウンロードしてもよろしいですか?ファイルサイズやインターネット接続の状況によっては、利用可能になるまでに時間がかかる場合があります。",
+    "confirm": "ダウンロード"
+  },
+  "confirmGlobal": {
+    "title": "全世界の地図をダウンロードしますか?",
+    "message": "Protomaps の全世界の地図 ({{size}}、ビルド {{date}}) をすべてダウンロードします。地球全体をカバーしているため、個別の地域ファイルは不要になります。十分なディスク容量があることを確認してください。",
+    "confirm": "ダウンロード"
+  },
+  "notifications": {
+    "baseMapDownloaded": "ベースマップをダウンロードしました。",
+    "baseMapFailed": "ベースマップをダウンロードできませんでした。この NOMAD をインターネットに接続して、もう一度お試しください。",
+    "globalQueued": "全世界の地図のダウンロードをキューに追加しました。ファイルサイズが大きく (約 125 GB)、時間がかかる場合があります。",
+    "globalFailed": "全世界の地図のダウンロードを開始できませんでした。もう一度お試しください。",
+    "baseAssetsDownloaded": "ベースマップのアセットをダウンロードしました。",
+    "baseAssetsFailed": "ベースマップのアセットのダウンロード中にエラーが発生しました。もう一度お試しください。",
+    "baseAssetsUnknown": "ベースアセットのダウンロード中に不明なエラーが発生しました。",
+    "collectionQueued": "コレクション「{{name}}」のダウンロードをキューに追加しました。",
+    "collectionAlreadyInstalled": "コレクション「{{name}}」のすべてのリソースはすでにダウンロード済みです。",
+    "downloadQueued": "ダウンロードをキューに追加しました。",
+    "fileDeleted": "{{name}} を削除しました。",
+    "fileDeleteFailed": "{{name}} を削除できませんでした。もう一度お試しください。",
+    "countryDownloadQueued": "ダウンロードをキューに追加しました。進行状況は下で確認できます。",
+    "manifestsRefreshed": "地図コレクションを更新しました。"
+  },
+  "downloadUrl": {
+    "description": "ダウンロードする地図地域ファイルの URL を入力してください。URL は一般公開されていて、末尾が .pmtiles である必要があります。ファイルの有無、種類、おおよそのサイズを確認する事前チェックが実行されます。",
+    "placeholder": "ダウンロード URL を入力...",
+    "confirm": "ダウンロード",
+    "running": "URL の事前チェックを実行中: {{url}}",
+    "unknownError": "事前チェック中に不明なエラーが発生しました。",
+    "passed": "事前チェックに成功しました。ファイル名: {{filename}}、サイズ: {{size}} MB",
+    "failed": "事前チェックに失敗しました: {{error}}"
+  },
+  "card": {
+    "allDownloaded": "すべての項目をダウンロード済み",
+    "stats": "項目数: {{items}} | サイズ: {{size}}"
+  },
+  "countryPicker": {
+    "title": "国または地域ごとに地図をダウンロード",
+    "confirm": "ダウンロードを開始",
+    "searchPlaceholder_one": "{{count}} か国から検索...",
+    "searchPlaceholder_other": "{{count}} か国から検索...",
+    "clearAll": "すべてクリア",
+    "quickPicks": "クイック選択",
+    "noMatch": "「{{search}}」に一致する国がありません。",
+    "installed": "インストール済み",
+    "installedTitle": "ダウンロード済み — 別のズームで更新するには再選択してください",
+    "selectedCount_one": "{{count}} 件を選択中",
+    "selectedCount_other": "{{count}} 件を選択中",
+    "removeCountry": "{{name}} を削除",
+    "maxZoom": "最大ズームレベル: <code>{{zoom}}</code>",
+    "zoomWorld": "z{{zoom}} (世界)",
+    "zoomStreet": "z{{zoom}} (街路)",
+    "zoomHint": "ズームが低いほどファイルは小さくなり、詳細さは減ります。ズーム 15 では個々の街路が、ズーム 10 では都市レベルの詳細が表示されます。",
+    "pickAtLeastOne": "ダウンロードする前に、少なくとも 1 か国を選択してください。",
+    "stillEstimating": "サイズを見積もり中です — しばらくお待ちください。",
+    "estimateFailed": "見積もりに失敗しました",
+    "downloadFailed": "ダウンロードに失敗しました",
+    "preflightNoData": "事前チェックからデータが返されませんでした",
+    "estimating": "サイズを見積もり中…",
+    "pickToEstimate": "サイズを見積もるには、少なくとも 1 か国を選択してください。",
+    "result": "{{tiles}} タイル、約 {{size}}",
+    "sourceBuild": "(ソースのビルド {{date}})"
+  }
+}

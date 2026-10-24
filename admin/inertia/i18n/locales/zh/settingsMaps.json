@@ -1,0 +1,102 @@
+{
+  "page": {
+    "headTitle": "地图管理",
+    "title": "地图管理",
+    "subtitle": "管理已存储的地图文件，并探索新的区域！",
+    "baseAssetsMissing": "尚未安装基础地图资源。请先下载这些资源以启用地图功能。",
+    "downloadBaseAssets": "下载基础资源",
+    "worldBasemapMissingTitle": "尚未下载世界底图",
+    "worldBasemapMissingMessage": "低缩放级别的世界底图（约 15 MB）尚未下载，因此在您已下载的区域之外，地图显示为空白。请将此 NOMAD 连接到互联网，下载一次即可离线使用。",
+    "downloadBaseMap": "下载底图",
+    "globalInstalledTitle": "全球地图已安装",
+    "globalInstalledMessage": "您的全球地图构建版本 {{date}}（{{size}}）已存储在本地，可离线使用。",
+    "downloadLatestBuild": "下载最新构建版本",
+    "globalAvailableTitle": "可使用全球地图覆盖",
+    "globalAvailableMessage": "从 Protomaps 下载完整的全球地图（{{size}}，构建版本 {{date}}）。文件很大，但覆盖整个地球 — 无需再单独下载各个区域。",
+    "downloadGlobalMap": "下载全球地图",
+    "countryAlertTitle": "按国家或地区下载",
+    "countryAlertMessage": "选择您真正需要的国家 — 从单个国家到整个大洲均可 — 我们只会从 Protomaps 全球归档中提取这些图块。比 125 GB 的完整全球地图小得多。",
+    "chooseCountries": "选择国家",
+    "curatedRegions": "精选地图区域",
+    "forceRefresh": "强制刷新合集",
+    "noCollections": "没有可用的精选合集。",
+    "storedFiles": "已存储的地图文件",
+    "downloadCustom": "下载自定义地图文件",
+    "columnName": "名称",
+    "columnActions": "操作",
+    "delete": "删除",
+    "downloadMapFileTitle": "下载地图文件",
+    "suggestedUrl": "例如 https://github.com/Crosstalk-Solutions/project-nomad-maps/raw/refs/heads/master/pmtiles/california.pmtiles"
+  },
+  "confirmDelete": {
+    "title": "确认删除？",
+    "message": "确定要删除 {{name}} 吗？此操作无法撤销。",
+    "confirm": "删除"
+  },
+  "confirmDownload": {
+    "title": "确认下载？",
+    "message": "确定要下载 <strong>{{name}}</strong> 吗？根据文件大小和您的网络连接情况，可能需要一些时间才能可用。",
+    "confirm": "下载"
+  },
+  "confirmGlobal": {
+    "title": "下载全球地图？",
+    "message": "这将下载完整的 Protomaps 全球地图（{{size}}，构建版本 {{date}}）。覆盖整个地球，因此您无需再单独下载各区域文件。请确保有足够的磁盘空间。",
+    "confirm": "下载"
+  },
+  "notifications": {
+    "baseMapDownloaded": "底图下载成功。",
+    "baseMapFailed": "无法下载底图。请将此 NOMAD 连接到互联网后重试。",
+    "globalQueued": "全球地图下载已加入队列。这是一个大文件（约 125 GB），可能需要较长时间。",
+    "globalFailed": "启动全球地图下载失败。请重试。",
+    "baseAssetsDownloaded": "基础地图资源下载成功。",
+    "baseAssetsFailed": "下载基础地图资源时出错。请重试。",
+    "baseAssetsUnknown": "下载基础资源时发生未知错误。",
+    "collectionQueued": "合集“{{name}}”的下载已加入队列。",
+    "collectionAlreadyInstalled": "合集“{{name}}”中的所有资源均已下载。",
+    "downloadQueued": "下载已加入队列。",
+    "fileDeleted": "{{name}} 已删除。",
+    "fileDeleteFailed": "删除 {{name}} 失败。请重试。",
+    "countryDownloadQueued": "下载已加入队列。请在下方查看进度。",
+    "manifestsRefreshed": "地图合集刷新成功。"
+  },
+  "downloadUrl": {
+    "description": "输入您要下载的地图区域文件的 URL。该 URL 必须可公开访问，并以 .pmtiles 结尾。系统将运行预检以验证文件的可用性、类型和大致大小。",
+    "placeholder": "输入下载 URL...",
+    "confirm": "下载",
+    "running": "正在对 URL 运行预检：{{url}}",
+    "unknownError": "预检期间发生未知错误。",
+    "passed": "预检通过。文件名：{{filename}}，大小：{{size}} MB",
+    "failed": "预检失败：{{error}}"
+  },
+  "card": {
+    "allDownloaded": "所有项目均已下载",
+    "stats": "项目：{{items}} | 大小：{{size}}"
+  },
+  "countryPicker": {
+    "title": "按国家或地区下载地图",
+    "confirm": "开始下载",
+    "searchPlaceholder_one": "搜索 {{count}} 个国家...",
+    "searchPlaceholder_other": "搜索 {{count}} 个国家...",
+    "clearAll": "全部清除",
+    "quickPicks": "快速选择",
+    "noMatch": "没有与“{{search}}”匹配的国家。",
+    "installed": "已安装",
+    "installedTitle": "已下载 — 重新选择即可使用不同的缩放级别进行更新",
+    "selectedCount_one": "已选择 {{count}} 个",
+    "selectedCount_other": "已选择 {{count}} 个",
+    "removeCountry": "移除 {{name}}",
+    "maxZoom": "最大缩放级别：<code>{{zoom}}</code>",
+    "zoomWorld": "z{{zoom}}（世界）",
+    "zoomStreet": "z{{zoom}}（街道）",
+    "zoomHint": "缩放级别越低 = 文件越小、细节越少。缩放级别 15 可显示单条街道；缩放级别 10 显示城市级细节。",
+    "pickAtLeastOne": "下载前请至少选择一个国家。",
+    "stillEstimating": "仍在估算大小 — 请稍候。",
+    "estimateFailed": "估算失败",
+    "downloadFailed": "下载失败",
+    "preflightNoData": "预检未返回数据",
+    "estimating": "正在估算大小…",
+    "pickToEstimate": "请至少选择一个国家以估算大小。",
+    "result": "{{tiles}} 个图块，约 {{size}}",
+    "sourceBuild": "（源构建版本 {{date}}）"
+  }
+}

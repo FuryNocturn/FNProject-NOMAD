@@ -10,6 +10,12 @@ import { initReactI18next } from 'react-i18next'
 export const SUPPORTED_LANGUAGES = [
   { code: 'en', label: 'English' },
   { code: 'es', label: 'Español' },
+  { code: 'de', label: 'Deutsch' },
+  { code: 'fr', label: 'Français' },
+  { code: 'pt', label: 'Português' },
+  { code: 'ru', label: 'Русский' },
+  { code: 'zh', label: '中文' },
+  { code: 'ja', label: '日本語' },
 ] as const
 
 export type Language = (typeof SUPPORTED_LANGUAGES)[number]['code']

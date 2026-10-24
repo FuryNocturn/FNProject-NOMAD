@@ -1,6 +1,6 @@
 {
   "models": {
-    "headTitle": "Ajustes de {{name}} | Project NOMAD",
+    "headTitle": "Ajustes de {{name}}",
     "intro": "Gestiona fácilmente los ajustes de {{name}} y los modelos instalados. Te recomendamos empezar con modelos pequeños para ver cómo rinden en tu sistema antes de pasar a otros más grandes.",
     "depsMissing": "Las dependencias de {{name}} no están instaladas. Instálalas para gestionar los modelos de IA.",
     "sections": {

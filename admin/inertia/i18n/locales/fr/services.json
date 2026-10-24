@@ -1,0 +1,57 @@
+{
+  "nomad_kiwix_server": {
+    "name": "Bibliothèque d'informations",
+    "description": "Accès hors ligne à Wikipedia, aux références médicales, aux guides pratiques et aux encyclopédies"
+  },
+  "nomad_ollama": {
+    "name": "Assistant IA",
+    "description": "Chat IA local qui fonctionne entièrement sur votre matériel - aucune connexion Internet requise"
+  },
+  "nomad_cyberchef": {
+    "name": "Outils de données",
+    "description": "Couteau suisse pour l'encodage, le chiffrement et l'analyse de données"
+  },
+  "nomad_flatnotes": {
+    "name": "Notes",
+    "description": "Application de prise de notes simple avec stockage local"
+  },
+  "nomad_kolibri_2": {
+    "name": "Plateforme éducative (2e génération)",
+    "description": "Plateforme d'apprentissage interactive avec cours vidéo et exercices"
+  },
+  "nomad_stirling_pdf": {
+    "description": "Outil de manipulation de PDF hébergé localement — fusionner, diviser, compresser, convertir, et plus encore"
+  },
+  "nomad_filebrowser": {
+    "name": "Explorateur de fichiers",
+    "description": "Gestionnaire de fichiers web — parcourez, téléversez, téléchargez et organisez les fichiers de votre appareil"
+  },
+  "nomad_calibreweb": {
+    "description": "Liseuse et gestionnaire de bibliothèque de livres numériques web pour votre collection Calibre"
+  },
+  "nomad_it_tools": {
+    "description": "Collection d'utilitaires pratiques pour les développeurs — UUID, hachage, encodage, formateurs, et plus encore"
+  },
+  "nomad_excalidraw": {
+    "description": "Tableau blanc virtuel pour esquisser des diagrammes au style dessiné à la main — fonctionne entièrement hors ligne"
+  },
+  "nomad_meshtastic_web": {
+    "description": "Client web pour gérer les appareils radio maillés Meshtastic"
+  },
+  "nomad_meshcore_web": {
+    "description": "Client web pour les appareils radio maillés MeshCore"
+  },
+  "nomad_homebox": {
+    "description": "Inventaire domestique et gestion des biens — suivez tout ce que vous possédez"
+  },
+  "nomad_vaultwarden": {
+    "description": "Serveur de gestion de mots de passe léger compatible Bitwarden — sécurisez vos identifiants hors ligne"
+  },
+  "nomad_jellyfin": {
+    "description": "Serveur multimédia open source — diffusez vos bibliothèques de vidéos, de musique et de photos"
+  },
+  "nomad_translate": {
+    "name": "Bibliothèque traduite",
+    "description": "Lisez la Bibliothèque d'informations dans une autre langue. Traduction automatique qui fonctionne hors ligne, sur CPU"
+  }
+}

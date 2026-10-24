@@ -1,0 +1,216 @@
+{
+  "models": {
+    "headTitle": "Configurações do {{name}}",
+    "intro": "Gerencie com facilidade as configurações e os modelos instalados do {{name}}. Recomendamos começar com modelos menores para ver como eles se comportam no seu sistema antes de passar para os maiores.",
+    "depsMissing": "As dependências do {{name}} não estão instaladas. Instale-as para gerenciar os modelos de IA.",
+    "sections": {
+      "settings": "Configurações",
+      "installed": "Modelos instalados",
+      "remote": "Conexão remota",
+      "models": "Modelos"
+    },
+    "toasts": {
+      "remoteConfigFailed": "Falha ao configurar o Ollama remoto.",
+      "remoteCleared": "Configuração do Ollama remoto removida.",
+      "remoteClearFailed": "Falha ao remover o Ollama remoto.",
+      "listRefreshed": "Lista de modelos atualizada a partir do remoto.",
+      "installStarted": "Download do modelo {{model}} iniciado. Pode levar algum tempo para ser concluído.",
+      "installFailed": "Ocorreu um erro ao instalar o modelo: {{model}}. Tente novamente.",
+      "deleted": "Modelo excluído: {{model}}.",
+      "deleteFailed": "Ocorreu um erro ao excluir o modelo: {{model}}. Tente novamente.",
+      "settingUpdated": "Configuração atualizada com sucesso.",
+      "settingFailed": "Ocorreu um erro ao atualizar a configuração. Tente novamente."
+    },
+    "deleteModal": {
+      "title": "Excluir modelo?",
+      "confirm": "Excluir",
+      "body": "Tem certeza de que deseja excluir este modelo? Você precisará baixá-lo novamente se quiser usá-lo no futuro."
+    },
+    "contextWindowOptions": {
+      "4096": "4K tokens",
+      "8192": "8K tokens",
+      "16384": "16K tokens",
+      "32768": "32K tokens",
+      "65536": "64K tokens",
+      "131072": "128K tokens",
+      "auto": "Automático (recomendado)"
+    },
+    "relevancePresets": {
+      "off": "Desativado — usar todas as passagens recuperadas",
+      "lenient": "Tolerante",
+      "balanced": "Equilibrado (recomendado)",
+      "strict": "Rigoroso"
+    },
+    "relevanceCustom": "Personalizado ({{value}})",
+    "responseStyles": {
+      "auto": "Automático (recomendado)",
+      "focused": "Focado (factual, repetível)",
+      "creative": "Criativo (variado, exploratório)",
+      "off": "Padrões do back-end (não enviar nada)"
+    },
+    "tasksModelDefault": "Usar o modelo do chat",
+    "tasksModelNotInstalled": "{{model}} (não instalado)",
+    "settings": {
+      "chatSuggestions": {
+        "label": "Sugestões de chat",
+        "description": "Exibe sugestões de início de conversa geradas por IA na interface do chat"
+      },
+      "flashAttention": {
+        "label": "Flash Attention",
+        "description": "Ativa OLLAMA_FLASH_ATTENTION=1 para melhorar a eficiência de memória. Desative se você tiver instabilidade. Entra em vigor após reinstalar o Assistente de IA."
+      },
+      "autoThinking": {
+        "label": "Usar o raciocínio automaticamente quando o modelo for compatível",
+        "description": "Define o padrão para os modelos capazes de raciocinar. Você ainda pode ativar ou desativar o raciocínio de um modelo específico na janela do chat."
+      },
+      "rag": {
+        "label": "Consulta à Base de conhecimento",
+        "description": "Pesquisa documentos relevantes na sua base de conhecimento antes de responder. Desative para economizar memória e acelerar as respostas quando sua base de conhecimento for pequena ou estiver vazia. É o mesmo controle da janela do chat."
+      },
+      "assistantName": {
+        "label": "Nome do assistente",
+        "help": "Dê um nome personalizado ao seu assistente de IA, que será usado na interface do chat e em outras áreas do aplicativo.",
+        "placeholder": "Assistente de IA"
+      },
+      "tasksModel": {
+        "label": "Modelo de tarefas",
+        "help": "Modelo pequeno e rápido usado em trabalhos em segundo plano, como títulos de chats e sugestões. Deixe como o modelo do chat para usar o modelo que o chat estiver usando. Evite modelos de raciocínio aqui — eles são lentos em tarefas curtas e simples."
+      },
+      "minRelevance": {
+        "label": "Relevância da Base de conhecimento",
+        "help": "O quanto uma passagem da base de conhecimento precisa corresponder à sua pergunta para ser usada em uma resposta. Configurações mais rigorosas mantêm passagens sem relação de fora; rigorosas demais, e passagens realmente úteis também são descartadas. Quando nada atinge o nível exigido, o assistente responde com o próprio conhecimento."
+      },
+      "relevanceCheck": {
+        "label": "Verificar novamente as correspondências da base de conhecimento",
+        "description": "Antes de responder, pergunta ao Modelo de tarefas se as passagens encontradas realmente tratam da sua pergunta, e as deixa de fora (e sem citação) quando não tratam. Ajuda mais com bibliotecas grandes, como a Wikipedia ou o Projeto Gutenberg, em que sempre há algo parecido. Requer um Modelo de tarefas capaz (cerca de 8B de parâmetros ou mais); modelos menores rejeitam boas correspondências demais. Acrescenta um pequeno atraso a cada resposta."
+      },
+      "responseStyle": {
+        "label": "Estilo de resposta",
+        "help": "O quão aventureiro o assistente é ao escolher a próxima palavra. Automático segue o que o autor do modelo recomendou e completa o resto, e serve para a maioria das pessoas. Focado dá respostas mais curtas, estáveis e repetíveis, e é a melhor escolha para consultas. Criativo varia mais as palavras, com algum custo em precisão."
+      },
+      "contextWindow": {
+        "label": "Janela de contexto",
+        "help": "Quanto da conversa e do contexto da base de conhecimento cada resposta pode considerar. Automático dimensiona isso por modelo a partir do limite de treinamento e da memória disponível. Escolher um valor define um limite máximo — ele pode reduzir a janela para economizar memória, mas nunca a aumenta além do que o modelo suporta."
+      },
+      "inEffect": "Em vigor no momento: {{windows}}. As alterações valem para novas conversas."
+    },
+    "installed": {
+      "empty": "Nenhum modelo instalado. Navegue pelo catálogo de modelos abaixo para começar.",
+      "model": "Modelo",
+      "parameters": "Parâmetros",
+      "diskSize": "Tamanho em disco",
+      "action": "Ação",
+      "na": "N/D",
+      "delete": "Excluir"
+    },
+    "remote": {
+      "description": "Conecte-se a qualquer servidor de API compatível com a da OpenAI — Ollama, LM Studio, llama.cpp e outros são todos compatíveis.",
+      "ollamaHostNote": "Para instâncias remotas do Ollama, o host deve ser iniciado com <code>OLLAMA_HOST=0.0.0.0</code>.",
+      "urlLabel": "URL da API remota do Ollama/OpenAI",
+      "urlPlaceholder": "http://192.168.1.100:11434  (ou :1234 para apps compatíveis com a API da OpenAI)",
+      "saveTest": "Salvar e testar",
+      "clear": "Limpar"
+    },
+    "catalog": {
+      "alertTitle": "O download de modelos só é compatível com um back-end Ollama.",
+      "alertMessage": "Se você estiver conectado a um host de API da OpenAI (por exemplo, o LM Studio), baixe os modelos diretamente nesse aplicativo.",
+      "searchPlaceholder": "Pesquisar modelos de linguagem..",
+      "refresh": "Atualizar modelos",
+      "name": "Nome",
+      "estimatedPulls": "Downloads estimados",
+      "lastUpdated": "Última atualização",
+      "tag": "Tag",
+      "inputType": "Tipo de entrada",
+      "contextSize": "Tamanho do contexto",
+      "modelSize": "Tamanho do modelo",
+      "action": "Ação",
+      "delete": "Excluir",
+      "install": "Instalar",
+      "loadMore": "Carregar mais"
+    }
+  },
+  "apps": {
+    "headTitle": "Configurações de apps",
+    "title": "Apps",
+    "description": "Gerencie os aplicativos disponíveis na sua instância do Project NOMAD. As verificações noturnas de atualização detectarão automaticamente quando houver novas versões desses apps.",
+    "checkUpdates": "Verificar atualizações",
+    "columns": {
+      "name": "Nome",
+      "location": "Local",
+      "installed": "Instalado",
+      "version": "Versão",
+      "actions": "Ações"
+    },
+    "errors": {
+      "offlineCheck": "Você precisa de uma conexão com a internet para verificar atualizações.",
+      "checkFailed": "Falha ao verificar atualizações: {{error}}",
+      "offlineInstall": "Você precisa de uma conexão com a internet para instalar serviços.",
+      "installFailed": "Falha ao instalar o serviço: {{error}}",
+      "reinstallFailed": "Falha ao forçar a reinstalação do serviço: {{error}}",
+      "updateFailed": "Falha ao atualizar o serviço: {{error}}",
+      "unknown": "Erro desconhecido",
+      "startFailed": "Falha ao iniciar o serviço: {{error}}",
+      "stopFailed": "Falha ao parar o serviço: {{error}}",
+      "restartFailed": "Falha ao reiniciar o serviço: {{error}}",
+      "dispatchFailed": "Falha ao disparar a verificação de atualizações"
+    },
+    "installModal": {
+      "title": "Instalar serviço?",
+      "confirm": "Instalar",
+      "body": "Tem certeza de que deseja instalar {{name}}? Isso iniciará o serviço e o disponibilizará na sua instância do Project NOMAD. Pode levar algum tempo para ser concluído."
+    },
+    "forceReinstall": {
+      "title": "Forçar reinstalação?",
+      "button": "Forçar reinstalação",
+      "body": "Tem certeza de que deseja forçar a reinstalação de {{name}}? Isso <strong>APAGARÁ TODOS OS DADOS</strong> deste serviço e não pode ser desfeito. Faça isso somente se o serviço estiver com defeito e as outras etapas de solução de problemas tiverem falhado."
+    },
+    "affectModal": {
+      "stopTitle": "Parar serviço?",
+      "startTitle": "Iniciar serviço?",
+      "stop": "Parar",
+      "start": "Iniciar",
+      "stopBody": "Tem certeza de que deseja parar {{name}}?",
+      "startBody": "Tem certeza de que deseja iniciar {{name}}?"
+    },
+    "restartModal": {
+      "title": "Reiniciar serviço?",
+      "button": "Reiniciar",
+      "body": "Tem certeza de que deseja reiniciar {{name}}?"
+    },
+    "install": "Instalar",
+    "open": "Abrir",
+    "update": "Atualizar",
+    "updating": "Atualizando..."
+  },
+  "updateModal": {
+    "title": "Atualizar serviço",
+    "confirm": "Atualizar",
+    "body": "Atualizar <strong>{{name}}</strong> de <code>{{from}}</code> para <code>{{to}}</code>?",
+    "preserved": "Seus dados e sua configuração serão preservados durante a atualização.",
+    "viewReleaseNotes": "Ver notas da versão",
+    "showVersions": "Mostrar versões disponíveis",
+    "hideVersions": "Ocultar versões disponíveis",
+    "loadingVersions": "Carregando versões...",
+    "noVersions": "Nenhuma outra versão disponível",
+    "latest": "Mais recente",
+    "releaseNotes": "Notas da versão",
+    "majorWarning": "Não é recomendável atualizar para uma nova versão principal (por exemplo, 1.8.2 → 2.0.0) sem antes verificar a compatibilidade com a sua configuração atual. Sempre leia as notas da versão e, se possível, teste em um ambiente de homologação.",
+    "loadFailed": "Falha ao carregar as versões disponíveis"
+  },
+  "activity": {
+    "title": "Atividade de instalação"
+  },
+  "downloads": {
+    "title": "Downloads de modelos ativos",
+    "empty": "Nenhum download de modelo ativo",
+    "cancelTitle": "Cancelar download",
+    "downloading": "Baixando...",
+    "cancelModal": {
+      "title": "Cancelar download?",
+      "confirm": "Cancelar download",
+      "cancel": "Continuar baixando",
+      "stop": "Parar de baixar <model>{{model}}</model>?",
+      "note": "Os dados já baixados permanecerão no disco. Se você baixar este modelo novamente mais tarde, o download continuará de onde parou, em vez de recomeçar."
+    }
+  }
+}

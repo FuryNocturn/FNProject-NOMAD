@@ -1,0 +1,216 @@
+{
+  "models": {
+    "headTitle": "Einstellungen für {{name}}",
+    "intro": "Verwalte ganz einfach die Einstellungen und installierten Modelle von {{name}}. Wir empfehlen, zunächst mit kleineren Modellen zu beginnen, um zu sehen, wie sie auf deinem System laufen, bevor du zu größeren wechselst.",
+    "depsMissing": "Die Abhängigkeiten von {{name}} sind nicht installiert. Bitte installiere sie, um KI-Modelle zu verwalten.",
+    "sections": {
+      "settings": "Einstellungen",
+      "installed": "Installierte Modelle",
+      "remote": "Remote-Verbindung",
+      "models": "Modelle"
+    },
+    "toasts": {
+      "remoteConfigFailed": "Remote-Ollama konnte nicht konfiguriert werden.",
+      "remoteCleared": "Remote-Ollama-Konfiguration gelöscht.",
+      "remoteClearFailed": "Remote-Ollama konnte nicht zurückgesetzt werden.",
+      "listRefreshed": "Modellliste vom Remote-Server aktualisiert.",
+      "installStarted": "Modell-Download für {{model}} gestartet. Das kann eine Weile dauern.",
+      "installFailed": "Beim Installieren des Modells {{model}} ist ein Fehler aufgetreten. Bitte versuche es erneut.",
+      "deleted": "Modell gelöscht: {{model}}.",
+      "deleteFailed": "Beim Löschen des Modells {{model}} ist ein Fehler aufgetreten. Bitte versuche es erneut.",
+      "settingUpdated": "Einstellung erfolgreich aktualisiert.",
+      "settingFailed": "Beim Aktualisieren der Einstellung ist ein Fehler aufgetreten. Bitte versuche es erneut."
+    },
+    "deleteModal": {
+      "title": "Modell löschen?",
+      "confirm": "Löschen",
+      "body": "Möchtest du dieses Modell wirklich löschen? Du musst es erneut herunterladen, wenn du es künftig verwenden möchtest."
+    },
+    "contextWindowOptions": {
+      "4096": "4K Tokens",
+      "8192": "8K Tokens",
+      "16384": "16K Tokens",
+      "32768": "32K Tokens",
+      "65536": "64K Tokens",
+      "131072": "128K Tokens",
+      "auto": "Automatisch (empfohlen)"
+    },
+    "relevancePresets": {
+      "off": "Aus – alle abgerufenen Textstellen verwenden",
+      "lenient": "Großzügig",
+      "balanced": "Ausgewogen (empfohlen)",
+      "strict": "Streng"
+    },
+    "relevanceCustom": "Benutzerdefiniert ({{value}})",
+    "responseStyles": {
+      "auto": "Automatisch (empfohlen)",
+      "focused": "Fokussiert (sachlich, reproduzierbar)",
+      "creative": "Kreativ (abwechslungsreich, erkundend)",
+      "off": "Backend-Standardwerte (nichts senden)"
+    },
+    "tasksModelDefault": "Das Chat-Modell verwenden",
+    "tasksModelNotInstalled": "{{model}} (nicht installiert)",
+    "settings": {
+      "chatSuggestions": {
+        "label": "Chat-Vorschläge",
+        "description": "KI-generierte Gesprächseinstiege in der Chat-Oberfläche anzeigen"
+      },
+      "flashAttention": {
+        "label": "Flash Attention",
+        "description": "Aktiviert OLLAMA_FLASH_ATTENTION=1 für bessere Speichereffizienz. Deaktiviere es, wenn Instabilitäten auftreten. Wird nach einer Neuinstallation des KI-Assistenten wirksam."
+      },
+      "autoThinking": {
+        "label": "Denken automatisch verwenden, wenn ein Modell es unterstützt",
+        "description": "Legt den Standard für Modelle fest, die denken können. Im Chatfenster kannst du das Denken für einzelne Modelle weiterhin ein- oder ausschalten."
+      },
+      "rag": {
+        "label": "Abruf aus der Wissensdatenbank",
+        "description": "Durchsucht vor der Antwort deine Wissensdatenbank nach relevanten Dokumenten. Schalte dies aus, um Speicher zu sparen und Antworten zu beschleunigen, wenn deine Wissensdatenbank klein oder leer ist. Das ist derselbe Schalter wie im Chatfenster."
+      },
+      "assistantName": {
+        "label": "Name des Assistenten",
+        "help": "Gib deinem KI-Assistenten einen eigenen Namen, der in der Chat-Oberfläche und in anderen Bereichen der Anwendung verwendet wird.",
+        "placeholder": "KI-Assistent"
+      },
+      "tasksModel": {
+        "label": "Aufgabenmodell",
+        "help": "Kleines, schnelles Modell für Hintergrundaufgaben wie Chat-Titel und Vorschläge. Belasse es auf dem Chat-Modell, um das Modell zu verwenden, das der Chat gerade nutzt. Vermeide hier Reasoning-Modelle – sie sind bei kurzen, einfachen Aufgaben langsam."
+      },
+      "minRelevance": {
+        "label": "Relevanz der Wissensdatenbank",
+        "help": "Wie genau eine Textstelle aus der Wissensdatenbank zu deiner Frage passen muss, damit sie in einer Antwort verwendet wird. Strengere Einstellungen halten unpassende Textstellen heraus; ist sie zu streng, fallen auch wirklich nützliche weg. Erreicht nichts die Schwelle, antwortet der Assistent stattdessen aus seinem eigenen Wissen."
+      },
+      "relevanceCheck": {
+        "label": "Treffer der Wissensdatenbank doppelt prüfen",
+        "description": "Fragt vor der Antwort das Aufgabenmodell, ob die gefundenen Textstellen tatsächlich zu deiner Frage passen, und lässt sie weg (und unzitiert), wenn nicht. Hilft am meisten bei großen Bibliotheken wie Wikipedia oder Project Gutenberg, in denen immer etwas ähnlich aussieht. Erfordert ein leistungsfähiges Aufgabenmodell (etwa 8B Parameter oder größer); kleinere Modelle lehnen zu viele gute Treffer ab. Verursacht bei jeder Antwort eine kurze Verzögerung."
+      },
+      "responseStyle": {
+        "label": "Antwortstil",
+        "help": "Wie experimentierfreudig der Assistent bei der Wahl des nächsten Wortes ist. „Automatisch“ folgt den Empfehlungen des Modellautors, ergänzt den Rest und passt für die meisten Nutzer. „Fokussiert“ liefert kürzere, stabilere, besser reproduzierbare Antworten und ist die bessere Wahl zum Nachschlagen. „Kreativ“ variiert die Wortwahl stärker, auf Kosten der Genauigkeit."
+      },
+      "contextWindow": {
+        "label": "Kontextfenster",
+        "help": "Wie viel Unterhaltung und Kontext aus der Wissensdatenbank jede Antwort berücksichtigen kann. „Automatisch“ bestimmt dies pro Modell anhand seines trainierten Limits und deines verfügbaren Speichers. Ein gewählter Wert legt eine Obergrenze fest – er kann das Fenster verkleinern, um Speicher zu sparen, aber nie über das hinaus vergrößern, was ein Modell unterstützt."
+      },
+      "inEffect": "Aktuell wirksam: {{windows}}. Änderungen gelten für neue Unterhaltungen."
+    },
+    "installed": {
+      "empty": "Keine Modelle installiert. Durchsuche unten den Modellkatalog, um loszulegen.",
+      "model": "Modell",
+      "parameters": "Parameter",
+      "diskSize": "Größe auf dem Datenträger",
+      "action": "Aktion",
+      "na": "k. A.",
+      "delete": "Löschen"
+    },
+    "remote": {
+      "description": "Verbinde dich mit einem beliebigen OpenAI-kompatiblen API-Server – Ollama, LM Studio, llama.cpp und andere werden unterstützt.",
+      "ollamaHostNote": "Bei Remote-Ollama-Instanzen muss der Host mit <code>OLLAMA_HOST=0.0.0.0</code> gestartet werden.",
+      "urlLabel": "Remote-URL von Ollama/OpenAI-API",
+      "urlPlaceholder": "http://192.168.1.100:11434  (oder :1234 für OpenAI-API-kompatible Apps)",
+      "saveTest": "Speichern & testen",
+      "clear": "Zurücksetzen"
+    },
+    "catalog": {
+      "alertTitle": "Das Herunterladen von Modellen wird nur mit einem Ollama-Backend unterstützt.",
+      "alertMessage": "Wenn du mit einem OpenAI-API-Host (z. B. LM Studio) verbunden bist, lade Modelle bitte direkt in dieser Anwendung herunter.",
+      "searchPlaceholder": "Sprachmodelle suchen ..",
+      "refresh": "Modelle aktualisieren",
+      "name": "Name",
+      "estimatedPulls": "Geschätzte Downloads",
+      "lastUpdated": "Zuletzt aktualisiert",
+      "tag": "Tag",
+      "inputType": "Eingabetyp",
+      "contextSize": "Kontextgröße",
+      "modelSize": "Modellgröße",
+      "action": "Aktion",
+      "delete": "Löschen",
+      "install": "Installieren",
+      "loadMore": "Mehr laden"
+    }
+  },
+  "apps": {
+    "headTitle": "App-Einstellungen",
+    "title": "Apps",
+    "description": "Verwalte die Anwendungen, die in deiner Project-NOMAD-Instanz verfügbar sind. Nächtliche Update-Prüfungen erkennen automatisch, wenn neue Versionen dieser Apps verfügbar sind.",
+    "checkUpdates": "Nach Updates suchen",
+    "columns": {
+      "name": "Name",
+      "location": "Ort",
+      "installed": "Installiert",
+      "version": "Version",
+      "actions": "Aktionen"
+    },
+    "errors": {
+      "offlineCheck": "Zum Suchen nach Updates ist eine Internetverbindung erforderlich.",
+      "checkFailed": "Die Suche nach Updates ist fehlgeschlagen: {{error}}",
+      "offlineInstall": "Zum Installieren von Diensten ist eine Internetverbindung erforderlich.",
+      "installFailed": "Der Dienst konnte nicht installiert werden: {{error}}",
+      "reinstallFailed": "Die erzwungene Neuinstallation des Dienstes ist fehlgeschlagen: {{error}}",
+      "updateFailed": "Der Dienst konnte nicht aktualisiert werden: {{error}}",
+      "unknown": "Unbekannter Fehler",
+      "startFailed": "Der Dienst konnte nicht gestartet werden: {{error}}",
+      "stopFailed": "Der Dienst konnte nicht gestoppt werden: {{error}}",
+      "restartFailed": "Der Dienst konnte nicht neu gestartet werden: {{error}}",
+      "dispatchFailed": "Die Update-Prüfung konnte nicht gestartet werden"
+    },
+    "installModal": {
+      "title": "Dienst installieren?",
+      "confirm": "Installieren",
+      "body": "Möchtest du {{name}} wirklich installieren? Dadurch wird der Dienst gestartet und in deiner Project-NOMAD-Instanz verfügbar gemacht. Das kann eine Weile dauern."
+    },
+    "forceReinstall": {
+      "title": "Neuinstallation erzwingen?",
+      "button": "Neuinstallation erzwingen",
+      "body": "Möchtest du die Neuinstallation von {{name}} wirklich erzwingen? Dadurch werden <strong>ALLE DATEN</strong> dieses Dienstes <strong>GELÖSCHT</strong>, und das kann nicht rückgängig gemacht werden. Tu dies nur, wenn der Dienst nicht richtig funktioniert und andere Schritte zur Fehlerbehebung fehlgeschlagen sind."
+    },
+    "affectModal": {
+      "stopTitle": "Dienst stoppen?",
+      "startTitle": "Dienst starten?",
+      "stop": "Stoppen",
+      "start": "Starten",
+      "stopBody": "Möchtest du {{name}} wirklich stoppen?",
+      "startBody": "Möchtest du {{name}} wirklich starten?"
+    },
+    "restartModal": {
+      "title": "Dienst neu starten?",
+      "button": "Neu starten",
+      "body": "Möchtest du {{name}} wirklich neu starten?"
+    },
+    "install": "Installieren",
+    "open": "Öffnen",
+    "update": "Aktualisieren",
+    "updating": "Wird aktualisiert ..."
+  },
+  "updateModal": {
+    "title": "Dienst aktualisieren",
+    "confirm": "Aktualisieren",
+    "body": "<strong>{{name}}</strong> von <code>{{from}}</code> auf <code>{{to}}</code> aktualisieren?",
+    "preserved": "Deine Daten und Konfiguration bleiben bei der Aktualisierung erhalten.",
+    "viewReleaseNotes": "Versionshinweise ansehen",
+    "showVersions": "Verfügbare Versionen anzeigen",
+    "hideVersions": "Verfügbare Versionen ausblenden",
+    "loadingVersions": "Versionen werden geladen ...",
+    "noVersions": "Keine weiteren Versionen verfügbar",
+    "latest": "Neueste",
+    "releaseNotes": "Versionshinweise",
+    "majorWarning": "Ein Upgrade auf eine neue Hauptversion (z. B. 1.8.2 → 2.0.0) wird nicht empfohlen, sofern du die Kompatibilität mit deiner aktuellen Konfiguration nicht geprüft hast. Lies immer die Versionshinweise und teste nach Möglichkeit in einer Testumgebung.",
+    "loadFailed": "Die verfügbaren Versionen konnten nicht geladen werden"
+  },
+  "activity": {
+    "title": "Installationsaktivität"
+  },
+  "downloads": {
+    "title": "Aktive Modell-Downloads",
+    "empty": "Keine aktiven Modell-Downloads",
+    "cancelTitle": "Download abbrechen",
+    "downloading": "Wird heruntergeladen ...",
+    "cancelModal": {
+      "title": "Download abbrechen?",
+      "confirm": "Download abbrechen",
+      "cancel": "Weiter herunterladen",
+      "stop": "Download von <model>{{model}}</model> stoppen?",
+      "note": "Bereits heruntergeladene Daten bleiben auf dem Datenträger. Wenn du dieses Modell später erneut herunterlädst, wird dort fortgesetzt, wo es aufgehört hat, statt von vorn zu beginnen."
+    }
+  }
+}

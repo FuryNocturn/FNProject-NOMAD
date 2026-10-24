@@ -1,6 +1,6 @@
 {
   "zim": {
-    "headTitle": "Content Manager | Project NOMAD",
+    "headTitle": "Content Manager",
     "title": "Content Manager",
     "subtitle": "Manage your stored content files.",
     "hideUploader": "Hide Uploader",
@@ -33,7 +33,7 @@
     "onlyOneWikipedia": "Only one Wikipedia file can be uploaded at a time"
   },
   "explorer": {
-    "headTitle": "Content Explorer | Project NOMAD",
+    "headTitle": "Content Explorer",
     "title": "Content Explorer",
     "subtitle": "Browse and download content for offline reading!",
     "offline": "No internet connection. You may not be able to download files.",

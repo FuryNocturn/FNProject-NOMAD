@@ -1,0 +1,156 @@
+{
+  "headTitle": "かんたんセットアップウィザード",
+  "offline": {
+    "title": "インターネットに接続されていません",
+    "message": "続行するにはインターネット接続が必要です。インターネットに接続してから、もう一度お試しください。"
+  },
+  "steps": {
+    "apps": "アプリ",
+    "maps": "地図",
+    "content": "コンテンツ",
+    "creatorPacks": "クリエイターパック",
+    "ai": "AI",
+    "review": "確認"
+  },
+  "progress": "進行状況",
+  "capabilities": {
+    "information": {
+      "name": "情報ライブラリ",
+      "description": "Wikipedia、医療リファレンス、ハウツーガイド、百科事典にオフラインでアクセス",
+      "feature1": "Wikipedia 全体をオフラインで利用",
+      "feature2": "医療リファレンスと応急手当ガイド",
+      "feature3": "DIY 修理ガイドとハウツーコンテンツ",
+      "feature4": "Project Gutenberg の書籍と文学作品"
+    },
+    "education": {
+      "name": "教育プラットフォーム",
+      "description": "動画コースや演習を備えたインタラクティブな学習プラットフォーム",
+      "feature1": "Khan Academy の数学・理科コース",
+      "feature2": "K-12 のカリキュラムコンテンツ",
+      "feature3": "インタラクティブな演習とクイズ",
+      "feature4": "学習者の進捗管理"
+    },
+    "ai": {
+      "description": "お使いのハードウェア上だけで動作するローカル AI チャット - インターネット接続は不要です",
+      "feature1": "会話がデバイスの外に出ないプライベートなやり取り",
+      "feature2": "セットアップ後はインターネット接続が不要",
+      "feature3": "質問、文章作成の支援、アイデア出しができます",
+      "feature4": "ローカル AI モデルで自分のハードウェア上で動作"
+    },
+    "installed": "インストール済み",
+    "poweredBy": "Powered by {{name}}"
+  },
+  "step1": {
+    "title": "NOMAD で何をしたいですか?",
+    "subtitle": "必要な機能を選択してください。後からいつでも追加できます。",
+    "allInstalled": "利用可能な機能はすべてインストール済みです!",
+    "manageApps": "アプリを管理",
+    "coreCapabilities": "主要機能",
+    "useRemoteOllama": "リモートの Ollama インスタンスを使用",
+    "moreApps": {
+      "title": "他のアプリをお探しですか?",
+      "description": "メモ、データツール、アドオンアプリの全カタログは、Supply Depot からいつでも利用できます。",
+      "button": "Supply Depot を開く"
+    },
+    "confirmDisableAi": "AI をオフにすると、選択した AI モデル、インデックスのポリシー、リモート Ollama の設定が破棄されます。続行しますか?"
+  },
+  "step2": {
+    "title": "地図の地域を選択",
+    "subtitle": "オフラインで使用するためにダウンロードする地図地域のコレクションを選択してください。後からいつでも他の地域をダウンロードできます。",
+    "hint": "特定の国だけが必要ですか?それとも世界全体ですか?個別の国や全世界の地図は、<link>地図管理</link>からいつでもインストールできます。",
+    "empty": "現在利用できる地図コレクションはありません。"
+  },
+  "step3": {
+    "title": "コンテンツを選択",
+    "subtitleInformation": "オフラインの知識として使うコンテンツカテゴリを選択してください。",
+    "subtitleOther": "選択した機能のコンテンツを設定します。",
+    "additionalContent": "追加コンテンツ",
+    "additionalContentHint": "オフラインの参考資料として厳選されたコレクション",
+    "noContent": "コンテンツを必要とする機能が選択されていません。この手順をスキップするか、戻ってコンテンツが必要な機能を選択してください。"
+  },
+  "creatorPacks": {
+    "title": "クリエイターパックを導入",
+    "subtitle": "クリエイターのブランド動画コレクションを、Kiwix でのオフライン視聴用にダウンロードします。",
+    "empty": "現在利用できるクリエイターパックはありません。"
+  },
+  "ai": {
+    "title": "{{name}} を設定",
+    "subtitle": "ダウンロードするモデルを選択し、{{name}} が新しいコンテンツをどのように扱うかを設定します。",
+    "modelsTitle": "AI モデル",
+    "modelsHint": "オフライン AI 用にダウンロードするモデルを選択してください",
+    "remoteTitle": "リモートの Ollama を選択中",
+    "remoteMessage": "モデルはリモートマシン上で管理されます。セットアップ後に、設定 > AI アシスタントからモデルを追加できます。ただし、これは Ollama を使用している場合のみ対応しており、LM Studio やその他の OpenAI API ソフトウェアでは利用できません。",
+    "size": "サイズ: {{size}}",
+    "supportsImages": "画像対応",
+    "noModels": "現在利用できる推奨 AI モデルはありません。",
+    "autoIndexTitle": "{{name}} 用に新しいコンテンツを自動でインデックスしますか?",
+    "autoIndexDescription": "新しい ZIM、ドキュメント、厳選コンテンツを追加したとき、{{name}} が質問への回答時に検索できるよう自動的にインデックスしますか?",
+    "always": "はい、常に",
+    "manual": "先に確認する",
+    "changeLater": "この設定は、AI チャット内のナレッジベースパネルからいつでも変更できます。"
+  },
+  "review": {
+    "title": "選択内容の確認",
+    "subtitle": "セットアップを開始する前に、選択内容を確認してください。",
+    "noSelectionsTitle": "何も選択されていません",
+    "noSelectionsMessage": "インストールまたはダウンロードする項目が選択されていません。戻って選択するか、ホームページに戻ってください。",
+    "capabilities": "インストールする機能",
+    "mapCollections": "ダウンロードする地図コレクション ({{total}})",
+    "creatorPacks": "インストールするクリエイターパック ({{total}})",
+    "contentCategories": "コンテンツカテゴリ ({{total}})",
+    "files_one": "({{count}} 個のファイル)",
+    "files_other": "({{count}} 個のファイル)",
+    "wikipedia": "Wikipedia",
+    "noDownload": "ダウンロードなし",
+    "aiModels": "ダウンロードする AI モデル ({{total}})",
+    "autoIndexSetting": "自動インデックスの設定",
+    "autoIndexAlways": "新しいコンテンツは到着次第<strong>自動的にインデックス</strong>され、{{name}} が検索できるようになります。",
+    "autoIndexManual": "新しいコンテンツは、ナレッジベースパネルで<strong>あなたが許可するまで待機</strong>し、その後 {{name}} がインデックスします。",
+    "readyTitle": "開始の準備ができました",
+    "readyMessage": "「セットアップを完了」をクリックすると、アプリのインストールとコンテンツのダウンロードが始まります。インターネット接続の状況やダウンロードのサイズによっては、時間がかかる場合があります。"
+  },
+  "footer": {
+    "capabilities_one": "機能 {{count}} 件",
+    "capabilities_other": "機能 {{count}} 件",
+    "mapRegions_one": "地図地域 {{count}} 件",
+    "mapRegions_other": "地図地域 {{count}} 件",
+    "categories_one": "コンテンツカテゴリ {{count}} 件",
+    "categories_other": "コンテンツカテゴリ {{count}} 件",
+    "creatorPacks_one": "クリエイターパック {{count}} 件",
+    "creatorPacks_other": "クリエイターパック {{count}} 件",
+    "aiModels_one": "AI モデル {{count}} 件",
+    "aiModels_other": "AI モデル {{count}} 件",
+    "summary": "{{capabilities}}、{{maps}}、{{categories}}、{{aiModels}}を選択中",
+    "summaryWithPacks": "{{capabilities}}、{{maps}}、{{categories}}、{{packs}}、{{aiModels}}を選択中",
+    "back": "戻る",
+    "next": "次へ",
+    "cancel": "キャンセルしてホームへ",
+    "complete": "セットアップを完了"
+  },
+  "notifications": {
+    "needInternet": "セットアップを完了するには、インターネットに接続している必要があります。",
+    "remoteFailed": "リモートの Ollama を設定できませんでした。",
+    "completed": "セットアップウィザードが完了しました!選択内容を処理しています。",
+    "error": "セットアップ中にエラーが発生しました。一部の項目が処理されていない可能性があります。"
+  },
+  "complete": {
+    "headTitle": "かんたんセットアップウィザード完了",
+    "offlineMessage": "インターネットに接続されていないようです。アプリのインストールとコンテンツのダウンロードにはインターネット接続が必要です。",
+    "activityTitle": "アプリのインストール状況",
+    "backgroundTitle": "バックグラウンドで実行中",
+    "backgroundMessage": "このページはいつ離れても構いません。アプリのインストールとダウンロードはバックグラウンドで続行されます。なお、情報ライブラリ (インストールしている場合) は、最初のダウンロードがすべて完了するまで利用できない場合があります。",
+    "goHome": "ホームへ移動"
+  },
+  "storage": {
+    "title": "ストレージ",
+    "selectedInline": "(+{{size}} を選択中)",
+    "current": "現在 ({{size}})",
+    "selected": "選択分 (+{{size}})",
+    "exceeds": "空き容量を {{size}} 超えています",
+    "remaining": "{{size}} が空きとして残ります"
+  },
+  "disk": {
+    "nasStorage": "NAS ストレージ",
+    "unknown": "不明"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "title": "Настройки",
+  "supplyDepot": "Supply Depot",
+  "benchmark": "Тест производительности",
+  "contentExplorer": "Обозреватель контента",
+  "contentManager": "Менеджер контента",
+  "creatorPacks": "Наборы авторов",
+  "mapsManager": "Менеджер карт",
+  "serviceLogs": "Журналы и метрики служб",
+  "checkForUpdates": "Проверить обновления",
+  "system": "Система",
+  "advanced": "Дополнительно",
+  "apiReference": "Справочник API",
+  "support": "Поддержать проект",
+  "legal": "Правовая информация"
+}

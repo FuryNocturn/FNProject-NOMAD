@@ -1,0 +1,73 @@
+{
+  "page": {
+    "headTitle": "{{name}}"
+  },
+  "main": {
+    "clearHistoryTitle": "Effacer tout l'historique des discussions ?",
+    "clearHistoryBody": "Voulez-vous vraiment supprimer toutes les sessions de discussion ? Cette action est irréversible et toutes les conversations seront définitivement supprimées.",
+    "clearAll": "Tout effacer",
+    "noResponse": "Désolé, je n'ai pas pu générer de réponse.",
+    "requestError": "Désolé, une erreur s'est produite lors du traitement de votre demande. Veuillez réessayer.",
+    "startError": "Désolé, une erreur s'est produite au démarrage de cette discussion. Veuillez réessayer.",
+    "newChat": "Nouvelle discussion",
+    "switchTitle": "Passer à {{model}} ?",
+    "switchConfirm": "Changer et nouvelle discussion",
+    "switchBody": "Passer à <strong>{{model}}</strong> démarrera une nouvelle discussion. Votre conversation actuelle reste disponible dans la barre latérale.",
+    "closeSidebar": "Fermer la barre latérale des conversations",
+    "openSidebar": "Ouvrir la barre latérale des conversations",
+    "remoteDisconnected": "Distant déconnecté",
+    "remoteConnected": "Distant connecté",
+    "searchIn": "Rechercher dans :",
+    "all": "Tout",
+    "model": "Modèle :",
+    "loadingModels": "Chargement des modèles...",
+    "noModels": "Aucun modèle installé",
+    "knowledgeBase": "Base de connaissances :",
+    "knowledgeBaseTooltip": "Lorsque cette option est activée, l'assistant recherche des documents pertinents dans votre base de connaissances avant de répondre. La désactiver est plus rapide et moins gourmand en ressources, ce qui aide lorsque votre base de connaissances est petite ou vide. Il s'agit du même réglage que dans les paramètres de l'Assistant IA.",
+    "thinking": "Réflexion :",
+    "thinkingTooltip": "Lorsque cette option est activée, ce modèle déroule son raisonnement avant de répondre. Plus lent, mais souvent meilleur sur les questions délicates. Votre choix est mémorisé pour ce modèle ; la valeur par défaut des autres modèles se définit dans les paramètres de l'Assistant IA.",
+    "closeChat": "Fermer la discussion"
+  },
+  "interface": {
+    "tooManyImages": "Vous pouvez joindre jusqu'à {{max}} images.",
+    "unsupportedImage": "{{name}} n'est pas pris en charge. Utilisez JPEG, PNG ou WebP.",
+    "imageTooLarge": "{{name}} dépasse la limite de 8 Mo par image.",
+    "onlyFirstAttached_one": "Seule la première image sélectionnée a été jointe.",
+    "onlyFirstAttached_other": "Seules les {{count}} premières images sélectionnées ont été jointes.",
+    "startTitle": "Démarrer une conversation",
+    "startBody": "Interagissez directement avec vos modèles de langage installés depuis le Centre de commande.",
+    "suggestions": "Suggestions :",
+    "thinking": "Réflexion",
+    "inspiration": "Besoin d'inspiration ? Activez les suggestions de discussion dans les paramètres pour commencer avec des exemples de requêtes.",
+    "attachedImages": "Images jointes",
+    "removeImage": "Retirer {{name}}",
+    "attachImages": "Joindre des images",
+    "placeholder": "Écrivez votre message à {{name}}... (Maj+Entrée pour un saut de ligne)"
+  },
+  "bubble": {
+    "reasoning": "Raisonnement",
+    "thoughtFor": "Réflexion de {{seconds}} s",
+    "truncated": "Cette réponse a atteint la limite de longueur et a été coupée.",
+    "continue": "Continuer",
+    "sources": "Sources"
+  },
+  "sidebar": {
+    "ariaLabel": "Conversations de discussion",
+    "newChat": "Nouvelle discussion",
+    "noChats": "Aucune discussion précédente",
+    "logoAlt": "Logo de Project NOMAD",
+    "openFullChat": "Ouvrir la discussion complète",
+    "backToHome": "Retour à l'accueil",
+    "modelsSettings": "Modèles et paramètres",
+    "knowledgeBase": "Base de connaissances",
+    "clearHistory": "Effacer l'historique"
+  },
+  "button": {
+    "open": "Ouvrir la discussion"
+  },
+  "vision": {
+    "temporary": "Les images sont envoyées uniquement avec cette requête. Elles ne sont pas enregistrées et disparaîtront après leur envoi ou le rechargement de cette page.",
+    "unsupported": "Ce modèle ne peut pas utiliser d'images. Choisissez un modèle marqué « Prend en charge les images » dans Modèles et paramètres.",
+    "unknown": "NOMAD ne peut pas confirmer si ce modèle accepte les images. Vous pouvez essayer d'envoyer une image, mais la requête échouera si le modèle ne gère que le texte."
+  }
+}

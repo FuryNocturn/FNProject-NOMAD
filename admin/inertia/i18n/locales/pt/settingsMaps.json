@@ -1,0 +1,102 @@
+{
+  "page": {
+    "headTitle": "Gerenciador de mapas",
+    "title": "Gerenciador de mapas",
+    "subtitle": "Gerencie seus arquivos de mapa armazenados e explore novas regiões!",
+    "baseAssetsMissing": "Os recursos do mapa base não foram instalados. Baixe-os primeiro para habilitar a funcionalidade de mapas.",
+    "downloadBaseAssets": "Baixar recursos base",
+    "worldBasemapMissingTitle": "Mapa base mundial não baixado",
+    "worldBasemapMissingMessage": "O mapa base mundial de baixo zoom (~15 MB) ainda não foi baixado, então o mapa aparece em branco fora das regiões que você baixou. Conecte este NOMAD à internet e baixe-o uma vez para uso offline.",
+    "downloadBaseMap": "Baixar mapa base",
+    "globalInstalledTitle": "Mapa global instalado",
+    "globalInstalledMessage": "Sua versão do mapa global de {{date}} ({{size}}) está armazenada localmente e pronta para uso offline.",
+    "downloadLatestBuild": "Baixar a versão mais recente",
+    "globalAvailableTitle": "Cobertura de mapa global disponível",
+    "globalAvailableMessage": "Baixe um mapa mundial completo do Protomaps ({{size}}, versão de {{date}}). É um arquivo grande, mas cobre o planeta inteiro — sem precisar baixar regiões individuais.",
+    "downloadGlobalMap": "Baixar mapa global",
+    "countryAlertTitle": "Baixar por país ou região",
+    "countryAlertMessage": "Escolha os países de que você realmente precisa — de um único país a um continente inteiro — e baixaremos apenas esses blocos (tiles) do arquivo global do Protomaps. Muito menor que o mapa global completo de 125 GB.",
+    "chooseCountries": "Escolher países",
+    "curatedRegions": "Regiões de mapa selecionadas",
+    "forceRefresh": "Forçar atualização das coleções",
+    "noCollections": "Nenhuma coleção selecionada disponível.",
+    "storedFiles": "Arquivos de mapa armazenados",
+    "downloadCustom": "Baixar um arquivo de mapa personalizado",
+    "columnName": "Nome",
+    "columnActions": "Ações",
+    "delete": "Excluir",
+    "downloadMapFileTitle": "Baixar arquivo de mapa",
+    "suggestedUrl": "ex.: https://github.com/Crosstalk-Solutions/project-nomad-maps/raw/refs/heads/master/pmtiles/california.pmtiles"
+  },
+  "confirmDelete": {
+    "title": "Confirmar exclusão?",
+    "message": "Tem certeza de que deseja excluir {{name}}? Esta ação não pode ser desfeita.",
+    "confirm": "Excluir"
+  },
+  "confirmDownload": {
+    "title": "Confirmar download?",
+    "message": "Tem certeza de que deseja baixar <strong>{{name}}</strong>? Pode levar algum tempo até que fique disponível, dependendo do tamanho do arquivo e da sua conexão com a internet.",
+    "confirm": "Baixar"
+  },
+  "confirmGlobal": {
+    "title": "Baixar o mapa global?",
+    "message": "Isso baixará o mapa global completo do Protomaps ({{size}}, versão de {{date}}). Cobre o planeta inteiro, então você não precisará de arquivos de regiões individuais. Verifique se há espaço em disco suficiente.",
+    "confirm": "Baixar"
+  },
+  "notifications": {
+    "baseMapDownloaded": "Mapa base baixado com sucesso.",
+    "baseMapFailed": "Não foi possível baixar o mapa base. Conecte este NOMAD à internet e tente novamente.",
+    "globalQueued": "O download do mapa global foi enfileirado. É um arquivo grande (~125 GB) e pode demorar.",
+    "globalFailed": "Falha ao iniciar o download do mapa global. Tente novamente.",
+    "baseAssetsDownloaded": "Recursos do mapa base baixados com sucesso.",
+    "baseAssetsFailed": "Ocorreu um erro ao baixar os recursos do mapa base. Tente novamente.",
+    "baseAssetsUnknown": "Ocorreu um erro desconhecido ao baixar os recursos base.",
+    "collectionQueued": "O download da coleção \"{{name}}\" foi enfileirado.",
+    "collectionAlreadyInstalled": "Todos os recursos da coleção \"{{name}}\" já foram baixados.",
+    "downloadQueued": "O download foi enfileirado.",
+    "fileDeleted": "{{name}} foi excluído.",
+    "fileDeleteFailed": "Falha ao excluir {{name}}. Tente novamente.",
+    "countryDownloadQueued": "Download enfileirado. Acompanhe o progresso abaixo.",
+    "manifestsRefreshed": "Coleções de mapas atualizadas com sucesso."
+  },
+  "downloadUrl": {
+    "description": "Insira a URL do arquivo de região de mapa que você deseja baixar. A URL deve estar acessível publicamente e terminar em .pmtiles. Será executada uma verificação prévia para confirmar a disponibilidade, o tipo e o tamanho aproximado do arquivo.",
+    "placeholder": "Insira a URL de download...",
+    "confirm": "Baixar",
+    "running": "Executando verificação prévia da URL: {{url}}",
+    "unknownError": "Ocorreu um erro desconhecido durante a verificação prévia.",
+    "passed": "Verificação prévia aprovada. Nome do arquivo: {{filename}}, Tamanho: {{size}} MB",
+    "failed": "A verificação prévia falhou: {{error}}"
+  },
+  "card": {
+    "allDownloaded": "Todos os itens baixados",
+    "stats": "Itens: {{items}} | Tamanho: {{size}}"
+  },
+  "countryPicker": {
+    "title": "Baixar mapa por país ou região",
+    "confirm": "Iniciar download",
+    "searchPlaceholder_one": "Pesquisar {{count}} país...",
+    "searchPlaceholder_other": "Pesquisar {{count}} países...",
+    "clearAll": "Limpar tudo",
+    "quickPicks": "Seleções rápidas",
+    "noMatch": "Nenhum país corresponde a \"{{search}}\".",
+    "installed": "Instalado",
+    "installedTitle": "Já baixado — selecione novamente para atualizar com outro zoom",
+    "selectedCount_one": "{{count}} selecionado",
+    "selectedCount_other": "{{count}} selecionados",
+    "removeCountry": "Remover {{name}}",
+    "maxZoom": "Nível máximo de zoom: <code>{{zoom}}</code>",
+    "zoomWorld": "z{{zoom}} (mundo)",
+    "zoomStreet": "z{{zoom}} (rua)",
+    "zoomHint": "Zoom menor = arquivo menor, menos detalhes. O zoom 15 mostra ruas individuais; o zoom 10 mostra detalhes em nível de cidade.",
+    "pickAtLeastOne": "Escolha pelo menos um país antes de baixar.",
+    "stillEstimating": "Ainda estimando o tamanho — aguarde um instante.",
+    "estimateFailed": "Falha na estimativa",
+    "downloadFailed": "O download falhou",
+    "preflightNoData": "A verificação prévia não retornou dados",
+    "estimating": "Estimando o tamanho…",
+    "pickToEstimate": "Escolha pelo menos um país para estimar o tamanho.",
+    "result": "{{tiles}} tiles, ~{{size}}",
+    "sourceBuild": "(versão de origem {{date}})"
+  }
+}

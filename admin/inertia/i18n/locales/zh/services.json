@@ -1,0 +1,57 @@
+{
+  "nomad_kiwix_server": {
+    "name": "信息图书馆",
+    "description": "离线访问 Wikipedia、医学参考资料、操作指南和百科全书"
+  },
+  "nomad_ollama": {
+    "name": "AI 助手",
+    "description": "完全在您的硬件上运行的本地 AI 聊天 - 无需联网"
+  },
+  "nomad_cyberchef": {
+    "name": "数据工具",
+    "description": "数据编码、加密和分析的瑞士军刀"
+  },
+  "nomad_flatnotes": {
+    "name": "笔记",
+    "description": "使用本地存储的简易笔记应用"
+  },
+  "nomad_kolibri_2": {
+    "name": "教育平台（第二代）",
+    "description": "包含视频课程和练习的互动学习平台"
+  },
+  "nomad_stirling_pdf": {
+    "description": "本地部署的 PDF 处理工具 — 合并、拆分、压缩、转换等"
+  },
+  "nomad_filebrowser": {
+    "name": "文件浏览器",
+    "description": "基于网页的文件管理器 — 浏览、上传、下载并整理设备上的文件"
+  },
+  "nomad_calibreweb": {
+    "description": "基于网页的电子书阅读器，用于管理您的 Calibre 藏书库"
+  },
+  "nomad_it_tools": {
+    "description": "面向开发者的实用工具集 — UUID、哈希、编码、格式化工具等"
+  },
+  "nomad_excalidraw": {
+    "description": "用于绘制手绘风格图表的虚拟白板 — 完全离线可用"
+  },
+  "nomad_meshtastic_web": {
+    "description": "用于管理 Meshtastic 网状电台设备的浏览器客户端"
+  },
+  "nomad_meshcore_web": {
+    "description": "用于 MeshCore 网状电台设备的浏览器客户端"
+  },
+  "nomad_homebox": {
+    "description": "家庭物品清单与资产管理 — 追踪您拥有的一切"
+  },
+  "nomad_vaultwarden": {
+    "description": "轻量级、兼容 Bitwarden 的密码管理服务器 — 离线保护您的凭据安全"
+  },
+  "nomad_jellyfin": {
+    "description": "开源媒体服务器 — 串流播放您的视频、音乐和照片库"
+  },
+  "nomad_translate": {
+    "name": "翻译图书馆",
+    "description": "以其他语言阅读信息图书馆。离线机器翻译，仅用 CPU 即可运行"
+  }
+}

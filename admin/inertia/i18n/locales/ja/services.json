@@ -1,0 +1,57 @@
+{
+  "nomad_kiwix_server": {
+    "name": "情報ライブラリ",
+    "description": "Wikipedia、医療リファレンス、ハウツーガイド、百科事典にオフラインでアクセス"
+  },
+  "nomad_ollama": {
+    "name": "AI アシスタント",
+    "description": "お使いのハードウェア上だけで動作するローカル AI チャット - インターネット接続は不要です"
+  },
+  "nomad_cyberchef": {
+    "name": "データツール",
+    "description": "データのエンコード、暗号化、分析に使える万能ツール"
+  },
+  "nomad_flatnotes": {
+    "name": "メモ",
+    "description": "ローカルに保存するシンプルなメモアプリ"
+  },
+  "nomad_kolibri_2": {
+    "name": "教育プラットフォーム(第 2 世代)",
+    "description": "動画コースや演習を備えたインタラクティブな学習プラットフォーム"
+  },
+  "nomad_stirling_pdf": {
+    "description": "ローカルでホストされる PDF 操作ツール — 結合、分割、圧縮、変換などに対応"
+  },
+  "nomad_filebrowser": {
+    "name": "ファイルブラウザー",
+    "description": "Web ベースのファイルマネージャー — お使いのデバイス上のファイルを閲覧、アップロード、ダウンロード、整理できます"
+  },
+  "nomad_calibreweb": {
+    "description": "Calibre コレクション向けの Web ベースの電子書籍リーダー兼ライブラリ管理ツール"
+  },
+  "nomad_it_tools": {
+    "description": "開発者向けの便利なユーティリティ集 — UUID、ハッシュ、エンコード、フォーマッターなど"
+  },
+  "nomad_excalidraw": {
+    "description": "手描き風の図をスケッチできる仮想ホワイトボード — 完全にオフラインで動作します"
+  },
+  "nomad_meshtastic_web": {
+    "description": "Meshtastic メッシュ無線デバイスを管理するためのブラウザーベースのクライアント"
+  },
+  "nomad_meshcore_web": {
+    "description": "MeshCore メッシュ無線デバイス向けのブラウザーベースのクライアント"
+  },
+  "nomad_homebox": {
+    "description": "家庭の在庫・資産管理 — 所有するすべてのものを記録"
+  },
+  "nomad_vaultwarden": {
+    "description": "軽量な Bitwarden 互換のパスワード管理サーバー — 認証情報をオフラインで安全に保管"
+  },
+  "nomad_jellyfin": {
+    "description": "オープンソースのメディアサーバー — 動画、音楽、写真のライブラリをストリーミング"
+  },
+  "nomad_translate": {
+    "name": "翻訳ライブラリ",
+    "description": "情報ライブラリを別の言語で読めます。CPU 上でオフラインで動作する機械翻訳です"
+  }
+}

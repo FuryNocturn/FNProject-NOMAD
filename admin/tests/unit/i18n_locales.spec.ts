@@ -26,21 +26,50 @@ function loadLocale(lang: string): Record<string, unknown> {
 
 const english = flattenKeys(loadLocale('en'))
 
+// i18next plural keys: <base>_<CLDR category>. Languages need different categories
+// (ru: one/few/many/other, ja/zh: other only), so a translation may add variants en lacks.
+const PLURAL_SUFFIX = /_(zero|one|two|few|many|other)$/
+const pluralBase = (key: string) => key.replace(PLURAL_SUFFIX, '')
+const englishPluralBases = new Set(english.filter((k) => PLURAL_SUFFIX.test(k)).map(pluralBase))
+const get = (obj: any, key: string) => key.split('.').reduce((o, k) => o?.[k], obj)
+
+/** Plural categories a language actually uses for counts 0..100 (what the UI shows in practice). */
+function usedPluralCategories(lang: string): string[] {
+  const rules = new Intl.PluralRules(lang)
+  return [...new Set(Array.from({ length: 101 }, (_, n) => rules.select(n)))].sort()
+}
+
 for (const lang of readdirSync(LOCALES_DIR).filter((d) => d !== 'en')) {
   test(`${lang} has no keys that are missing from en`, () => {
     // en is the reference: a key only in a translation is a typo or dead text.
-    const extra = flattenKeys(loadLocale(lang)).filter((key) => !english.includes(key))
+    const extra = flattenKeys(loadLocale(lang)).filter(
+      (key) =>
+        !english.includes(key) && !(PLURAL_SUFFIX.test(key) && englishPluralBases.has(pluralBase(key)))
+    )
     assert.deepEqual(extra, [])
   })
 
   test(`${lang} keeps the same {{variables}} as en`, () => {
     const en = loadLocale('en')
     const other = loadLocale(lang)
-    const get = (obj: any, key: string) => key.split('.').reduce((o, k) => o?.[k], obj)
     const vars = (text: unknown) => String(text ?? '').match(/{{\w+}}/g)?.sort() ?? []
     for (const key of flattenKeys(other)) {
-      assert.deepEqual(vars(get(other, key)), vars(get(en, key)), `variables differ in ${key}`)
+      // A plural variant en doesn't have (e.g. ru _few) is compared with en's _other
+      const reference = get(en, key) ?? get(en, `${pluralBase(key)}_other`)
+      assert.deepEqual(vars(get(other, key)), vars(reference), `variables differ in ${key}`)
     }
+  })
+
+  test(`${lang} has every plural form it needs`, () => {
+    // A missing category makes i18next fall back to English for that count
+    const keys = new Set(flattenKeys(loadLocale(lang)))
+    const needed = usedPluralCategories(lang)
+    const missing = [...englishPluralBases].flatMap((base) =>
+      [...keys].some((k) => pluralBase(k) === base && PLURAL_SUFFIX.test(k))
+        ? needed.filter((cat) => !keys.has(`${base}_${cat}`)).map((cat) => `${base}_${cat}`)
+        : []
+    )
+    assert.deepEqual(missing, [])
   })
 }
 

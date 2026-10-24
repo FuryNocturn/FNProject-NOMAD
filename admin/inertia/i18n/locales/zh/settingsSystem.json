@@ -1,0 +1,362 @@
+{
+  "common": {
+    "na": "不适用",
+    "moreInfo": "更多信息",
+    "save": "保存",
+    "saveSchedule": "保存计划",
+    "windowStart": "窗口开始",
+    "windowEnd": "窗口结束",
+    "localServerTime": "服务器本地时间",
+    "cooloffPeriod": "冷却期",
+    "updateWindow": "更新窗口：",
+    "lastRun": "上次运行：",
+    "lastError": "上次错误：",
+    "upToDate": "（已是最新）",
+    "insideWindow": "当前处于窗口内",
+    "outsideWindow": "当前处于窗口外",
+    "cooloff": {
+      "h24": "24 小时（1 天）",
+      "h48": "48 小时（2 天）",
+      "h72": "72 小时（3 天）",
+      "h168": "7 天"
+    }
+  },
+  "system": {
+    "title": "系统信息",
+    "subtitle": "实时监控与诊断 • 最后更新：{{time}} • 每 30 秒刷新一次数据",
+    "highMemory": {
+      "title": "检测到内存使用率过高",
+      "message": "系统内存使用率超过 90%。性能可能会下降。"
+    },
+    "resourceUsage": "资源使用情况",
+    "cpuUsage": "CPU 使用率",
+    "memoryUsage": "内存使用率",
+    "swapUsage": "交换空间使用率",
+    "cores_one": "{{count}} 核",
+    "cores_other": "{{count}} 核",
+    "systemDetails": "系统详情",
+    "os": {
+      "title": "操作系统",
+      "distribution": "发行版",
+      "kernel": "内核版本",
+      "architecture": "架构",
+      "hostname": "主机名",
+      "platform": "平台"
+    },
+    "processor": {
+      "title": "处理器",
+      "manufacturer": "制造商",
+      "brand": "品牌",
+      "cores": "核心数",
+      "physicalCores": "物理核心数",
+      "virtualization": "虚拟化",
+      "enabled": "已启用",
+      "disabled": "已禁用"
+    },
+    "aiAssistant": "AI 助手",
+    "graphics": {
+      "title": "显卡",
+      "model": "型号",
+      "vendor": "厂商",
+      "vram": "显存",
+      "modelN": "GPU {{n}} 型号",
+      "vendorN": "GPU {{n}} 厂商",
+      "vramN": "GPU {{n}} 显存"
+    },
+    "memoryAllocation": "内存分配",
+    "totalRam": "总内存",
+    "usedRam": "已用内存",
+    "availableRam": "可用内存",
+    "utilized": "已使用 {{percent}}%",
+    "storageDevices": "存储设备",
+    "storageNormal": "正常",
+    "storageWarning": "警告 - 使用率偏高",
+    "storageCritical": "严重 - 磁盘几乎已满",
+    "noStorage": "未检测到存储设备",
+    "systemStatus": "系统状态",
+    "uptime": "系统运行时间",
+    "cpuCores": "CPU 核心数"
+  },
+  "advanced": {
+    "pageTitle": "高级设置",
+    "title": "高级",
+    "intro": "面向运维人员的高级配置。这些设置是可选的 — 默认值适用于大多数部署。",
+    "connectivity": "连通性",
+    "connectivityDescription": "NOMAD 会定期检查是否能够访问互联网。默认情况下，它会探测 Cloudflare 的实用端点，并带有若干备用端点。如果您的网络屏蔽了默认端点，请在下方设置自定义端点。留空则使用内置默认值。",
+    "envOverrideTitle": "由环境变量管理",
+    "envOverrideMessage": "已设置环境变量 INTERNET_STATUS_TEST_URL，其优先于此设置。移除该环境变量后，即可在此处管理测试 URL。",
+    "testUrlLabel": "网络状态测试 URL",
+    "testUrlHelp": "用于检查连通性的单个 http(s) URL。任何 HTTP 响应都视为在线。",
+    "errorProtocol": "测试 URL 必须使用 http 或 https。",
+    "errorInvalid": "测试 URL 必须是有效的 URL（例如“https://example.com”）。",
+    "updated": "设置更新成功。",
+    "updateFailed": "更新设置时出错。请重试。"
+  },
+  "legal": {
+    "pageTitle": "法律声明",
+    "title": "法律声明",
+    "license": {
+      "title": "许可协议",
+      "copyright": "版权所有 2024-2026 Crosstalk Solutions, LLC",
+      "p1": "根据 Apache 许可证 2.0 版（“许可证”）授权；除非遵守该许可证，否则您不得使用此文件。您可以在以下网址获取许可证副本：",
+      "p2": "除非适用法律要求或书面同意，根据许可证分发的软件均按“原样”提供，不附带任何明示或暗示的保证或条件。有关许可证下的具体权限和限制，请参阅许可证。"
+    },
+    "thirdParty": {
+      "title": "第三方软件声明",
+      "intro": "Project NOMAD™ 集成了以下开源项目。我们感谢它们的开发者和社区：",
+      "kiwix": "- 离线 Wikipedia 和内容阅读器（GPL-3.0 许可证）",
+      "kolibri": "- Learning Equality 开发的离线学习平台（MIT 许可证）",
+      "ollama": "- 本地大语言模型运行时（MIT 许可证）",
+      "cyberchef": "- GCHQ 开发的数据分析和编码工具集（Apache 2.0 许可证）",
+      "flatnotes": "- 自托管笔记应用（MIT 许可证）",
+      "qdrant": "- 用于 AI 知识库的向量搜索引擎（Apache 2.0 许可证）"
+    },
+    "privacy": {
+      "title": "隐私声明",
+      "intro": "Project NOMAD 以隐私为核心原则进行设计：",
+      "telemetry": "<b>零遥测：</b>NOMAD 不会收集、传输或存储任何使用数据、分析数据或遥测数据。",
+      "localFirst": "<b>本地优先：</b>您的所有数据、下载的内容、AI 对话和笔记都保留在您的设备上。",
+      "noAccounts": "<b>无需账户：</b>默认情况下，NOMAD 无需用户账户或身份验证即可运行。",
+      "networkOptional": "<b>网络可选：</b>仅在下载内容或更新时才需要联网。所有已安装的功能均可完全离线运行。"
+    },
+    "content": {
+      "title": "内容免责声明",
+      "p1": "Project NOMAD 提供工具，用于下载和访问来自第三方来源的内容，包括 Wikipedia、Wikibooks、医学参考资料、教育平台以及其他公开可用的资源。",
+      "p2": "Crosstalk Solutions, LLC 不创建、控制、核实或保证任何第三方内容的准确性、完整性或可靠性。收录任何内容并不构成对其的认可。",
+      "p3": "用户有责任自行评估其下载和使用的任何内容是否恰当、准确。"
+    },
+    "medical": {
+      "title": "医疗和紧急情况信息免责声明",
+      "p1": "通过 NOMAD 提供的部分内容包括医学参考资料、急救指南和应急准备信息。这些内容仅供一般信息参考之用。",
+      "notSubstitute": "此类信息不能替代专业的医疗建议、诊断或治疗。",
+      "i1": "如对医疗状况有疑问，请务必咨询合格的医疗服务提供者。",
+      "i2": "切勿因为阅读了离线内容而无视专业医疗建议，或延误就医。",
+      "i3": "遇到医疗紧急情况时，如有条件，请立即拨打急救电话。",
+      "i4": "医学信息可能会过时。如有可能，请通过最新的专业来源核实关键信息。"
+    },
+    "storage": {
+      "title": "数据存储",
+      "intro": "与 Project NOMAD 相关的所有数据都存储在您设备本地：",
+      "installDir": "<b>安装目录：</b>/opt/project-nomad",
+      "downloaded": "<b>已下载的内容：</b>/opt/project-nomad/storage",
+      "appData": "<b>应用数据：</b>存储在本地系统的 Docker 卷中",
+      "outro": "您对自己的数据拥有完全控制权。卸载 NOMAD 或删除这些目录将永久移除所有相关数据。"
+    }
+  },
+  "support": {
+    "pageTitle": "支持本项目",
+    "title": "支持本项目",
+    "intro": "Project NOMAD 100% 免费且开源 — 无需订阅，没有付费墙，没有附加条件。如果您愿意帮助项目持续发展，以下是几种表达支持的方式。",
+    "coffee": {
+      "title": "请我们喝杯咖啡",
+      "description": "每一份贡献都有助于资助开发、服务器成本和 NOMAD 的新内容包。即使是小额捐赠也大有帮助。",
+      "button": "在 Ko-fi 上支持"
+    },
+    "rogue": {
+      "title": "家庭网络需要帮助？",
+      "bannerAlt": "Rogue Support — 征服您的家庭网络",
+      "description": "Rogue Support 是面向家庭用户的网络咨询服务。可以把它看作计算机网络领域的“优步” — 在您需要时提供专家帮助。",
+      "visit": "访问 Rogue.Support"
+    },
+    "other": {
+      "title": "其他帮助方式",
+      "starLink": "在 GitHub 上为项目加星",
+      "starText": "— 这能让更多人发现 NOMAD",
+      "issuesLink": "报告错误并提出功能建议",
+      "issuesText": "— 每一份反馈都会让 NOMAD 变得更好",
+      "share": "把 NOMAD 分享给可能用得上的人 — 口碑是最好的宣传",
+      "discordLink": "加入 Discord 社区",
+      "discordText": "— 来聊聊天、分享您的搭建成果、帮助其他用户"
+    }
+  },
+  "update": {
+    "pageTitle": "系统更新",
+    "title": "系统更新",
+    "subtitle": "让您的 Project NOMAD 实例保持最新，获取最新的功能和改进。",
+    "stage": {
+      "idle": "准备更新",
+      "starting": "正在开始更新",
+      "pulling": "正在拉取镜像",
+      "pulled": "镜像已拉取",
+      "recreating": "正在重新创建容器",
+      "complete": "更新完成",
+      "error": "更新失败"
+    },
+    "errors": {
+      "title": "更新失败",
+      "startFailed": "启动更新失败",
+      "logsFailed": "获取更新日志失败",
+      "checkFailed": "检查更新失败"
+    },
+    "restarting": {
+      "title": "容器正在重启",
+      "message": "管理容器正在重启。更新完成后，此页面将自动重新加载。"
+    },
+    "connectionLost": {
+      "title": "连接暂时中断（属正常现象）",
+      "message": "更新期间后端重启时，您可能会看到错误通知。这完全正常，在预期之内。连接很快就会恢复。"
+    },
+    "updateAvailable": "有可用更新",
+    "upToDate": "系统已是最新",
+    "newVersionAvailable": "您的 Project NOMAD 实例有新版本（{{version}}）可用。",
+    "runningLatest": "您的系统正在运行最新版本！",
+    "currentVersion": "当前版本",
+    "latestVersion": "最新版本",
+    "percentComplete": "已完成 {{progress}}%",
+    "startUpdate": "开始更新",
+    "noUpdateAvailable": "没有可用更新",
+    "checkAgain": "再次检查",
+    "whatHappens": "更新期间会发生什么？",
+    "steps": {
+      "pull": {
+        "title": "拉取最新镜像",
+        "description": "为所有核心容器下载最新的 Docker 镜像"
+      },
+      "recreate": {
+        "title": "重新创建容器",
+        "description": "安全地停止所有核心容器，并使用新镜像重新创建"
+      },
+      "reload": {
+        "title": "自动重新加载",
+        "description": "更新完成后，此页面将自动重新加载"
+      }
+    },
+    "viewLogs": "查看更新日志",
+    "backup": {
+      "title": "备份提醒",
+      "message": "虽然更新在设计上是安全的，但仍始终建议在继续之前备份所有重要数据。"
+    },
+    "downtime": {
+      "title": "短暂停机",
+      "message": "更新过程中，服务将短暂不可用。根据您的网络连接情况，通常需要 2-5 分钟。"
+    },
+    "earlyAccess": {
+      "title": "抢先体验",
+      "label": "启用抢先体验",
+      "description": "在候选发布版（RC）正式发布前接收这些版本。注意：RC 版本可能包含错误，不建议在对稳定性和数据完整性要求严格的环境中使用。"
+    },
+    "notify": {
+      "updateAvailable": "有可用更新：{{version}}",
+      "upToDate": "系统已是最新",
+      "settingUpdated": "设置更新成功。",
+      "settingFailed": "更新设置时出错。请重试。",
+      "subscribed": "已成功订阅发布说明！",
+      "subscribeFailed": "订阅失败：{{error}}",
+      "subscribeError": "订阅发布说明时出错：{{error}}",
+      "unknownError": "未知错误"
+    },
+    "subscribe": {
+      "heading": "想及时了解 Project NOMAD 的最新动态吗？订阅后，发布说明将直接发送到您的收件箱。可随时退订。",
+      "placeholder": "您的电子邮件地址",
+      "button": "订阅",
+      "privacy": "我们重视您的隐私。Project NOMAD 绝不会与第三方共享您的电子邮件，也不会向您发送垃圾邮件。"
+    },
+    "logs": {
+      "title": "更新日志",
+      "empty": "暂无日志...",
+      "close": "关闭"
+    }
+  },
+  "coreAuto": {
+    "title": "自动核心更新",
+    "disabledTitle": "自动核心更新已禁用",
+    "disabledDefault": "自动核心更新因多次失败而被禁用。",
+    "enable": "启用自动核心更新",
+    "description": "在您选定的窗口内自动安装次要版本和补丁更新。由于主版本可能带来破坏性变更，主版本始终需要手动更新。",
+    "cooloffHelp": "发布后的延迟时间",
+    "toggleFailed": "更新自动更新设置失败。",
+    "enabled": "自动更新已启用。",
+    "disabled": "自动更新已禁用。",
+    "saved": "自动更新计划已保存。",
+    "saveFailed": "保存自动更新计划失败。",
+    "statusLabel": "状态：",
+    "eligible": "有符合条件的更新可用：{{version}}",
+    "noEligible": "没有符合条件的更新 — 系统已是最新，或最新版本是主版本 / 仍在冷却期内。",
+    "inWindow": "当前处于窗口内",
+    "outOfWindow": "当前处于窗口外",
+    "lastCheck": "上次检查："
+  },
+  "appAuto": {
+    "title": "自动应用更新",
+    "enable": "启用自动应用更新",
+    "description": "为您已选择加入的应用自动安装次要版本和补丁更新（在 Supply Depot 中逐个切换各应用）。主版本始终需要手动更新。使用与上方核心计划相同的更新窗口和冷却期。",
+    "enabled": "应用自动更新已启用。",
+    "disabled": "应用自动更新已禁用。",
+    "failed": "更新应用自动更新设置失败。",
+    "summary": "{{start}}–{{end}}（{{window}}）；冷却期 {{hours}} 小时。",
+    "none": "尚未有应用选择加入。请在 Supply Depot 中为单个应用启用自动更新。"
+  },
+  "contentAuto": {
+    "title": "自动内容更新",
+    "disabledTitle": "自动内容更新已禁用",
+    "disabledDefault": "自动内容更新因多次失败而被禁用。",
+    "enable": "启用自动内容更新",
+    "description": "在您选定的窗口内，自动下载已安装的信息图书馆内容（ZIM 文件）和地图的较新版本。内容下载可能非常大，因此请设置每个窗口的数据上限，以限制一次拉取的数据量。我们建议每个更新窗口至少允许 0.5 GB，以确保大多数更新能够及时拉取；但如果您的带宽非常有限，且不介意跳过部分更新，也可以设置更低的上限（这些更新仍会显示在界面中，可手动更新）。如果某个更新在窗口内反复下载失败，将被自动禁用，需要手动干预才能重新启用。",
+    "cooloffHelp": "新版本出现后的延迟时间",
+    "dataCap": "数据上限 (GB)",
+    "dataCapHelp": "每个窗口。0 = 无限制",
+    "enabled": "自动内容更新已启用。",
+    "disabled": "自动内容更新已禁用。",
+    "toggleFailed": "更新内容自动更新设置失败。",
+    "invalidCap": "数据上限必须为 0 或正数 GB。",
+    "saved": "内容更新计划已保存。",
+    "saveFailed": "保存内容更新计划失败。",
+    "summaryUnlimited": "{{start}}–{{end}}（{{window}}）；冷却期 {{hours}} 小时；数据上限无限制。",
+    "summaryCapped": "{{start}}–{{end}}（{{window}}）；冷却期 {{hours}} 小时；数据上限 {{cap}}（本窗口已用 {{used}}）。",
+    "allUpToDate": "所有已安装的内容均为最新。检测到新版本时将显示在这里。",
+    "skipped": "已跳过 — 超出数据上限，请手动更新"
+  },
+  "contentUpdates": {
+    "title": "手动内容更新",
+    "description": "检查已安装的 ZIM 文件和地图是否有较新版本可用。",
+    "check": "检查内容更新",
+    "checkFailed": "检查内容更新失败",
+    "issueTitle": "更新检查问题",
+    "allUpToDateTitle": "所有内容均为最新",
+    "allUpToDateMessage": "您已安装的所有内容均为最新可用版本。",
+    "available_one": "有 {{count}} 个可用更新",
+    "available_other": "有 {{count}} 个可用更新",
+    "updateAll": "全部更新（{{count}}）",
+    "colTitle": "标题",
+    "colType": "类型",
+    "colSize": "大小",
+    "colVersion": "版本",
+    "typeMap": "地图",
+    "update": "更新",
+    "started": "已开始更新 {{id}}",
+    "startFailed": "启动更新失败",
+    "startFailedFor": "启动 {{id}} 的更新失败",
+    "startedCount": "已开始 {{count}} 个更新",
+    "failedCount": "有 {{count}} 个更新无法启动",
+    "applyFailed": "应用更新失败",
+    "lastChecked": "上次检查：{{time}}"
+  },
+  "gpu": {
+    "reinstalled": "正在重新安装 {{name}} 以支持 GPU。此页面即将重新加载。",
+    "reinstallFailed": "重新安装失败：{{error}}",
+    "forceFailed": "强制重新安装失败",
+    "unknownError": "未知错误",
+    "reinstallTitle": "重新安装 {{name}}？",
+    "reinstall": "重新安装",
+    "reinstallBody": "这将重新创建启用了 GPU 支持的 {{name}} 容器。已下载的模型将被保留。重新安装期间，服务将短暂不可用。",
+    "amdUnsupported": "您的系统有 AMD GPU，但 {{name}} 仅在 CPU 上运行。重新安装无法解决此问题：该 GPU{{target}}不在 ROCm 支持列表中，需要设置 GFX 版本覆盖。",
+    "amdUnsupportedTarget": "（{{target}}）",
+    "amdMissing": "您的系统有 AMD GPU，但 {{name}} 无法访问它。AI 仅在 CPU 上运行，速度会慢得多。",
+    "nvidiaMissing": "您的系统有 NVIDIA GPU，但 {{name}} 无法访问它。AI 仅在 CPU 上运行，速度会慢得多。",
+    "alertTitle": "{{name}} 无法访问 GPU",
+    "fixOverride": "修复：设置 GFX 覆盖",
+    "fixReinstall": "修复：重新安装 {{name}}",
+    "saveFailed": "保存 GFX 覆盖失败：{{error}}",
+    "overrideTitle": "设置 AMD GFX 覆盖",
+    "saveAndReinstall": "保存并重新安装",
+    "overrideIntro": "ROCm 仅为固定列表中的 AMD 芯片提供 GPU 内核。不在该列表中的集成 Radeon GPU 将在 CPU 上运行，除非通过 HSA_OVERRIDE_GFX_VERSION 让 ROCm 将其视为受支持的芯片。",
+    "chip780": "Radeon 780M / 760M (gfx1103)：11.0.0",
+    "chip680": "Radeon 680M / 660M 及其他 RDNA 2 核显 (gfx1031 至 gfx1036)：10.3.0",
+    "detected": "检测到的 GPU：{{gpu}}。当前覆盖值：{{override}}。",
+    "detectedRecommended": "检测到的 GPU：{{gpu}}。当前覆盖值：{{override}}。此 GPU 的推荐值：{{value}}。",
+    "notReported": "Ollama 未报告",
+    "none": "无",
+    "overrideLabel": "GFX 版本覆盖",
+    "overrideHelp": "保存后将使用此覆盖值重新创建 {{name}} 容器。已下载的模型将被保留。"
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "page": {
+    "headTitle": "{{name}}"
+  },
+  "main": {
+    "clearHistoryTitle": "Limpar todo o histórico de chats?",
+    "clearHistoryBody": "Tem certeza de que deseja excluir todas as sessões de chat? Esta ação não pode ser desfeita e todas as conversas serão excluídas permanentemente.",
+    "clearAll": "Limpar tudo",
+    "noResponse": "Desculpe, não foi possível gerar uma resposta.",
+    "requestError": "Desculpe, ocorreu um erro ao processar sua solicitação. Tente novamente.",
+    "startError": "Desculpe, ocorreu um erro ao iniciar este chat. Tente novamente.",
+    "newChat": "Novo chat",
+    "switchTitle": "Mudar para {{model}}?",
+    "switchConfirm": "Mudar e iniciar novo chat",
+    "switchBody": "Mudar para <strong>{{model}}</strong> iniciará um novo chat. Sua conversa atual continuará disponível na barra lateral.",
+    "closeSidebar": "Fechar barra lateral de conversas",
+    "openSidebar": "Abrir barra lateral de conversas",
+    "remoteDisconnected": "Remoto desconectado",
+    "remoteConnected": "Remoto conectado",
+    "searchIn": "Pesquisar em:",
+    "all": "Todos",
+    "model": "Modelo:",
+    "loadingModels": "Carregando modelos...",
+    "noModels": "Nenhum modelo instalado",
+    "knowledgeBase": "Base de conhecimento:",
+    "knowledgeBaseTooltip": "Quando ativada, o assistente pesquisa na sua base de conhecimento por documentos relevantes antes de responder. Desativá-la é mais rápido e mais leve para o hardware, o que ajuda quando sua base de conhecimento é pequena ou está vazia. É a mesma configuração das configurações do Assistente de IA.",
+    "thinking": "Raciocínio:",
+    "thinkingTooltip": "Quando ativado, este modelo elabora seu raciocínio antes de responder. Fica mais lento, mas muitas vezes é melhor em perguntas difíceis. Sua escolha é lembrada para este modelo; o padrão para os outros modelos é definido nas configurações do Assistente de IA.",
+    "closeChat": "Fechar chat"
+  },
+  "interface": {
+    "tooManyImages": "Você pode anexar até {{max}} imagens.",
+    "unsupportedImage": "{{name}} não é compatível. Use JPEG, PNG ou WebP.",
+    "imageTooLarge": "{{name}} excede o limite de 8 MB por imagem.",
+    "onlyFirstAttached_one": "Somente a primeira imagem selecionada foi anexada.",
+    "onlyFirstAttached_other": "Somente as primeiras {{count}} imagens selecionadas foram anexadas.",
+    "startTitle": "Inicie uma conversa",
+    "startBody": "Interaja com seus modelos de linguagem instalados diretamente na Central de Comando.",
+    "suggestions": "Sugestões:",
+    "thinking": "Pensando",
+    "inspiration": "Precisa de inspiração? Ative as sugestões de chat nas configurações para começar com exemplos de prompts.",
+    "attachedImages": "Imagens anexadas",
+    "removeImage": "Remover {{name}}",
+    "attachImages": "Anexar imagens",
+    "placeholder": "Digite sua mensagem para {{name}}... (Shift+Enter para nova linha)"
+  },
+  "bubble": {
+    "reasoning": "Raciocínio",
+    "thoughtFor": "Pensou por {{seconds}}s",
+    "truncated": "Esta resposta atingiu o limite de tamanho e foi cortada.",
+    "continue": "Continuar",
+    "sources": "Fontes"
+  },
+  "sidebar": {
+    "ariaLabel": "Conversas do chat",
+    "newChat": "Novo chat",
+    "noChats": "Nenhum chat anterior",
+    "logoAlt": "Logotipo do Project NOMAD",
+    "openFullChat": "Abrir chat completo",
+    "backToHome": "Voltar ao início",
+    "modelsSettings": "Modelos e configurações",
+    "knowledgeBase": "Base de conhecimento",
+    "clearHistory": "Limpar histórico"
+  },
+  "button": {
+    "open": "Abrir chat"
+  },
+  "vision": {
+    "temporary": "As imagens são enviadas apenas com esta solicitação. Elas não são salvas e desaparecerão depois que você as enviar ou recarregar esta página.",
+    "unsupported": "Este modelo não consegue usar imagens. Escolha um modelo marcado como “Suporta imagens” em Modelos e configurações.",
+    "unknown": "O NOMAD não consegue confirmar se este modelo aceita imagens. Você pode tentar enviar uma imagem, mas a solicitação falhará se o modelo for apenas de texto."
+  }
+}

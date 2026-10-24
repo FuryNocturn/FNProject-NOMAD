@@ -1,0 +1,73 @@
+{
+  "page": {
+    "headTitle": "{{name}}"
+  },
+  "main": {
+    "clearHistoryTitle": "Gesamten Chatverlauf löschen?",
+    "clearHistoryBody": "Möchtest du wirklich alle Chat-Sitzungen löschen? Diese Aktion kann nicht rückgängig gemacht werden und alle Unterhaltungen werden dauerhaft gelöscht.",
+    "clearAll": "Alle löschen",
+    "noResponse": "Entschuldigung, ich konnte keine Antwort erzeugen.",
+    "requestError": "Entschuldigung, bei der Verarbeitung deiner Anfrage ist ein Fehler aufgetreten. Bitte versuche es erneut.",
+    "startError": "Entschuldigung, beim Starten dieses Chats ist ein Fehler aufgetreten. Bitte versuche es erneut.",
+    "newChat": "Neuer Chat",
+    "switchTitle": "Zu {{model}} wechseln?",
+    "switchConfirm": "Wechseln & neuer Chat",
+    "switchBody": "Beim Wechsel zu <strong>{{model}}</strong> wird ein neuer Chat gestartet. Deine aktuelle Unterhaltung bleibt in der Seitenleiste erhalten.",
+    "closeSidebar": "Unterhaltungs-Seitenleiste schließen",
+    "openSidebar": "Unterhaltungs-Seitenleiste öffnen",
+    "remoteDisconnected": "Remote getrennt",
+    "remoteConnected": "Remote verbunden",
+    "searchIn": "Suchen in:",
+    "all": "Alle",
+    "model": "Modell:",
+    "loadingModels": "Modelle werden geladen ...",
+    "noModels": "Keine Modelle installiert",
+    "knowledgeBase": "Wissensdatenbank:",
+    "knowledgeBaseTooltip": "Wenn aktiviert, durchsucht der Assistent vor der Antwort deine Wissensdatenbank nach relevanten Dokumenten. Deaktiviert ist es schneller und schont die Hardware, was hilfreich ist, wenn deine Wissensdatenbank klein oder leer ist. Dies ist dieselbe Einstellung wie in den Einstellungen des KI-Assistenten.",
+    "thinking": "Denken:",
+    "thinkingTooltip": "Wenn aktiviert, durchdenkt dieses Modell seine Argumentation, bevor es antwortet. Langsamer, aber oft besser bei kniffligen Fragen. Deine Auswahl wird für dieses Modell gespeichert; der Standard für andere Modelle wird in den Einstellungen des KI-Assistenten festgelegt.",
+    "closeChat": "Chat schließen"
+  },
+  "interface": {
+    "tooManyImages": "Du kannst bis zu {{max}} Bilder anhängen.",
+    "unsupportedImage": "{{name}} wird nicht unterstützt. Verwende JPEG, PNG oder WebP.",
+    "imageTooLarge": "{{name}} überschreitet das Limit von 8 MB pro Bild.",
+    "onlyFirstAttached_one": "Nur das erste ausgewählte Bild wurde angehängt.",
+    "onlyFirstAttached_other": "Nur die ersten {{count}} ausgewählten Bilder wurden angehängt.",
+    "startTitle": "Unterhaltung beginnen",
+    "startBody": "Interagiere direkt in der Kommandozentrale mit deinen installierten Sprachmodellen.",
+    "suggestions": "Vorschläge:",
+    "thinking": "Denkt nach",
+    "inspiration": "Brauchst du Inspiration? Aktiviere Chat-Vorschläge in den Einstellungen, um mit Beispiel-Prompts zu starten.",
+    "attachedImages": "Angehängte Bilder",
+    "removeImage": "{{name}} entfernen",
+    "attachImages": "Bilder anhängen",
+    "placeholder": "Schreibe deine Nachricht an {{name}} ... (Umschalt+Eingabe für neue Zeile)"
+  },
+  "bubble": {
+    "reasoning": "Überlegungen",
+    "thoughtFor": "{{seconds}} s nachgedacht",
+    "truncated": "Diese Antwort hat das Längenlimit erreicht und wurde abgeschnitten.",
+    "continue": "Fortsetzen",
+    "sources": "Quellen"
+  },
+  "sidebar": {
+    "ariaLabel": "Chat-Unterhaltungen",
+    "newChat": "Neuer Chat",
+    "noChats": "Keine früheren Chats",
+    "logoAlt": "Project-NOMAD-Logo",
+    "openFullChat": "Vollständigen Chat öffnen",
+    "backToHome": "Zurück zur Startseite",
+    "modelsSettings": "Modelle & Einstellungen",
+    "knowledgeBase": "Wissensdatenbank",
+    "clearHistory": "Verlauf löschen"
+  },
+  "button": {
+    "open": "Chat öffnen"
+  },
+  "vision": {
+    "temporary": "Bilder werden nur mit dieser Anfrage gesendet. Sie werden nicht gespeichert und verschwinden, nachdem du sie gesendet oder diese Seite neu geladen hast.",
+    "unsupported": "Dieses Modell kann keine Bilder verwenden. Wähle ein Modell, das in „Modelle & Einstellungen“ mit „Unterstützt Bilder“ markiert ist.",
+    "unknown": "NOMAD kann nicht bestätigen, ob dieses Modell Bilder akzeptiert. Du kannst es mit einem Bild versuchen, die Anfrage schlägt jedoch fehl, wenn das Modell nur Text unterstützt."
+  }
+}

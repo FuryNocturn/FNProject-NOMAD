@@ -1,0 +1,13 @@
+{
+  "docs": {
+    "title": "文档"
+  },
+  "errors": {
+    "notFoundTitle": "页面未找到",
+    "notFoundMessage": "此页面不存在。",
+    "serverError": "服务器错误"
+  },
+  "about": {
+    "hello": "来自“关于”的问候！"
+  }
+}

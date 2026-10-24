@@ -1,0 +1,198 @@
+{
+  "title": "System-Benchmark",
+  "subtitle": "Miss die Leistung deines Servers und vergleiche sie mit der NOMAD-Community",
+  "na": "k. A.",
+  "yes": "Ja",
+  "no": "Nein",
+  "unknown": "Unbekannt",
+  "types": {
+    "full": "vollständig",
+    "system": "System",
+    "ai": "KI"
+  },
+  "errors": {
+    "benchmarkFailed": "Benchmark fehlgeschlagen",
+    "failedToStart": "Der Benchmark konnte nicht gestartet werden",
+    "updateTagFailed": "Der Builder-Tag konnte nicht aktualisiert werden",
+    "submitFailed": "Der Benchmark konnte nicht übermittelt werden",
+    "alreadySubmitted": "Ein Benchmark für dieses System mit demselben oder einem höheren Score wurde bereits übermittelt."
+  },
+  "run": {
+    "title": "Benchmark ausführen",
+    "compilingReportLower": "Bericht wird erstellt ...",
+    "failedTitle": "Benchmark fehlgeschlagen",
+    "aiRequiredTitle": "{{name}} erforderlich",
+    "aiRequiredMessage": "Für den vollständigen Benchmark muss {{name}} installiert sein. Installiere es, um die gesamte NOMAD-Leistungsfähigkeit zu messen und die Ergebnisse mit der Community zu teilen.",
+    "goToApps": "Zu den Apps, um {{name}} zu installieren →",
+    "intro": "Führe einen Benchmark aus, um die Leistung von CPU, Arbeitsspeicher, Datenträger und KI-Inferenz deines Systems zu messen. Der Benchmark dauert etwa 3–6 Minuten.",
+    "full": "Vollständigen Benchmark ausführen",
+    "systemOnly": "Nur System",
+    "aiOnly": "Nur KI",
+    "aiOnlyDisabled": "{{name}} muss installiert sein, um den KI-Benchmark auszuführen",
+    "aiNotInstalledNote": "<note>Hinweis:</note> {{name}} ist nicht installiert. <installLink>Installiere es</installLink>, um vollständige Benchmarks auszuführen und Ergebnisse mit der Community zu teilen.",
+    "aiInference": "KI-Inferenz",
+    "tokensPerSecond": "Tokens pro Sekunde",
+    "firstTokenIn": "Erstes Token nach {{ms}} ms",
+    "waitingFirstToken": "Warte auf das erste Token ...",
+    "utilization": "Auslastung",
+    "vramOf": "VRAM (von {{total}} GB)",
+    "diskRead": "Datenträger lesen",
+    "diskWrite": "Datenträger schreiben",
+    "benchmarkThroughput": "Benchmark-Durchsatz",
+    "systemDiskActivity": "Datenträgeraktivität des Systems",
+    "compilingReport": "Bericht wird erstellt",
+    "calculatingScore": "Dein NOMAD Score wird berechnet ...",
+    "identifyingHardware": "Hardware wird erkannt",
+    "detectingSystem": "Dein System wird erkannt ...",
+    "memoryThroughput": "Speicherdurchsatz",
+    "cpuLoad": "CPU-Last",
+    "eventsPerSecond": "Ereignisse pro Sekunde",
+    "overall": "Gesamt",
+    "temperature": "Temperatur",
+    "cpuPackage": "CPU-Package",
+    "disk": "Datenträger",
+    "read": "Lesen",
+    "write": "Schreiben",
+    "runningBenchmark": "Benchmark läuft ..."
+  },
+  "stages": {
+    "idle": "Leerlauf",
+    "starting": "Startet",
+    "detecting_hardware": "Hardware wird erkannt",
+    "running_cpu": "CPU-Benchmark",
+    "running_memory": "Speicher-Benchmark",
+    "running_disk_read": "Datenträger-Lesetest",
+    "running_disk_write": "Datenträger-Schreibtest",
+    "downloading_ai_model": "KI-Modell wird heruntergeladen",
+    "running_ai": "KI-Inferenztest",
+    "calculating_score": "Score wird berechnet",
+    "completed": "Abgeschlossen",
+    "error": "Fehler"
+  },
+  "cores": {
+    "threadLoad": "Thread {{n}}: {{load}} %",
+    "threads_one": "{{count}} Thread",
+    "threads_other": "{{count}} Threads",
+    "perCell": "({{count}}/Zelle)"
+  },
+  "results": {
+    "soFar": "Bisherige Ergebnisse",
+    "partial": {
+      "running_cpu": "CPU",
+      "running_memory": "Speicher",
+      "running_disk_read": "Lesen",
+      "running_disk_write": "Schreiben",
+      "running_ai": "KI"
+    }
+  },
+  "reveal": {
+    "report": "Bericht",
+    "continue": "Weiter"
+  },
+  "builderTag": {
+    "randomize": "Zufällig",
+    "yourTag": "Dein Builder-Tag:"
+  },
+  "gauges": {
+    "cpu": "CPU",
+    "memory": "Speicher",
+    "diskRead": "Datenträger lesen",
+    "diskWrite": "Datenträger schreiben",
+    "aiScore": "KI-Score"
+  },
+  "score": {
+    "nomadScore": "NOMAD Score",
+    "systemScore": "System-Score",
+    "aiScore": "KI-Score",
+    "legacyScore": "Legacy-Score",
+    "partial": "Teilweise",
+    "outOf100": "von 100",
+    "v2Tooltip": "Der NOMAD Score v2 ist ein nach oben offener Index im Vergleich zum NOMAD-Referenzbuild, der genau 1000 erreicht. Höher ist besser, und es gibt keine Obergrenze.",
+    "referenceBuild": "Referenzbuild = 1000.",
+    "legacyScale": "Legacy-Skala: {{score}} / 100",
+    "partialCta": "Dies ist ein Teilergebnis, nicht dein NOMAD Score. Führe einen vollständigen Benchmark aus, um deinen NOMAD Score zu erhalten.",
+    "compositeDesc": "Dein NOMAD Score ist ein gewichteter Gesamtwert aller Benchmark-Ergebnisse."
+  },
+  "share": {
+    "title": "Mit der Community teilen",
+    "description": "Teile deinen Benchmark in der Community-Bestenliste. Wähle einen Builder-Tag, um deinen Platz zu sichern, oder teile anonym.",
+    "yourBuilderTag": "Dein Builder-Tag",
+    "anonymously": "Anonym teilen (kein Builder-Tag in der Bestenliste)",
+    "submitting": "Wird übermittelt ...",
+    "failedTitle": "Übermittlung fehlgeschlagen",
+    "partialTitle": "Teil-Benchmark",
+    "partialMessage": "Dieser {{type}}-Benchmark kann nicht mit der Community geteilt werden. Führe einen vollständigen Benchmark mit installiertem {{name}} aus, um deine Ergebnisse zu teilen.",
+    "sharedTitle": "Mit der Community geteilt",
+    "sharedMessage": "Dein Benchmark wurde an die Community-Bestenliste übermittelt. Danke für deinen Beitrag!",
+    "viewLeaderboard": "Bestenliste ansehen →"
+  },
+  "perf": {
+    "title": "Systemleistung"
+  },
+  "ai": {
+    "title": "KI-Leistung",
+    "tokensPerSecond": "Tokens pro Sekunde",
+    "tokensTooltip": "Wie schnell die KI Text erzeugt. Höher ist besser. Ab 30 Tokens/s fühlt es sich flüssig an, ab 60 augenblicklich.",
+    "ttft": "Zeit bis zum ersten Token",
+    "ttftTooltip": "Wie schnell die KI zu antworten beginnt, nachdem du eine Nachricht gesendet hast. Niedriger ist besser. Unter 500 ms fühlt es sich augenblicklich an.",
+    "noDataTitle": "Keine KI-Benchmark-Daten",
+    "noDataMessage": "Führe einen vollständigen Benchmark oder einen reinen KI-Benchmark aus, um die KI-Inferenzleistung zu messen."
+  },
+  "hardware": {
+    "title": "Hardware-Informationen",
+    "processor": "Prozessor",
+    "model": "Modell",
+    "cores": "Kerne",
+    "threads": "Threads",
+    "system": "System",
+    "ram": "RAM",
+    "diskType": "Datenträgertyp",
+    "notDetected": "Nicht erkannt"
+  },
+  "details": {
+    "title": "Benchmark-Details",
+    "benchmarkId": "Benchmark-ID",
+    "type": "Typ",
+    "date": "Datum",
+    "rawScores": "Rohwerte",
+    "cpuScore": "CPU-Score",
+    "memoryScore": "Speicher-Score",
+    "diskReadScore": "Datenträger-Lese-Score",
+    "diskWriteScore": "Datenträger-Schreib-Score",
+    "aiTokensSec": "KI-Tokens/s",
+    "aiTtft": "KI: Zeit bis zum ersten Token",
+    "info": "Benchmark-Infos",
+    "fullId": "Vollständige Benchmark-ID",
+    "benchmarkType": "Benchmark-Typ",
+    "runDate": "Ausführungsdatum",
+    "builderTag": "Builder-Tag",
+    "notSet": "Nicht festgelegt",
+    "aiModelUsed": "Verwendetes KI-Modell",
+    "submittedToRepo": "An das Repository übermittelt",
+    "repoId": "Repository-ID",
+    "measuredV2": "Gemessene Leistung (v2)",
+    "cpuSingle": "CPU Single-Thread",
+    "cpuMulti": "CPU Multi-Thread ({{threads}}T)",
+    "memoryThreads": "Speicher ({{threads}}T)",
+    "diskReadDirect": "Datenträger lesen (O_DIRECT)",
+    "diskWriteDirect": "Datenträger schreiben (O_DIRECT)",
+    "eventsPerSec": "Ereignisse/s",
+    "opsPerSec": "Ops/s",
+    "environment": "Umgebung",
+    "runEnvironment": "Ausführungsumgebung",
+    "storageBackend": "Speicher-Backend",
+    "gpuCompute": "GPU-Rechenleistung",
+    "detected": "Erkannt"
+  },
+  "history": {
+    "title": "Benchmark-Verlauf",
+    "recorded_one": "{{count}} Benchmark aufgezeichnet",
+    "recorded_other": "{{count}} Benchmarks aufgezeichnet",
+    "score": "Score",
+    "shared": "Geteilt"
+  },
+  "empty": {
+    "title": "Keine Benchmark-Ergebnisse",
+    "message": "Führe deinen ersten Benchmark aus, um die Leistungswerte deines Servers zu sehen."
+  }
+}

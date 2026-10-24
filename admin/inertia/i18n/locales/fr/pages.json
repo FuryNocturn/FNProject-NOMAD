@@ -1,0 +1,13 @@
+{
+  "docs": {
+    "title": "Documentation"
+  },
+  "errors": {
+    "notFoundTitle": "Page introuvable",
+    "notFoundMessage": "Cette page n'existe pas.",
+    "serverError": "Erreur du serveur"
+  },
+  "about": {
+    "hello": "Bonjour depuis la page À propos !"
+  }
+}

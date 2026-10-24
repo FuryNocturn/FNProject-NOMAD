@@ -1,0 +1,231 @@
+{
+  "modal": {
+    "title": "Base de conhecimento",
+    "close": "Fechar",
+    "offline": "<strong>Base de conhecimento indisponível:</strong> O banco de dados vetorial Qdrant está offline.",
+    "starting": "Iniciando…",
+    "startQdrant": "Iniciar o Qdrant",
+    "collectionLabel": "Coleção:",
+    "upload": "Enviar",
+    "whyTitle": "Por que enviar documentos para a sua Base de conhecimento?",
+    "why1Title": "Integração da Base de conhecimento com {{name}}",
+    "why1Body": "Quando você envia documentos para a sua Base de conhecimento, o NOMAD processa e incorpora o conteúdo, tornando-o diretamente acessível ao {{name}}. Isso permite que o {{name}} consulte seus documentos específicos durante as conversas, oferecendo respostas mais precisas e personalizadas com base nos dados que você enviou.",
+    "why2Title": "Processamento de documentos aprimorado com OCR",
+    "why2Body": "O NOMAD inclui recursos integrados de Reconhecimento Óptico de Caracteres (OCR), que permitem extrair texto de documentos baseados em imagem, como PDFs digitalizados ou fotos. Isso significa que, mesmo que seus documentos não estejam em um formato de texto padrão, o NOMAD ainda consegue processar e incorporar o conteúdo deles para o acesso da IA.",
+    "why3Title": "Integração com a Biblioteca de informações",
+    "why3Body": "O NOMAD descobrirá e extrairá automaticamente qualquer conteúdo que você salvar na sua Biblioteca de informações (se instalada), deixando-o disponível imediatamente para o {{name}} sem etapas extras.",
+    "autoIndexTitle": "Indexar automaticamente o novo conteúdo para a IA?",
+    "autoIndexHint": "O conteúdo indexado normalmente ocupa de 5 a 10 vezes o tamanho original do arquivo em disco. As alterações se aplicam ao novo conteúdo adicionado depois que esta configuração mudar.",
+    "ingestPolicyAria": "Política de ingestão",
+    "policy": {
+      "Always": "Sempre",
+      "Manual": "Manual"
+    },
+    "processingQueue": "Fila de processamento",
+    "cleanUpFailed": "Limpar falhas",
+    "cancelAllJobs": "Cancelar todas as tarefas",
+    "cancelAllJobsTitle": "Interrompe e limpa todas as tarefas de embedding, independentemente do estado, incluindo as travadas ou em andamento. Exclui os arquivos de origem enviados para essas tarefas.",
+    "storedFiles": "Arquivos armazenados da Base de conhecimento",
+    "searchIn": "Pesquisar em:",
+    "all": "Todos",
+    "uncategorized": "Sem categoria",
+    "manageCollections": "Gerenciar coleções",
+    "resetRebuild": "Redefinir e reconstruir",
+    "resetRebuildTitle": "Descarta toda a coleção de embeddings e refaz o embedding de tudo do zero. Remove permanentemente os vetores de arquivos que não estão mais no disco. Destrutivo: exige digitar RESET para confirmar.",
+    "reembedAll": "Refazer embedding de tudo",
+    "reembedAllTitle": "Refaz o embedding de todos os arquivos no disco, substituindo os vetores existentes arquivo por arquivo. Os vetores de arquivos que não estão mais no disco são preservados. Use se o fragmentador ou o modelo de embedding tiver mudado.",
+    "syncStorage": "Sincronizar armazenamento",
+    "syncStorageTitle": "Verifica o armazenamento em busca de novos arquivos e enfileira os que ainda não passaram por embedding. Pode ser executado a qualquer momento; não afeta o conteúdo que já passou por embedding.",
+    "warningsUnavailable": "Avisos de arquivos indisponíveis — não foi possível ler o estado do armazenamento. Tentando novamente…",
+    "columns": {
+      "fileName": "Nome do arquivo",
+      "size": "Tamanho",
+      "uploaded": "Enviado em",
+      "collection": "Coleção",
+      "active": "Ativo"
+    },
+    "managedByNomad": "Gerenciado pelo NOMAD",
+    "removeConfirm": "Remover da base de conhecimento?",
+    "deleting": "Excluindo…",
+    "delete": "Excluir",
+    "view": "Ver",
+    "download": "Baixar",
+    "state": {
+      "indexed": "Indexado",
+      "notIndexed": "Não indexado",
+      "failed": "Falhou",
+      "stalled": "Travado"
+    },
+    "actions": {
+      "reembed": "Refazer embedding",
+      "index": "Indexar",
+      "retry": "Tentar novamente"
+    },
+    "warnings": {
+      "zeroChunks": "0 fragmentos incorporados — este arquivo não tem conteúdo de texto. O {{name}} não consegue consultá-lo.",
+      "partialStall": "Apenas {{embedded}} de cerca de {{expected}} fragmentos incorporados — a ingestão pode ter travado."
+    },
+    "toasts": {
+      "policyAlways": "O novo conteúdo será indexado automaticamente para a IA.",
+      "policyManual": "O novo conteúdo aguardará sua confirmação.",
+      "policyFailed": "Falha ao atualizar a política de indexação.",
+      "collectionUpdated": "Coleção atualizada.",
+      "collectionUpdateFailed": "Falha ao atualizar a coleção.",
+      "activeUpdated": "Estado ativo atualizado.",
+      "activeUpdateFailed": "Falha ao atualizar o estado ativo.",
+      "collectionActiveUpdated": "Estado ativo da coleção atualizado.",
+      "collectionActiveUpdateFailed": "Falha ao atualizar o estado ativo da coleção.",
+      "fileRemoved": "Arquivo removido da base de conhecimento.",
+      "deleteFailed": "Falha ao excluir o arquivo.",
+      "fileQueued": "Arquivo enfileirado para embedding.",
+      "queueFailed": "Falha ao enfileirar o arquivo.",
+      "failedCleaned": "Tarefas com falha removidas.",
+      "cleanupFailed": "Falha ao limpar as tarefas.",
+      "allCancelled": "Todas as tarefas de embedding foram canceladas.",
+      "cancelFailed": "Falha ao cancelar as tarefas.",
+      "qdrantStartFailed": "Falha ao iniciar o Qdrant.",
+      "synced": "Armazenamento sincronizado com sucesso. Se novos arquivos foram encontrados, eles foram enfileirados para processamento.",
+      "syncFailed": "Falha ao sincronizar o armazenamento",
+      "reembedDone": "Novo embedding concluído.",
+      "reembedFailed": "Falha ao refazer o embedding da base de conhecimento.",
+      "resetDone": "Redefinição concluída.",
+      "resetFailed": "Falha ao redefinir a base de conhecimento.",
+      "uploadQueued_one": "{{count}} arquivo enfileirado para processamento.",
+      "uploadQueued_other": "{{count}} arquivos enfileirados para processamento.",
+      "uploadFailed": "Falha ao enviar: {{name}}"
+    },
+    "cancelAllModal": {
+      "title": "Cancelar todas as tarefas de embedding?",
+      "confirm": "Cancelar todas as tarefas",
+      "cancel": "Manter tarefas",
+      "body": "Isso interrompe <strong>todas</strong> as tarefas de embedding — inclusive as ainda em andamento ou travadas — e limpa a fila de processamento. Os arquivos de origem enviados para essas tarefas são excluídos, então você precisará enviar novamente o que ainda quiser indexar. Os arquivos armazenados que já concluíram o embedding não são afetados. Tem certeza de que deseja continuar?"
+    },
+    "syncModal": {
+      "title": "Confirmar sincronização?",
+      "confirm": "Confirmar sincronização",
+      "body": "Isso verificará os diretórios de armazenamento do NOMAD em busca de novos arquivos e os enfileirará para processamento. É útil se você adicionou arquivos manualmente ao armazenamento ou quer garantir que tudo esteja atualizado. Pode haver um aumento temporário no uso de recursos se novos arquivos forem encontrados e processados. Tem certeza de que deseja continuar?"
+    },
+    "reembedAllModal": {
+      "title": "Refazer o embedding de todos os documentos?",
+      "confirming": "Refazendo embedding…",
+      "intro_one": "Isso reprocessará todos os documentos atualmente na sua base de conhecimento — cerca de <strong>{{count}} arquivo</strong>. Para cada arquivo, o NOMAD excluirá os embeddings existentes do Qdrant e enfileirará uma nova tarefa de embedding usando a fragmentação e o modelo de embedding atuais.",
+      "intro_other": "Isso reprocessará todos os documentos atualmente na sua base de conhecimento — cerca de <strong>{{count}} arquivos</strong>. Para cada arquivo, o NOMAD excluirá os embeddings existentes do Qdrant e enfileirará uma nova tarefa de embedding usando a fragmentação e o modelo de embedding atuais.",
+      "purposeTitle": "Para que serve",
+      "purposeBody": "Use quando o modelo de embedding ou a lógica de fragmentação tiver mudado, ou quando suspeitar que os vetores armazenados estão desatualizados. Os arquivos no disco <em>não</em> são excluídos, e quaisquer pontos órfãos cujo arquivo de origem não exista mais serão preservados intactos (veja <em>Redefinir e reconstruir</em> se quiser começar totalmente do zero).",
+      "headsUp": "Atenção",
+      "warn1_one": "Refazer o embedding de {{count}} arquivo pode demorar bastante, especialmente com PDFs grandes ou arquivos ZIM.",
+      "warn1_other": "Refazer o embedding de {{count}} arquivos pode demorar bastante, especialmente com PDFs grandes ou arquivos ZIM.",
+      "warn2": "Em sistemas sem aceleração por GPU, espere um uso elevado e contínuo da CPU durante todo o processo.",
+      "warn3": "Os resultados de pesquisa da Base de conhecimento podem ficar incompletos até que todos os arquivos terminem de refazer o embedding.",
+      "warn4": "Se já houver tarefas de embedding em andamento, esta ação será recusada — aguarde o esvaziamento da fila primeiro."
+    },
+    "resetModal": {
+      "title": "Redefinir e reconstruir a Base de conhecimento?",
+      "confirm": "Apagar e reconstruir",
+      "confirming": "Redefinindo…",
+      "intro_one": "Isso <strong>excluirá permanentemente todos os pontos</strong> da coleção <code>nomad_knowledge_base</code> do Qdrant e reconstruirá a partir de <strong>{{count}} arquivo</strong> atualmente no disco. A coleção é descartada, recriada e todos os arquivos são enfileirados novamente para embedding.",
+      "intro_other": "Isso <strong>excluirá permanentemente todos os pontos</strong> da coleção <code>nomad_knowledge_base</code> do Qdrant e reconstruirá a partir de <strong>{{count}} arquivos</strong> atualmente no disco. A coleção é descartada, recriada e todos os arquivos são enfileirados novamente para embedding.",
+      "differsTitle": "Diferença em relação a Refazer embedding de tudo",
+      "differs1": "<strong>Refazer embedding de tudo</strong> substitui os vetores arquivo por arquivo. Quaisquer pontos órfãos (vetores cujo arquivo de origem foi excluído do disco em algum momento) são preservados.",
+      "differs2": "<strong>Redefinir e reconstruir</strong> descarta toda a coleção. Os pontos órfãos são <strong>perdidos para sempre</strong>. Depois, somente os arquivos atualmente no disco existirão no Qdrant.",
+      "destructiveTitle": "Esta ação é destrutiva e não pode ser desfeita",
+      "destructive1": "A pesquisa na Base de conhecimento ficará vazia até o embedding terminar (possivelmente horas em sistemas só com CPU).",
+      "destructive2": "Durante alguns segundos na redefinição, a coleção do Qdrant não existe — consultas de chat com RAG nesse intervalo podem retornar o erro \"coleção não encontrada\". Evite usar o chat até que a reconstrução tenha começado.",
+      "destructive3": "Se já houver tarefas de embedding em andamento, esta ação será recusada — aguarde o esvaziamento da fila primeiro.",
+      "typeToConfirm": "Digite <code>RESET</code> para confirmar:",
+      "typeExactly": "Digite RESET exatamente (maiúsculas, sem espaços) para habilitar o botão de confirmação."
+    },
+    "reembedFileModal": {
+      "title": "Refazer o embedding deste arquivo?",
+      "confirm": "Refazer embedding",
+      "confirming": "Enfileirando…",
+      "body": "Isso excluirá os embeddings existentes de <strong>{{name}}</strong> e enfileirará uma nova tarefa de embedding. O arquivo no disco não é alterado.",
+      "headsUp": "Atenção",
+      "warn1": "Para arquivos ZIM grandes, isso pode demorar bastante, especialmente em sistemas só com CPU.",
+      "warn2": "Os resultados de pesquisa que faziam referência a este arquivo ficarão incompletos até que o novo embedding termine.",
+      "warn3": "Se já houver uma tarefa em execução para este arquivo, o novo embedding será recusado — aguarde o término dela primeiro."
+    },
+    "viewer": {
+      "loadError": "Não foi possível carregar o arquivo. Ele pode ter sido movido ou seu tipo não pode ser visualizado."
+    }
+  },
+  "policyBanner": {
+    "title_one": "Indexar seu arquivo existente para {{name}}?",
+    "title_other": "Indexar seus {{count, number}} arquivos existentes para {{name}}?",
+    "body": "Depois de indexados, o {{name}} pode consultá-los ao responder às suas perguntas.",
+    "indexExisting": "Indexar conteúdo existente",
+    "maybeLater": "Talvez depois",
+    "indexStarted": "O {{name}} indexará seu conteúdo existente. Você pode acompanhar o progresso no painel Base de conhecimento.",
+    "indexFailed": "Não foi possível iniciar a indexação. Tente novamente pelo painel Base de conhecimento.",
+    "laterSaved": "Seu conteúdo continuará sem indexação por enquanto. Você pode ativar a qualquer momento pelo painel Base de conhecimento.",
+    "laterFailed": "Não foi possível salvar sua escolha. Tente novamente."
+  },
+  "collections": {
+    "title": "Gerenciar coleções",
+    "close": "Fechar",
+    "intro": "Renomeie ou remova coleções. Remover uma coleção não exclui nenhum arquivo — eles simplesmente voltam para Sem categoria, para que você possa reclassificá-los.",
+    "empty": "Ainda não há coleções. Atribua um arquivo a uma coleção na tabela da Base de conhecimento para criar uma.",
+    "save": "Salvar",
+    "rename": "Renomear",
+    "removeConfirm": "Remover \"{{name}}\"? Os arquivos voltam para Sem categoria.",
+    "renamed": "Coleção renomeada.",
+    "renameFailed": "Falha ao renomear a coleção.",
+    "removed": "Coleção removida.",
+    "removeFailed": "Falha ao remover a coleção."
+  },
+  "combobox": {
+    "uncategorized": "Sem categoria",
+    "create": "+ Criar \"{{name}}\"",
+    "noMatches": "Nenhuma correspondência"
+  },
+  "nomadMd": {
+    "intro": "Instruções personalizadas enviadas ao {{name}} como prompt de sistema em todos os chats.",
+    "tip": "Dica: este arquivo também fica armazenado em disco em <code>storage/NOMAD.md</code> e pode ser editado diretamente.",
+    "save": "Salvar",
+    "saved": "NOMAD.md salvo. Ele se aplica às novas mensagens.",
+    "saveFailed": "Falha ao salvar o NOMAD.md.",
+    "closeAria": "Fechar",
+    "template": "# NOMAD.md\n\n<!--\nEste arquivo contém instruções personalizadas para o seu assistente de IA. Tudo o que\nestá aqui é enviado ao assistente como prompt de sistema em todos os chats — use-o\npara definir persona, tom, prioridades e regras permanentes.\n\nEle também é armazenado em disco em storage/NOMAD.md, então você pode editá-lo diretamente.\nSubstitua este modelo pelas suas próprias instruções e clique em Salvar.\n-->\n\n## Sobre mim\n\n- (ex.: Estou montando um sítio isolado, sem rede elétrica, em um clima frio.)\n\n## Como o assistente deve responder\n\n- Seja conciso e prático.\n- Priorize a segurança e os métodos comprovados.\n"
+  },
+  "guardrail": {
+    "title": "Confirmar operação grande de indexação de IA",
+    "body": "Indexar este lote para o Assistente de IA usará aproximadamente <strong>{{size}}</strong> de espaço em disco para embeddings, além dos downloads brutos.",
+    "freeDisk": "Isso é mais de 10% do seu espaço livre restante em disco ({{free}} livres). O embedding pode levar várias horas e é difícil de interromper de forma limpa depois de iniciado.",
+    "manualHint": "Se preferir revisar item por item antes de indexar, cancele aqui e mude sua configuração de indexação automática para <strong>Manual</strong> no painel Base de conhecimento.",
+    "proceed": "Continuar mesmo assim"
+  },
+  "jobs": {
+    "processingQueue": "Fila de processamento",
+    "empty": "Nenhum arquivo está sendo processado no momento",
+    "lastActivity": "· última atividade {{time}}",
+    "chunks": "· {{count}} fragmentos",
+    "health": {
+      "waiting": {
+        "label": "Aguardando",
+        "aria": "A tarefa está na fila, aguardando para iniciar"
+      },
+      "healthy": {
+        "label": "Ativa",
+        "aria": "A tarefa está fazendo embedding em ritmo normal"
+      },
+      "slow": {
+        "label": "Lenta",
+        "aria": "A tarefa não progride há pelo menos 2 minutos"
+      },
+      "stalled": {
+        "label": "Travada",
+        "aria": "A tarefa não progride há pelo menos 5 minutos"
+      },
+      "failed": {
+        "label": "Falhou",
+        "aria": "A tarefa falhou"
+      }
+    },
+    "timeAgo": {
+      "justNow": "agora mesmo",
+      "seconds": "há {{count}}s",
+      "minutes": "há {{count}}min",
+      "hours": "há {{count}}h"
+    }
+  }
+}
