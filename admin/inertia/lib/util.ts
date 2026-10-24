@@ -55,7 +55,37 @@ export function generateUUID(): string {
  * @param path The full file path.
  * @returns The extracted file name.
  */
-export const extractFileName = (path: string) => {
+/**
+ * Copy text to the clipboard. NOMAD is usually opened over plain HTTP on a LAN
+ * address, which is not a secure context, so navigator.clipboard is undefined
+ * there; fall back to a hidden textarea + execCommand('copy').
+ */
+export async function copyText(text: string): Promise<boolean> {
+  if (window.isSecureContext && navigator.clipboard) {
+    try {
+      await navigator.clipboard.writeText(text)
+      return true
+    } catch {
+      // Permission denied or document not focused: try the fallback
+    }
+  }
+  const textarea = document.createElement('textarea')
+  textarea.value = text
+  textarea.setAttribute('readonly', '')
+  textarea.style.position = 'fixed'
+  textarea.style.opacity = '0'
+  document.body.appendChild(textarea)
+  textarea.select()
+  try {
+    return document.execCommand('copy')
+  } catch {
+    return false
+  } finally {
+    textarea.remove()
+  }
+}
+
+export const extractFileName =(path: string) => {
   if (!path) return ''
   if (path.includes('/')) {
     return path.substring(path.lastIndexOf('/') + 1)

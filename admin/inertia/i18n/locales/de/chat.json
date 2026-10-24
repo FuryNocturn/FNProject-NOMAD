@@ -49,7 +49,9 @@
     "thoughtFor": "{{seconds}} s nachgedacht",
     "truncated": "Diese Antwort hat das Längenlimit erreicht und wurde abgeschnitten.",
     "continue": "Fortsetzen",
-    "sources": "Quellen"
+    "sources": "Quellen",
+    "copy": "Kopieren",
+    "copied": "Kopiert"
   },
   "sidebar": {
     "ariaLabel": "Chat-Unterhaltungen",

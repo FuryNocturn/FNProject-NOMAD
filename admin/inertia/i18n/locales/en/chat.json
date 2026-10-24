@@ -49,7 +49,9 @@
     "thoughtFor": "Thought for {{seconds}}s",
     "truncated": "This answer hit the length limit and was cut off.",
     "continue": "Continue",
-    "sources": "Sources"
+    "sources": "Sources",
+    "copy": "Copy",
+    "copied": "Copied"
   },
   "sidebar": {
     "ariaLabel": "Chat conversations",

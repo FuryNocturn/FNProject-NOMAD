@@ -49,7 +49,9 @@
     "thoughtFor": "{{seconds}} 秒間思考",
     "truncated": "この回答は長さの上限に達したため、途中で打ち切られました。",
     "continue": "続ける",
-    "sources": "情報源"
+    "sources": "情報源",
+    "copy": "コピー",
+    "copied": "コピーしました"
   },
   "sidebar": {
     "ariaLabel": "チャットの会話",

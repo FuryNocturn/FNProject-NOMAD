@@ -49,7 +49,9 @@
     "thoughtFor": "思考了 {{seconds}} 秒",
     "truncated": "此回答达到长度上限，已被截断。",
     "continue": "继续",
-    "sources": "来源"
+    "sources": "来源",
+    "copy": "复制",
+    "copied": "已复制"
   },
   "sidebar": {
     "ariaLabel": "聊天对话",
