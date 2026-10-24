@@ -1,0 +1,156 @@
+{
+  "headTitle": "快速设置向导",
+  "offline": {
+    "title": "无网络连接",
+    "message": "需要联网才能继续。请连接到互联网后重试。"
+  },
+  "steps": {
+    "apps": "应用",
+    "maps": "地图",
+    "content": "内容",
+    "creatorPacks": "创作者内容包",
+    "ai": "AI",
+    "review": "确认"
+  },
+  "progress": "进度",
+  "capabilities": {
+    "information": {
+      "name": "信息图书馆",
+      "description": "离线访问 Wikipedia、医学参考资料、操作指南和百科全书",
+      "feature1": "完整的离线 Wikipedia",
+      "feature2": "医学参考资料和急救指南",
+      "feature3": "DIY 维修指南和操作教程内容",
+      "feature4": "Project Gutenberg 图书和文学作品"
+    },
+    "education": {
+      "name": "教育平台",
+      "description": "包含视频课程和练习的互动学习平台",
+      "feature1": "可汗学院数学和科学课程",
+      "feature2": "K-12 课程内容",
+      "feature3": "互动练习和测验",
+      "feature4": "学习者进度跟踪"
+    },
+    "ai": {
+      "description": "完全在您的硬件上运行的本地 AI 聊天 - 无需联网",
+      "feature1": "私密对话，内容绝不离开您的设备",
+      "feature2": "设置完成后无需联网",
+      "feature3": "提问、获得写作帮助、头脑风暴",
+      "feature4": "使用本地 AI 模型，在您自己的硬件上运行"
+    },
+    "installed": "已安装",
+    "poweredBy": "由 {{name}} 提供支持"
+  },
+  "step1": {
+    "title": "您希望 NOMAD 做什么？",
+    "subtitle": "选择您需要的功能。之后随时可以添加更多。",
+    "allInstalled": "所有可用功能均已安装！",
+    "manageApps": "管理应用",
+    "coreCapabilities": "核心功能",
+    "useRemoteOllama": "使用远程 Ollama 实例",
+    "moreApps": {
+      "title": "想要更多应用？",
+      "description": "笔记、数据工具以及完整的附加应用目录，随时可在 Supply Depot 中获取。",
+      "button": "打开 Supply Depot"
+    },
+    "confirmDisableAi": "关闭 AI 将丢弃您选择的 AI 模型、索引策略和远程 Ollama 配置。是否继续？"
+  },
+  "step2": {
+    "title": "选择地图区域",
+    "subtitle": "选择要下载供离线使用的地图区域合集。之后随时可以下载更多区域。",
+    "hint": "只需要某个国家，还是想要整个世界？单个国家和完整的全球地图都可以随时在<link>地图管理</link>中安装。",
+    "empty": "目前没有可用的地图合集。"
+  },
+  "step3": {
+    "title": "选择内容",
+    "subtitleInformation": "选择用于离线知识的内容类别。",
+    "subtitleOther": "为所选功能配置内容。",
+    "additionalContent": "更多内容",
+    "additionalContentHint": "精选的离线参考合集",
+    "noContent": "未选择需要内容的功能。您可以跳过此步骤，或返回选择需要内容的功能。"
+  },
+  "creatorPacks": {
+    "title": "预置创作者内容包",
+    "subtitle": "来自创作者的品牌视频合集，下载后可在 Kiwix 中离线观看。",
+    "empty": "目前没有可用的创作者内容包。"
+  },
+  "ai": {
+    "title": "配置 {{name}}",
+    "subtitle": "选择要下载的模型，并设置 {{name}} 如何处理新内容。",
+    "modelsTitle": "AI 模型",
+    "modelsHint": "选择要下载的模型以供离线 AI 使用",
+    "remoteTitle": "已选择远程 Ollama",
+    "remoteMessage": "模型在远程机器上管理。设置完成后，您可以在 设置 > AI 助手 中添加模型。请注意，此功能仅在使用 Ollama 时受支持，不支持 LM Studio 及其他 OpenAI API 软件。",
+    "size": "大小：{{size}}",
+    "supportsImages": "支持图片",
+    "noModels": "目前没有推荐的 AI 模型。",
+    "autoIndexTitle": "为 {{name}} 自动索引新内容？",
+    "autoIndexDescription": "当您添加新的 ZIM、文档或精选内容时，是否让 {{name}} 自动为其建立索引，以便在回答您的问题时进行搜索？",
+    "always": "是，始终自动",
+    "manual": "先询问我",
+    "changeLater": "您可以随时在 AI 聊天中的知识库面板里更改此设置。"
+  },
+  "review": {
+    "title": "确认您的选择",
+    "subtitle": "在开始设置流程前，请确认您的选择。",
+    "noSelectionsTitle": "未做任何选择",
+    "noSelectionsMessage": "您尚未选择要安装或下载的任何内容。您可以返回进行选择，或返回首页。",
+    "capabilities": "待安装的功能",
+    "mapCollections": "待下载的地图合集（{{total}}）",
+    "creatorPacks": "待安装的创作者内容包（{{total}}）",
+    "contentCategories": "内容类别（{{total}}）",
+    "files_one": "（{{count}} 个文件）",
+    "files_other": "（{{count}} 个文件）",
+    "wikipedia": "Wikipedia",
+    "noDownload": "不下载",
+    "aiModels": "待下载的 AI 模型（{{total}}）",
+    "autoIndexSetting": "自动索引设置",
+    "autoIndexAlways": "新内容到达后将<strong>自动建立索引</strong>，以便 {{name}} 搜索。",
+    "autoIndexManual": "新内容将<strong>等待您在知识库面板中确认</strong>后，{{name}} 才会为其建立索引。",
+    "readyTitle": "准备开始",
+    "readyMessage": "点击“完成设置”开始安装应用并下载内容。根据您的网络连接情况和下载内容的大小，这可能需要一些时间。"
+  },
+  "footer": {
+    "capabilities_one": "{{count}} 项功能",
+    "capabilities_other": "{{count}} 项功能",
+    "mapRegions_one": "{{count}} 个地图区域",
+    "mapRegions_other": "{{count}} 个地图区域",
+    "categories_one": "{{count}} 个内容类别",
+    "categories_other": "{{count}} 个内容类别",
+    "creatorPacks_one": "{{count}} 个创作者内容包",
+    "creatorPacks_other": "{{count}} 个创作者内容包",
+    "aiModels_one": "{{count}} 个 AI 模型",
+    "aiModels_other": "{{count}} 个 AI 模型",
+    "summary": "已选择：{{capabilities}}、{{maps}}、{{categories}}、{{aiModels}}",
+    "summaryWithPacks": "已选择：{{capabilities}}、{{maps}}、{{categories}}、{{packs}}、{{aiModels}}",
+    "back": "上一步",
+    "next": "下一步",
+    "cancel": "取消并返回首页",
+    "complete": "完成设置"
+  },
+  "notifications": {
+    "needInternet": "必须联网才能完成设置。",
+    "remoteFailed": "配置远程 Ollama 失败。",
+    "completed": "设置向导已完成！正在处理您的选择。",
+    "error": "设置过程中发生错误。部分项目可能未被处理。"
+  },
+  "complete": {
+    "headTitle": "快速设置向导已完成",
+    "offlineMessage": "您似乎未连接到互联网。安装应用和下载内容需要联网。",
+    "activityTitle": "应用安装活动",
+    "backgroundTitle": "在后台运行",
+    "backgroundMessage": "您可以随时离开此页面 - 应用安装和下载将在后台继续进行！请注意，在所有初始下载完成之前，信息图书馆（如已安装）可能无法使用。",
+    "goHome": "前往首页"
+  },
+  "storage": {
+    "title": "存储",
+    "selectedInline": "（已选 +{{size}}）",
+    "current": "当前（{{size}}）",
+    "selected": "已选（+{{size}}）",
+    "exceeds": "超出可用空间 {{size}}",
+    "remaining": "将剩余 {{size}} 可用空间"
+  },
+  "disk": {
+    "nasStorage": "NAS 存储",
+    "unknown": "未知"
+  }
+}

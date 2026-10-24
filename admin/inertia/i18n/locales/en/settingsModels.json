@@ -1,6 +1,6 @@
 {
   "models": {
-    "headTitle": "{{name}} Settings | Project NOMAD",
+    "headTitle": "{{name}} Settings",
     "intro": "Easily manage the {{name}}'s settings and installed models. We recommend starting with smaller models first to see how they perform on your system before moving on to larger ones.",
     "depsMissing": "{{name}}'s dependencies are not installed. Please install them to manage AI models.",
     "sections": {

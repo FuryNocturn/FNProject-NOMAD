@@ -1,0 +1,44 @@
+{
+  "tiles": {
+    "maps": {
+      "label": "Mapas",
+      "description": "Veja mapas offline"
+    },
+    "drugReference": {
+      "label": "Referência de medicamentos",
+      "description": "Bulas de medicamentos da FDA offline. Pesquise pelo nome do medicamento ou por sintoma"
+    },
+    "easySetup": {
+      "label": "Configuração rápida",
+      "description": "Não sabe por onde começar? Use o assistente de configuração para configurar seu NOMAD rapidamente!"
+    },
+    "supplyDepot": {
+      "label": "Supply Depot",
+      "description": "Navegue e instale apps selecionados, ou adicione seu próprio contêiner Docker"
+    },
+    "docs": {
+      "label": "Documentação",
+      "description": "Leia os manuais e guias do Project NOMAD"
+    },
+    "settings": {
+      "label": "Configurações",
+      "description": "Defina as configurações do seu NOMAD"
+    }
+  },
+  "updateAvailable": "Há uma atualização disponível para o Project NOMAD!",
+  "benchmarkRerun": {
+    "title": "Seu benchmark pode ser reavaliado com o Score v2",
+    "message": "Atualizamos o sistema de pontuação do benchmark. Execute seu benchmark novamente para obter um resultado atualizado do Score v2 no ranking da comunidade.",
+    "button": "Executar benchmark novamente"
+  },
+  "startHere": "Comece aqui!",
+  "poweredBy": "Desenvolvido com {{name}}",
+  "accessApp": "Acessar o aplicativo {{name}}",
+  "opensInNewTab": "Abre em uma nova aba",
+  "linkTileHint": "Um atalho que você adicionou. O NOMAD não gerencia isso.",
+  "editLink": "Editar este link",
+  "removeLink": "Remover este link",
+  "removeLinkFailed": "Falha ao remover este link.",
+  "addLink": "Adicionar um link",
+  "addLinkHint": "Um atalho para outro recurso da sua rede"
+}

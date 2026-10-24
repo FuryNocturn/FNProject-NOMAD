@@ -1,0 +1,44 @@
+{
+  "tiles": {
+    "maps": {
+      "label": "地図",
+      "description": "オフライン地図を表示"
+    },
+    "drugReference": {
+      "label": "医薬品リファレンス",
+      "description": "オフラインの FDA 医薬品ラベル。医薬品名または症状で検索できます"
+    },
+    "easySetup": {
+      "label": "かんたんセットアップ",
+      "description": "どこから始めればよいかわからない場合は、セットアップウィザードで NOMAD をすばやく設定できます!"
+    },
+    "supplyDepot": {
+      "label": "Supply Depot",
+      "description": "厳選されたアプリを閲覧・インストールしたり、独自の Docker コンテナを追加したりできます"
+    },
+    "docs": {
+      "label": "ドキュメント",
+      "description": "Project NOMAD のマニュアルとガイドを読む"
+    },
+    "settings": {
+      "label": "設定",
+      "description": "NOMAD の設定を行います"
+    }
+  },
+  "updateAvailable": "Project NOMAD のアップデートがあります!",
+  "benchmarkRerun": {
+    "title": "ベンチマークを Score v2 で再採点できます",
+    "message": "ベンチマークのスコアリングシステムをアップグレードしました。ベンチマークを再実行して、コミュニティのリーダーボード向けに更新された Score v2 の結果を取得してください。",
+    "button": "ベンチマークを再実行"
+  },
+  "startHere": "ここから始めましょう!",
+  "poweredBy": "Powered by {{name}}",
+  "accessApp": "{{name}} アプリケーションにアクセス",
+  "opensInNewTab": "新しいタブで開きます",
+  "linkTileHint": "追加したショートカットです。NOMAD は管理しません。",
+  "editLink": "このリンクを編集",
+  "removeLink": "このリンクを削除",
+  "removeLinkFailed": "このリンクを削除できませんでした。",
+  "addLink": "リンクを追加",
+  "addLinkHint": "ネットワーク上の他のものへのショートカット"
+}

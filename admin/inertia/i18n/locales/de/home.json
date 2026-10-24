@@ -1,0 +1,44 @@
+{
+  "tiles": {
+    "maps": {
+      "label": "Karten",
+      "description": "Offline-Karten ansehen"
+    },
+    "drugReference": {
+      "label": "Arzneimittelreferenz",
+      "description": "Offline-FDA-Arzneimittelinformationen. Suche nach Wirkstoffname oder nach Symptom"
+    },
+    "easySetup": {
+      "label": "Schnelleinrichtung",
+      "description": "Du weißt nicht, wo du anfangen sollst? Nutze den Einrichtungsassistenten, um dein NOMAD schnell zu konfigurieren!"
+    },
+    "supplyDepot": {
+      "label": "Supply Depot",
+      "description": "Durchsuche und installiere kuratierte Apps oder füge deinen eigenen Docker-Container hinzu"
+    },
+    "docs": {
+      "label": "Dokumentation",
+      "description": "Handbücher und Anleitungen zu Project NOMAD lesen"
+    },
+    "settings": {
+      "label": "Einstellungen",
+      "description": "Deine NOMAD-Einstellungen konfigurieren"
+    }
+  },
+  "updateAvailable": "Für Project NOMAD ist ein Update verfügbar!",
+  "benchmarkRerun": {
+    "title": "Dein Benchmark kann mit Score v2 neu bewertet werden",
+    "message": "Wir haben das Bewertungssystem des Benchmarks verbessert. Führe deinen Benchmark erneut aus, um ein aktualisiertes Score-v2-Ergebnis in der Community-Bestenliste zu erhalten.",
+    "button": "Benchmark erneut ausführen"
+  },
+  "startHere": "Hier starten!",
+  "poweredBy": "Bereitgestellt von {{name}}",
+  "accessApp": "Die Anwendung {{name}} öffnen",
+  "opensInNewTab": "Öffnet in einem neuen Tab",
+  "linkTileHint": "Eine von dir hinzugefügte Verknüpfung. NOMAD verwaltet sie nicht.",
+  "editLink": "Diesen Link bearbeiten",
+  "removeLink": "Diesen Link entfernen",
+  "removeLinkFailed": "Der Link konnte nicht entfernt werden.",
+  "addLink": "Link hinzufügen",
+  "addLinkHint": "Eine Verknüpfung zu etwas anderem in deinem Netzwerk"
+}

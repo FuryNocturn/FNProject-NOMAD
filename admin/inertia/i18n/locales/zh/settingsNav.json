@@ -1,0 +1,16 @@
+{
+  "title": "设置",
+  "supplyDepot": "Supply Depot",
+  "benchmark": "性能测试",
+  "contentExplorer": "内容浏览",
+  "contentManager": "内容管理",
+  "creatorPacks": "创作者内容包",
+  "mapsManager": "地图管理",
+  "serviceLogs": "服务日志与指标",
+  "checkForUpdates": "检查更新",
+  "system": "系统",
+  "advanced": "高级",
+  "apiReference": "API 参考",
+  "support": "支持本项目",
+  "legal": "法律声明"
+}

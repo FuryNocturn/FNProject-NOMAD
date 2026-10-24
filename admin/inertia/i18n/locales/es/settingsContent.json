@@ -1,6 +1,6 @@
 {
   "zim": {
-    "headTitle": "Gestor de contenido | Project NOMAD",
+    "headTitle": "Gestor de contenido",
     "title": "Gestor de contenido",
     "subtitle": "Gestiona tus archivos de contenido almacenados.",
     "hideUploader": "Ocultar cargador",
@@ -33,7 +33,7 @@
     "onlyOneWikipedia": "Solo se puede subir un archivo de Wikipedia a la vez"
   },
   "explorer": {
-    "headTitle": "Explorador de contenido | Project NOMAD",
+    "headTitle": "Explorador de contenido",
     "title": "Explorador de contenido",
     "subtitle": "Explora y descarga contenido para leer sin conexión.",
     "offline": "Sin conexión a internet. Es posible que no puedas descargar archivos.",

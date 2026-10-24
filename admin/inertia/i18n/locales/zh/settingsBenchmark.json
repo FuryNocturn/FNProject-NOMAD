@@ -1,0 +1,198 @@
+{
+  "title": "系统性能测试",
+  "subtitle": "测量服务器的性能，并与 NOMAD 社区进行比较",
+  "na": "不适用",
+  "yes": "是",
+  "no": "否",
+  "unknown": "未知",
+  "types": {
+    "full": "完整",
+    "system": "系统",
+    "ai": "AI"
+  },
+  "errors": {
+    "benchmarkFailed": "性能测试失败",
+    "failedToStart": "启动性能测试失败",
+    "updateTagFailed": "更新构建者标签失败",
+    "submitFailed": "提交性能测试失败",
+    "alreadySubmitted": "此系统已提交过得分相同或更高的性能测试。"
+  },
+  "run": {
+    "title": "运行性能测试",
+    "compilingReportLower": "正在生成报告...",
+    "failedTitle": "性能测试失败",
+    "aiRequiredTitle": "需要 {{name}}",
+    "aiRequiredMessage": "完整性能测试需要安装 {{name}}。安装后即可测量您的 NOMAD 完整能力，并与社区分享结果。",
+    "goToApps": "前往应用安装 {{name}} →",
+    "intro": "运行性能测试，以测量系统的 CPU、内存、磁盘和 AI 推理性能。性能测试大约需要 3-6 分钟完成。",
+    "full": "运行完整性能测试",
+    "systemOnly": "仅系统",
+    "aiOnly": "仅 AI",
+    "aiOnlyDisabled": "必须安装 {{name}} 才能运行 AI 性能测试",
+    "aiNotInstalledNote": "<note>注意：</note>{{name}} 未安装。<installLink>安装它</installLink>即可运行完整性能测试并与社区分享结果。",
+    "aiInference": "AI 推理",
+    "tokensPerSecond": "每秒词元数",
+    "firstTokenIn": "首个词元用时 {{ms}} ms",
+    "waitingFirstToken": "正在等待首个词元...",
+    "utilization": "利用率",
+    "vramOf": "显存（共 {{total}} GB）",
+    "diskRead": "磁盘读取",
+    "diskWrite": "磁盘写入",
+    "benchmarkThroughput": "性能测试吞吐量",
+    "systemDiskActivity": "系统磁盘活动",
+    "compilingReport": "正在生成报告",
+    "calculatingScore": "正在计算您的 NOMAD 得分...",
+    "identifyingHardware": "正在识别硬件",
+    "detectingSystem": "正在检测您的系统...",
+    "memoryThroughput": "内存吞吐量",
+    "cpuLoad": "CPU 负载",
+    "eventsPerSecond": "每秒事件数",
+    "overall": "总体",
+    "temperature": "温度",
+    "cpuPackage": "CPU 封装",
+    "disk": "磁盘",
+    "read": "读取",
+    "write": "写入",
+    "runningBenchmark": "正在运行性能测试..."
+  },
+  "stages": {
+    "idle": "空闲",
+    "starting": "启动中",
+    "detecting_hardware": "检测硬件",
+    "running_cpu": "CPU 测试",
+    "running_memory": "内存测试",
+    "running_disk_read": "磁盘读取测试",
+    "running_disk_write": "磁盘写入测试",
+    "downloading_ai_model": "下载 AI 模型",
+    "running_ai": "AI 推理测试",
+    "calculating_score": "计算得分",
+    "completed": "完成",
+    "error": "错误"
+  },
+  "cores": {
+    "threadLoad": "线程 {{n}}：{{load}}%",
+    "threads_one": "{{count}} 个线程",
+    "threads_other": "{{count}} 个线程",
+    "perCell": "（每格 {{count}} 个）"
+  },
+  "results": {
+    "soFar": "目前的结果",
+    "partial": {
+      "running_cpu": "CPU",
+      "running_memory": "内存",
+      "running_disk_read": "读取",
+      "running_disk_write": "写入",
+      "running_ai": "AI"
+    }
+  },
+  "reveal": {
+    "report": "报告",
+    "continue": "继续"
+  },
+  "builderTag": {
+    "randomize": "随机生成",
+    "yourTag": "您的构建者标签："
+  },
+  "gauges": {
+    "cpu": "CPU",
+    "memory": "内存",
+    "diskRead": "磁盘读取",
+    "diskWrite": "磁盘写入",
+    "aiScore": "AI 得分"
+  },
+  "score": {
+    "nomadScore": "NOMAD 得分",
+    "systemScore": "系统得分",
+    "aiScore": "AI 得分",
+    "legacyScore": "旧版得分",
+    "partial": "部分",
+    "outOf100": "满分 100",
+    "v2Tooltip": "NOMAD Score v2 是相对于 NOMAD 参考配置的无上限指数，参考配置的得分恰好为 1000。得分越高越好，且没有上限。",
+    "referenceBuild": "参考配置 = 1000。",
+    "legacyScale": "旧版评分：{{score}} / 100",
+    "partialCta": "这是部分结果，不是您的 NOMAD 得分。运行完整性能测试即可获得您的 NOMAD 得分。",
+    "compositeDesc": "您的 NOMAD 得分是所有性能测试结果的加权综合值。"
+  },
+  "share": {
+    "title": "与社区分享",
+    "description": "将您的性能测试分享到社区排行榜。选择一个构建者标签来占据您的位置，或匿名分享。",
+    "yourBuilderTag": "您的构建者标签",
+    "anonymously": "匿名分享（排行榜上不显示构建者标签）",
+    "submitting": "提交中...",
+    "failedTitle": "提交失败",
+    "partialTitle": "部分性能测试",
+    "partialMessage": "此{{type}}性能测试无法与社区分享。请在已安装 {{name}} 的情况下运行完整性能测试，以分享您的结果。",
+    "sharedTitle": "已与社区分享",
+    "sharedMessage": "您的性能测试已提交到社区排行榜。感谢您的贡献！",
+    "viewLeaderboard": "查看排行榜 →"
+  },
+  "perf": {
+    "title": "系统性能"
+  },
+  "ai": {
+    "title": "AI 性能",
+    "tokensPerSecond": "每秒词元数",
+    "tokensTooltip": "AI 生成文本的速度。越高越好。30+ 词元/秒的响应感觉流畅，60+ 则感觉近乎即时。",
+    "ttft": "首词元时间",
+    "ttftTooltip": "发送消息后 AI 开始响应的速度。越低越好。低于 500ms 感觉近乎即时。",
+    "noDataTitle": "没有 AI 性能测试数据",
+    "noDataMessage": "运行完整性能测试或仅 AI 性能测试，以测量 AI 推理性能。"
+  },
+  "hardware": {
+    "title": "硬件信息",
+    "processor": "处理器",
+    "model": "型号",
+    "cores": "核心数",
+    "threads": "线程数",
+    "system": "系统",
+    "ram": "内存",
+    "diskType": "磁盘类型",
+    "notDetected": "未检测到"
+  },
+  "details": {
+    "title": "性能测试详情",
+    "benchmarkId": "性能测试 ID",
+    "type": "类型",
+    "date": "日期",
+    "rawScores": "原始得分",
+    "cpuScore": "CPU 得分",
+    "memoryScore": "内存得分",
+    "diskReadScore": "磁盘读取得分",
+    "diskWriteScore": "磁盘写入得分",
+    "aiTokensSec": "AI 词元/秒",
+    "aiTtft": "AI 首词元时间",
+    "info": "性能测试信息",
+    "fullId": "完整性能测试 ID",
+    "benchmarkType": "性能测试类型",
+    "runDate": "运行日期",
+    "builderTag": "构建者标签",
+    "notSet": "未设置",
+    "aiModelUsed": "使用的 AI 模型",
+    "submittedToRepo": "已提交到资料库",
+    "repoId": "资料库 ID",
+    "measuredV2": "实测性能 (v2)",
+    "cpuSingle": "CPU 单线程",
+    "cpuMulti": "CPU 多线程（{{threads}}T）",
+    "memoryThreads": "内存（{{threads}}T）",
+    "diskReadDirect": "磁盘读取 (O_DIRECT)",
+    "diskWriteDirect": "磁盘写入 (O_DIRECT)",
+    "eventsPerSec": "事件/秒",
+    "opsPerSec": "操作/秒",
+    "environment": "环境",
+    "runEnvironment": "运行环境",
+    "storageBackend": "存储后端",
+    "gpuCompute": "GPU 计算",
+    "detected": "已检测到"
+  },
+  "history": {
+    "title": "性能测试历史",
+    "recorded_one": "已记录 {{count}} 次性能测试",
+    "recorded_other": "已记录 {{count}} 次性能测试",
+    "score": "得分",
+    "shared": "已分享"
+  },
+  "empty": {
+    "title": "没有性能测试结果",
+    "message": "运行您的第一次性能测试，即可查看服务器的性能得分。"
+  }
+}

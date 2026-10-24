@@ -1,0 +1,156 @@
+{
+  "headTitle": "Assistent für die Schnelleinrichtung",
+  "offline": {
+    "title": "Keine Internetverbindung",
+    "message": "Zum Fortfahren ist eine Internetverbindung erforderlich. Bitte verbinde dich mit dem Internet und versuche es erneut."
+  },
+  "steps": {
+    "apps": "Apps",
+    "maps": "Karten",
+    "content": "Inhalte",
+    "creatorPacks": "Creator-Pakete",
+    "ai": "KI",
+    "review": "Überprüfung"
+  },
+  "progress": "Fortschritt",
+  "capabilities": {
+    "information": {
+      "name": "Informationsbibliothek",
+      "description": "Offline-Zugriff auf Wikipedia, medizinische Nachschlagewerke, Anleitungen und Enzyklopädien",
+      "feature1": "Komplettes Wikipedia offline",
+      "feature2": "Medizinische Nachschlagewerke und Erste-Hilfe-Leitfäden",
+      "feature3": "Reparaturanleitungen zum Selbermachen und How-to-Inhalte",
+      "feature4": "Bücher und Literatur von Project Gutenberg"
+    },
+    "education": {
+      "name": "Bildungsplattform",
+      "description": "Interaktive Lernplattform mit Videokursen und Übungen",
+      "feature1": "Mathematik- und Naturwissenschaftskurse der Khan Academy",
+      "feature2": "Lehrplaninhalte für die Klassen 1–12 (K-12)",
+      "feature3": "Interaktive Übungen und Quizze",
+      "feature4": "Fortschrittsverfolgung für Lernende"
+    },
+    "ai": {
+      "description": "Lokaler KI-Chat, der vollständig auf deiner Hardware läuft – keine Internetverbindung nötig",
+      "feature1": "Private Unterhaltungen, die dein Gerät nie verlassen",
+      "feature2": "Nach der Einrichtung ist keine Internetverbindung nötig",
+      "feature3": "Stelle Fragen, lass dir beim Schreiben helfen, sammle Ideen",
+      "feature4": "Läuft auf deiner eigenen Hardware mit lokalen KI-Modellen"
+    },
+    "installed": "Installiert",
+    "poweredBy": "Bereitgestellt von {{name}}"
+  },
+  "step1": {
+    "title": "Was soll NOMAD für dich tun?",
+    "subtitle": "Wähle die Funktionen aus, die du brauchst. Du kannst jederzeit später weitere hinzufügen.",
+    "allInstalled": "Alle verfügbaren Funktionen sind bereits installiert!",
+    "manageApps": "Apps verwalten",
+    "coreCapabilities": "Kernfunktionen",
+    "useRemoteOllama": "Remote-Ollama-Instanz verwenden",
+    "moreApps": {
+      "title": "Auf der Suche nach weiteren Apps?",
+      "description": "Notizen, Datenwerkzeuge und der gesamte Katalog an Zusatz-Apps stehen dir jederzeit im Supply Depot zur Verfügung.",
+      "button": "Supply Depot öffnen"
+    },
+    "confirmDisableAi": "Wenn du die KI deaktivierst, gehen deine KI-Modellauswahl, die Indexierungsrichtlinie und die Remote-Ollama-Konfiguration verloren. Fortfahren?"
+  },
+  "step2": {
+    "title": "Kartenregionen auswählen",
+    "subtitle": "Wähle Kartenregionen-Sammlungen aus, die für die Offline-Nutzung heruntergeladen werden sollen. Du kannst jederzeit später weitere Regionen herunterladen.",
+    "hint": "Brauchst du nur ein bestimmtes Land oder die ganze Welt? Einzelne Länder und eine vollständige Weltkarte kannst du jederzeit in der <link>Kartenverwaltung</link> installieren.",
+    "empty": "Derzeit sind keine Kartensammlungen verfügbar."
+  },
+  "step3": {
+    "title": "Inhalte auswählen",
+    "subtitleInformation": "Wähle Inhaltskategorien für Offline-Wissen aus.",
+    "subtitleOther": "Konfiguriere Inhalte für die ausgewählten Funktionen.",
+    "additionalContent": "Zusätzliche Inhalte",
+    "additionalContentHint": "Kuratierte Sammlungen als Offline-Nachschlagewerke",
+    "noContent": "Es sind keine inhaltsbasierten Funktionen ausgewählt. Du kannst diesen Schritt überspringen oder zurückgehen, um Funktionen auszuwählen, die Inhalte benötigen."
+  },
+  "creatorPacks": {
+    "title": "Creator-Pakete im Angebot",
+    "subtitle": "Videosammlungen von Creators, für die Offline-Wiedergabe in Kiwix heruntergeladen.",
+    "empty": "Derzeit sind keine Creator-Pakete verfügbar."
+  },
+  "ai": {
+    "title": "{{name}} konfigurieren",
+    "subtitle": "Wähle Modelle zum Herunterladen aus und lege fest, wie {{name}} mit neuen Inhalten umgeht.",
+    "modelsTitle": "KI-Modelle",
+    "modelsHint": "Wähle Modelle aus, die für die Offline-KI heruntergeladen werden sollen",
+    "remoteTitle": "Remote-Ollama ausgewählt",
+    "remoteMessage": "Die Modelle werden auf dem Remote-Rechner verwaltet. Nach der Einrichtung kannst du Modelle unter Einstellungen > KI-Assistent hinzufügen. Beachte, dass dies nur mit Ollama unterstützt wird, nicht mit LM Studio und anderer OpenAI-API-Software.",
+    "size": "Größe: {{size}}",
+    "supportsImages": "Unterstützt Bilder",
+    "noModels": "Derzeit sind keine empfohlenen KI-Modelle verfügbar.",
+    "autoIndexTitle": "Neue Inhalte für {{name}} automatisch indexieren?",
+    "autoIndexDescription": "Wenn du neue ZIMs, Dokumente oder kuratierte Inhalte hinzufügst, soll {{name}} sie automatisch indexieren, damit er sie bei der Beantwortung deiner Fragen durchsuchen kann?",
+    "always": "Ja, immer",
+    "manual": "Erst nachfragen",
+    "changeLater": "Du kannst das jederzeit im Bereich „Wissensdatenbank“ im KI-Chat ändern."
+  },
+  "review": {
+    "title": "Auswahl überprüfen",
+    "subtitle": "Überprüfe deine Auswahl, bevor die Einrichtung beginnt.",
+    "noSelectionsTitle": "Keine Auswahl getroffen",
+    "noSelectionsMessage": "Du hast nichts zum Installieren oder Herunterladen ausgewählt. Du kannst zurückgehen, um eine Auswahl zu treffen, oder zur Startseite zurückkehren.",
+    "capabilities": "Zu installierende Funktionen",
+    "mapCollections": "Herunterzuladende Kartensammlungen ({{total}})",
+    "creatorPacks": "Zu installierende Creator-Pakete ({{total}})",
+    "contentCategories": "Inhaltskategorien ({{total}})",
+    "files_one": "({{count}} Datei)",
+    "files_other": "({{count}} Dateien)",
+    "wikipedia": "Wikipedia",
+    "noDownload": "Kein Download",
+    "aiModels": "Herunterzuladende KI-Modelle ({{total}})",
+    "autoIndexSetting": "Einstellung zur automatischen Indexierung",
+    "autoIndexAlways": "Neue Inhalte werden bei ihrem Eintreffen <strong>automatisch indexiert</strong>, damit {{name}} sie durchsuchen kann.",
+    "autoIndexManual": "Neue Inhalte <strong>warten darauf, dass du sie freigibst</strong>, und zwar im Bereich „Wissensdatenbank“, bevor {{name}} sie indexiert.",
+    "readyTitle": "Bereit zum Start",
+    "readyMessage": "Klicke auf „Einrichtung abschließen“, um mit der Installation der Apps und dem Herunterladen der Inhalte zu beginnen. Das kann je nach Internetverbindung und Größe der Downloads einige Zeit dauern."
+  },
+  "footer": {
+    "capabilities_one": "{{count}} Funktion",
+    "capabilities_other": "{{count}} Funktionen",
+    "mapRegions_one": "{{count}} Kartenregion",
+    "mapRegions_other": "{{count}} Kartenregionen",
+    "categories_one": "{{count}} Inhaltskategorie",
+    "categories_other": "{{count}} Inhaltskategorien",
+    "creatorPacks_one": "{{count}} Creator-Paket",
+    "creatorPacks_other": "{{count}} Creator-Pakete",
+    "aiModels_one": "{{count}} KI-Modell",
+    "aiModels_other": "{{count}} KI-Modelle",
+    "summary": "{{capabilities}}, {{maps}}, {{categories}}, {{aiModels}} ausgewählt",
+    "summaryWithPacks": "{{capabilities}}, {{maps}}, {{categories}}, {{packs}}, {{aiModels}} ausgewählt",
+    "back": "Zurück",
+    "next": "Weiter",
+    "cancel": "Abbrechen & zur Startseite",
+    "complete": "Einrichtung abschließen"
+  },
+  "notifications": {
+    "needInternet": "Zum Abschließen der Einrichtung ist eine Internetverbindung erforderlich.",
+    "remoteFailed": "Remote-Ollama konnte nicht konfiguriert werden.",
+    "completed": "Einrichtungsassistent abgeschlossen! Deine Auswahl wird verarbeitet.",
+    "error": "Bei der Einrichtung ist ein Fehler aufgetreten. Einige Elemente wurden möglicherweise nicht verarbeitet."
+  },
+  "complete": {
+    "headTitle": "Schnelleinrichtung abgeschlossen",
+    "offlineMessage": "Es sieht so aus, als wärst du nicht mit dem Internet verbunden. Zum Installieren von Apps und Herunterladen von Inhalten ist eine Internetverbindung erforderlich.",
+    "activityTitle": "App-Installationsaktivität",
+    "backgroundTitle": "Läuft im Hintergrund",
+    "backgroundMessage": "Du kannst diese Seite jederzeit verlassen – die App-Installationen und Downloads laufen im Hintergrund weiter! Bitte beachte, dass die Informationsbibliothek (falls installiert) möglicherweise nicht verfügbar ist, bis alle ersten Downloads abgeschlossen sind.",
+    "goHome": "Zur Startseite"
+  },
+  "storage": {
+    "title": "Speicher",
+    "selectedInline": "(+{{size}} ausgewählt)",
+    "current": "Aktuell ({{size}})",
+    "selected": "Ausgewählt (+{{size}})",
+    "exceeds": "Überschreitet den verfügbaren Platz um {{size}}",
+    "remaining": "{{size}} bleiben frei"
+  },
+  "disk": {
+    "nasStorage": "NAS-Speicher",
+    "unknown": "Unbekannt"
+  }
+}

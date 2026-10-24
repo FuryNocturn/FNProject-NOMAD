@@ -8,7 +8,14 @@ import { Table, TableHead, TableBody, TableRow, TableHeader, TableCell } from '.
 
 // Paragraph component
 const Paragraph = ({ children }: { children: React.ReactNode }) => {
-  return <p className="mb-4 leading-relaxed text-desert-green-darker/85">{children}</p>
+  // Markdown wraps a standalone image in a paragraph, but Image renders a <figure>, which is
+  // not allowed inside <p> (invalid HTML, React hydration warning) — use a <div> for those
+  const Tag = React.Children.toArray(children).some(
+    (child) => React.isValidElement(child) && child.type === Image
+  )
+    ? 'div'
+    : 'p'
+  return <Tag className="mb-4 leading-relaxed text-desert-green-darker/85">{children}</Tag>
 }
 
 // Link component

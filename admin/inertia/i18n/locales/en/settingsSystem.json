@@ -78,7 +78,7 @@
     "cpuCores": "CPU Cores"
   },
   "advanced": {
-    "pageTitle": "Advanced Settings | Project NOMAD",
+    "pageTitle": "Advanced Settings",
     "title": "Advanced",
     "intro": "Advanced configuration for operators. These settings are optional — the defaults work for most deployments.",
     "connectivity": "Connectivity",
@@ -93,7 +93,7 @@
     "updateFailed": "There was an error updating the setting. Please try again."
   },
   "legal": {
-    "pageTitle": "Legal Notices | Project NOMAD",
+    "pageTitle": "Legal Notices",
     "title": "Legal Notices",
     "license": {
       "title": "License Agreement",
@@ -144,7 +144,7 @@
     }
   },
   "support": {
-    "pageTitle": "Support the Project | Project NOMAD",
+    "pageTitle": "Support the Project",
     "title": "Support the Project",
     "intro": "Project NOMAD is 100% free and open source — no subscriptions, no paywalls, no catch. If you'd like to help keep the project going, here are a few ways to show your support.",
     "coffee": {

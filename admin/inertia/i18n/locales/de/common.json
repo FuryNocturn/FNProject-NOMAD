@@ -1,0 +1,16 @@
+{
+  "backToHome": "Zurück zur Startseite",
+  "debugInfo": "Debug-Infos",
+  "version": "Project NOMAD™ Kommandozentrale v{{version}}",
+  "commandCenter": "Kommandozentrale",
+  "logoAlt": "Project-NOMAD-Logo",
+  "goToSettings": "Zu den Einstellungen",
+  "remove": "Entfernen",
+  "cancel": "Abbrechen",
+  "confirm": "Bestätigen",
+  "loading": "Wird geladen ...",
+  "loadingShort": "Lädt",
+  "dismissAlert": "Meldung schließen",
+  "noRecords": "Keine Einträge gefunden",
+  "internalError": "Ein interner Fehler ist aufgetreten. Bitte versuche es erneut oder prüfe die Konsole für Details. {{detail}}"
+}

@@ -1,0 +1,57 @@
+{
+  "nomad_kiwix_server": {
+    "name": "Informationsbibliothek",
+    "description": "Offline-Zugriff auf Wikipedia, medizinische Nachschlagewerke, Anleitungen und Enzyklopädien"
+  },
+  "nomad_ollama": {
+    "name": "KI-Assistent",
+    "description": "Lokaler KI-Chat, der vollständig auf deiner Hardware läuft – keine Internetverbindung nötig"
+  },
+  "nomad_cyberchef": {
+    "name": "Datenwerkzeuge",
+    "description": "Schweizer Taschenmesser für Datenkodierung, Verschlüsselung und Analyse"
+  },
+  "nomad_flatnotes": {
+    "name": "Notizen",
+    "description": "Einfache Notiz-App mit lokaler Speicherung"
+  },
+  "nomad_kolibri_2": {
+    "name": "Bildungsplattform (Gen 2)",
+    "description": "Interaktive Lernplattform mit Videokursen und Übungen"
+  },
+  "nomad_stirling_pdf": {
+    "description": "Lokal gehostetes PDF-Werkzeug – zusammenführen, teilen, komprimieren, konvertieren und mehr"
+  },
+  "nomad_filebrowser": {
+    "name": "Dateibrowser",
+    "description": "Webbasierter Dateimanager – Dateien auf deinem Gerät durchsuchen, hochladen, herunterladen und organisieren"
+  },
+  "nomad_calibreweb": {
+    "description": "Webbasierter E-Book-Reader und Bibliotheksverwaltung für deine Calibre-Sammlung"
+  },
+  "nomad_it_tools": {
+    "description": "Sammlung praktischer Hilfsprogramme für Entwickler – UUID, Hash, Kodierung, Formatierer und mehr"
+  },
+  "nomad_excalidraw": {
+    "description": "Virtuelles Whiteboard für Diagramme im handgezeichneten Stil – funktioniert komplett offline"
+  },
+  "nomad_meshtastic_web": {
+    "description": "Browserbasierter Client zur Verwaltung von Meshtastic-Mesh-Funkgeräten"
+  },
+  "nomad_meshcore_web": {
+    "description": "Browserbasierter Client für MeshCore-Mesh-Funkgeräte"
+  },
+  "nomad_homebox": {
+    "description": "Heiminventar und Vermögensverwaltung – behalte den Überblick über alles, was du besitzt"
+  },
+  "nomad_vaultwarden": {
+    "description": "Schlanker Bitwarden-kompatibler Passwortmanager-Server – sichere deine Zugangsdaten offline"
+  },
+  "nomad_jellyfin": {
+    "description": "Open-Source-Medienserver – streame deine Video-, Musik- und Fotobibliotheken"
+  },
+  "nomad_translate": {
+    "name": "Übersetzte Bibliothek",
+    "description": "Lies die Informationsbibliothek in einer anderen Sprache. Maschinelle Übersetzung, die offline auf der CPU funktioniert"
+  }
+}

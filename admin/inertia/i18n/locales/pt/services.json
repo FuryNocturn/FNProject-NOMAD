@@ -1,0 +1,57 @@
+{
+  "nomad_kiwix_server": {
+    "name": "Biblioteca de informações",
+    "description": "Acesso offline à Wikipedia, referências médicas, guias práticos e enciclopédias"
+  },
+  "nomad_ollama": {
+    "name": "Assistente de IA",
+    "description": "Chat de IA local que roda inteiramente no seu hardware - sem precisar de internet"
+  },
+  "nomad_cyberchef": {
+    "name": "Ferramentas de dados",
+    "description": "Canivete suíço para codificação, criptografia e análise de dados"
+  },
+  "nomad_flatnotes": {
+    "name": "Notas",
+    "description": "Aplicativo simples de anotações com armazenamento local"
+  },
+  "nomad_kolibri_2": {
+    "name": "Plataforma de educação (2ª geração)",
+    "description": "Plataforma de aprendizado interativa com videoaulas e exercícios"
+  },
+  "nomad_stirling_pdf": {
+    "description": "Ferramenta de manipulação de PDF hospedada localmente — mesclar, dividir, comprimir, converter e muito mais"
+  },
+  "nomad_filebrowser": {
+    "name": "Navegador de arquivos",
+    "description": "Gerenciador de arquivos baseado na web — navegue, envie, baixe e organize arquivos no seu dispositivo"
+  },
+  "nomad_calibreweb": {
+    "description": "Leitor de e-books e gerenciador de biblioteca baseado na web para a sua coleção do Calibre"
+  },
+  "nomad_it_tools": {
+    "description": "Coleção de utilitários práticos para desenvolvedores — UUID, hash, codificação, formatadores e mais"
+  },
+  "nomad_excalidraw": {
+    "description": "Quadro branco virtual para esboçar diagramas em estilo de desenho à mão — funciona totalmente offline"
+  },
+  "nomad_meshtastic_web": {
+    "description": "Cliente baseado em navegador para gerenciar dispositivos de rádio mesh Meshtastic"
+  },
+  "nomad_meshcore_web": {
+    "description": "Cliente baseado em navegador para dispositivos de rádio mesh MeshCore"
+  },
+  "nomad_homebox": {
+    "description": "Inventário doméstico e gestão de bens — acompanhe tudo o que você possui"
+  },
+  "nomad_vaultwarden": {
+    "description": "Servidor leve de gerenciador de senhas compatível com o Bitwarden — proteja suas credenciais offline"
+  },
+  "nomad_jellyfin": {
+    "description": "Servidor de mídia de código aberto — transmita suas bibliotecas de vídeos, músicas e fotos"
+  },
+  "nomad_translate": {
+    "name": "Biblioteca traduzida",
+    "description": "Leia a Biblioteca de informações em outro idioma. Tradução automática que funciona offline, na CPU"
+  }
+}

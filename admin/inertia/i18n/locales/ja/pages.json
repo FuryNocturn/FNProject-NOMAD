@@ -1,0 +1,13 @@
+{
+  "docs": {
+    "title": "ドキュメント"
+  },
+  "errors": {
+    "notFoundTitle": "ページが見つかりません",
+    "notFoundMessage": "このページは存在しません。",
+    "serverError": "サーバーエラー"
+  },
+  "about": {
+    "hello": "About からこんにちは!"
+  }
+}

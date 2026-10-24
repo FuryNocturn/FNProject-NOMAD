@@ -1,0 +1,231 @@
+{
+  "modal": {
+    "title": "知识库",
+    "close": "关闭",
+    "offline": "<strong>知识库不可用：</strong>Qdrant 向量数据库已离线。",
+    "starting": "启动中…",
+    "startQdrant": "启动 Qdrant",
+    "collectionLabel": "合集：",
+    "upload": "上传",
+    "whyTitle": "为什么要把文档上传到知识库？",
+    "why1Title": "{{name}} 知识库集成",
+    "why1Body": "当您把文档上传到知识库时，NOMAD 会处理并嵌入这些内容，使 {{name}} 可以直接访问。这样 {{name}} 就能在对话中引用您的特定文档，并根据您上传的数据给出更准确、更个性化的回答。",
+    "why2Title": "通过 OCR 增强文档处理",
+    "why2Body": "NOMAD 内置光学字符识别（OCR）功能，可以从扫描版 PDF 或照片等基于图像的文档中提取文字。这意味着即使您的文档不是标准文本格式，NOMAD 仍能处理并嵌入其内容，供 AI 使用。",
+    "why3Title": "信息图书馆集成",
+    "why3Body": "NOMAD 会自动发现并提取您保存到信息图书馆（如已安装）中的任何内容，使 {{name}} 无需额外步骤即可立即使用。",
+    "autoIndexTitle": "为 AI 自动索引新内容？",
+    "autoIndexHint": "已索引的内容在磁盘上通常占用原始文件大小的 5–10 倍。更改仅适用于此设置变更之后添加的新内容。",
+    "ingestPolicyAria": "摄取策略",
+    "policy": {
+      "Always": "始终",
+      "Manual": "手动"
+    },
+    "processingQueue": "处理队列",
+    "cleanUpFailed": "清理失败项",
+    "cancelAllJobs": "取消所有任务",
+    "cancelAllJobsTitle": "无论状态如何，停止并清空所有嵌入任务，包括卡住或正在进行的任务。这些任务已上传的源文件将被删除。",
+    "storedFiles": "已存储的知识库文件",
+    "searchIn": "搜索范围：",
+    "all": "全部",
+    "uncategorized": "未分类",
+    "manageCollections": "管理合集",
+    "resetRebuild": "重置并重建",
+    "resetRebuildTitle": "删除整个嵌入合集，并从头重新嵌入所有内容。将永久移除磁盘上已不存在的文件的向量。具有破坏性：需要输入 RESET 确认。",
+    "reembedAll": "全部重新嵌入",
+    "reembedAllTitle": "重新嵌入磁盘上的每个文件，逐个文件替换现有向量。磁盘上已不存在的文件的向量会被保留。当分块器或嵌入模型发生变化时使用。",
+    "syncStorage": "同步存储",
+    "syncStorageTitle": "扫描存储中的新文件，并将尚未嵌入的文件加入队列。可随时安全运行；不会触及已嵌入的内容。",
+    "warningsUnavailable": "文件警告不可用 — 无法读取存储状态。正在重试…",
+    "columns": {
+      "fileName": "文件名",
+      "size": "大小",
+      "uploaded": "上传时间",
+      "collection": "合集",
+      "active": "启用"
+    },
+    "managedByNomad": "由 NOMAD 管理",
+    "removeConfirm": "从知识库中移除？",
+    "deleting": "删除中…",
+    "delete": "删除",
+    "view": "查看",
+    "download": "下载",
+    "state": {
+      "indexed": "已索引",
+      "notIndexed": "未索引",
+      "failed": "失败",
+      "stalled": "已停滞"
+    },
+    "actions": {
+      "reembed": "重新嵌入",
+      "index": "索引",
+      "retry": "重试"
+    },
+    "warnings": {
+      "zeroChunks": "已嵌入 0 个分块 — 此文件没有文本内容。{{name}} 无法引用它。",
+      "partialStall": "预计 {{expected}} 个分块中仅嵌入了 {{embedded}} 个 — 摄取可能已停滞。"
+    },
+    "toasts": {
+      "policyAlways": "新内容将自动为 AI 建立索引。",
+      "policyManual": "新内容将等待您确认后再索引。",
+      "policyFailed": "更新索引策略失败。",
+      "collectionUpdated": "合集已更新。",
+      "collectionUpdateFailed": "更新合集失败。",
+      "activeUpdated": "启用状态已更新。",
+      "activeUpdateFailed": "更新启用状态失败。",
+      "collectionActiveUpdated": "合集启用状态已更新。",
+      "collectionActiveUpdateFailed": "更新合集启用状态失败。",
+      "fileRemoved": "文件已从知识库中移除。",
+      "deleteFailed": "删除文件失败。",
+      "fileQueued": "文件已加入嵌入队列。",
+      "queueFailed": "将文件加入队列失败。",
+      "failedCleaned": "失败的任务已清理。",
+      "cleanupFailed": "清理任务失败。",
+      "allCancelled": "所有嵌入任务已取消。",
+      "cancelFailed": "取消任务失败。",
+      "qdrantStartFailed": "启动 Qdrant 失败。",
+      "synced": "存储同步成功。如发现新文件，已将其加入处理队列。",
+      "syncFailed": "同步存储失败",
+      "reembedDone": "重新嵌入已完成。",
+      "reembedFailed": "重新嵌入知识库失败。",
+      "resetDone": "重置完成。",
+      "resetFailed": "重置知识库失败。",
+      "uploadQueued_one": "{{count}} 个文件已加入处理队列。",
+      "uploadQueued_other": "{{count}} 个文件已加入处理队列。",
+      "uploadFailed": "上传失败：{{name}}"
+    },
+    "cancelAllModal": {
+      "title": "取消所有嵌入任务？",
+      "confirm": "取消所有任务",
+      "cancel": "保留任务",
+      "body": "这将停止<strong>所有</strong>嵌入任务 — 包括仍在进行或卡住的任务 — 并清空处理队列。这些任务已上传的源文件将被删除，因此任何仍需索引的内容都需要重新上传。已完成嵌入的存储文件不受影响。确定要继续吗？"
+    },
+    "syncModal": {
+      "title": "确认同步？",
+      "confirm": "确认同步",
+      "body": "这将扫描 NOMAD 的存储目录中的所有新文件，并将其加入处理队列。如果您手动向存储中添加了文件，或想确保一切都是最新的，此操作会很有用。如果发现并处理新文件，资源占用可能会暂时升高。确定要继续吗？"
+    },
+    "reembedAllModal": {
+      "title": "重新嵌入所有文档？",
+      "confirming": "重新嵌入中…",
+      "intro_one": "这将重新处理您知识库中当前的每个文档 — 约 <strong>{{count}} 个文件</strong>。对于每个文件，NOMAD 会从 Qdrant 中删除现有嵌入，并使用当前的分块和嵌入模型加入新的嵌入任务。",
+      "intro_other": "这将重新处理您知识库中当前的每个文档 — 约 <strong>{{count}} 个文件</strong>。对于每个文件，NOMAD 会从 Qdrant 中删除现有嵌入，并使用当前的分块和嵌入模型加入新的嵌入任务。",
+      "purposeTitle": "用途",
+      "purposeBody": "当嵌入模型或分块逻辑发生变化，或您怀疑已存储的向量已过期时使用。磁盘上的文件<em>不会</em>被删除，源文件已不存在的孤立数据点也将原样保留（如需完全清空，请参见<em>重置并重建</em>）。",
+      "headsUp": "请注意",
+      "warn1_one": "嵌入 {{count}} 个文件可能耗时很长，尤其是大型 PDF 或 ZIM 归档。",
+      "warn1_other": "嵌入 {{count}} 个文件可能耗时很长，尤其是大型 PDF 或 ZIM 归档。",
+      "warn2": "在没有 GPU 加速的系统上，整个期间 CPU 使用率会持续较高。",
+      "warn3": "在所有文件完成重新嵌入之前，知识库搜索结果可能不完整。",
+      "warn4": "如果嵌入任务已在进行中，此操作将被拒绝 — 请先等待队列清空。"
+    },
+    "resetModal": {
+      "title": "重置并重建知识库？",
+      "confirm": "清除并重建",
+      "confirming": "重置中…",
+      "intro_one": "这将<strong>永久删除所有数据点</strong>（位于 <code>nomad_knowledge_base</code> Qdrant 合集中），并根据磁盘上当前的 <strong>{{count}} 个文件</strong>重建。该合集将被删除并重新创建，每个文件都会重新加入嵌入队列。",
+      "intro_other": "这将<strong>永久删除所有数据点</strong>（位于 <code>nomad_knowledge_base</code> Qdrant 合集中），并根据磁盘上当前的 <strong>{{count}} 个文件</strong>重建。该合集将被删除并重新创建，每个文件都会重新加入嵌入队列。",
+      "differsTitle": "与“全部重新嵌入”的区别",
+      "differs1": "<strong>全部重新嵌入</strong>会逐个文件替换向量。任何孤立数据点（其源文件曾从磁盘上被删除的向量）都会被保留。",
+      "differs2": "<strong>重置并重建</strong>会删除整个合集。孤立数据点将<strong>永远消失</strong>。之后 Qdrant 中只会存在磁盘上当前有的文件。",
+      "destructiveTitle": "此操作具有破坏性，且无法撤销",
+      "destructive1": "在嵌入完成之前，知识库搜索将为空（在仅有 CPU 的系统上可能长达数小时）。",
+      "destructive2": "重置期间的几秒钟内，Qdrant 合集不存在 — 在此期间的任何 RAG 聊天查询都可能返回“找不到合集”错误。请在重建开始前避免使用聊天。",
+      "destructive3": "如果嵌入任务已在进行中，此操作将被拒绝 — 请先等待队列清空。",
+      "typeToConfirm": "输入 <code>RESET</code> 以确认：",
+      "typeExactly": "请准确输入 RESET（大写，无空格）以启用确认按钮。"
+    },
+    "reembedFileModal": {
+      "title": "重新嵌入此文件？",
+      "confirm": "重新嵌入",
+      "confirming": "加入队列中…",
+      "body": "这将删除 <strong>{{name}}</strong> 的现有嵌入，并加入新的嵌入任务。磁盘上的文件不会被改动。",
+      "headsUp": "请注意",
+      "warn1": "对于大型 ZIM 归档，这可能需要很长时间，尤其是在仅有 CPU 的系统上。",
+      "warn2": "在新的嵌入完成之前，引用此文件的搜索结果将不完整。",
+      "warn3": "如果此文件的任务已在运行，重新嵌入将被拒绝 — 请先等待其完成。"
+    },
+    "viewer": {
+      "loadError": "无法加载文件。它可能已被移动，或其类型不可查看。"
+    }
+  },
+  "policyBanner": {
+    "title_one": "为 {{name}} 索引您现有的文件？",
+    "title_other": "为 {{name}} 索引您现有的 {{count, number}} 个文件？",
+    "body": "建立索引后，{{name}} 就可以在回答您的问题时引用这些内容。",
+    "indexExisting": "索引现有内容",
+    "maybeLater": "以后再说",
+    "indexStarted": "{{name}} 将为您现有的内容建立索引。您可以在知识库面板中查看进度。",
+    "indexFailed": "无法开始索引。请在知识库面板中重试。",
+    "laterSaved": "您的内容暂时保持未索引状态。您可以随时在知识库面板中选择启用。",
+    "laterFailed": "无法保存您的选择。请重试。"
+  },
+  "collections": {
+    "title": "管理合集",
+    "close": "关闭",
+    "intro": "重命名或移除合集。移除合集不会删除任何文件 — 它们只会被移回“未分类”，以便您重新整理。",
+    "empty": "还没有合集。在知识库表格中将文件分配到某个合集即可创建。",
+    "save": "保存",
+    "rename": "重命名",
+    "removeConfirm": "移除“{{name}}”？文件将移至“未分类”。",
+    "renamed": "合集已重命名。",
+    "renameFailed": "重命名合集失败。",
+    "removed": "合集已移除。",
+    "removeFailed": "移除合集失败。"
+  },
+  "combobox": {
+    "uncategorized": "未分类",
+    "create": "+ 创建“{{name}}”",
+    "noMatches": "无匹配项"
+  },
+  "nomadMd": {
+    "intro": "在每次聊天中，作为系统提示词传递给 {{name}} 的自定义指令。",
+    "tip": "提示：此文件同时存储在磁盘上的 <code>storage/NOMAD.md</code>，可直接编辑。",
+    "save": "保存",
+    "saved": "NOMAD.md 已保存。将应用于新消息。",
+    "saveFailed": "保存 NOMAD.md 失败。",
+    "closeAria": "关闭",
+    "template": "# NOMAD.md\n\n<!--\n此文件保存您的 AI 助手的自定义指令。这里的所有内容都会在每次聊天时\n作为系统提示词发送给助手 — 可用来设定角色、语气、优先事项和长期规则。\n\n它同时存储在磁盘上的 storage/NOMAD.md，因此您可以直接编辑。\n请用您自己的指令替换此模板，然后点击“保存”。\n-->\n\n## 关于我\n\n- （例如：我正在寒冷地区建造一处离网家园。）\n\n## 助手应如何回复\n\n- 简明实用。\n- 优先考虑安全和经过验证的方法。\n"
+  },
+  "guardrail": {
+    "title": "确认大规模 AI 索引操作",
+    "body": "为 AI 助手索引这批内容，除原始下载文件外，还将占用约 <strong>{{size}}</strong> 的磁盘空间用于嵌入。",
+    "freeDisk": "这超过了您剩余可用磁盘空间的 10%（剩余 {{free}}）。嵌入可能需要数小时，且一旦开始就很难干净地中断。",
+    "manualHint": "如果您希望在索引前逐项审核，请在此取消，并在知识库面板中将自动索引设置切换为<strong>手动</strong>。",
+    "proceed": "仍然继续"
+  },
+  "jobs": {
+    "processingQueue": "处理队列",
+    "empty": "当前没有正在处理的文件",
+    "lastActivity": "· 最近活动：{{time}}",
+    "chunks": "· {{count}} 个分块",
+    "health": {
+      "waiting": {
+        "label": "等待中",
+        "aria": "任务已排队，等待开始"
+      },
+      "healthy": {
+        "label": "活动",
+        "aria": "任务正在以正常速率嵌入"
+      },
+      "slow": {
+        "label": "缓慢",
+        "aria": "任务已至少 2 分钟没有进展"
+      },
+      "stalled": {
+        "label": "已停滞",
+        "aria": "任务已至少 5 分钟没有进展"
+      },
+      "failed": {
+        "label": "失败",
+        "aria": "任务失败"
+      }
+    },
+    "timeAgo": {
+      "justNow": "刚刚",
+      "seconds": "{{count}} 秒前",
+      "minutes": "{{count}} 分钟前",
+      "hours": "{{count}} 小时前"
+    }
+  }
+}

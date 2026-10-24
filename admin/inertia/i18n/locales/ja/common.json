@@ -1,0 +1,16 @@
+{
+  "backToHome": "ホームに戻る",
+  "debugInfo": "デバッグ情報",
+  "version": "Project NOMAD™ コマンドセンター v{{version}}",
+  "commandCenter": "コマンドセンター",
+  "logoAlt": "Project NOMAD ロゴ",
+  "goToSettings": "設定へ移動",
+  "remove": "削除",
+  "cancel": "キャンセル",
+  "confirm": "確認",
+  "loading": "読み込み中...",
+  "loadingShort": "読み込み中",
+  "dismissAlert": "アラートを閉じる",
+  "noRecords": "レコードが見つかりません",
+  "internalError": "内部エラーが発生しました。もう一度お試しいただくか、コンソールで詳細を確認してください。{{detail}}"
+}

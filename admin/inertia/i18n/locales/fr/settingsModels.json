@@ -1,0 +1,216 @@
+{
+  "models": {
+    "headTitle": "Paramètres de {{name}}",
+    "intro": "Gérez facilement les paramètres de {{name}} et les modèles installés. Nous recommandons de commencer par de petits modèles afin de voir comment ils se comportent sur votre système avant de passer à des modèles plus gros.",
+    "depsMissing": "Les dépendances de {{name}} ne sont pas installées. Veuillez les installer pour gérer les modèles d'IA.",
+    "sections": {
+      "settings": "Paramètres",
+      "installed": "Modèles installés",
+      "remote": "Connexion distante",
+      "models": "Modèles"
+    },
+    "toasts": {
+      "remoteConfigFailed": "Échec de la configuration d'Ollama distant.",
+      "remoteCleared": "Configuration d'Ollama distant effacée.",
+      "remoteClearFailed": "Échec de l'effacement d'Ollama distant.",
+      "listRefreshed": "Liste des modèles actualisée depuis le serveur distant.",
+      "installStarted": "Téléchargement du modèle {{model}} lancé. Cela peut prendre un certain temps.",
+      "installFailed": "Une erreur s'est produite lors de l'installation du modèle : {{model}}. Veuillez réessayer.",
+      "deleted": "Modèle supprimé : {{model}}.",
+      "deleteFailed": "Une erreur s'est produite lors de la suppression du modèle : {{model}}. Veuillez réessayer.",
+      "settingUpdated": "Paramètre mis à jour avec succès.",
+      "settingFailed": "Une erreur s'est produite lors de la mise à jour du paramètre. Veuillez réessayer."
+    },
+    "deleteModal": {
+      "title": "Supprimer le modèle ?",
+      "confirm": "Supprimer",
+      "body": "Voulez-vous vraiment supprimer ce modèle ? Vous devrez le télécharger à nouveau si vous souhaitez l'utiliser à l'avenir."
+    },
+    "contextWindowOptions": {
+      "4096": "4K tokens",
+      "8192": "8K tokens",
+      "16384": "16K tokens",
+      "32768": "32K tokens",
+      "65536": "64K tokens",
+      "131072": "128K tokens",
+      "auto": "Auto (recommandé)"
+    },
+    "relevancePresets": {
+      "off": "Désactivé — utiliser tous les passages récupérés",
+      "lenient": "Tolérant",
+      "balanced": "Équilibré (recommandé)",
+      "strict": "Strict"
+    },
+    "relevanceCustom": "Personnalisé ({{value}})",
+    "responseStyles": {
+      "auto": "Auto (recommandé)",
+      "focused": "Ciblé (factuel, reproductible)",
+      "creative": "Créatif (varié, exploratoire)",
+      "off": "Valeurs par défaut du backend (ne rien envoyer)"
+    },
+    "tasksModelDefault": "Utiliser le modèle de chat",
+    "tasksModelNotInstalled": "{{model}} (non installé)",
+    "settings": {
+      "chatSuggestions": {
+        "label": "Suggestions de discussion",
+        "description": "Afficher dans l'interface de chat des amorces de conversation générées par l'IA"
+      },
+      "flashAttention": {
+        "label": "Flash Attention",
+        "description": "Active OLLAMA_FLASH_ATTENTION=1 pour une meilleure efficacité mémoire. Désactivez-la en cas d'instabilité. Prend effet après la réinstallation de l'Assistant IA."
+      },
+      "autoThinking": {
+        "label": "Utiliser automatiquement la réflexion lorsqu'un modèle la prend en charge",
+        "description": "Définit la valeur par défaut pour les modèles capables de réfléchir. Vous pouvez toujours activer ou désactiver la réflexion pour un modèle donné dans la fenêtre de chat."
+      },
+      "rag": {
+        "label": "Recherche dans la Base de connaissances",
+        "description": "Recherche des documents pertinents dans votre base de connaissances avant de répondre. Désactivez cette option pour économiser de la mémoire et accélérer les réponses lorsque votre base de connaissances est petite ou vide. C'est le même interrupteur que celui de la fenêtre de chat."
+      },
+      "assistantName": {
+        "label": "Nom de l'assistant",
+        "help": "Donnez à votre assistant IA un nom personnalisé qui sera utilisé dans l'interface de chat et dans d'autres zones de l'application.",
+        "placeholder": "Assistant IA"
+      },
+      "tasksModel": {
+        "label": "Modèle de tâches",
+        "help": "Modèle petit et rapide utilisé pour le travail en arrière-plan, comme les titres de discussion et les suggestions. Laissez-le sur le modèle de chat pour utiliser celui que le chat emploie. Évitez les modèles de raisonnement ici — ils sont lents pour des tâches courtes et accessoires."
+      },
+      "minRelevance": {
+        "label": "Pertinence de la Base de connaissances",
+        "help": "Degré de correspondance requis entre un passage de la base de connaissances et votre question pour qu'il soit utilisé dans une réponse. Des réglages plus stricts écartent les passages sans rapport ; trop stricts, ils écartent aussi des passages réellement utiles. Lorsque rien n'atteint le seuil, l'assistant répond à partir de ses propres connaissances."
+      },
+      "relevanceCheck": {
+        "label": "Revérifier les correspondances de la base de connaissances",
+        "description": "Avant de répondre, demande au Modèle de tâches si les passages trouvés concernent réellement votre question, et les écarte (sans les citer) dans le cas contraire. Utile surtout pour les grandes bibliothèques comme Wikipedia ou Project Gutenberg, où quelque chose semble toujours similaire. Nécessite un Modèle de tâches performant (environ 8 milliards de paramètres ou plus) ; les modèles plus petits rejettent trop de bonnes correspondances. Ajoute un court délai à chaque réponse."
+      },
+      "responseStyle": {
+        "label": "Style de réponse",
+        "help": "Degré d'audace de l'assistant dans le choix du mot suivant. Auto suit la recommandation de l'auteur du modèle et complète le reste, et convient à la plupart des gens. Ciblé donne des réponses plus courtes, plus stables et plus reproductibles, et convient mieux aux recherches d'informations. Créatif varie davantage la formulation, au détriment d'une certaine précision."
+      },
+      "contextWindow": {
+        "label": "Fenêtre de contexte",
+        "help": "Quantité de conversation et de contexte de la base de connaissances que chaque réponse peut prendre en compte. Auto la dimensionne pour chaque modèle d'après sa limite d'entraînement et votre mémoire disponible. Choisir une valeur définit une limite supérieure — elle peut réduire la fenêtre pour économiser de la mémoire, mais ne la porte jamais au-delà de ce qu'un modèle prend en charge."
+      },
+      "inEffect": "Actuellement en vigueur : {{windows}}. Les changements prennent effet pour les nouvelles conversations."
+    },
+    "installed": {
+      "empty": "Aucun modèle installé. Parcourez le catalogue de modèles ci-dessous pour commencer.",
+      "model": "Modèle",
+      "parameters": "Paramètres",
+      "diskSize": "Taille sur disque",
+      "action": "Action",
+      "na": "N/D",
+      "delete": "Supprimer"
+    },
+    "remote": {
+      "description": "Connectez-vous à n'importe quel serveur d'API compatible OpenAI — Ollama, LM Studio, llama.cpp et d'autres sont tous pris en charge.",
+      "ollamaHostNote": "Pour les instances Ollama distantes, l'hôte doit être démarré avec <code>OLLAMA_HOST=0.0.0.0</code>.",
+      "urlLabel": "URL de l'API Ollama/OpenAI distante",
+      "urlPlaceholder": "http://192.168.1.100:11434  (ou :1234 pour les applications compatibles avec l'API OpenAI)",
+      "saveTest": "Enregistrer et tester",
+      "clear": "Effacer"
+    },
+    "catalog": {
+      "alertTitle": "Le téléchargement de modèles n'est pris en charge qu'avec un backend Ollama.",
+      "alertMessage": "Si vous êtes connecté à un hôte d'API OpenAI (par ex. LM Studio), veuillez télécharger les modèles directement dans cette application.",
+      "searchPlaceholder": "Rechercher des modèles de langage..",
+      "refresh": "Actualiser les modèles",
+      "name": "Nom",
+      "estimatedPulls": "Téléchargements estimés",
+      "lastUpdated": "Dernière mise à jour",
+      "tag": "Tag",
+      "inputType": "Type d'entrée",
+      "contextSize": "Taille du contexte",
+      "modelSize": "Taille du modèle",
+      "action": "Action",
+      "delete": "Supprimer",
+      "install": "Installer",
+      "loadMore": "Charger plus"
+    }
+  },
+  "apps": {
+    "headTitle": "Paramètres des applications",
+    "title": "Applications",
+    "description": "Gérez les applications disponibles dans votre instance de Project NOMAD. Des vérifications de mise à jour nocturnes détecteront automatiquement la disponibilité de nouvelles versions de ces applications.",
+    "checkUpdates": "Rechercher des mises à jour",
+    "columns": {
+      "name": "Nom",
+      "location": "Emplacement",
+      "installed": "Installé",
+      "version": "Version",
+      "actions": "Actions"
+    },
+    "errors": {
+      "offlineCheck": "Vous devez disposer d'une connexion Internet pour rechercher des mises à jour.",
+      "checkFailed": "Échec de la recherche de mises à jour : {{error}}",
+      "offlineInstall": "Vous devez disposer d'une connexion Internet pour installer des services.",
+      "installFailed": "Échec de l'installation du service : {{error}}",
+      "reinstallFailed": "Échec de la réinstallation forcée du service : {{error}}",
+      "updateFailed": "Échec de la mise à jour du service : {{error}}",
+      "unknown": "Erreur inconnue",
+      "startFailed": "Échec du démarrage du service : {{error}}",
+      "stopFailed": "Échec de l'arrêt du service : {{error}}",
+      "restartFailed": "Échec du redémarrage du service : {{error}}",
+      "dispatchFailed": "Échec du lancement de la recherche de mises à jour"
+    },
+    "installModal": {
+      "title": "Installer le service ?",
+      "confirm": "Installer",
+      "body": "Voulez-vous vraiment installer {{name}} ? Cela démarrera le service et le rendra disponible dans votre instance de Project NOMAD. Cela peut prendre un certain temps."
+    },
+    "forceReinstall": {
+      "title": "Forcer la réinstallation ?",
+      "button": "Forcer la réinstallation",
+      "body": "Voulez-vous vraiment forcer la réinstallation de {{name}} ? Cela <strong>EFFACERA TOUTES LES DONNÉES</strong> de ce service et ne peut pas être annulé. Ne le faites que si le service dysfonctionne et que les autres étapes de dépannage ont échoué."
+    },
+    "affectModal": {
+      "stopTitle": "Arrêter le service ?",
+      "startTitle": "Démarrer le service ?",
+      "stop": "Arrêter",
+      "start": "Démarrer",
+      "stopBody": "Voulez-vous vraiment arrêter {{name}} ?",
+      "startBody": "Voulez-vous vraiment démarrer {{name}} ?"
+    },
+    "restartModal": {
+      "title": "Redémarrer le service ?",
+      "button": "Redémarrer",
+      "body": "Voulez-vous vraiment redémarrer {{name}} ?"
+    },
+    "install": "Installer",
+    "open": "Ouvrir",
+    "update": "Mettre à jour",
+    "updating": "Mise à jour..."
+  },
+  "updateModal": {
+    "title": "Mettre à jour le service",
+    "confirm": "Mettre à jour",
+    "body": "Mettre à jour <strong>{{name}}</strong> de <code>{{from}}</code> vers <code>{{to}}</code> ?",
+    "preserved": "Vos données et votre configuration seront conservées pendant la mise à jour.",
+    "viewReleaseNotes": "Voir les notes de version",
+    "showVersions": "Afficher les versions disponibles",
+    "hideVersions": "Masquer les versions disponibles",
+    "loadingVersions": "Chargement des versions...",
+    "noVersions": "Aucune autre version disponible",
+    "latest": "Dernière",
+    "releaseNotes": "Notes de version",
+    "majorWarning": "Il n'est pas recommandé de passer à une nouvelle version majeure (par ex. 1.8.2 → 2.0.0) sans avoir vérifié la compatibilité avec votre configuration actuelle. Consultez toujours les notes de version et testez si possible dans un environnement de préproduction.",
+    "loadFailed": "Échec du chargement des versions disponibles"
+  },
+  "activity": {
+    "title": "Activité d'installation"
+  },
+  "downloads": {
+    "title": "Téléchargements de modèles actifs",
+    "empty": "Aucun téléchargement de modèle actif",
+    "cancelTitle": "Annuler le téléchargement",
+    "downloading": "Téléchargement...",
+    "cancelModal": {
+      "title": "Annuler le téléchargement ?",
+      "confirm": "Annuler le téléchargement",
+      "cancel": "Continuer le téléchargement",
+      "stop": "Arrêter le téléchargement de <model>{{model}}</model> ?",
+      "note": "Les données déjà téléchargées resteront sur le disque. Si vous retéléchargez ce modèle plus tard, le téléchargement reprendra là où il s'est arrêté au lieu de recommencer."
+    }
+  }
+}

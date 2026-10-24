@@ -1,0 +1,231 @@
+{
+  "modal": {
+    "title": "Base de connaissances",
+    "close": "Fermer",
+    "offline": "<strong>Base de connaissances indisponible :</strong> la base de données vectorielle Qdrant est hors ligne.",
+    "starting": "Démarrage…",
+    "startQdrant": "Démarrer Qdrant",
+    "collectionLabel": "Collection :",
+    "upload": "Téléverser",
+    "whyTitle": "Pourquoi téléverser des documents dans votre Base de connaissances ?",
+    "why1Title": "Intégration de la Base de connaissances avec {{name}}",
+    "why1Body": "Lorsque vous téléversez des documents dans votre Base de connaissances, NOMAD traite et intègre (embedding) leur contenu, le rendant directement accessible à {{name}}. Cela permet à {{name}} de se référer à vos documents pendant les conversations et de fournir des réponses plus précises et personnalisées, basées sur vos données téléversées.",
+    "why2Title": "Traitement de documents amélioré grâce à l'OCR",
+    "why2Body": "NOMAD intègre des capacités de reconnaissance optique de caractères (OCR) qui lui permettent d'extraire le texte de documents basés sur des images, comme des PDF numérisés ou des photos. Ainsi, même si vos documents ne sont pas dans un format texte standard, NOMAD peut tout de même traiter et intégrer leur contenu pour l'IA.",
+    "why3Title": "Intégration de la Bibliothèque d'informations",
+    "why3Body": "NOMAD détectera et extraira automatiquement tout contenu que vous enregistrez dans votre Bibliothèque d'informations (si elle est installée), le rendant instantanément disponible pour {{name}} sans aucune étape supplémentaire.",
+    "autoIndexTitle": "Indexer automatiquement le nouveau contenu pour l'IA ?",
+    "autoIndexHint": "Le contenu indexé occupe généralement 5 à 10 fois la taille du fichier d'origine sur le disque. Les changements s'appliquent au nouveau contenu ajouté après la modification de ce réglage.",
+    "ingestPolicyAria": "Politique d'ingestion",
+    "policy": {
+      "Always": "Toujours",
+      "Manual": "Manuel"
+    },
+    "processingQueue": "File de traitement",
+    "cleanUpFailed": "Nettoyer les échecs",
+    "cancelAllJobs": "Annuler toutes les tâches",
+    "cancelAllJobsTitle": "Arrête et vide toutes les tâches d'embedding, quel que soit leur état, y compris celles bloquées ou en cours. Supprime les fichiers sources téléversés pour ces tâches.",
+    "storedFiles": "Fichiers de la Base de connaissances stockés",
+    "searchIn": "Rechercher dans :",
+    "all": "Tout",
+    "uncategorized": "Non classé",
+    "manageCollections": "Gérer les collections",
+    "resetRebuild": "Réinitialiser et reconstruire",
+    "resetRebuildTitle": "Supprime toute la collection d'embeddings et réintègre tout depuis zéro. Supprime définitivement les vecteurs des fichiers qui ne sont plus sur le disque. Destructif : il faut saisir RESET pour confirmer.",
+    "reembedAll": "Tout réintégrer",
+    "reembedAllTitle": "Réintègre chaque fichier présent sur le disque, en remplaçant les vecteurs existants fichier par fichier. Les vecteurs des fichiers qui ne sont plus sur le disque sont conservés. À utiliser si le découpage ou le modèle d'embedding a changé.",
+    "syncStorage": "Synchroniser le stockage",
+    "syncStorageTitle": "Analyse le stockage à la recherche de nouveaux fichiers et met en file d'attente ceux qui n'ont pas encore été intégrés. Peut être lancé à tout moment ; ne touche pas au contenu déjà intégré.",
+    "warningsUnavailable": "Avertissements de fichiers indisponibles — impossible de lire l'état du stockage. Nouvelle tentative…",
+    "columns": {
+      "fileName": "Nom du fichier",
+      "size": "Taille",
+      "uploaded": "Téléversé",
+      "collection": "Collection",
+      "active": "Actif"
+    },
+    "managedByNomad": "Géré par NOMAD",
+    "removeConfirm": "Retirer de la base de connaissances ?",
+    "deleting": "Suppression…",
+    "delete": "Supprimer",
+    "view": "Afficher",
+    "download": "Télécharger",
+    "state": {
+      "indexed": "Indexé",
+      "notIndexed": "Non indexé",
+      "failed": "Échec",
+      "stalled": "Bloqué"
+    },
+    "actions": {
+      "reembed": "Réintégrer",
+      "index": "Indexer",
+      "retry": "Réessayer"
+    },
+    "warnings": {
+      "zeroChunks": "0 segment intégré — ce fichier ne contient aucun texte. {{name}} ne peut pas s'y référer.",
+      "partialStall": "Seuls {{embedded}} segments sur env. {{expected}} ont été intégrés — l'ingestion est peut-être bloquée."
+    },
+    "toasts": {
+      "policyAlways": "Le nouveau contenu sera indexé automatiquement pour l'IA.",
+      "policyManual": "Le nouveau contenu attendra votre accord.",
+      "policyFailed": "Échec de la mise à jour de la politique d'indexation.",
+      "collectionUpdated": "Collection mise à jour.",
+      "collectionUpdateFailed": "Échec de la mise à jour de la collection.",
+      "activeUpdated": "État actif mis à jour.",
+      "activeUpdateFailed": "Échec de la mise à jour de l'état actif.",
+      "collectionActiveUpdated": "État actif de la collection mis à jour.",
+      "collectionActiveUpdateFailed": "Échec de la mise à jour de l'état actif de la collection.",
+      "fileRemoved": "Fichier retiré de la base de connaissances.",
+      "deleteFailed": "Échec de la suppression du fichier.",
+      "fileQueued": "Fichier mis en file d'attente pour l'embedding.",
+      "queueFailed": "Échec de la mise en file d'attente du fichier.",
+      "failedCleaned": "Tâches en échec nettoyées.",
+      "cleanupFailed": "Échec du nettoyage des tâches.",
+      "allCancelled": "Toutes les tâches d'embedding ont été annulées.",
+      "cancelFailed": "Échec de l'annulation des tâches.",
+      "qdrantStartFailed": "Échec du démarrage de Qdrant.",
+      "synced": "Stockage synchronisé avec succès. Si de nouveaux fichiers ont été trouvés, ils ont été mis en file d'attente pour traitement.",
+      "syncFailed": "Échec de la synchronisation du stockage",
+      "reembedDone": "Réintégration terminée.",
+      "reembedFailed": "Échec de la réintégration de la base de connaissances.",
+      "resetDone": "Réinitialisation terminée.",
+      "resetFailed": "Échec de la réinitialisation de la base de connaissances.",
+      "uploadQueued_one": "{{count}} fichier mis en file d'attente pour traitement.",
+      "uploadQueued_other": "{{count}} fichiers mis en file d'attente pour traitement.",
+      "uploadFailed": "Échec du téléversement : {{name}}"
+    },
+    "cancelAllModal": {
+      "title": "Annuler toutes les tâches d'embedding ?",
+      "confirm": "Annuler toutes les tâches",
+      "cancel": "Conserver les tâches",
+      "body": "Cela arrête <strong>toutes</strong> les tâches d'embedding — y compris celles encore en cours ou bloquées — et vide la file de traitement. Les fichiers sources téléversés pour ces tâches sont supprimés ; vous devrez donc téléverser à nouveau tout ce que vous souhaitez encore indexer. Les fichiers stockés dont l'embedding est déjà terminé ne sont pas affectés. Voulez-vous vraiment continuer ?"
+    },
+    "syncModal": {
+      "title": "Confirmer la synchronisation ?",
+      "confirm": "Confirmer la synchronisation",
+      "body": "Cela analysera les répertoires de stockage de NOMAD à la recherche de nouveaux fichiers et les mettra en file d'attente pour traitement. C'est utile si vous avez ajouté des fichiers manuellement au stockage ou si vous voulez vous assurer que tout est à jour. Cela peut provoquer une hausse temporaire de l'utilisation des ressources si de nouveaux fichiers sont trouvés et traités. Voulez-vous vraiment continuer ?"
+    },
+    "reembedAllModal": {
+      "title": "Réintégrer tous les documents ?",
+      "confirming": "Réintégration…",
+      "intro_one": "Cela retraitera tous les documents actuellement présents dans votre base de connaissances — environ <strong>{{count}} fichier</strong>. Pour chaque fichier, NOMAD supprimera les embeddings existants de Qdrant et mettra en file d'attente une nouvelle tâche d'embedding avec le découpage et le modèle d'embedding actuels.",
+      "intro_other": "Cela retraitera tous les documents actuellement présents dans votre base de connaissances — environ <strong>{{count}} fichiers</strong>. Pour chaque fichier, NOMAD supprimera les embeddings existants de Qdrant et mettra en file d'attente une nouvelle tâche d'embedding avec le découpage et le modèle d'embedding actuels.",
+      "purposeTitle": "À quoi cela sert",
+      "purposeBody": "Utilisez cette option lorsque le modèle d'embedding ou la logique de découpage a changé, ou si vous soupçonnez que les vecteurs stockés sont obsolètes. Les fichiers sur le disque ne sont <em>pas</em> supprimés, et les points orphelins dont le fichier source n'est plus présent seront conservés intacts (voir <em>Réinitialiser et reconstruire</em> si vous voulez repartir de zéro).",
+      "headsUp": "Attention",
+      "warn1_one": "L'embedding de {{count}} fichier peut prendre beaucoup de temps, en particulier pour les gros PDF ou les archives ZIM.",
+      "warn1_other": "L'embedding de {{count}} fichiers peut prendre beaucoup de temps, en particulier pour les gros PDF ou les archives ZIM.",
+      "warn2": "Sur les systèmes sans accélération GPU, attendez-vous à une utilisation élevée et soutenue du CPU pendant toute la durée.",
+      "warn3": "Les résultats de recherche de la Base de connaissances peuvent être incomplets tant que tous les fichiers n'ont pas fini d'être réintégrés.",
+      "warn4": "Si des tâches d'embedding sont déjà en cours, cette action sera refusée — attendez d'abord que la file se vide."
+    },
+    "resetModal": {
+      "title": "Réinitialiser et reconstruire la Base de connaissances ?",
+      "confirm": "Effacer et reconstruire",
+      "confirming": "Réinitialisation…",
+      "intro_one": "Cela <strong>supprimera définitivement tous les points</strong> de la collection Qdrant <code>nomad_knowledge_base</code> et la reconstruira à partir du <strong>{{count}} fichier</strong> actuellement sur le disque. La collection est supprimée, recréée, et chaque fichier est remis en file d'attente pour l'embedding.",
+      "intro_other": "Cela <strong>supprimera définitivement tous les points</strong> de la collection Qdrant <code>nomad_knowledge_base</code> et la reconstruira à partir des <strong>{{count}} fichiers</strong> actuellement sur le disque. La collection est supprimée, recréée, et chaque fichier est remis en file d'attente pour l'embedding.",
+      "differsTitle": "Différence avec Tout réintégrer",
+      "differs1": "<strong>Tout réintégrer</strong> remplace les vecteurs fichier par fichier. Les points orphelins (vecteurs dont le fichier source a été supprimé du disque à un moment donné) sont conservés.",
+      "differs2": "<strong>Réinitialiser et reconstruire</strong> supprime toute la collection. Les points orphelins sont <strong>définitivement perdus</strong>. Seuls les fichiers actuellement sur le disque existeront ensuite dans Qdrant.",
+      "destructiveTitle": "Cette action est destructive et ne peut pas être annulée",
+      "destructive1": "La recherche dans la Base de connaissances sera vide jusqu'à la fin de l'embedding (potentiellement plusieurs heures sur les systèmes sans GPU).",
+      "destructive2": "Pendant quelques secondes lors de la réinitialisation, la collection Qdrant n'existe pas — toute requête de chat avec RAG durant cette fenêtre peut renvoyer une erreur « collection introuvable ». Évitez d'utiliser le chat tant que la reconstruction n'a pas commencé.",
+      "destructive3": "Si des tâches d'embedding sont déjà en cours, cette action sera refusée — attendez d'abord que la file se vide.",
+      "typeToConfirm": "Saisissez <code>RESET</code> pour confirmer :",
+      "typeExactly": "Saisissez exactement RESET (en majuscules, sans espaces) pour activer le bouton de confirmation."
+    },
+    "reembedFileModal": {
+      "title": "Réintégrer ce fichier ?",
+      "confirm": "Réintégrer",
+      "confirming": "Mise en file d'attente…",
+      "body": "Cela supprimera les embeddings existants de <strong>{{name}}</strong> et mettra en file d'attente une nouvelle tâche d'embedding. Le fichier sur le disque n'est pas modifié.",
+      "headsUp": "Attention",
+      "warn1": "Pour les grosses archives ZIM, cela peut prendre beaucoup de temps, en particulier sur les systèmes sans GPU.",
+      "warn2": "Les résultats de recherche qui faisaient référence à ce fichier seront incomplets tant que le nouvel embedding n'est pas terminé.",
+      "warn3": "Si une tâche pour ce fichier est déjà en cours, la réintégration sera refusée — attendez d'abord qu'elle se termine."
+    },
+    "viewer": {
+      "loadError": "Impossible de charger le fichier. Il a peut-être été déplacé ou son type n'est pas affichable."
+    }
+  },
+  "policyBanner": {
+    "title_one": "Indexer votre fichier existant pour {{name}} ?",
+    "title_other": "Indexer vos {{count, number}} fichiers existants pour {{name}} ?",
+    "body": "Une fois indexés, {{name}} peut s'y référer pour répondre à vos questions.",
+    "indexExisting": "Indexer le contenu existant",
+    "maybeLater": "Peut-être plus tard",
+    "indexStarted": "{{name}} va indexer votre contenu existant. Vous pouvez suivre la progression dans le panneau Base de connaissances.",
+    "indexFailed": "Impossible de démarrer l'indexation. Réessayez depuis le panneau Base de connaissances.",
+    "laterSaved": "Votre contenu reste non indexé pour le moment. Vous pouvez l'activer à tout moment depuis le panneau Base de connaissances.",
+    "laterFailed": "Impossible d'enregistrer votre choix. Réessayez."
+  },
+  "collections": {
+    "title": "Gérer les collections",
+    "close": "Fermer",
+    "intro": "Renommez ou supprimez des collections. Supprimer une collection ne supprime aucun fichier — ils sont simplement replacés dans Non classé afin que vous puissiez les reclasser.",
+    "empty": "Aucune collection pour le moment. Affectez un fichier à une collection depuis le tableau de la Base de connaissances pour en créer une.",
+    "save": "Enregistrer",
+    "rename": "Renommer",
+    "removeConfirm": "Supprimer « {{name}} » ? Les fichiers passent dans Non classé.",
+    "renamed": "Collection renommée.",
+    "renameFailed": "Échec du renommage de la collection.",
+    "removed": "Collection supprimée.",
+    "removeFailed": "Échec de la suppression de la collection."
+  },
+  "combobox": {
+    "uncategorized": "Non classé",
+    "create": "+ Créer « {{name}} »",
+    "noMatches": "Aucun résultat"
+  },
+  "nomadMd": {
+    "intro": "Instructions personnalisées transmises à {{name}} comme invite système à chaque discussion.",
+    "tip": "Astuce : ce fichier est aussi stocké sur le disque dans <code>storage/NOMAD.md</code> et peut être modifié directement.",
+    "save": "Enregistrer",
+    "saved": "NOMAD.md enregistré. Il s'applique aux nouveaux messages.",
+    "saveFailed": "Échec de l'enregistrement de NOMAD.md.",
+    "closeAria": "Fermer",
+    "template": "# NOMAD.md\n\n<!--\nCe fichier contient les instructions personnalisées de votre assistant IA. Tout ce\nqui s'y trouve est envoyé à l'assistant comme invite système à chaque discussion — utilisez-le pour définir\nun personnage, un ton, des priorités et des règles permanentes.\n\nIl est aussi stocké sur le disque dans storage/NOMAD.md, vous pouvez donc le modifier directement.\nRemplacez ce modèle par vos propres instructions, puis cliquez sur Enregistrer.\n-->\n\n## À propos de moi\n\n- (ex. Je m'installe dans une ferme autonome hors réseau en climat froid.)\n\n## Comment l'assistant doit répondre\n\n- Être concis et pratique.\n- Privilégier la sécurité et les méthodes éprouvées.\n"
+  },
+  "guardrail": {
+    "title": "Confirmer une opération d'indexation IA volumineuse",
+    "body": "L'indexation de ce lot pour l'Assistant IA utilisera environ <strong>{{size}}</strong> d'espace disque pour les embeddings, en plus des téléchargements bruts.",
+    "freeDisk": "C'est plus de 10 % de votre espace disque libre restant ({{free}} libres). L'embedding peut prendre plusieurs heures et est difficile à interrompre proprement une fois lancé.",
+    "manualHint": "Si vous préférez examiner chaque élément avant l'indexation, annulez ici et réglez votre paramètre d'indexation automatique sur <strong>Manuel</strong> depuis le panneau Base de connaissances.",
+    "proceed": "Continuer quand même"
+  },
+  "jobs": {
+    "processingQueue": "File de traitement",
+    "empty": "Aucun fichier n'est en cours de traitement",
+    "lastActivity": "· dernière activité {{time}}",
+    "chunks": "· {{count}} segments",
+    "health": {
+      "waiting": {
+        "label": "En attente",
+        "aria": "La tâche est en file d'attente et attend de démarrer"
+      },
+      "healthy": {
+        "label": "Active",
+        "aria": "La tâche réalise l'embedding à un rythme normal"
+      },
+      "slow": {
+        "label": "Lente",
+        "aria": "La tâche n'a pas progressé depuis au moins 2 minutes"
+      },
+      "stalled": {
+        "label": "Bloquée",
+        "aria": "La tâche n'a pas progressé depuis au moins 5 minutes"
+      },
+      "failed": {
+        "label": "Échec",
+        "aria": "La tâche a échoué"
+      }
+    },
+    "timeAgo": {
+      "justNow": "à l'instant",
+      "seconds": "il y a {{count}} s",
+      "minutes": "il y a {{count}} min",
+      "hours": "il y a {{count}} h"
+    }
+  }
+}

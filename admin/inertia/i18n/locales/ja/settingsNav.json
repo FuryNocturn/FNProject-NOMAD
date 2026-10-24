@@ -1,0 +1,16 @@
+{
+  "title": "設定",
+  "supplyDepot": "Supply Depot",
+  "benchmark": "ベンチマーク",
+  "contentExplorer": "コンテンツエクスプローラー",
+  "contentManager": "コンテンツ管理",
+  "creatorPacks": "クリエイターパック",
+  "mapsManager": "地図管理",
+  "serviceLogs": "サービスログとメトリクス",
+  "checkForUpdates": "アップデートの確認",
+  "system": "システム",
+  "advanced": "詳細設定",
+  "apiReference": "API リファレンス",
+  "support": "プロジェクトを支援",
+  "legal": "法的通知"
+}

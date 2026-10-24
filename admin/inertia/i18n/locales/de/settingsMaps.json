@@ -1,0 +1,102 @@
+{
+  "page": {
+    "headTitle": "Kartenverwaltung",
+    "title": "Kartenverwaltung",
+    "subtitle": "Verwalte deine gespeicherten Kartendateien und entdecke neue Regionen!",
+    "baseAssetsMissing": "Die Basiskarten-Ressourcen sind nicht installiert. Bitte lade sie zuerst herunter, um die Kartenfunktion zu aktivieren.",
+    "downloadBaseAssets": "Basisressourcen herunterladen",
+    "worldBasemapMissingTitle": "Weltbasiskarte nicht heruntergeladen",
+    "worldBasemapMissingMessage": "Die Weltbasiskarte für niedrige Zoomstufen (~15 MB) wurde noch nicht heruntergeladen, daher erscheint die Karte außerhalb der von dir heruntergeladenen Regionen leer. Verbinde dieses NOMAD mit dem Internet und lade sie einmalig für die Offline-Nutzung herunter.",
+    "downloadBaseMap": "Basiskarte herunterladen",
+    "globalInstalledTitle": "Weltkarte installiert",
+    "globalInstalledMessage": "Dein Weltkarten-Build {{date}} ({{size}}) ist lokal gespeichert und bereit für die Offline-Nutzung.",
+    "downloadLatestBuild": "Neuesten Build herunterladen",
+    "globalAvailableTitle": "Weltweite Kartenabdeckung verfügbar",
+    "globalAvailableMessage": "Lade eine vollständige Weltkarte von Protomaps herunter ({{size}}, Build {{date}}). Die Datei ist groß, deckt aber den gesamten Planeten ab – einzelne Regionen müssen nicht heruntergeladen werden.",
+    "downloadGlobalMap": "Weltkarte herunterladen",
+    "countryAlertTitle": "Nach Land oder Region herunterladen",
+    "countryAlertMessage": "Wähle genau die Länder aus, die du brauchst – vom einzelnen Land bis zum ganzen Kontinent –, und wir laden nur diese Kacheln aus dem globalen Protomaps-Archiv. Deutlich kleiner als die vollständige 125-GB-Weltkarte.",
+    "chooseCountries": "Länder auswählen",
+    "curatedRegions": "Kuratierte Kartenregionen",
+    "forceRefresh": "Sammlungen erzwungen aktualisieren",
+    "noCollections": "Keine kuratierten Sammlungen verfügbar.",
+    "storedFiles": "Gespeicherte Kartendateien",
+    "downloadCustom": "Eigene Kartendatei herunterladen",
+    "columnName": "Name",
+    "columnActions": "Aktionen",
+    "delete": "Löschen",
+    "downloadMapFileTitle": "Kartendatei herunterladen",
+    "suggestedUrl": "z. B. https://github.com/Crosstalk-Solutions/project-nomad-maps/raw/refs/heads/master/pmtiles/california.pmtiles"
+  },
+  "confirmDelete": {
+    "title": "Löschen bestätigen?",
+    "message": "Möchtest du {{name}} wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.",
+    "confirm": "Löschen"
+  },
+  "confirmDownload": {
+    "title": "Download bestätigen?",
+    "message": "Möchtest du <strong>{{name}}</strong> wirklich herunterladen? Je nach Dateigröße und Internetverbindung kann es eine Weile dauern, bis die Datei verfügbar ist.",
+    "confirm": "Herunterladen"
+  },
+  "confirmGlobal": {
+    "title": "Weltkarte herunterladen?",
+    "message": "Dadurch wird die vollständige Protomaps-Weltkarte heruntergeladen ({{size}}, Build {{date}}). Sie deckt den gesamten Planeten ab, sodass du keine einzelnen Regionsdateien brauchst. Stelle sicher, dass genügend Speicherplatz vorhanden ist.",
+    "confirm": "Herunterladen"
+  },
+  "notifications": {
+    "baseMapDownloaded": "Basiskarte erfolgreich heruntergeladen.",
+    "baseMapFailed": "Die Basiskarte konnte nicht heruntergeladen werden. Bitte verbinde dieses NOMAD mit dem Internet und versuche es erneut.",
+    "globalQueued": "Der Download der Weltkarte wurde eingereiht. Die Datei ist groß (~125 GB) und der Download kann eine Weile dauern.",
+    "globalFailed": "Der Download der Weltkarte konnte nicht gestartet werden. Bitte versuche es erneut.",
+    "baseAssetsDownloaded": "Basiskarten-Ressourcen erfolgreich heruntergeladen.",
+    "baseAssetsFailed": "Beim Herunterladen der Basiskarten-Ressourcen ist ein Fehler aufgetreten. Bitte versuche es erneut.",
+    "baseAssetsUnknown": "Beim Herunterladen der Basisressourcen ist ein unbekannter Fehler aufgetreten.",
+    "collectionQueued": "Der Download der Sammlung „{{name}}“ wurde eingereiht.",
+    "collectionAlreadyInstalled": "Alle Ressourcen der Sammlung „{{name}}“ wurden bereits heruntergeladen.",
+    "downloadQueued": "Der Download wurde eingereiht.",
+    "fileDeleted": "{{name}} wurde gelöscht.",
+    "fileDeleteFailed": "{{name}} konnte nicht gelöscht werden. Bitte versuche es erneut.",
+    "countryDownloadQueued": "Download eingereiht. Den Fortschritt siehst du unten.",
+    "manifestsRefreshed": "Kartensammlungen erfolgreich aktualisiert."
+  },
+  "downloadUrl": {
+    "description": "Gib die URL der Kartenregionsdatei ein, die du herunterladen möchtest. Die URL muss öffentlich erreichbar sein und auf .pmtiles enden. Eine Vorabprüfung stellt Verfügbarkeit, Typ und ungefähre Größe der Datei fest.",
+    "placeholder": "Download-URL eingeben ...",
+    "confirm": "Herunterladen",
+    "running": "Vorabprüfung für URL wird ausgeführt: {{url}}",
+    "unknownError": "Bei der Vorabprüfung ist ein unbekannter Fehler aufgetreten.",
+    "passed": "Vorabprüfung bestanden. Dateiname: {{filename}}, Größe: {{size}} MB",
+    "failed": "Vorabprüfung fehlgeschlagen: {{error}}"
+  },
+  "card": {
+    "allDownloaded": "Alle Elemente heruntergeladen",
+    "stats": "Elemente: {{items}} | Größe: {{size}}"
+  },
+  "countryPicker": {
+    "title": "Karte nach Land oder Region herunterladen",
+    "confirm": "Download starten",
+    "searchPlaceholder_one": "{{count}} Land durchsuchen ...",
+    "searchPlaceholder_other": "{{count}} Länder durchsuchen ...",
+    "clearAll": "Alle abwählen",
+    "quickPicks": "Schnellauswahl",
+    "noMatch": "Kein Land entspricht „{{search}}“.",
+    "installed": "Installiert",
+    "installedTitle": "Bereits heruntergeladen – erneut auswählen, um mit einer anderen Zoomstufe zu aktualisieren",
+    "selectedCount_one": "{{count}} ausgewählt",
+    "selectedCount_other": "{{count}} ausgewählt",
+    "removeCountry": "{{name}} entfernen",
+    "maxZoom": "Maximale Zoomstufe: <code>{{zoom}}</code>",
+    "zoomWorld": "z{{zoom}} (Welt)",
+    "zoomStreet": "z{{zoom}} (Straße)",
+    "zoomHint": "Niedrigere Zoomstufe = kleinere Datei, weniger Details. Zoomstufe 15 zeigt einzelne Straßen, Zoomstufe 10 Details auf Stadtebene.",
+    "pickAtLeastOne": "Wähle vor dem Download mindestens ein Land aus.",
+    "stillEstimating": "Die Größe wird noch geschätzt – einen Moment bitte.",
+    "estimateFailed": "Schätzung fehlgeschlagen",
+    "downloadFailed": "Download fehlgeschlagen",
+    "preflightNoData": "Die Vorabprüfung hat keine Daten zurückgegeben",
+    "estimating": "Größe wird geschätzt …",
+    "pickToEstimate": "Wähle mindestens ein Land aus, um die Größe zu schätzen.",
+    "result": "{{tiles}} Kacheln, ca. {{size}}",
+    "sourceBuild": "(Quell-Build {{date}})"
+  }
+}

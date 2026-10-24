@@ -1,0 +1,44 @@
+{
+  "tiles": {
+    "maps": {
+      "label": "地图",
+      "description": "查看离线地图"
+    },
+    "drugReference": {
+      "label": "药品参考",
+      "description": "离线 FDA 药品说明书。可按药品名称或症状搜索"
+    },
+    "easySetup": {
+      "label": "快速设置",
+      "description": "不知从何开始？使用设置向导快速配置您的 NOMAD！"
+    },
+    "supplyDepot": {
+      "label": "Supply Depot",
+      "description": "浏览并安装精选应用，或添加您自己的 Docker 容器"
+    },
+    "docs": {
+      "label": "文档",
+      "description": "阅读 Project NOMAD 手册和指南"
+    },
+    "settings": {
+      "label": "设置",
+      "description": "配置您的 NOMAD 设置"
+    }
+  },
+  "updateAvailable": "Project NOMAD 有可用更新！",
+  "benchmarkRerun": {
+    "title": "您的性能测试可使用 Score v2 重新评分",
+    "message": "我们已升级性能测试的评分系统。重新运行性能测试，即可在社区排行榜上获得更新后的 Score v2 结果。",
+    "button": "重新运行性能测试"
+  },
+  "startHere": "从这里开始！",
+  "poweredBy": "由 {{name}} 提供支持",
+  "accessApp": "访问 {{name}} 应用",
+  "opensInNewTab": "在新标签页中打开",
+  "linkTileHint": "这是您添加的快捷方式，NOMAD 不对其进行管理。",
+  "editLink": "编辑此链接",
+  "removeLink": "移除此链接",
+  "removeLinkFailed": "移除此链接失败。",
+  "addLink": "添加链接",
+  "addLinkHint": "指向您网络中其他内容的快捷方式"
+}

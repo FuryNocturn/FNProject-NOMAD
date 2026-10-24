@@ -1,0 +1,16 @@
+{
+  "title": "Paramètres",
+  "supplyDepot": "Supply Depot",
+  "benchmark": "Benchmark",
+  "contentExplorer": "Explorateur de contenu",
+  "contentManager": "Gestionnaire de contenu",
+  "creatorPacks": "Packs de créateurs",
+  "mapsManager": "Gestionnaire de cartes",
+  "serviceLogs": "Journaux et métriques des services",
+  "checkForUpdates": "Rechercher des mises à jour",
+  "system": "Système",
+  "advanced": "Avancé",
+  "apiReference": "Référence de l'API",
+  "support": "Soutenir le projet",
+  "legal": "Mentions légales"
+}

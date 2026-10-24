@@ -1,0 +1,156 @@
+{
+  "headTitle": "Assistant de configuration rapide",
+  "offline": {
+    "title": "Aucune connexion Internet",
+    "message": "Une connexion Internet est nécessaire pour continuer. Veuillez vous connecter à Internet et réessayer."
+  },
+  "steps": {
+    "apps": "Applications",
+    "maps": "Cartes",
+    "content": "Contenu",
+    "creatorPacks": "Packs de créateurs",
+    "ai": "IA",
+    "review": "Récapitulatif"
+  },
+  "progress": "Progression",
+  "capabilities": {
+    "information": {
+      "name": "Bibliothèque d'informations",
+      "description": "Accès hors ligne à Wikipedia, aux références médicales, aux guides pratiques et aux encyclopédies",
+      "feature1": "Wikipedia complet hors ligne",
+      "feature2": "Références médicales et guides de premiers secours",
+      "feature3": "Guides de réparation et contenus pratiques à faire soi-même",
+      "feature4": "Livres et littérature du Projet Gutenberg"
+    },
+    "education": {
+      "name": "Plateforme éducative",
+      "description": "Plateforme d'apprentissage interactive avec cours vidéo et exercices",
+      "feature1": "Cours de mathématiques et de sciences de la Khan Academy",
+      "feature2": "Contenus des programmes scolaires de la maternelle au lycée",
+      "feature3": "Exercices et quiz interactifs",
+      "feature4": "Suivi de la progression des apprenants"
+    },
+    "ai": {
+      "description": "Chat IA local qui fonctionne entièrement sur votre matériel - aucune connexion Internet requise",
+      "feature1": "Des conversations privées qui ne quittent jamais votre appareil",
+      "feature2": "Aucune connexion Internet nécessaire après la configuration",
+      "feature3": "Posez des questions, obtenez de l'aide pour écrire, trouvez des idées",
+      "feature4": "Fonctionne sur votre propre matériel avec des modèles d'IA locaux"
+    },
+    "installed": "Installé",
+    "poweredBy": "Propulsé par {{name}}"
+  },
+  "step1": {
+    "title": "Que voulez-vous que NOMAD fasse ?",
+    "subtitle": "Sélectionnez les fonctionnalités dont vous avez besoin. Vous pourrez toujours en ajouter d'autres plus tard.",
+    "allInstalled": "Toutes les fonctionnalités disponibles sont déjà installées !",
+    "manageApps": "Gérer les applications",
+    "coreCapabilities": "Fonctionnalités essentielles",
+    "useRemoteOllama": "Utiliser une instance Ollama distante",
+    "moreApps": {
+      "title": "Vous cherchez d'autres applications ?",
+      "description": "Notes, outils de données et le catalogue complet d'applications complémentaires sont disponibles à tout moment dans Supply Depot.",
+      "button": "Ouvrir Supply Depot"
+    },
+    "confirmDisableAi": "Désactiver l'IA supprimera vos choix de modèles d'IA, votre politique d'indexation et la configuration d'Ollama distant. Continuer ?"
+  },
+  "step2": {
+    "title": "Choisir les régions de carte",
+    "subtitle": "Sélectionnez les collections de régions de carte à télécharger pour une utilisation hors ligne. Vous pourrez toujours télécharger d'autres régions plus tard.",
+    "hint": "Vous n'avez besoin que d'un pays précis, ou vous voulez le monde entier ? Les pays individuels et une carte mondiale complète peuvent être installés à tout moment depuis le <link>Gestionnaire de cartes</link>.",
+    "empty": "Aucune collection de cartes disponible pour le moment."
+  },
+  "step3": {
+    "title": "Choisir le contenu",
+    "subtitleInformation": "Sélectionnez les catégories de contenu pour la connaissance hors ligne.",
+    "subtitleOther": "Configurez le contenu des fonctionnalités sélectionnées.",
+    "additionalContent": "Contenu supplémentaire",
+    "additionalContentHint": "Collections sélectionnées pour référence hors ligne",
+    "noContent": "Aucune fonctionnalité basée sur du contenu n'est sélectionnée. Vous pouvez ignorer cette étape ou revenir en arrière pour sélectionner des fonctionnalités nécessitant du contenu."
+  },
+  "creatorPacks": {
+    "title": "Packs de créateurs disponibles",
+    "subtitle": "Collections de vidéos de marque proposées par des créateurs, téléchargées pour un visionnage hors ligne dans Kiwix.",
+    "empty": "Aucun pack de créateurs disponible pour le moment."
+  },
+  "ai": {
+    "title": "Configurer {{name}}",
+    "subtitle": "Choisissez les modèles à télécharger et définissez comment {{name}} gère le nouveau contenu.",
+    "modelsTitle": "Modèles d'IA",
+    "modelsHint": "Sélectionnez les modèles à télécharger pour l'IA hors ligne",
+    "remoteTitle": "Ollama distant sélectionné",
+    "remoteMessage": "Les modèles sont gérés sur la machine distante. Vous pourrez ajouter des modèles depuis Paramètres > Assistant IA après la configuration ; notez que cela n'est possible qu'avec Ollama, pas avec LM Studio ni les autres logiciels compatibles avec l'API OpenAI.",
+    "size": "Taille : {{size}}",
+    "supportsImages": "Prend en charge les images",
+    "noModels": "Aucun modèle d'IA recommandé disponible pour le moment.",
+    "autoIndexTitle": "Indexer automatiquement le nouveau contenu pour {{name}} ?",
+    "autoIndexDescription": "Lorsque vous ajoutez de nouveaux ZIM, documents ou contenus sélectionnés, {{name}} doit-il les indexer automatiquement afin de pouvoir les consulter pour répondre à vos questions ?",
+    "always": "Oui, toujours",
+    "manual": "Me demander d'abord",
+    "changeLater": "Vous pouvez modifier ce réglage à tout moment depuis le panneau Base de connaissances dans le chat IA."
+  },
+  "review": {
+    "title": "Vérifier vos sélections",
+    "subtitle": "Vérifiez vos choix avant de lancer le processus de configuration.",
+    "noSelectionsTitle": "Aucune sélection effectuée",
+    "noSelectionsMessage": "Vous n'avez rien sélectionné à installer ou à télécharger. Vous pouvez revenir en arrière pour faire des sélections ou retourner à la page d'accueil.",
+    "capabilities": "Fonctionnalités à installer",
+    "mapCollections": "Collections de cartes à télécharger ({{total}})",
+    "creatorPacks": "Packs de créateurs à installer ({{total}})",
+    "contentCategories": "Catégories de contenu ({{total}})",
+    "files_one": "({{count}} fichier)",
+    "files_other": "({{count}} fichiers)",
+    "wikipedia": "Wikipedia",
+    "noDownload": "Aucun téléchargement",
+    "aiModels": "Modèles d'IA à télécharger ({{total}})",
+    "autoIndexSetting": "Paramètre d'indexation automatique",
+    "autoIndexAlways": "Le nouveau contenu sera <strong>indexé automatiquement</strong> dès son arrivée afin que {{name}} puisse le consulter.",
+    "autoIndexManual": "Le nouveau contenu <strong>attendra votre accord</strong> dans le panneau Base de connaissances avant que {{name}} ne l'indexe.",
+    "readyTitle": "Prêt à démarrer",
+    "readyMessage": "Cliquez sur « Terminer la configuration » pour lancer l'installation des applications et le téléchargement du contenu. Cela peut prendre un certain temps selon votre connexion Internet et la taille des téléchargements."
+  },
+  "footer": {
+    "capabilities_one": "{{count}} fonctionnalité",
+    "capabilities_other": "{{count}} fonctionnalités",
+    "mapRegions_one": "{{count}} région de carte",
+    "mapRegions_other": "{{count}} régions de carte",
+    "categories_one": "{{count}} catégorie de contenu",
+    "categories_other": "{{count}} catégories de contenu",
+    "creatorPacks_one": "{{count}} pack de créateurs",
+    "creatorPacks_other": "{{count}} packs de créateurs",
+    "aiModels_one": "{{count}} modèle d'IA",
+    "aiModels_other": "{{count}} modèles d'IA",
+    "summary": "{{capabilities}}, {{maps}}, {{categories}}, {{aiModels}} sélectionné(s)",
+    "summaryWithPacks": "{{capabilities}}, {{maps}}, {{categories}}, {{packs}}, {{aiModels}} sélectionné(s)",
+    "back": "Retour",
+    "next": "Suivant",
+    "cancel": "Annuler et retourner à l'accueil",
+    "complete": "Terminer la configuration"
+  },
+  "notifications": {
+    "needInternet": "Vous devez disposer d'une connexion Internet pour terminer la configuration.",
+    "remoteFailed": "Échec de la configuration d'Ollama distant.",
+    "completed": "Assistant de configuration terminé ! Vos sélections sont en cours de traitement.",
+    "error": "Une erreur s'est produite pendant la configuration. Certains éléments n'ont peut-être pas été traités."
+  },
+  "complete": {
+    "headTitle": "Assistant de configuration rapide terminé",
+    "offlineMessage": "Il semble que vous ne soyez pas connecté à Internet. L'installation des applications et le téléchargement du contenu nécessitent une connexion Internet.",
+    "activityTitle": "Activité d'installation des applications",
+    "backgroundTitle": "Exécution en arrière-plan",
+    "backgroundMessage": "N'hésitez pas à quitter cette page à tout moment - l'installation de vos applications et vos téléchargements se poursuivront en arrière-plan ! Notez que la Bibliothèque d'informations (si elle est installée) peut être indisponible tant que tous les téléchargements initiaux ne sont pas terminés.",
+    "goHome": "Aller à l'accueil"
+  },
+  "storage": {
+    "title": "Stockage",
+    "selectedInline": "(+{{size}} sélectionné)",
+    "current": "Actuel ({{size}})",
+    "selected": "Sélectionné (+{{size}})",
+    "exceeds": "Dépasse l'espace disponible de {{size}}",
+    "remaining": "{{size}} resteront libres"
+  },
+  "disk": {
+    "nasStorage": "Stockage NAS",
+    "unknown": "Inconnu"
+  }
+}

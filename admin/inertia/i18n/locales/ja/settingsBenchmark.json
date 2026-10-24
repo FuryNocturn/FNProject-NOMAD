@@ -1,0 +1,198 @@
+{
+  "title": "システムベンチマーク",
+  "subtitle": "サーバーの性能を測定し、NOMAD コミュニティと比較します",
+  "na": "N/A",
+  "yes": "はい",
+  "no": "いいえ",
+  "unknown": "不明",
+  "types": {
+    "full": "フル",
+    "system": "システム",
+    "ai": "AI"
+  },
+  "errors": {
+    "benchmarkFailed": "ベンチマークに失敗しました",
+    "failedToStart": "ベンチマークを開始できませんでした",
+    "updateTagFailed": "ビルダータグを更新できませんでした",
+    "submitFailed": "ベンチマークを送信できませんでした",
+    "alreadySubmitted": "このシステムについて、同じかそれ以上のスコアのベンチマークがすでに送信されています。"
+  },
+  "run": {
+    "title": "ベンチマークを実行",
+    "compilingReportLower": "レポートを作成中...",
+    "failedTitle": "ベンチマークに失敗しました",
+    "aiRequiredTitle": "{{name}} が必要です",
+    "aiRequiredMessage": "フルベンチマークを実行するには、{{name}} のインストールが必要です。インストールして NOMAD の総合的な性能を測定し、結果をコミュニティと共有しましょう。",
+    "goToApps": "アプリで {{name}} をインストール →",
+    "intro": "ベンチマークを実行して、システムの CPU、メモリ、ディスク、AI 推論の性能を測定します。ベンチマークの完了には約 3~6 分かかります。",
+    "full": "フルベンチマークを実行",
+    "systemOnly": "システムのみ",
+    "aiOnly": "AI のみ",
+    "aiOnlyDisabled": "AI ベンチマークを実行するには {{name}} のインストールが必要です",
+    "aiNotInstalledNote": "<note>注:</note> {{name}} がインストールされていません。<installLink>インストール</installLink>すると、フルベンチマークを実行して結果をコミュニティと共有できます。",
+    "aiInference": "AI 推論",
+    "tokensPerSecond": "1 秒あたりのトークン数",
+    "firstTokenIn": "最初のトークンまで {{ms}} ms",
+    "waitingFirstToken": "最初のトークンを待機中...",
+    "utilization": "使用率",
+    "vramOf": "VRAM (全体 {{total}} GB)",
+    "diskRead": "ディスク読み取り",
+    "diskWrite": "ディスク書き込み",
+    "benchmarkThroughput": "ベンチマークのスループット",
+    "systemDiskActivity": "システムのディスクアクティビティ",
+    "compilingReport": "レポートを作成中",
+    "calculatingScore": "NOMAD スコアを計算中...",
+    "identifyingHardware": "ハードウェアを識別中",
+    "detectingSystem": "システムを検出中...",
+    "memoryThroughput": "メモリスループット",
+    "cpuLoad": "CPU 負荷",
+    "eventsPerSecond": "1 秒あたりのイベント数",
+    "overall": "全体",
+    "temperature": "温度",
+    "cpuPackage": "CPU パッケージ",
+    "disk": "ディスク",
+    "read": "読み取り",
+    "write": "書き込み",
+    "runningBenchmark": "ベンチマークを実行中..."
+  },
+  "stages": {
+    "idle": "待機中",
+    "starting": "開始中",
+    "detecting_hardware": "ハードウェアを検出中",
+    "running_cpu": "CPU ベンチマーク",
+    "running_memory": "メモリベンチマーク",
+    "running_disk_read": "ディスク読み取りテスト",
+    "running_disk_write": "ディスク書き込みテスト",
+    "downloading_ai_model": "AI モデルをダウンロード中",
+    "running_ai": "AI 推論テスト",
+    "calculating_score": "スコアを計算中",
+    "completed": "完了",
+    "error": "エラー"
+  },
+  "cores": {
+    "threadLoad": "スレッド {{n}}: {{load}}%",
+    "threads_one": "{{count}} スレッド",
+    "threads_other": "{{count}} スレッド",
+    "perCell": "(1 セルあたり {{count}})"
+  },
+  "results": {
+    "soFar": "これまでの結果",
+    "partial": {
+      "running_cpu": "CPU",
+      "running_memory": "メモリ",
+      "running_disk_read": "読み取り",
+      "running_disk_write": "書き込み",
+      "running_ai": "AI"
+    }
+  },
+  "reveal": {
+    "report": "レポート",
+    "continue": "続ける"
+  },
+  "builderTag": {
+    "randomize": "ランダム生成",
+    "yourTag": "あなたのビルダータグ:"
+  },
+  "gauges": {
+    "cpu": "CPU",
+    "memory": "メモリ",
+    "diskRead": "ディスク読み取り",
+    "diskWrite": "ディスク書き込み",
+    "aiScore": "AI スコア"
+  },
+  "score": {
+    "nomadScore": "NOMAD スコア",
+    "systemScore": "システムスコア",
+    "aiScore": "AI スコア",
+    "legacyScore": "レガシースコア",
+    "partial": "一部のみ",
+    "outOf100": "100 点満点",
+    "v2Tooltip": "NOMAD Score v2 は、NOMAD リファレンスビルド (ちょうど 1000 点) を基準にした上限のない指数です。高いほど良く、上限はありません。",
+    "referenceBuild": "リファレンスビルド = 1000。",
+    "legacyScale": "レガシー換算: {{score}} / 100",
+    "partialCta": "これは一部のみの結果であり、NOMAD スコアではありません。NOMAD スコアを取得するには、フルベンチマークを実行してください。",
+    "compositeDesc": "NOMAD スコアは、すべてのベンチマーク結果の加重合成値です。"
+  },
+  "share": {
+    "title": "コミュニティと共有",
+    "description": "ベンチマークをコミュニティのリーダーボードで共有します。ビルダータグを選んで自分の順位を確保するか、匿名で共有できます。",
+    "yourBuilderTag": "あなたのビルダータグ",
+    "anonymously": "匿名で共有 (リーダーボードにビルダータグを表示しません)",
+    "submitting": "送信中...",
+    "failedTitle": "送信に失敗しました",
+    "partialTitle": "一部のみのベンチマーク",
+    "partialMessage": "この{{type}}ベンチマークはコミュニティと共有できません。{{name}} をインストールした状態でフルベンチマークを実行して、結果を共有してください。",
+    "sharedTitle": "コミュニティと共有しました",
+    "sharedMessage": "ベンチマークをコミュニティのリーダーボードに送信しました。ご協力ありがとうございます!",
+    "viewLeaderboard": "リーダーボードを見る →"
+  },
+  "perf": {
+    "title": "システム性能"
+  },
+  "ai": {
+    "title": "AI 性能",
+    "tokensPerSecond": "1 秒あたりのトークン数",
+    "tokensTooltip": "AI がテキストを生成する速さです。高いほど良い値です。30 トークン/秒以上なら快適に、60 トークン/秒以上ならほぼ即座に感じられます。",
+    "ttft": "最初のトークンまでの時間",
+    "ttftTooltip": "メッセージを送信してから AI が応答を始めるまでの速さです。低いほど良い値です。500 ms 未満なら即座に感じられます。",
+    "noDataTitle": "AI ベンチマークのデータがありません",
+    "noDataMessage": "AI 推論の性能を測定するには、フルベンチマークまたは AI のみのベンチマークを実行してください。"
+  },
+  "hardware": {
+    "title": "ハードウェア情報",
+    "processor": "プロセッサ",
+    "model": "モデル",
+    "cores": "コア数",
+    "threads": "スレッド数",
+    "system": "システム",
+    "ram": "RAM",
+    "diskType": "ディスクの種類",
+    "notDetected": "検出されませんでした"
+  },
+  "details": {
+    "title": "ベンチマークの詳細",
+    "benchmarkId": "ベンチマーク ID",
+    "type": "種類",
+    "date": "日付",
+    "rawScores": "生スコア",
+    "cpuScore": "CPU スコア",
+    "memoryScore": "メモリスコア",
+    "diskReadScore": "ディスク読み取りスコア",
+    "diskWriteScore": "ディスク書き込みスコア",
+    "aiTokensSec": "AI トークン/秒",
+    "aiTtft": "AI の最初のトークンまでの時間",
+    "info": "ベンチマーク情報",
+    "fullId": "ベンチマーク ID (完全版)",
+    "benchmarkType": "ベンチマークの種類",
+    "runDate": "実行日",
+    "builderTag": "ビルダータグ",
+    "notSet": "未設定",
+    "aiModelUsed": "使用した AI モデル",
+    "submittedToRepo": "リポジトリに送信済み",
+    "repoId": "リポジトリ ID",
+    "measuredV2": "測定された性能 (v2)",
+    "cpuSingle": "CPU シングルスレッド",
+    "cpuMulti": "CPU マルチスレッド ({{threads}}T)",
+    "memoryThreads": "メモリ ({{threads}}T)",
+    "diskReadDirect": "ディスク読み取り (O_DIRECT)",
+    "diskWriteDirect": "ディスク書き込み (O_DIRECT)",
+    "eventsPerSec": "イベント/秒",
+    "opsPerSec": "操作/秒",
+    "environment": "環境",
+    "runEnvironment": "実行環境",
+    "storageBackend": "ストレージバックエンド",
+    "gpuCompute": "GPU 演算",
+    "detected": "検出済み"
+  },
+  "history": {
+    "title": "ベンチマーク履歴",
+    "recorded_one": "{{count}} 件のベンチマークを記録済み",
+    "recorded_other": "{{count}} 件のベンチマークを記録済み",
+    "score": "スコア",
+    "shared": "共有済み"
+  },
+  "empty": {
+    "title": "ベンチマーク結果がありません",
+    "message": "最初のベンチマークを実行して、サーバーの性能スコアを確認しましょう。"
+  }
+}

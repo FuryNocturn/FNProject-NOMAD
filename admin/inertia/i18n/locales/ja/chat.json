@@ -1,0 +1,73 @@
+{
+  "page": {
+    "headTitle": "{{name}}"
+  },
+  "main": {
+    "clearHistoryTitle": "チャット履歴をすべて消去しますか?",
+    "clearHistoryBody": "すべてのチャットセッションを削除してもよろしいですか?この操作は元に戻せません。すべての会話が完全に削除されます。",
+    "clearAll": "すべて消去",
+    "noResponse": "申し訳ありません。応答を生成できませんでした。",
+    "requestError": "申し訳ありません。リクエストの処理中にエラーが発生しました。もう一度お試しください。",
+    "startError": "申し訳ありません。このチャットの開始中にエラーが発生しました。もう一度お試しください。",
+    "newChat": "新しいチャット",
+    "switchTitle": "{{model}} に切り替えますか?",
+    "switchConfirm": "切り替えて新しいチャット",
+    "switchBody": "<strong>{{model}}</strong> に切り替えると、新しいチャットが開始されます。現在の会話はサイドバーに残ります。",
+    "closeSidebar": "会話サイドバーを閉じる",
+    "openSidebar": "会話サイドバーを開く",
+    "remoteDisconnected": "リモート未接続",
+    "remoteConnected": "リモート接続済み",
+    "searchIn": "検索対象:",
+    "all": "すべて",
+    "model": "モデル:",
+    "loadingModels": "モデルを読み込み中...",
+    "noModels": "インストール済みのモデルがありません",
+    "knowledgeBase": "ナレッジベース:",
+    "knowledgeBaseTooltip": "オンにすると、アシスタントは回答する前にナレッジベースから関連するドキュメントを検索します。オフにすると高速になりハードウェアへの負荷も減るため、ナレッジベースが小さい場合や空の場合に有効です。AI アシスタント設定と同じ設定です。",
+    "thinking": "思考:",
+    "thinkingTooltip": "オンにすると、このモデルは回答する前に推論を行います。時間はかかりますが、難しい質問ではより良い結果になることがよくあります。この選択はモデルごとに記憶されます。他のモデルの既定値は AI アシスタント設定で指定します。",
+    "closeChat": "チャットを閉じる"
+  },
+  "interface": {
+    "tooManyImages": "添付できる画像は最大 {{max}} 枚です。",
+    "unsupportedImage": "{{name}} はサポートされていません。JPEG、PNG、WebP を使用してください。",
+    "imageTooLarge": "{{name}} は 1 枚あたり 8 MB の上限を超えています。",
+    "onlyFirstAttached_one": "選択した最初の画像のみが添付されました。",
+    "onlyFirstAttached_other": "選択した画像のうち最初の {{count}} 枚のみが添付されました。",
+    "startTitle": "会話を始める",
+    "startBody": "コマンドセンターで、インストール済みの言語モデルと直接やり取りできます。",
+    "suggestions": "候補:",
+    "thinking": "思考中",
+    "inspiration": "ヒントが必要ですか?設定でチャットの候補を有効にすると、サンプルプロンプトから始められます。",
+    "attachedImages": "添付画像",
+    "removeImage": "{{name}} を削除",
+    "attachImages": "画像を添付",
+    "placeholder": "{{name}} にメッセージを入力... (Shift+Enter で改行)"
+  },
+  "bubble": {
+    "reasoning": "推論",
+    "thoughtFor": "{{seconds}} 秒間思考",
+    "truncated": "この回答は長さの上限に達したため、途中で打ち切られました。",
+    "continue": "続ける",
+    "sources": "情報源"
+  },
+  "sidebar": {
+    "ariaLabel": "チャットの会話",
+    "newChat": "新しいチャット",
+    "noChats": "過去のチャットはありません",
+    "logoAlt": "Project NOMAD ロゴ",
+    "openFullChat": "チャットを全画面で開く",
+    "backToHome": "ホームに戻る",
+    "modelsSettings": "モデルと設定",
+    "knowledgeBase": "ナレッジベース",
+    "clearHistory": "履歴を消去"
+  },
+  "button": {
+    "open": "チャットを開く"
+  },
+  "vision": {
+    "temporary": "画像はこのリクエストでのみ送信されます。保存されず、送信後またはこのページを再読み込みすると消去されます。",
+    "unsupported": "このモデルでは画像を使用できません。モデルと設定で「画像対応」と表示されているモデルを選択してください。",
+    "unknown": "NOMAD は、このモデルが画像を受け付けるかどうかを確認できません。画像を試すことはできますが、モデルがテキスト専用の場合はリクエストが失敗します。"
+  }
+}

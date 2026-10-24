@@ -78,7 +78,7 @@
     "cpuCores": "Núcleos de CPU"
   },
   "advanced": {
-    "pageTitle": "Ajustes avanzados | Project NOMAD",
+    "pageTitle": "Ajustes avanzados",
     "title": "Avanzado",
     "intro": "Configuración avanzada para operadores. Estos ajustes son opcionales: los valores por defecto sirven para la mayoría de las instalaciones.",
     "connectivity": "Conectividad",
@@ -93,7 +93,7 @@
     "updateFailed": "Ha habido un error al actualizar el ajuste. Inténtalo de nuevo."
   },
   "legal": {
-    "pageTitle": "Avisos legales | Project NOMAD",
+    "pageTitle": "Avisos legales",
     "title": "Avisos legales",
     "license": {
       "title": "Acuerdo de licencia",
@@ -144,7 +144,7 @@
     }
   },
   "support": {
-    "pageTitle": "Apoya el proyecto | Project NOMAD",
+    "pageTitle": "Apoya el proyecto",
     "title": "Apoya el proyecto",
     "intro": "Project NOMAD es 100 % gratuito y de código abierto: sin suscripciones, sin muros de pago, sin letra pequeña. Si quieres ayudar a que el proyecto siga adelante, aquí tienes algunas formas de apoyarlo.",
     "coffee": {

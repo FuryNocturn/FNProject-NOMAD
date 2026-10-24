@@ -1,0 +1,73 @@
+{
+  "page": {
+    "headTitle": "{{name}}"
+  },
+  "main": {
+    "clearHistoryTitle": "清除所有聊天记录？",
+    "clearHistoryBody": "确定要删除所有聊天会话吗？此操作无法撤销，所有对话都将被永久删除。",
+    "clearAll": "全部清除",
+    "noResponse": "抱歉，我无法生成回复。",
+    "requestError": "抱歉，处理您的请求时出错。请重试。",
+    "startError": "抱歉，启动此聊天时出错。请重试。",
+    "newChat": "新建聊天",
+    "switchTitle": "切换到 {{model}}？",
+    "switchConfirm": "切换并新建聊天",
+    "switchBody": "切换到 <strong>{{model}}</strong> 将开始一个新聊天。您当前的对话仍会保留在侧边栏中。",
+    "closeSidebar": "关闭对话侧边栏",
+    "openSidebar": "打开对话侧边栏",
+    "remoteDisconnected": "远程已断开",
+    "remoteConnected": "远程已连接",
+    "searchIn": "搜索范围：",
+    "all": "全部",
+    "model": "模型：",
+    "loadingModels": "正在加载模型...",
+    "noModels": "未安装模型",
+    "knowledgeBase": "知识库：",
+    "knowledgeBaseTooltip": "开启后，助手会在回答前先在您的知识库中搜索相关文档。关闭后速度更快、对硬件更省资源，适合知识库较小或为空的情况。此选项与 AI 助手设置中的相同。",
+    "thinking": "思考：",
+    "thinkingTooltip": "开启后，该模型会先进行推理再回答。速度较慢，但在处理复杂问题时往往效果更好。您的选择会针对该模型保存；其他模型的默认值在 AI 助手设置中设定。",
+    "closeChat": "关闭聊天"
+  },
+  "interface": {
+    "tooManyImages": "最多可附加 {{max}} 张图片。",
+    "unsupportedImage": "不支持 {{name}}。请使用 JPEG、PNG 或 WebP。",
+    "imageTooLarge": "{{name}} 超过了每张图片 8 MB 的限制。",
+    "onlyFirstAttached_one": "仅附加了所选的第一张图片。",
+    "onlyFirstAttached_other": "仅附加了所选的前 {{count}} 张图片。",
+    "startTitle": "开始对话",
+    "startBody": "直接在指挥中心中与已安装的语言模型交互。",
+    "suggestions": "建议：",
+    "thinking": "思考中",
+    "inspiration": "需要灵感？在设置中启用聊天建议，即可使用示例提示词开始。",
+    "attachedImages": "已附加的图片",
+    "removeImage": "移除 {{name}}",
+    "attachImages": "附加图片",
+    "placeholder": "向 {{name}} 输入消息...（Shift+Enter 换行）"
+  },
+  "bubble": {
+    "reasoning": "推理",
+    "thoughtFor": "思考了 {{seconds}} 秒",
+    "truncated": "此回答达到长度上限，已被截断。",
+    "continue": "继续",
+    "sources": "来源"
+  },
+  "sidebar": {
+    "ariaLabel": "聊天对话",
+    "newChat": "新建聊天",
+    "noChats": "没有以往的聊天",
+    "logoAlt": "Project NOMAD 徽标",
+    "openFullChat": "打开完整聊天",
+    "backToHome": "返回首页",
+    "modelsSettings": "模型与设置",
+    "knowledgeBase": "知识库",
+    "clearHistory": "清除记录"
+  },
+  "button": {
+    "open": "打开聊天"
+  },
+  "vision": {
+    "temporary": "图片仅随本次请求发送，不会被保存，发送后或刷新此页面后即会消失。",
+    "unsupported": "此模型无法使用图片。请在“模型与设置”中选择标有“支持图片”的模型。",
+    "unknown": "NOMAD 无法确认此模型是否支持图片。您可以尝试发送图片，但如果该模型仅支持文本，请求将会失败。"
+  }
+}

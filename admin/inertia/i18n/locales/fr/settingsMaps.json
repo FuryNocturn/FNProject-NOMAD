@@ -1,0 +1,102 @@
+{
+  "page": {
+    "headTitle": "Gestionnaire de cartes",
+    "title": "Gestionnaire de cartes",
+    "subtitle": "Gérez vos fichiers de cartes stockés et explorez de nouvelles régions !",
+    "baseAssetsMissing": "Les ressources de la carte de base n'ont pas été installées. Veuillez d'abord les télécharger pour activer la fonctionnalité de cartes.",
+    "downloadBaseAssets": "Télécharger les ressources de base",
+    "worldBasemapMissingTitle": "Fond de carte mondial non téléchargé",
+    "worldBasemapMissingMessage": "Le fond de carte mondial à faible niveau de zoom (~15 Mo) n'a pas encore été téléchargé ; la carte apparaît donc vide en dehors des régions que vous avez téléchargées. Connectez ce NOMAD à Internet et téléchargez-le une fois pour une utilisation hors ligne.",
+    "downloadBaseMap": "Télécharger le fond de carte",
+    "globalInstalledTitle": "Carte mondiale installée",
+    "globalInstalledMessage": "Votre carte mondiale (version du {{date}}, {{size}}) est stockée localement et prête pour une utilisation hors ligne.",
+    "downloadLatestBuild": "Télécharger la dernière version",
+    "globalAvailableTitle": "Couverture cartographique mondiale disponible",
+    "globalAvailableMessage": "Téléchargez une carte mondiale complète depuis Protomaps ({{size}}, version du {{date}}). Il s'agit d'un fichier volumineux, mais il couvre toute la planète — aucun téléchargement de région individuelle n'est nécessaire.",
+    "downloadGlobalMap": "Télécharger la carte mondiale",
+    "countryAlertTitle": "Télécharger par pays ou par région",
+    "countryAlertMessage": "Choisissez les pays dont vous avez réellement besoin — d'un seul pays à un continent entier — et nous ne récupérerons que ces tuiles depuis l'archive mondiale Protomaps. Bien plus léger que la carte mondiale complète de 125 Go.",
+    "chooseCountries": "Choisir des pays",
+    "curatedRegions": "Régions de carte sélectionnées",
+    "forceRefresh": "Forcer l'actualisation des collections",
+    "noCollections": "Aucune collection sélectionnée disponible.",
+    "storedFiles": "Fichiers de cartes stockés",
+    "downloadCustom": "Télécharger un fichier de carte personnalisé",
+    "columnName": "Nom",
+    "columnActions": "Actions",
+    "delete": "Supprimer",
+    "downloadMapFileTitle": "Télécharger un fichier de carte",
+    "suggestedUrl": "ex. https://github.com/Crosstalk-Solutions/project-nomad-maps/raw/refs/heads/master/pmtiles/california.pmtiles"
+  },
+  "confirmDelete": {
+    "title": "Confirmer la suppression ?",
+    "message": "Voulez-vous vraiment supprimer {{name}} ? Cette action est irréversible.",
+    "confirm": "Supprimer"
+  },
+  "confirmDownload": {
+    "title": "Confirmer le téléchargement ?",
+    "message": "Voulez-vous vraiment télécharger <strong>{{name}}</strong> ? Il peut s'écouler un certain temps avant qu'il soit disponible, selon la taille du fichier et votre connexion Internet.",
+    "confirm": "Télécharger"
+  },
+  "confirmGlobal": {
+    "title": "Télécharger la carte mondiale ?",
+    "message": "Cela téléchargera la carte mondiale complète de Protomaps ({{size}}, version du {{date}}). Elle couvre toute la planète, vous n'aurez donc pas besoin de fichiers de régions individuelles. Assurez-vous de disposer de suffisamment d'espace disque.",
+    "confirm": "Télécharger"
+  },
+  "notifications": {
+    "baseMapDownloaded": "Fond de carte téléchargé avec succès.",
+    "baseMapFailed": "Impossible de télécharger le fond de carte. Veuillez connecter ce NOMAD à Internet et réessayer.",
+    "globalQueued": "Le téléchargement de la carte mondiale a été mis en file d'attente. Il s'agit d'un fichier volumineux (~125 Go) qui peut prendre du temps.",
+    "globalFailed": "Échec du démarrage du téléchargement de la carte mondiale. Veuillez réessayer.",
+    "baseAssetsDownloaded": "Ressources de la carte de base téléchargées avec succès.",
+    "baseAssetsFailed": "Une erreur s'est produite lors du téléchargement des ressources de la carte de base. Veuillez réessayer.",
+    "baseAssetsUnknown": "Une erreur inconnue s'est produite lors du téléchargement des ressources de base.",
+    "collectionQueued": "Le téléchargement de la collection « {{name}} » a été mis en file d'attente.",
+    "collectionAlreadyInstalled": "Toutes les ressources de la collection « {{name}} » ont déjà été téléchargées.",
+    "downloadQueued": "Le téléchargement a été mis en file d'attente.",
+    "fileDeleted": "{{name}} a été supprimé.",
+    "fileDeleteFailed": "Échec de la suppression de {{name}}. Veuillez réessayer.",
+    "countryDownloadQueued": "Téléchargement mis en file d'attente. Suivez la progression ci-dessous.",
+    "manifestsRefreshed": "Collections de cartes actualisées avec succès."
+  },
+  "downloadUrl": {
+    "description": "Saisissez l'URL du fichier de région de carte que vous souhaitez télécharger. L'URL doit être accessible publiquement et se terminer par .pmtiles. Une vérification préalable sera effectuée pour contrôler la disponibilité, le type et la taille approximative du fichier.",
+    "placeholder": "Saisissez l'URL de téléchargement...",
+    "confirm": "Télécharger",
+    "running": "Vérification préalable de l'URL en cours : {{url}}",
+    "unknownError": "Une erreur inconnue s'est produite pendant la vérification préalable.",
+    "passed": "Vérification préalable réussie. Nom du fichier : {{filename}}, taille : {{size}} Mo",
+    "failed": "Échec de la vérification préalable : {{error}}"
+  },
+  "card": {
+    "allDownloaded": "Tous les éléments sont téléchargés",
+    "stats": "Éléments : {{items}} | Taille : {{size}}"
+  },
+  "countryPicker": {
+    "title": "Télécharger une carte par pays ou par région",
+    "confirm": "Démarrer le téléchargement",
+    "searchPlaceholder_one": "Rechercher parmi {{count}} pays...",
+    "searchPlaceholder_other": "Rechercher parmi {{count}} pays...",
+    "clearAll": "Tout effacer",
+    "quickPicks": "Sélections rapides",
+    "noMatch": "Aucun pays ne correspond à « {{search}} ».",
+    "installed": "Installé",
+    "installedTitle": "Déjà téléchargé — sélectionnez-le à nouveau pour le mettre à jour avec un autre niveau de zoom",
+    "selectedCount_one": "{{count}} sélectionné",
+    "selectedCount_other": "{{count}} sélectionnés",
+    "removeCountry": "Retirer {{name}}",
+    "maxZoom": "Niveau de zoom maximal : <code>{{zoom}}</code>",
+    "zoomWorld": "z{{zoom}} (monde)",
+    "zoomStreet": "z{{zoom}} (rue)",
+    "zoomHint": "Zoom plus faible = fichier plus petit, moins de détails. Le zoom 15 affiche les rues individuelles ; le zoom 10 affiche le détail au niveau de la ville.",
+    "pickAtLeastOne": "Choisissez au moins un pays avant de télécharger.",
+    "stillEstimating": "Estimation de la taille en cours — patientez un instant.",
+    "estimateFailed": "Échec de l'estimation",
+    "downloadFailed": "Échec du téléchargement",
+    "preflightNoData": "La vérification préalable n'a renvoyé aucune donnée",
+    "estimating": "Estimation de la taille…",
+    "pickToEstimate": "Choisissez au moins un pays pour estimer la taille.",
+    "result": "{{tiles}} tuiles, ~{{size}}",
+    "sourceBuild": "(version source du {{date}})"
+  }
+}

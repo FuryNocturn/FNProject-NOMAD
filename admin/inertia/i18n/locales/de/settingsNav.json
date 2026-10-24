@@ -1,0 +1,16 @@
+{
+  "title": "Einstellungen",
+  "supplyDepot": "Supply Depot",
+  "benchmark": "Benchmark",
+  "contentExplorer": "Inhaltsentdecker",
+  "contentManager": "Inhaltsverwaltung",
+  "creatorPacks": "Creator-Pakete",
+  "mapsManager": "Kartenverwaltung",
+  "serviceLogs": "Dienstprotokolle & Metriken",
+  "checkForUpdates": "Nach Updates suchen",
+  "system": "System",
+  "advanced": "Erweitert",
+  "apiReference": "API-Referenz",
+  "support": "Das Projekt unterstützen",
+  "legal": "Rechtliche Hinweise"
+}

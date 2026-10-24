@@ -1,0 +1,16 @@
+{
+  "backToHome": "返回首页",
+  "debugInfo": "调试信息",
+  "version": "Project NOMAD™ 指挥中心 v{{version}}",
+  "commandCenter": "指挥中心",
+  "logoAlt": "Project NOMAD 徽标",
+  "goToSettings": "前往设置",
+  "remove": "移除",
+  "cancel": "取消",
+  "confirm": "确认",
+  "loading": "加载中...",
+  "loadingShort": "加载中",
+  "dismissAlert": "关闭提示",
+  "noRecords": "未找到记录",
+  "internalError": "发生内部错误。请重试，或查看控制台了解详情。{{detail}}"
+}

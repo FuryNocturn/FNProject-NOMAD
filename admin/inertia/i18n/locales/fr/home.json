@@ -1,0 +1,44 @@
+{
+  "tiles": {
+    "maps": {
+      "label": "Cartes",
+      "description": "Consulter les cartes hors ligne"
+    },
+    "drugReference": {
+      "label": "Répertoire des médicaments",
+      "description": "Notices de médicaments de la FDA hors ligne. Recherche par nom de médicament ou par symptôme"
+    },
+    "easySetup": {
+      "label": "Configuration rapide",
+      "description": "Vous ne savez pas par où commencer ? Utilisez l'assistant de configuration pour paramétrer rapidement votre NOMAD !"
+    },
+    "supplyDepot": {
+      "label": "Supply Depot",
+      "description": "Parcourez et installez des applications sélectionnées, ou ajoutez votre propre conteneur Docker"
+    },
+    "docs": {
+      "label": "Documentation",
+      "description": "Lire les manuels et guides de Project NOMAD"
+    },
+    "settings": {
+      "label": "Paramètres",
+      "description": "Configurer les paramètres de votre NOMAD"
+    }
+  },
+  "updateAvailable": "Une mise à jour est disponible pour Project NOMAD !",
+  "benchmarkRerun": {
+    "title": "Votre benchmark peut être re-noté avec le Score v2",
+    "message": "Nous avons amélioré le système de notation du benchmark. Relancez votre benchmark pour obtenir un résultat Score v2 à jour dans le classement de la communauté.",
+    "button": "Relancer le benchmark"
+  },
+  "startHere": "Commencez ici !",
+  "poweredBy": "Propulsé par {{name}}",
+  "accessApp": "Accéder à l'application {{name}}",
+  "opensInNewTab": "S'ouvre dans un nouvel onglet",
+  "linkTileHint": "Un raccourci que vous avez ajouté. NOMAD ne le gère pas.",
+  "editLink": "Modifier ce lien",
+  "removeLink": "Supprimer ce lien",
+  "removeLinkFailed": "Échec de la suppression de ce lien.",
+  "addLink": "Ajouter un lien",
+  "addLinkHint": "Un raccourci vers autre chose sur votre réseau"
+}

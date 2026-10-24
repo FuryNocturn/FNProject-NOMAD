@@ -1,0 +1,16 @@
+{
+  "backToHome": "Retour à l'accueil",
+  "debugInfo": "Infos de débogage",
+  "version": "Project NOMAD™ Centre de commande v{{version}}",
+  "commandCenter": "Centre de commande",
+  "logoAlt": "Logo de Project NOMAD",
+  "goToSettings": "Aller aux paramètres",
+  "remove": "Supprimer",
+  "cancel": "Annuler",
+  "confirm": "Confirmer",
+  "loading": "Chargement...",
+  "loadingShort": "Chargement",
+  "dismissAlert": "Fermer l'alerte",
+  "noRecords": "Aucun enregistrement trouvé",
+  "internalError": "Une erreur interne s'est produite. Veuillez réessayer ou consulter la console pour plus de détails. {{detail}}"
+}
