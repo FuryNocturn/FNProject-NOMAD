@@ -42,6 +42,14 @@
       "strict": "Strict"
     },
     "relevanceCustom": "Custom ({{value}})",
+    "embeddingModels": {
+      "english": "{{name}} — English (default)",
+      "multilingual": "{{name}} — multilingual"
+    },
+    "embeddingRebuild": {
+      "title": "Rebuild the Knowledge Base to use this model",
+      "message": "The Knowledge Base was built with a different embedding model. Until you run \"Reset & Rebuild\" in the Knowledge Base, chat answers will not use your documents."
+    },
     "responseStyles": {
       "auto": "Auto (recommended)",
       "focused": "Focused (factual, repeatable)",
@@ -75,6 +83,10 @@
       "tasksModel": {
         "label": "Tasks Model",
         "help": "Small, fast model used for background work like chat titles and suggestions. Leave this set to the chat model to use whichever model the chat is using. Avoid reasoning models here — they are slow at short, aesthetic tasks."
+      },
+      "embeddingModel": {
+        "label": "Knowledge Base Embedding Model",
+        "help": "The model that turns your documents and questions into searchable vectors. The default only understands English well; pick a multilingual one to ask about documents in Spanish or other languages. With LM Studio, download and load the model there first."
       },
       "minRelevance": {
         "label": "Knowledge Base Relevance",

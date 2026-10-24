@@ -8,7 +8,8 @@ import { getSettingSchema, updateSettingSchema, validateSettingValue } from '#va
 import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
 import env from '#start/env'
-import { parseMinRelevance } from '../utils/misc.js'
+import { parseMinRelevance, pickEmbeddingModel } from '../utils/misc.js'
+import { EMBEDDING_MODEL_NAME } from '../../constants/ollama.js'
 import { isRelevanceCheckEnabled } from '../utils/relevance_judge.js'
 import { parseResponseStyle } from '../utils/sampler.js'
 import { resolveDefaultMinFinalScore } from '../utils/rag_relevance.js'
@@ -83,6 +84,11 @@ export default class SettingsController {
     const minRelevance = await KVStore.getValue('rag.minRelevance')
     const relevanceCheck = await KVStore.getValue('rag.relevanceCheck')
     const responseStyle = await KVStore.getValue('ai.responseStyle')
+    const embeddingModel = pickEmbeddingModel(await KVStore.getValue('rag.embeddingModel')).name
+    // Collections from before the setting existed have no record and were built by nomic
+    const embeddingModelIndexed =
+      (await KVStore.getValue('rag.embeddingModelIndexed')) ?? EMBEDDING_MODEL_NAME
+    const defaultMinRelevance = await resolveDefaultMinFinalScore()
     // Resolved window per installed model, so the setting shows what "Auto"
     // actually produced rather than leaving the user to guess. Best-effort:
     // a model whose metadata can't be read simply doesn't get a badge.
@@ -111,7 +117,11 @@ export default class SettingsController {
           contextWindow: contextWindow ?? 'auto',
           // Sent as the resolved number so the select can match an option
           // without duplicating the "unset means the default" rule in the UI.
-          minRelevance: parseMinRelevance(minRelevance, await resolveDefaultMinFinalScore()),
+          minRelevance: parseMinRelevance(minRelevance, defaultMinRelevance),
+          // The embedding model's own floor, which the "Balanced" preset maps to
+          defaultMinRelevance,
+          embeddingModel,
+          embeddingModelIndexed,
           relevanceCheck: isRelevanceCheckEnabled(relevanceCheck),
           // Resolved rather than raw, for the same reason: unset means 'auto',
           // and the select shouldn't have to know that.

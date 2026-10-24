@@ -88,6 +88,17 @@ test('installed tags: other models match exactly or as :latest only', () => {
   assert.equal(isInstalledTagOf('qwen3-embedding:latest', 'qwen3-embedding:0.6b'), false)
 })
 
+test('installed tags: LM Studio names of the same models are recognised', () => {
+  assert.equal(isInstalledTagOf('text-embedding-nomic-embed-text-v1.5', EMBEDDING_MODEL_NAME), true)
+  assert.equal(isInstalledTagOf('text-embedding-bge-m3', 'bge-m3'), true)
+  assert.equal(isInstalledTagOf('text-embedding-bge-m3@q8_0', 'bge-m3'), true)
+  assert.equal(isInstalledTagOf('text-embedding-qwen3-embedding-0.6b', 'qwen3-embedding:0.6b'), true)
+  assert.equal(isInstalledTagOf('text-embedding-embeddinggemma-300m', 'embeddinggemma'), true)
+  // Same size rule as Ollama: another qwen3-embedding size is another width
+  assert.equal(isInstalledTagOf('text-embedding-qwen3-embedding-8b', 'qwen3-embedding:0.6b'), false)
+  assert.equal(isInstalledTagOf('text-embedding-bge-large-en', 'bge-m3'), false)
+})
+
 test('embedding model: the qwen3 query instruction ends its line before the query', () => {
   // Qwen3-Embedding's documented format is `Instruct: <task>\nQuery:<query>`;
   // a literal backslash-n would still embed, just worse, with nothing failing.

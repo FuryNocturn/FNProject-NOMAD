@@ -42,6 +42,14 @@
       "strict": "Rigoroso"
     },
     "relevanceCustom": "Personalizado ({{value}})",
+    "embeddingModels": {
+      "english": "{{name}} — inglês (padrão)",
+      "multilingual": "{{name}} — multilíngue"
+    },
+    "embeddingRebuild": {
+      "title": "Reconstrua a base de conhecimento para usar este modelo",
+      "message": "A base de conhecimento foi criada com outro modelo de embeddings. Até executar \"Redefinir e reconstruir\" na base de conhecimento, as respostas do chat não usarão os seus documentos."
+    },
     "responseStyles": {
       "auto": "Automático (recomendado)",
       "focused": "Focado (factual, repetível)",
@@ -75,6 +83,10 @@
       "tasksModel": {
         "label": "Modelo de tarefas",
         "help": "Modelo pequeno e rápido usado em trabalhos em segundo plano, como títulos de chats e sugestões. Deixe como o modelo do chat para usar o modelo que o chat estiver usando. Evite modelos de raciocínio aqui — eles são lentos em tarefas curtas e simples."
+      },
+      "embeddingModel": {
+        "label": "Modelo de embeddings da base de conhecimento",
+        "help": "O modelo que transforma os seus documentos e perguntas em vetores pesquisáveis. O padrão só entende bem inglês; escolha um multilíngue para perguntar sobre documentos em português ou outros idiomas. Com o LM Studio, baixe e carregue o modelo lá primeiro."
       },
       "minRelevance": {
         "label": "Relevância da Base de conhecimento",

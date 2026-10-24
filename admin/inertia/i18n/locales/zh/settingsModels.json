@@ -42,6 +42,14 @@
       "strict": "严格"
     },
     "relevanceCustom": "自定义（{{value}}）",
+    "embeddingModels": {
+      "english": "{{name}} — 英语（默认）",
+      "multilingual": "{{name}} — 多语言"
+    },
+    "embeddingRebuild": {
+      "title": "重建知识库以使用此模型",
+      "message": "知识库是用其他嵌入模型构建的。在知识库中执行“重置并重建”之前，聊天回答不会使用你的文档。"
+    },
     "responseStyles": {
       "auto": "自动（推荐）",
       "focused": "专注（基于事实，可重复）",
@@ -75,6 +83,10 @@
       "tasksModel": {
         "label": "任务模型",
         "help": "用于聊天标题和建议等后台工作的小型快速模型。保持设置为聊天模型，则使用聊天当前所用的模型。请避免在此使用推理模型 — 它们处理简短的辅助任务时速度很慢。"
+      },
+      "embeddingModel": {
+        "label": "知识库嵌入模型",
+        "help": "将文档和问题转换为可搜索向量的模型。默认模型只擅长英语；如需用中文或其他语言查询文档，请选择多语言模型。使用 LM Studio 时，请先在 LM Studio 中下载并加载该模型。"
       },
       "minRelevance": {
         "label": "知识库相关度",

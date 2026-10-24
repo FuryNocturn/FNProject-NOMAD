@@ -39,11 +39,22 @@ export function isEmbeddingModelName(model: string): boolean {
  * nomic-embed-text has always been accepted under any tag; other models must
  * match exactly or as `:latest`, because other tags of the same family can be
  * different models entirely (qwen3-embedding:8b is 4096-wide, :0.6b is 1024).
+ * LM Studio lists the same models as `text-embedding-<name>` with `-` for `:`
+ * (text-embedding-bge-m3, text-embedding-qwen3-embedding-0.6b), sometimes with a
+ * publisher prefix or `@<quant>` suffix; those are matched under the same rules.
  */
 export function isInstalledTagOf(installed: string, wanted: string): boolean {
   const name = installed.toLowerCase()
   if (wanted === EMBEDDING_MODEL_NAME) return name.includes('nomic-embed-text')
-  return name === wanted || name === `${wanted}:latest`
+  if (name === wanted || name === `${wanted}:latest`) return true
+  const lmStudio = name
+    .replace(/^.*\//, '')
+    .replace(/@.*$/, '')
+    .replace(/^text-embedding-/, '')
+  const flat = wanted.replace(':', '-')
+  // An untagged family (embeddinggemma) may carry LM Studio's size suffix (-300m);
+  // a tagged one (qwen3-embedding:0.6b) must match its size exactly.
+  return lmStudio === flat || (!wanted.includes(':') && lmStudio.startsWith(`${flat}-`))
 }
 
 /**

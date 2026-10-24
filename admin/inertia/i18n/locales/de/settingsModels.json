@@ -42,6 +42,14 @@
       "strict": "Streng"
     },
     "relevanceCustom": "Benutzerdefiniert ({{value}})",
+    "embeddingModels": {
+      "english": "{{name}} — Englisch (Standard)",
+      "multilingual": "{{name}} — mehrsprachig"
+    },
+    "embeddingRebuild": {
+      "title": "Wissensdatenbank neu aufbauen, um dieses Modell zu nutzen",
+      "message": "Die Wissensdatenbank wurde mit einem anderen Embedding-Modell erstellt. Bis du in der Wissensdatenbank „Zurücksetzen & neu aufbauen“ ausführst, nutzen Chat-Antworten deine Dokumente nicht."
+    },
     "responseStyles": {
       "auto": "Automatisch (empfohlen)",
       "focused": "Fokussiert (sachlich, reproduzierbar)",
@@ -75,6 +83,10 @@
       "tasksModel": {
         "label": "Aufgabenmodell",
         "help": "Kleines, schnelles Modell für Hintergrundaufgaben wie Chat-Titel und Vorschläge. Belasse es auf dem Chat-Modell, um das Modell zu verwenden, das der Chat gerade nutzt. Vermeide hier Reasoning-Modelle – sie sind bei kurzen, einfachen Aufgaben langsam."
+      },
+      "embeddingModel": {
+        "label": "Embedding-Modell der Wissensdatenbank",
+        "help": "Das Modell, das deine Dokumente und Fragen in durchsuchbare Vektoren umwandelt. Das Standardmodell versteht nur Englisch gut; wähle ein mehrsprachiges, um Fragen zu Dokumenten in Deutsch oder anderen Sprachen zu stellen. Bei LM Studio lade das Modell zuerst dort herunter und lade es."
       },
       "minRelevance": {
         "label": "Relevanz der Wissensdatenbank",

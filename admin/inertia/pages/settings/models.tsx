@@ -14,6 +14,8 @@ import StyledModal from '~/components/StyledModal'
 import type { NomadInstalledModel } from '../../../types/ollama'
 import { SERVICE_NAMES } from '../../../constants/service_names'
 import {
+  EMBEDDING_MODEL_NAME,
+  EMBEDDING_MODELS,
   RAG_MIN_FINAL_SCORE,
   RAG_MIN_RELEVANCE_PRESETS,
   RESPONSE_STYLE_PRESETS,
@@ -43,7 +45,7 @@ export default function ModelsPage(props: {
   models: {
     availableModels: NomadOllamaModel[]
     installedModels: NomadInstalledModel[]
-    settings: { chatSuggestionsEnabled: boolean; aiAssistantCustomName: string; remoteOllamaUrl: string; ollamaFlashAttention: boolean; autoThinking: boolean; tasksModel: string; ragEnabled: boolean; contextWindow: string; minRelevance: number; relevanceCheck: boolean; responseStyle: string }
+    settings: { chatSuggestionsEnabled: boolean; aiAssistantCustomName: string; remoteOllamaUrl: string; ollamaFlashAttention: boolean; autoThinking: boolean; tasksModel: string; ragEnabled: boolean; contextWindow: string; minRelevance: number; defaultMinRelevance: number; embeddingModel: string; embeddingModelIndexed: string; relevanceCheck: boolean; responseStyle: string }
     /** Effective window per installed model, as resolved by ContextWindowService. */
     resolvedContextWindows?: Record<string, number>
   }
@@ -68,6 +70,8 @@ export default function ModelsPage(props: {
   const [tasksModel, setTasksModel] = useState(props.models.settings.tasksModel)
   const [contextWindow, setContextWindow] = useState(props.models.settings.contextWindow)
   const [minRelevance, setMinRelevance] = useState(String(props.models.settings.minRelevance))
+  const [embeddingModel, setEmbeddingModel] = useState(props.models.settings.embeddingModel)
+  const [embeddingSaving, setEmbeddingSaving] = useState(false)
   const [relevanceCheck, setRelevanceCheck] = useState(props.models.settings.relevanceCheck)
   const [responseStyle, setResponseStyle] = useState(props.models.settings.responseStyle)
   const [aiAssistantCustomName, setAiAssistantCustomName] = useState(
@@ -236,22 +240,67 @@ export default function ModelsPage(props: {
   // floor, which is not a thing anyone can reason about directly. The stored
   // setting is still the number, so retuning these labels later cannot orphan a
   // saved value.
+  // The presets are calibrated for nomic-embed-text; other embedding models score
+  // on a different scale, so they get only "Off" and their own calibrated floor.
+  const { defaultMinRelevance } = props.models.settings
+  const relevancePresets: { value: number; label: string }[] =
+    defaultMinRelevance === RAG_MIN_FINAL_SCORE
+      ? [...RAG_MIN_RELEVANCE_PRESETS]
+      : [RAG_MIN_RELEVANCE_PRESETS[0], { value: defaultMinRelevance, label: 'Balanced (recommended)' }]
+  const presetKey = (value: number) =>
+    value === defaultMinRelevance ? 'balanced' : RELEVANCE_PRESET_KEYS[value]
   const minRelevanceOptions = [
-    ...RAG_MIN_RELEVANCE_PRESETS.map((preset) => ({
+    ...relevancePresets.map((preset) => ({
       value: String(preset.value),
       // Unknown (newly added) presets show their English label until translated
-      label: RELEVANCE_PRESET_KEYS[preset.value]
-        ? t(`settingsModels.models.relevancePresets.${RELEVANCE_PRESET_KEYS[preset.value]}`)
+      label: presetKey(preset.value)
+        ? t(`settingsModels.models.relevancePresets.${presetKey(preset.value)}`)
         : preset.label,
     })),
     // The setting is API-writable to any value in [0,1], so a value off the
     // preset ladder is reachable. Surface it as a disabled option rather than
     // letting the select render empty — same treatment the tasks model gets when
     // the chosen model has since been deleted.
-    ...(RAG_MIN_RELEVANCE_PRESETS.some((p) => String(p.value) === minRelevance)
+    ...(relevancePresets.some((p) => String(p.value) === minRelevance)
       ? []
       : [{ value: minRelevance, label: t('settingsModels.models.relevanceCustom', { value: minRelevance }), disabled: true }]),
   ]
+
+  const embeddingModelOptions = Object.keys(EMBEDDING_MODELS).map((name) => ({
+    value: name,
+    label: t(
+      name === EMBEDDING_MODEL_NAME
+        ? 'settingsModels.models.embeddingModels.english'
+        : 'settingsModels.models.embeddingModels.multilingual',
+      { name }
+    ),
+  }))
+  // Searches return nothing until the knowledge base is rebuilt with the chosen model
+  const embeddingRebuildNeeded = embeddingModel !== props.models.settings.embeddingModelIndexed
+
+  // Floors are not comparable between embedding models, so a switch also clears
+  // rag.minRelevance back to the new model's own default.
+  async function handleEmbeddingModelChange(name: string) {
+    const previous = embeddingModel
+    setEmbeddingModel(name)
+    setEmbeddingSaving(true)
+    const saved = await api.updateSetting('rag.embeddingModel', name)
+    if (!saved?.success) {
+      setEmbeddingModel(previous)
+      setEmbeddingSaving(false)
+      return
+    }
+    await api.updateSetting('rag.minRelevance', '')
+    queryClient.invalidateQueries({ queryKey: ['system-setting', 'rag.embeddingModel'] })
+    addNotification({ message: t('settingsModels.models.toasts.settingUpdated'), type: 'success' })
+    router.reload({
+      only: ['models'],
+      onSuccess: (page) => {
+        setMinRelevance(String((page.props as any).models.settings.minRelevance))
+      },
+      onFinish: () => setEmbeddingSaving(false),
+    })
+  }
 
   const responseStyleOptions = RESPONSE_STYLE_PRESETS.map((preset) => ({
     value: preset.value,
@@ -382,6 +431,23 @@ export default function ModelsPage(props: {
                   updateSettingMutation.mutate({ key: 'ai.tasksModel', value: newVal })
                 }}
               />
+              <Select
+                name="embeddingModel"
+                label={t('settingsModels.models.settings.embeddingModel.label')}
+                helpText={t('settingsModels.models.settings.embeddingModel.help')}
+                value={embeddingModel}
+                options={embeddingModelOptions}
+                disabled={!ragEnabled || embeddingSaving}
+                onChange={handleEmbeddingModelChange}
+              />
+              {embeddingRebuildNeeded && (
+                <Alert
+                  type="warning"
+                  variant="bordered"
+                  title={t('settingsModels.models.embeddingRebuild.title')}
+                  message={t('settingsModels.models.embeddingRebuild.message')}
+                />
+              )}
               <Select
                 name="minRelevance"
                 label={t('settingsModels.models.settings.minRelevance.label')}
