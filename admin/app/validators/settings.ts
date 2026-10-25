@@ -33,6 +33,20 @@ export function validateSettingValue(key: KVStoreKey, value: unknown): string | 
                 return 'Language must be a language code such as "en" or "es".'
             }
             return null
+        case 'downloads.kiwixMirror': {
+            // Empty clears it (back to download.kiwix.org)
+            if (value === '' || value === null || value === undefined) {
+                return null
+            }
+            let url: URL | null = null
+            try {
+                url = typeof value === 'string' ? new URL(value) : null
+            } catch {}
+            if (!url || url.protocol !== 'https:' || url.search || url.hash) {
+                return 'Mirror must be an https URL of a Kiwix zim/ folder.'
+            }
+            return null
+        }
         case 'autoUpdate.windowStart':
         case 'autoUpdate.windowEnd':
         case 'contentAutoUpdate.windowStart':

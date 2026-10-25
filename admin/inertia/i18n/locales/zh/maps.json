@@ -100,5 +100,12 @@
     "IconFlag": "集结点",
     "IconAlertTriangle": "危险源",
     "IconSkull": "危险"
+  },
+  "layers": {
+    "label": "地图图层",
+    "street": "街道",
+    "aerial": "航空",
+    "hybrid": "混合",
+    "topographic": "地形"
   }
 }

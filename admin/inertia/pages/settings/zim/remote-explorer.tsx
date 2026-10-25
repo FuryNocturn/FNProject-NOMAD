@@ -32,6 +32,7 @@ import {
   IconLibrary,
 } from '@tabler/icons-react'
 import useDebounce from '~/hooks/useDebounce'
+import { useSystemSetting } from '~/hooks/useSystemSetting'
 import CategoryCard from '~/components/CategoryCard'
 import CreatorPacksSection from '~/components/CreatorPacksSection'
 import TierSelectionModal from '~/components/TierSelectionModal'
@@ -500,6 +501,19 @@ export default function ZimRemoteExplorer() {
 
   const hasCustomLibraries = customLibraries && customLibraries.length > 0
 
+  // Preferred mirror for every file from download.kiwix.org (Wikipedia, collections,
+  // Easy Setup, updates); empty means the official server
+  const { data: kiwixMirrorSetting } = useSystemSetting({ key: 'downloads.kiwixMirror' })
+  const kiwixMirror: string = kiwixMirrorSetting?.value ?? ''
+  const setKiwixMirror = useMutation({
+    mutationFn: (value: string) => api.updateSetting('downloads.kiwixMirror', value),
+    onSuccess: (result) => {
+      if (!result?.success) return
+      queryClient.invalidateQueries({ queryKey: ['system-setting', 'downloads.kiwixMirror'] })
+      addNotification({ message: t('settingsContent.explorer.mirror.saved'), type: 'success' })
+    },
+  })
+
   return (
     <SettingsLayout>
       <Head title={t('settingsContent.explorer.headTitle')} />
@@ -528,6 +542,30 @@ export default function ZimRemoteExplorer() {
               className="!mt-6"
             />
           )}
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <label htmlFor="kiwix-mirror" className="text-sm font-medium text-text-secondary">
+              {t('settingsContent.explorer.mirror.label')}
+            </label>
+            <select
+              id="kiwix-mirror"
+              value={kiwixMirror}
+              disabled={setKiwixMirror.isPending}
+              onChange={(e) => setKiwixMirror.mutate(e.target.value)}
+              className="rounded-md border border-border-default bg-surface-primary text-text-primary px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-desert-green"
+            >
+              <option value="">{t('settingsContent.explorer.mirror.official')}</option>
+              {(customLibraries ?? []).map((lib) => (
+                <option key={lib.id} value={lib.base_url}>
+                  {lib.name}
+                </option>
+              ))}
+              {/* A mirror whose library was removed afterwards */}
+              {kiwixMirror && !customLibraries?.some((lib) => lib.base_url === kiwixMirror) && (
+                <option value={kiwixMirror}>{kiwixMirror}</option>
+              )}
+            </select>
+            <p className="w-full text-xs text-text-muted">{t('settingsContent.explorer.mirror.help')}</p>
+          </div>
           <div className="mt-8 mb-6 flex items-center justify-between">
             <StyledSectionHeader title={t('settingsContent.explorer.curatedContent')} className="!mb-0" />
             <StyledButton

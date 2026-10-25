@@ -100,5 +100,12 @@
     "IconFlag": "Rally point",
     "IconAlertTriangle": "Hazard",
     "IconSkull": "Danger"
+  },
+  "layers": {
+    "label": "Map layer",
+    "street": "Streets",
+    "aerial": "Aerial",
+    "hybrid": "Hybrid",
+    "topographic": "Topographic"
   }
 }

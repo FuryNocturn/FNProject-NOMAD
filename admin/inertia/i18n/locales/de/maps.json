@@ -100,5 +100,12 @@
     "IconFlag": "Sammelpunkt",
     "IconAlertTriangle": "Gefahrenstelle",
     "IconSkull": "Lebensgefahr"
+  },
+  "layers": {
+    "label": "Kartenebene",
+    "street": "Straßen",
+    "aerial": "Luftbild",
+    "hybrid": "Hybrid",
+    "topographic": "Topografisch"
   }
 }

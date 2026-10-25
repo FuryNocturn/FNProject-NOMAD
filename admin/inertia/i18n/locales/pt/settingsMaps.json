@@ -98,5 +98,28 @@
     "pickToEstimate": "Escolha pelo menos um país para estimar o tamanho.",
     "result": "{{tiles}} tiles, ~{{size}}",
     "sourceBuild": "(versão de origem {{date}})"
+  },
+  "raster": {
+    "title": "Mapas aéreos e topográficos",
+    "intro": "Descarregue imagem aérea ou um mapa topográfico de uma zona de que já tenha o mapa de ruas, para trocar de camada no mapa sem ligação. Cada nível de detalhe a mais ocupa cerca de quatro vezes mais.",
+    "source": "Origem",
+    "area": "Zona",
+    "chooseArea": "Escolha uma zona…",
+    "customArea": "Zona personalizada",
+    "detail": "Detalhe",
+    "zoomOption": "Zoom {{zoom}} (≈ {{meters}} m por píxel)",
+    "bboxPlaceholder": "Oeste, sul, leste, norte (graus), ex. -3.9, 40.3, -3.5, 40.6",
+    "noRegions": "Descarregue primeiro uma região de mapa de ruas para a escolher aqui, ou escreva uma zona personalizada.",
+    "download": "Descarregar",
+    "estimate": "≈ {{tiles}} mosaicos, cerca de {{size}}",
+    "noCoverage": "Esta origem não cobre essa zona.",
+    "started": "Download do mapa iniciado. Acompanhe-o abaixo.",
+    "alreadyRunning": "Esse mapa já está a ser descarregado.",
+    "providers": {
+      "ign-pnoa": "Imagem aérea – PNOA (IGN Espanha)",
+      "ign-mtn": "Mapa topográfico – MTN (IGN Espanha)",
+      "usgs-imagery": "Imagem aérea – USGS (Estados Unidos)",
+      "usgs-topo": "Mapa topográfico – USGS (Estados Unidos)"
+    }
   }
 }

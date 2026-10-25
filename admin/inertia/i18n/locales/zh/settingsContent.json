@@ -100,7 +100,13 @@
     "addLibrary": "添加图书库",
     "libraryAdded": "自定义图书库已添加。",
     "libraryAddFailed": "添加自定义图书库失败。",
-    "libraryRemoved": "自定义图书库已移除。"
+    "libraryRemoved": "自定义图书库已移除。",
+    "mirror": {
+      "label": "下载镜像：",
+      "official": "官方服务器（download.kiwix.org）",
+      "help": "用于从 download.kiwix.org 下载的所有文件：维基百科、合集、初始设置和更新。官方服务器可能非常慢；如果镜像失败，下载将从官方服务器继续。",
+      "saved": "下载镜像已保存。"
+    }
   },
   "creatorPacksPage": {
     "headTitle": "创作者内容包",

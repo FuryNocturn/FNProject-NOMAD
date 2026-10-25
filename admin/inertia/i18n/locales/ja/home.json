@@ -8,6 +8,10 @@
       "label": "医薬品リファレンス",
       "description": "オフラインの FDA 医薬品ラベル。医薬品名または症状で検索できます"
     },
+    "documents": {
+      "label": "ドキュメント検索",
+      "description": "AI なしで PDF・本・メモの文字を検索"
+    },
     "easySetup": {
       "label": "かんたんセットアップ",
       "description": "どこから始めればよいかわからない場合は、セットアップウィザードで NOMAD をすばやく設定できます!"

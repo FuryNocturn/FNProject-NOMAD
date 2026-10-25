@@ -100,5 +100,12 @@
     "IconFlag": "集合地点",
     "IconAlertTriangle": "危険箇所",
     "IconSkull": "危険"
+  },
+  "layers": {
+    "label": "地図レイヤー",
+    "street": "街路",
+    "aerial": "航空写真",
+    "hybrid": "ハイブリッド",
+    "topographic": "地形図"
   }
 }

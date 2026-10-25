@@ -6,6 +6,7 @@ export const SETTINGS_KEYS: KVStoreKey[] = [
     'ui.hasVisitedEasySetup',
     'ui.theme',
     'ui.language',
+    'downloads.kiwixMirror',
     'system.earlyAccess',
     'system.internetStatusTestUrl',
     'ai.assistantCustomName',

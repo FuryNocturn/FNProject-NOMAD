@@ -38,9 +38,8 @@ defensive one.
 
 **The AI is the variable, and it is the model rather than NOMAD.** Ollama idles at
 roughly 1.2GB, and a model needs about its download size resident while it answers,
-so an 8B model at ~4.6GB wants about that much on top. **8GB is workable for a small
-model, 16GB is comfortable, and 32GB is the recommendation if you want to run larger
-ones.**
+so an 8B model at ~4.6GB wants about that much on top.
+**8GB is workable for a small model, 16GB is comfortable, and 32GB is the recommendation if you want to run larger ones.**
 
 Where that memory comes from depends on your hardware. With a discrete GPU the model
 loads into VRAM and never touches system RAM, so VRAM is the number that limits which
@@ -88,6 +87,12 @@ Content is as current as when it was last downloaded. Wikipedia snapshots are ty
 Yes — with the Knowledge Base. Upload PDFs, text files, and other documents to the [Knowledge Base](/knowledge-base), and the AI can reference them when answering your questions. This uses semantic search to find relevant information from your uploaded files.
 
 For Kiwix content, NOMAD uses standard ZIM files. For educational content, Kolibri uses its own channel format.
+
+### Can I search my documents without the AI?
+Yes. **[Search Documents](/documents)** finds words in your Knowledge Base files (PDF, Word, EPUB and text) using a plain keyword index, so it works with no AI model, GPU or Qdrant. Scanned PDFs without a text layer are not searchable this way.
+
+### Can NOMAD use documents that stay on my NAS?
+Yes, optionally. Mount the folder read-only into the admin container at `/app/external_docs` — for example, add `- /mnt/nas/docs:/app/external_docs:ro` to the `admin` service's `volumes` in your compose file and restart NOMAD. Its files then appear in Search Documents and are indexed for the AI on the next Knowledge Base sync. NOMAD never modifies or deletes anything in that folder; if it isn't mounted, it is simply ignored.
 
 ### What are curated collection tiers?
 When selecting content in the Easy Setup wizard or Content Explorer, collections are organized into three tiers:

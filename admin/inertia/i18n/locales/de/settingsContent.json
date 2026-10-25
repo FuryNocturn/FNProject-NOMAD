@@ -100,7 +100,13 @@
     "addLibrary": "Bibliothek hinzufügen",
     "libraryAdded": "Eigene Bibliothek hinzugefügt.",
     "libraryAddFailed": "Die eigene Bibliothek konnte nicht hinzugefügt werden.",
-    "libraryRemoved": "Eigene Bibliothek entfernt."
+    "libraryRemoved": "Eigene Bibliothek entfernt.",
+    "mirror": {
+      "label": "Download-Mirror:",
+      "official": "Offizieller Server (download.kiwix.org)",
+      "help": "Gilt für jede Datei von download.kiwix.org: Wikipedia, Sammlungen, Ersteinrichtung und Updates. Der offizielle Server kann sehr langsam sein; fällt der Mirror aus, wird der Download vom offiziellen Server fortgesetzt.",
+      "saved": "Download-Mirror gespeichert."
+    }
   },
   "creatorPacksPage": {
     "headTitle": "Creator-Pakete",

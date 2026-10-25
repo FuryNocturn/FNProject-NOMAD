@@ -100,7 +100,13 @@
     "addLibrary": "ライブラリを追加",
     "libraryAdded": "カスタムライブラリを追加しました。",
     "libraryAddFailed": "カスタムライブラリを追加できませんでした。",
-    "libraryRemoved": "カスタムライブラリを削除しました。"
+    "libraryRemoved": "カスタムライブラリを削除しました。",
+    "mirror": {
+      "label": "ダウンロードミラー：",
+      "official": "公式サーバー（download.kiwix.org）",
+      "help": "download.kiwix.org から取得するすべてのファイル（Wikipedia、コレクション、初期設定、更新）に使われます。公式サーバーは非常に遅いことがあります。ミラーが失敗した場合は、公式サーバーからダウンロードを続けます。",
+      "saved": "ダウンロードミラーを保存しました。"
+    }
   },
   "creatorPacksPage": {
     "headTitle": "クリエイターパック",

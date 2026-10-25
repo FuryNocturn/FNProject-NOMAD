@@ -98,5 +98,28 @@
     "pickToEstimate": "Pick at least one country to estimate size.",
     "result": "{{tiles}} tiles, ~{{size}}",
     "sourceBuild": "(source build {{date}})"
+  },
+  "raster": {
+    "title": "Aerial and topographic maps",
+    "intro": "Download aerial imagery or a topographic map for an area you already have a street map of, to switch layers on the map while offline. Each extra detail level is about four times larger.",
+    "source": "Source",
+    "area": "Area",
+    "chooseArea": "Choose an area…",
+    "customArea": "Custom area",
+    "detail": "Detail",
+    "zoomOption": "Zoom {{zoom}} (≈ {{meters}} m per pixel)",
+    "bboxPlaceholder": "West, south, east, north (degrees), e.g. -3.9, 40.3, -3.5, 40.6",
+    "noRegions": "Download a street map region first to pick it here, or enter a custom area.",
+    "download": "Download",
+    "estimate": "≈ {{tiles}} tiles, about {{size}}",
+    "noCoverage": "This source has no coverage for that area.",
+    "started": "Map download started. Follow it below.",
+    "alreadyRunning": "That map is already downloading.",
+    "providers": {
+      "ign-pnoa": "Aerial imagery – PNOA (IGN Spain)",
+      "ign-mtn": "Topographic map – MTN (IGN Spain)",
+      "usgs-imagery": "Aerial imagery – USGS (United States)",
+      "usgs-topo": "Topographic map – USGS (United States)"
+    }
   }
 }

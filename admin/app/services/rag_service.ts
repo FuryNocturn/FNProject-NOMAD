@@ -86,6 +86,9 @@ export class RagService {
   // every embed call — ~45% of per-document Qdrant time on large ingestions (#1129)
   private ensuredCollections = new Set<string>()
   public static UPLOADS_STORAGE_PATH = 'storage/kb_uploads'
+  // Optional read-only folder (e.g. a NAS share bind-mounted at /app/external_docs).
+  // Absent → ignored. NOMAD indexes it but never writes to or deletes from it (#1422).
+  public static EXTERNAL_DOCS_PATH = 'external_docs'
   public static CONTENT_COLLECTION_NAME = 'nomad_knowledge_base'
   // Upper bound on distinct sources returned by Qdrant's facet API. Real
   // NOMADs cap out at a few hundred ZIM files + uploaded PDFs; 10k leaves
@@ -1137,6 +1140,8 @@ export class RagService {
         // carries no equivalent embedded metadata.
         archive_title: result.payload?.archive_title as string | undefined,
         archive_date: result.payload?.archive_date as string | undefined,
+        // Where the article lives inside its ZIM, so a citation can link to it.
+        article_path: result.payload?.article_path as string | undefined,
       }))
 
       const rerankedResults = this.rerankResults(resultsWithMetadata, keywords, query)
@@ -1225,6 +1230,7 @@ export class RagService {
           // Citation metadata (#1179)
           archive_title: result.archive_title,
           archive_date: result.archive_date,
+          article_path: result.article_path,
         },
       }))
     } catch (error) {
@@ -1795,10 +1801,35 @@ export class RagService {
    * they don't need to repeat the check.
    */
   private resolveUploadPath(source: string): string | null {
-    const uploadsAbsPath = resolve(join(process.cwd(), RagService.UPLOADS_STORAGE_PATH))
     const resolved = resolve(source)
-    if (!resolved.startsWith(uploadsAbsPath + sep)) return null
-    return resolved
+    // The external documents folder is readable too (view/download), never writable
+    const allowed = [RagService.UPLOADS_STORAGE_PATH, RagService.EXTERNAL_DOCS_PATH].some(
+      (dir) => resolved.startsWith(resolve(join(process.cwd(), dir)) + sep)
+    )
+    return allowed ? resolved : null
+  }
+
+  /**
+   * Plain text of a document for keyword search (#1182). Text layer only: no
+   * OCR, so it is fast and needs nothing from the AI stack. Null for types
+   * the search does not index or files that cannot be parsed.
+   */
+  public async extractTextForSearch(filepath: string): Promise<string | null> {
+    const fileType = determineFileType(filepath)
+    const buffer = await getFile(filepath, 'buffer')
+    if (!buffer) return null
+    switch (fileType) {
+      case 'pdf':
+        return (await this.extractPDFText(buffer as Buffer)).text
+      case 'docx':
+        return await this.processDocxFile(buffer as Buffer)
+      case 'epub':
+        return await this.processEPUBFile(buffer as Buffer)
+      case 'text':
+        return await this.processTextFile(buffer as Buffer)
+      default:
+        return null
+    }
   }
 
   private static readonly VIEWABLE_TEXT_EXTENSIONS: ReadonlySet<string> = new Set([
@@ -2183,10 +2214,11 @@ export class RagService {
    * orphaned and purged the first time it's added (see _nomadDocsRoots()
    * for exactly that lesson learned with README.md/docs).
    */
-  private _kbScanRoots(): { kbUploadsPath: string; zimPath: string } {
+  private _kbScanRoots(): { kbUploadsPath: string; zimPath: string; externalPath: string } {
     return {
       kbUploadsPath: join(process.cwd(), RagService.UPLOADS_STORAGE_PATH),
       zimPath: join(process.cwd(), ZIM_STORAGE_PATH),
+      externalPath: join(process.cwd(), RagService.EXTERNAL_DOCS_PATH),
     }
   }
 
@@ -2225,13 +2257,19 @@ export class RagService {
     files: string[]
     scannedRoots: string[]
   }> {
-    const { kbUploadsPath: KB_UPLOADS_PATH, zimPath: ZIM_PATH } = this._kbScanRoots()
+    const {
+      kbUploadsPath: KB_UPLOADS_PATH,
+      zimPath: ZIM_PATH,
+      externalPath: EXTERNAL_PATH,
+    } = this._kbScanRoots()
     const filesInStorage: string[] = []
     const scannedRoots: string[] = []
 
     for (const [label, dirPath] of [
       [RagService.UPLOADS_STORAGE_PATH, KB_UPLOADS_PATH] as const,
       [ZIM_STORAGE_PATH, ZIM_PATH] as const,
+      // Optional; ENOENT below skips it when nothing is mounted there
+      [RagService.EXTERNAL_DOCS_PATH, EXTERNAL_PATH] as const,
     ]) {
       try {
         const contents = await listDirectoryContentsRecursive(dirPath)

@@ -4,6 +4,7 @@ import { Worker } from 'bullmq'
 import queueConfig from '#config/queue'
 import { RunDownloadJob } from '#jobs/run_download_job'
 import { RunExtractPmtilesJob } from '#jobs/run_extract_pmtiles_job'
+import { RunRasterMapJob } from '#jobs/run_raster_map_job'
 import { DownloadModelJob } from '#jobs/download_model_job'
 import { RunBenchmarkJob } from '#jobs/run_benchmark_job'
 import { EmbedFileJob } from '#jobs/embed_file_job'
@@ -198,6 +199,7 @@ export default class QueueWork extends BaseCommand {
 
     handlers.set(RunDownloadJob.key, new RunDownloadJob())
     handlers.set(RunExtractPmtilesJob.key, new RunExtractPmtilesJob())
+    handlers.set(RunRasterMapJob.key, new RunRasterMapJob())
     handlers.set(DownloadModelJob.key, new DownloadModelJob())
     handlers.set(RunBenchmarkJob.key, new RunBenchmarkJob())
     handlers.set(EmbedFileJob.key, new EmbedFileJob())
@@ -211,6 +213,7 @@ export default class QueueWork extends BaseCommand {
 
     queues.set(RunDownloadJob.key, RunDownloadJob.queue)
     queues.set(RunExtractPmtilesJob.key, RunExtractPmtilesJob.queue)
+    queues.set(RunRasterMapJob.key, RunRasterMapJob.queue)
     queues.set(DownloadModelJob.key, DownloadModelJob.queue)
     queues.set(RunBenchmarkJob.key, RunBenchmarkJob.queue)
     queues.set(EmbedFileJob.key, EmbedFileJob.queue)

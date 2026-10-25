@@ -100,7 +100,13 @@
     "addLibrary": "Add Library",
     "libraryAdded": "Custom library added.",
     "libraryAddFailed": "Failed to add custom library.",
-    "libraryRemoved": "Custom library removed."
+    "libraryRemoved": "Custom library removed.",
+    "mirror": {
+      "label": "Download mirror:",
+      "official": "Official server (download.kiwix.org)",
+      "help": "Used for every file from download.kiwix.org: Wikipedia, collections, Easy Setup and updates. The official server can be very slow; if the mirror fails, the download continues from the official server.",
+      "saved": "Download mirror saved."
+    }
   },
   "creatorPacksPage": {
     "headTitle": "Creator Packs",

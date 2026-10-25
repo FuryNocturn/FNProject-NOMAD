@@ -44,6 +44,9 @@ type MapLocationParams = {
 }
 
 const SAVED_MAP_VIEW_KEY = 'nomad:map-view'
+const MAP_MODE_KEY = 'nomad:map-mode'
+const MAP_MODES = ['street', 'aerial', 'hybrid', 'topographic'] as const
+type MapMode = (typeof MAP_MODES)[number]
 const DEFAULT_MAP_VIEW = { longitude: -101, latitude: 40, zoom: 3.5 }
 
 type SavedMapView = { longitude: number; latitude: number; zoom: number }
@@ -161,6 +164,39 @@ export default function MapComponent({
 
   const [scaleUnit, setScaleUnit] = useState<ScaleUnit>(getInitialScaleUnit)
 
+  // Raster archives (aerial / topographic, #1175) come in the style hidden; the
+  // mode decides which layers show. Only offered when such archives exist.
+  const [rasterRoles, setRasterRoles] = useState<string[]>([])
+  const [mapMode, setMapMode] = useState<MapMode>(() => {
+    const stored = localStorage.getItem(MAP_MODE_KEY)
+    return MAP_MODES.includes(stored as MapMode) ? (stored as MapMode) : 'street'
+  })
+
+  const applyMapMode = useCallback((mode: MapMode) => {
+    const map = mapRef.current?.getMap()
+    if (!map) return
+    const wantRole = mode === 'street' ? null : mode === 'topographic' ? 'topographic' : 'aerial'
+    for (const layer of map.getStyle()?.layers ?? []) {
+      const role = (layer.metadata as Record<string, unknown> | undefined)?.['nomad:role']
+      let visible: boolean
+      if (layer.type === 'raster' && role) visible = role === wantRole
+      else if (!('source' in layer) || !layer.source) visible = true // background
+      else if (mode === 'street') visible = true
+      // Hybrid keeps roads, borders and labels over the imagery
+      else visible = mode === 'hybrid' && (layer.type === 'line' || layer.type === 'symbol')
+      map.setLayoutProperty(layer.id, 'visibility', visible ? 'visible' : 'none')
+    }
+  }, [])
+
+  const changeMapMode = useCallback(
+    (mode: MapMode) => {
+      setMapMode(mode)
+      localStorage.setItem(MAP_MODE_KEY, mode)
+      applyMapMode(mode)
+    },
+    [applyMapMode]
+  )
+
   // Resolve the initial view once at mount: saved view → default. Lazy so it isn't recomputed
   // on every render.
   const [initialViewState] = useState(() => getSavedMapView() ?? DEFAULT_MAP_VIEW)
@@ -277,7 +313,22 @@ export default function MapComponent({
 
   const handleMapLoad = useCallback(() => {
     flyToLocationParams()
-  }, [flyToLocationParams])
+    const layers = mapRef.current?.getMap().getStyle()?.layers ?? []
+    const roles = [
+      ...new Set(
+        layers
+          .map((l) => (l.metadata as Record<string, unknown> | undefined)?.['nomad:role'])
+          .filter((r): r is string => typeof r === 'string')
+      ),
+    ]
+    setRasterRoles(roles)
+    // A saved mode whose imagery was since deleted falls back to streets
+    const usable =
+      mapMode === 'street' ||
+      roles.includes(mapMode === 'topographic' ? 'topographic' : 'aerial')
+    applyMapMode(usable ? mapMode : 'street')
+    if (!usable) setMapMode('street')
+  }, [flyToLocationParams, applyMapMode, mapMode])
 
   const handleMapClick = useCallback(
     (e: MapLayerMouseEvent) => {
@@ -406,6 +457,34 @@ export default function MapComponent({
           <NavigationControl style={{ marginTop: '110px', marginRight: '36px' }} />
           <FullscreenControl style={{ marginTop: '30px', marginRight: '36px' }} />
           <ScaleControl position="bottom-left" maxWidth={150} unit={scaleUnit} />
+
+          {rasterRoles.length > 0 && (
+            <div
+              className="maplibregl-ctrl absolute bottom-10 right-3 z-10 flex overflow-hidden rounded-md border border-border-default bg-surface-primary text-xs shadow"
+              role="group"
+              aria-label={t('maps.layers.label')}
+            >
+              {MAP_MODES.filter(
+                (mode) =>
+                  mode === 'street' ||
+                  rasterRoles.includes(mode === 'topographic' ? 'topographic' : 'aerial')
+              ).map((mode) => (
+                <button
+                  key={mode}
+                  type="button"
+                  onClick={() => changeMapMode(mode)}
+                  aria-pressed={mapMode === mode}
+                  className={
+                    mapMode === mode
+                      ? 'px-3 py-1.5 bg-desert-green text-white'
+                      : 'px-3 py-1.5 text-text-primary hover:bg-surface-secondary'
+                  }
+                >
+                  {t(`maps.layers.${mode}`)}
+                </button>
+              ))}
+            </div>
+          )}
 
           {showCoordinates && cursorLngLat && (
             <CoordinateOverlay

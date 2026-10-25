@@ -1,0 +1,13 @@
+{
+  "headTitle": "Rechercher dans les documents",
+  "title": "Recherchez dans vos documents",
+  "subtitle": "Trouve des mots dans les fichiers de votre base de connaissances (PDF, Word, EPUB, texte) et dans le dossier de documents externe s’il est connecté. Fonctionne sans l’Assistant IA.",
+  "indexing": "Indexation des documents…",
+  "indexed_one": "{{count}} document indexé",
+  "indexed_other": "{{count}} documents indexés",
+  "reindex": "Mettre à jour l’index",
+  "placeholder": "Mots à rechercher…",
+  "search": "Rechercher",
+  "noResults": "Aucun document ne contient « {{query}} ».",
+  "empty": "Aucun document pour l’instant. Téléversez des fichiers depuis la base de connaissances ou placez-les dans storage/kb_uploads."
+}

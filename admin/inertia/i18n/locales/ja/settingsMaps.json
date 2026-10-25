@@ -98,5 +98,28 @@
     "pickToEstimate": "サイズを見積もるには、少なくとも 1 か国を選択してください。",
     "result": "{{tiles}} タイル、約 {{size}}",
     "sourceBuild": "(ソースのビルド {{date}})"
+  },
+  "raster": {
+    "title": "航空写真と地形図",
+    "intro": "街路地図をすでに持っている地域の航空写真や地形図をダウンロードし、オフラインで地図のレイヤーを切り替えられます。詳細レベルを 1 段上げるごとにサイズは約 4 倍になります。",
+    "source": "ソース",
+    "area": "地域",
+    "chooseArea": "地域を選択…",
+    "customArea": "カスタム地域",
+    "detail": "詳細",
+    "zoomOption": "ズーム {{zoom}}（≈ 1 ピクセルあたり {{meters}} m）",
+    "bboxPlaceholder": "西、南、東、北（度）例: -3.9, 40.3, -3.5, 40.6",
+    "noRegions": "ここで選ぶには先に街路地図の地域をダウンロードするか、カスタム地域を入力してください。",
+    "download": "ダウンロード",
+    "estimate": "≈ {{tiles}} タイル、約 {{size}}",
+    "noCoverage": "このソースはその地域をカバーしていません。",
+    "started": "地図のダウンロードを開始しました。下で進捗を確認できます。",
+    "alreadyRunning": "その地図はすでにダウンロード中です。",
+    "providers": {
+      "ign-pnoa": "航空写真 – PNOA（スペイン IGN）",
+      "ign-mtn": "地形図 – MTN（スペイン IGN）",
+      "usgs-imagery": "航空写真 – USGS（米国）",
+      "usgs-topo": "地形図 – USGS（米国）"
+    }
   }
 }

@@ -1215,6 +1215,78 @@ class API {
     })()
   }
 
+  async getRasterProviders() {
+    return catchInternal(async () => {
+      const response = await this.client.get<
+        { id: string; role: 'aerial' | 'topographic'; coverage: number[]; maxzoom: number; attribution: string }[]
+      >('/maps/raster/providers')
+      return response.data
+    })()
+  }
+
+  async getRasterRegions() {
+    return catchInternal(async () => {
+      const response = await this.client.get<{ id: string; name: string; bbox: number[] }[]>(
+        '/maps/raster/regions'
+      )
+      return response.data
+    })()
+  }
+
+  // Not wrapped in catchInternal: a 422 (no coverage) is an expected answer the form shows
+  async estimateRasterMap(body: { providerId: string; bbox: number[]; maxzoom: number }) {
+    const response = await this.client.post<{
+      bbox: number[]
+      maxzoom: number
+      tiles: number
+      bytes: number
+    }>('/maps/raster/estimate', body)
+    return response.data
+  }
+
+  async downloadRasterMap(body: {
+    providerId: string
+    regionId: string
+    regionName: string
+    bbox: number[]
+    maxzoom: number
+  }) {
+    return catchInternal(async () => {
+      const response = await this.client.post<{ created: boolean; jobId: string }>(
+        '/maps/raster/download',
+        body
+      )
+      return response.data
+    })()
+  }
+
+  async searchDocuments(q: string) {
+    return catchInternal(async () => {
+      const response = await this.client.get<{
+        results: { source: string; fileName: string; snippet: string }[]
+      }>('/documents/search', { params: { q } })
+      return response.data.results
+    })()
+  }
+
+  async getDocumentIndexStatus() {
+    return catchInternal(async () => {
+      const response = await this.client.get<{
+        running: boolean
+        documents: number
+        lastRun: { at: string; indexed: number; removed: number; failed: number } | null
+      }>('/documents/status')
+      return response.data
+    })()
+  }
+
+  async reindexDocuments() {
+    return catchInternal(async () => {
+      const response = await this.client.post<{ started: boolean }>('/documents/reindex')
+      return response.data
+    })()
+  }
+
   async getSetting(key: string) {
     return catchInternal(async () => {
       const response = await this.client.get<{ key: string; value: any }>(

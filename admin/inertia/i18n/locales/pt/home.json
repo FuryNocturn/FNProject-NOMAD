@@ -8,6 +8,10 @@
       "label": "Referência de medicamentos",
       "description": "Bulas de medicamentos da FDA offline. Pesquise pelo nome do medicamento ou por sintoma"
     },
+    "documents": {
+      "label": "Pesquisar documentos",
+      "description": "Encontre texto nos seus PDF, livros e notas, sem IA"
+    },
     "easySetup": {
       "label": "Configuração rápida",
       "description": "Não sabe por onde começar? Use o assistente de configuração para configurar seu NOMAD rapidamente!"

@@ -1,4 +1,5 @@
 import { RagService } from '#services/rag_service'
+import { DocumentSearchService } from '#services/document_search_service'
 import { EmbedFileJob } from '#jobs/embed_file_job'
 import KbRatioRegistry from '#models/kb_ratio_registry'
 import { inject } from '@adonisjs/core'
@@ -13,7 +14,10 @@ import { sanitizeCollectionName } from '../../constants/kb_collections.js'
 
 @inject()
 export default class RagController {
-  constructor(private ragService: RagService) { }
+  constructor(
+    private ragService: RagService,
+    private documentSearch: DocumentSearchService
+  ) { }
 
   public async upload({ request, response }: HttpContext) {
     // Only the types RagService can parse (see determineFileType). extname comes
@@ -39,6 +43,11 @@ export default class RagController {
 
     await uploadedFile.move(app.makePath(RagService.UPLOADS_STORAGE_PATH), {
       name: fileName,
+    })
+
+    // Keyword search works without AI, so index the text whatever happens to embedding
+    this.documentSearch.indexFile(fullPath).catch((error) => {
+      logger.warn({ err: error }, `[RagController] text index failed for ${fileName}`)
     })
 
     // Dispatch background job for embedding
@@ -193,6 +202,7 @@ export default class RagController {
     if (!result.success) {
       return response.status(500).json({ error: result.message })
     }
+    await this.documentSearch.remove(source).catch(() => {})
     return response.status(200).json({ message: result.message })
   }
 

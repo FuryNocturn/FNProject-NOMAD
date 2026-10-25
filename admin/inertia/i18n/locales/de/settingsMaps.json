@@ -98,5 +98,28 @@
     "pickToEstimate": "Wähle mindestens ein Land aus, um die Größe zu schätzen.",
     "result": "{{tiles}} Kacheln, ca. {{size}}",
     "sourceBuild": "(Quell-Build {{date}})"
+  },
+  "raster": {
+    "title": "Luftbilder und topografische Karten",
+    "intro": "Lade Luftbilder oder eine topografische Karte für ein Gebiet herunter, von dem du schon eine Straßenkarte hast, um offline die Kartenebene zu wechseln. Jede weitere Detailstufe ist etwa viermal so groß.",
+    "source": "Quelle",
+    "area": "Gebiet",
+    "chooseArea": "Gebiet wählen…",
+    "customArea": "Eigenes Gebiet",
+    "detail": "Detail",
+    "zoomOption": "Zoom {{zoom}} (≈ {{meters}} m pro Pixel)",
+    "bboxPlaceholder": "West, Süd, Ost, Nord (Grad), z. B. -3.9, 40.3, -3.5, 40.6",
+    "noRegions": "Lade zuerst eine Straßenkarten-Region herunter, um sie hier zu wählen, oder gib ein eigenes Gebiet ein.",
+    "download": "Herunterladen",
+    "estimate": "≈ {{tiles}} Kacheln, etwa {{size}}",
+    "noCoverage": "Diese Quelle deckt das Gebiet nicht ab.",
+    "started": "Kartendownload gestartet. Fortschritt unten.",
+    "alreadyRunning": "Diese Karte wird bereits heruntergeladen.",
+    "providers": {
+      "ign-pnoa": "Luftbild – PNOA (IGN Spanien)",
+      "ign-mtn": "Topografische Karte – MTN (IGN Spanien)",
+      "usgs-imagery": "Luftbild – USGS (USA)",
+      "usgs-topo": "Topografische Karte – USGS (USA)"
+    }
   }
 }
