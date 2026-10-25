@@ -38,7 +38,9 @@ export interface RunRasterMapJobParams {
 }
 
 const CONCURRENCY = 6
-const TILE_RETRIES = 3
+// Tile servers return the odd 502 under load; one bad tile should not fail
+// the whole attempt (1+2+4+8 s of backoff before giving up)
+const TILE_RETRIES = 5
 
 /**
  * Builds an offline aerial/topographic map (#1175): fetches a provider's XYZ
@@ -144,7 +146,7 @@ export class RunRasterMapJob {
             return Buffer.from(res.data)
           } catch (error) {
             if (attempt >= TILE_RETRIES) throw error
-            await new Promise((r) => setTimeout(r, 1000 * attempt))
+            await new Promise((r) => setTimeout(r, 1000 * 2 ** (attempt - 1)))
           }
         }
       }

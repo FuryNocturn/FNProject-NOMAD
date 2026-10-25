@@ -3,6 +3,7 @@ import { QueueService } from './queue_service.js'
 import { RunDownloadJob } from '#jobs/run_download_job'
 import { RunExtractPmtilesJob } from '#jobs/run_extract_pmtiles_job'
 import type { RunExtractPmtilesJobParams } from '#jobs/run_extract_pmtiles_job'
+import { RunRasterMapJob } from '#jobs/run_raster_map_job'
 import { DownloadModelJob } from '#jobs/download_model_job'
 import { DownloadDrugDataJob } from '#jobs/download_drug_data_job'
 import { DownloadJobWithProgress, DownloadProgressData, RunDownloadJobParams } from '../../types/downloads.js'
@@ -342,6 +343,13 @@ export class DownloadService {
         await deleteFileIfExists(outputFilepath + '.tmp')
       } catch {
         // File may not exist yet (subprocess may not have opened it)
+      }
+      // Raster map jobs stage tiles in <name>.mbtiles; the job deletes it itself when
+      // it sees the cancel, but not when cancelled while waiting for a retry
+      if (job.name === RunRasterMapJob.key && outputFilepath.endsWith('.pmtiles')) {
+        const mbtiles = outputFilepath.replace(/\.pmtiles$/, '.mbtiles')
+        await deleteFileIfExists(mbtiles).catch(() => {})
+        await deleteFileIfExists(`${mbtiles}-journal`).catch(() => {})
       }
     }
 
