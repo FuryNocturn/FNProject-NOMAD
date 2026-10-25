@@ -100,7 +100,13 @@
     "addLibrary": "Ajouter la bibliothèque",
     "libraryAdded": "Bibliothèque personnalisée ajoutée.",
     "libraryAddFailed": "Échec de l'ajout de la bibliothèque personnalisée.",
-    "libraryRemoved": "Bibliothèque personnalisée supprimée."
+    "libraryRemoved": "Bibliothèque personnalisée supprimée.",
+    "mirror": {
+      "label": "Miroir de téléchargement :",
+      "official": "Serveur officiel (download.kiwix.org)",
+      "help": "Utilisé pour tous les fichiers de download.kiwix.org : Wikipédia, collections, configuration initiale et mises à jour. Le serveur officiel peut être très lent ; si le miroir échoue, le téléchargement continue depuis le serveur officiel.",
+      "saved": "Miroir de téléchargement enregistré."
+    }
   },
   "creatorPacksPage": {
     "headTitle": "Packs de créateurs",

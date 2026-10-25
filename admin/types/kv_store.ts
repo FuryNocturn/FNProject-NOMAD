@@ -53,6 +53,8 @@ export const KV_STORE_SCHEMA = {
   'ui.hasVisitedEasySetup':     'boolean',
   'ui.theme':                   'string',
   'ui.language':                'string',
+  // Base URL of a Kiwix mirror's zim/ folder; null → download.kiwix.org
+  'downloads.kiwixMirror':      'string',
   'ai.assistantCustomName':     'string',
   'gpu.type':                   'string',
   'ai.remoteOllamaUrl':         'string',
