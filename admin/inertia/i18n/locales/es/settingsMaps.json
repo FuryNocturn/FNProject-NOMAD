@@ -98,5 +98,28 @@
     "pickToEstimate": "Elige al menos un país para estimar el tamaño.",
     "result": "{{tiles}} teselas, ~{{size}}",
     "sourceBuild": "(compilación de origen {{date}})"
+  },
+  "raster": {
+    "title": "Mapas aéreos y topográficos",
+    "intro": "Descarga la ortofoto o el mapa topográfico de una zona de la que ya tengas el mapa de calles, para cambiar de capa en el mapa sin conexión. Cada nivel de detalle más ocupa unas cuatro veces más.",
+    "source": "Origen",
+    "area": "Zona",
+    "chooseArea": "Elige una zona…",
+    "customArea": "Zona personalizada",
+    "detail": "Detalle",
+    "zoomOption": "Zoom {{zoom}} (≈ {{meters}} m por píxel)",
+    "bboxPlaceholder": "Oeste, sur, este, norte (grados), p. ej. -3.9, 40.3, -3.5, 40.6",
+    "noRegions": "Descarga primero una región de mapa de calles para elegirla aquí, o escribe una zona personalizada.",
+    "download": "Descargar",
+    "estimate": "≈ {{tiles}} teselas, unos {{size}}",
+    "noCoverage": "Este origen no cubre esa zona.",
+    "started": "Descarga del mapa iniciada. Síguela abajo.",
+    "alreadyRunning": "Ese mapa ya se está descargando.",
+    "providers": {
+      "ign-pnoa": "Ortofoto aérea – PNOA (IGN España)",
+      "ign-mtn": "Mapa topográfico – MTN (IGN España)",
+      "usgs-imagery": "Imagen aérea – USGS (Estados Unidos)",
+      "usgs-topo": "Mapa topográfico – USGS (Estados Unidos)"
+    }
   }
 }

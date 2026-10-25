@@ -100,5 +100,12 @@
     "IconFlag": "Point de ralliement",
     "IconAlertTriangle": "Danger",
     "IconSkull": "Péril mortel"
+  },
+  "layers": {
+    "label": "Couche de carte",
+    "street": "Routes",
+    "aerial": "Aérienne",
+    "hybrid": "Hybride",
+    "topographic": "Topographique"
   }
 }

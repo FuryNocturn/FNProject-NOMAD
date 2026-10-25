@@ -100,5 +100,12 @@
     "IconFlag": "Место сбора",
     "IconAlertTriangle": "Опасность",
     "IconSkull": "Смертельная опасность"
+  },
+  "layers": {
+    "label": "Слой карты",
+    "street": "Улицы",
+    "aerial": "Аэрофото",
+    "hybrid": "Гибрид",
+    "topographic": "Топокарта"
   }
 }

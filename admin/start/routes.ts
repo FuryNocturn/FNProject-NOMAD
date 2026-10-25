@@ -20,6 +20,7 @@ import NomadMdController from '#controllers/nomad_md_controller'
 import OllamaController from '#controllers/ollama_controller'
 import OpenApiController from '#controllers/openapi_controller'
 import RagController from '#controllers/rag_controller'
+import RasterMapsController from '#controllers/raster_maps_controller'
 import SettingsController from '#controllers/settings_controller'
 import SupplyDepotController from '#controllers/supply_depot_controller'
 import SystemController from '#controllers/system_controller'
@@ -254,6 +255,27 @@ router
     })
   })
   .prefix('/api/maps')
+
+router
+  .group(() => {
+    documented(router.get('/providers', [RasterMapsController, 'providers']), {
+      summary: 'List aerial/topographic imagery sources',
+      tags: ['maps'],
+    })
+    documented(router.get('/regions', [RasterMapsController, 'regions']), {
+      summary: 'List downloaded map regions usable as imagery areas',
+      tags: ['maps'],
+    })
+    documented(router.post('/estimate', [RasterMapsController, 'estimate']), {
+      summary: 'Estimate an aerial/topographic map download',
+      tags: ['maps'],
+    })
+    documented(router.post('/download', [RasterMapsController, 'download']), {
+      summary: 'Download an aerial/topographic map for an area',
+      tags: ['maps'],
+    })
+  })
+  .prefix('/api/maps/raster')
 
 router
   .group(() => {

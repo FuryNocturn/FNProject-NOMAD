@@ -1,7 +1,7 @@
 import { execFile } from 'node:child_process'
 import { createHash, randomBytes } from 'node:crypto'
 import { createReadStream } from 'node:fs'
-import { access, link, mkdir, rm, stat } from 'node:fs/promises'
+import { access, link, mkdir, rename, rm, stat } from 'node:fs/promises'
 import { basename, extname, join, resolve, sep } from 'node:path'
 import { promisify } from 'node:util'
 
@@ -205,13 +205,19 @@ export async function convertRasterMbtilesToPmtiles(
 
     try {
       await link(stagingPath, outputPath)
+      await rm(stagingPath)
     } catch (error) {
-      if (error instanceof Error && 'code' in error && error.code === 'EEXIST') {
+      const code = error instanceof Error && 'code' in error ? error.code : undefined
+      if (code === 'EEXIST') {
         throw new Error(`PMTiles output already exists: ${request.filename}`)
       }
-      throw error
+      // Some bind mounts (Docker Desktop's Windows drives) have no hard links;
+      // the existence check above already guarded against overwriting
+      if (code !== 'EPERM' && code !== 'ENOTSUP' && code !== 'ENOSYS' && code !== 'EXDEV') {
+        throw error
+      }
+      await rename(stagingPath, outputPath)
     }
-    await rm(stagingPath)
     return { outputPath, archive }
   } catch (error) {
     await rm(stagingPath, { force: true })

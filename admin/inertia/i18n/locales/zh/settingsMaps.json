@@ -98,5 +98,28 @@
     "pickToEstimate": "请至少选择一个国家以估算大小。",
     "result": "{{tiles}} 个图块，约 {{size}}",
     "sourceBuild": "（源构建版本 {{date}}）"
+  },
+  "raster": {
+    "title": "航空影像与地形图",
+    "intro": "为已有街道地图的区域下载航空影像或地形图，以便离线时切换地图图层。每增加一级细节，大小约为原来的四倍。",
+    "source": "来源",
+    "area": "区域",
+    "chooseArea": "选择区域…",
+    "customArea": "自定义区域",
+    "detail": "细节",
+    "zoomOption": "缩放 {{zoom}}（≈ 每像素 {{meters}} 米）",
+    "bboxPlaceholder": "西、南、东、北（度），例如 -3.9, 40.3, -3.5, 40.6",
+    "noRegions": "请先下载一个街道地图区域以便在此选择，或输入自定义区域。",
+    "download": "下载",
+    "estimate": "≈ {{tiles}} 个瓦片，约 {{size}}",
+    "noCoverage": "此来源不覆盖该区域。",
+    "started": "地图下载已开始，可在下方查看进度。",
+    "alreadyRunning": "该地图正在下载中。",
+    "providers": {
+      "ign-pnoa": "航空影像 – PNOA（西班牙 IGN）",
+      "ign-mtn": "地形图 – MTN（西班牙 IGN）",
+      "usgs-imagery": "航空影像 – USGS（美国）",
+      "usgs-topo": "地形图 – USGS（美国）"
+    }
   }
 }

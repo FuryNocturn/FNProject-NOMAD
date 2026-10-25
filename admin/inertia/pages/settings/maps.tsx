@@ -12,6 +12,7 @@ import DownloadURLModal from '~/components/DownloadURLModal'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import useDownloads from '~/hooks/useDownloads'
 import StyledSectionHeader from '~/components/StyledSectionHeader'
+import RasterMapDownload from '~/components/maps/RasterMapDownload'
 import CuratedCollectionCard from '~/components/CuratedCollectionCard'
 import CountryPickerModal from '~/components/CountryPickerModal'
 import type { CollectionWithStatus } from '../../../types/collections'
@@ -462,6 +463,7 @@ export default function MapsManager(props: {
             ]}
             data={props.maps.regionFiles || []}
           />
+          <RasterMapDownload />
           <ActiveDownloads filetype="map" withHeader />
         </main>
       </div>

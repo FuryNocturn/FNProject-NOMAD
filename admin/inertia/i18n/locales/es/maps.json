@@ -100,5 +100,12 @@
     "IconFlag": "Punto de encuentro",
     "IconAlertTriangle": "Riesgo",
     "IconSkull": "Peligro"
+  },
+  "layers": {
+    "label": "Capa del mapa",
+    "street": "Calles",
+    "aerial": "Aérea",
+    "hybrid": "Híbrida",
+    "topographic": "Topográfica"
   }
 }

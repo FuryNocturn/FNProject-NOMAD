@@ -98,5 +98,28 @@
     "pickToEstimate": "Choisissez au moins un pays pour estimer la taille.",
     "result": "{{tiles}} tuiles, ~{{size}}",
     "sourceBuild": "(version source du {{date}})"
+  },
+  "raster": {
+    "title": "Cartes aériennes et topographiques",
+    "intro": "Téléchargez l’imagerie aérienne ou une carte topographique d’une zone dont vous avez déjà la carte routière, pour changer de couche hors ligne. Chaque niveau de détail supplémentaire est environ quatre fois plus lourd.",
+    "source": "Source",
+    "area": "Zone",
+    "chooseArea": "Choisissez une zone…",
+    "customArea": "Zone personnalisée",
+    "detail": "Détail",
+    "zoomOption": "Zoom {{zoom}} (≈ {{meters}} m par pixel)",
+    "bboxPlaceholder": "Ouest, sud, est, nord (degrés), ex. -3.9, 40.3, -3.5, 40.6",
+    "noRegions": "Téléchargez d’abord une région de carte routière pour la choisir ici, ou saisissez une zone personnalisée.",
+    "download": "Télécharger",
+    "estimate": "≈ {{tiles}} tuiles, environ {{size}}",
+    "noCoverage": "Cette source ne couvre pas cette zone.",
+    "started": "Téléchargement de la carte lancé. Suivez-le ci-dessous.",
+    "alreadyRunning": "Cette carte est déjà en cours de téléchargement.",
+    "providers": {
+      "ign-pnoa": "Image aérienne – PNOA (IGN Espagne)",
+      "ign-mtn": "Carte topographique – MTN (IGN Espagne)",
+      "usgs-imagery": "Image aérienne – USGS (États-Unis)",
+      "usgs-topo": "Carte topographique – USGS (États-Unis)"
+    }
   }
 }
