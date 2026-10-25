@@ -1,0 +1,13 @@
+{
+  "headTitle": "Buscar en documentos",
+  "title": "Busca en tus documentos",
+  "subtitle": "Encuentra palabras en los archivos de tu base de conocimiento (PDF, Word, EPUB, texto) y en la carpeta de documentos externa si hay una conectada. Funciona sin el Asistente de IA.",
+  "indexing": "Indexando documentos…",
+  "indexed_one": "{{count}} documento indexado",
+  "indexed_other": "{{count}} documentos indexados",
+  "reindex": "Actualizar índice",
+  "placeholder": "Palabras a buscar…",
+  "search": "Buscar",
+  "noResults": "Ningún documento contiene «{{query}}».",
+  "empty": "Aún no hay documentos. Súbelos desde la base de conocimiento o ponlos en storage/kb_uploads."
+}

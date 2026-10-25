@@ -88,6 +88,12 @@ Yes — with the Knowledge Base. Upload PDFs, text files, and other documents to
 
 For Kiwix content, NOMAD uses standard ZIM files. For educational content, Kolibri uses its own channel format.
 
+### Can I search my documents without the AI?
+Yes. **[Search Documents](/documents)** finds words in your Knowledge Base files (PDF, Word, EPUB and text) using a plain keyword index, so it works with no AI model, GPU or Qdrant. Scanned PDFs without a text layer are not searchable this way.
+
+### Can NOMAD use documents that stay on my NAS?
+Yes, optionally. Mount the folder read-only into the admin container at `/app/external_docs` — for example, add `- /mnt/nas/docs:/app/external_docs:ro` to the `admin` service's `volumes` in your compose file and restart NOMAD. Its files then appear in Search Documents and are indexed for the AI on the next Knowledge Base sync. NOMAD never modifies or deletes anything in that folder; if it isn't mounted, it is simply ignored.
+
 ### What are curated collection tiers?
 When selecting content in the Easy Setup wizard or Content Explorer, collections are organized into three tiers:
 - **Essential** — Core content for the category (smallest download)

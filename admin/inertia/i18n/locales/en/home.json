@@ -8,6 +8,10 @@
       "label": "Drug Reference",
       "description": "Offline FDA drug labels. Search by drug name or by symptom"
     },
+    "documents": {
+      "label": "Search Documents",
+      "description": "Find text in your PDFs, books and notes, no AI needed"
+    },
     "easySetup": {
       "label": "Easy Setup",
       "description": "Not sure where to start? Use the setup wizard to quickly configure your NOMAD!"

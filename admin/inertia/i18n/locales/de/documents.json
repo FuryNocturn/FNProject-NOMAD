@@ -1,0 +1,13 @@
+{
+  "headTitle": "Dokumente durchsuchen",
+  "title": "Deine Dokumente durchsuchen",
+  "subtitle": "Findet Wörter in den Dateien deiner Wissensdatenbank (PDF, Word, EPUB, Text) und im externen Dokumentenordner, falls verbunden. Funktioniert ohne KI-Assistent.",
+  "indexing": "Dokumente werden indexiert…",
+  "indexed_one": "{{count}} Dokument indexiert",
+  "indexed_other": "{{count}} Dokumente indexiert",
+  "reindex": "Index aktualisieren",
+  "placeholder": "Gesuchte Wörter…",
+  "search": "Suchen",
+  "noResults": "Kein Dokument enthält „{{query}}“.",
+  "empty": "Noch keine Dokumente. Lade Dateien über die Wissensdatenbank hoch oder lege sie in storage/kb_uploads ab."
+}

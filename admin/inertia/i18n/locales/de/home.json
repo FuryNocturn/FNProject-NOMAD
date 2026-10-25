@@ -8,6 +8,10 @@
       "label": "Arzneimittelreferenz",
       "description": "Offline-FDA-Arzneimittelinformationen. Suche nach Wirkstoffname oder nach Symptom"
     },
+    "documents": {
+      "label": "Dokumente durchsuchen",
+      "description": "Text in PDFs, Büchern und Notizen finden, ohne KI"
+    },
     "easySetup": {
       "label": "Schnelleinrichtung",
       "description": "Du weißt nicht, wo du anfangen sollst? Nutze den Einrichtungsassistenten, um dein NOMAD schnell zu konfigurieren!"

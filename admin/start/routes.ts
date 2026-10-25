@@ -10,6 +10,7 @@ import BenchmarkController from '#controllers/benchmark_controller'
 import ChatsController from '#controllers/chats_controller'
 import ConditionsController from '#controllers/conditions_controller'
 import DocsController from '#controllers/docs_controller'
+import DocumentsController from '#controllers/documents_controller'
 import DrugReferenceController from '#controllers/drug_reference_controller'
 import DownloadsController from '#controllers/downloads_controller'
 import EasySetupController from '#controllers/easy_setup_controller'
@@ -849,6 +850,24 @@ router
 // is the background ingest job (server-side, triggered but not executed inline).
 // /drug-reference/interactions must precede /drug-reference/:id so the literal
 // path wins over the param route.
+router.get('/documents', [DocumentsController, 'index'])
+router
+  .group(() => {
+    documented(router.get('/search', [DocumentsController, 'search']), {
+      summary: 'Keyword search over knowledge base documents (no AI)',
+      tags: ['documents'],
+    })
+    documented(router.get('/status', [DocumentsController, 'status']), {
+      summary: 'Document search index status',
+      tags: ['documents'],
+    })
+    documented(router.post('/reindex', [DocumentsController, 'reindex']), {
+      summary: 'Start an incremental reindex of document text',
+      tags: ['documents'],
+    })
+  })
+  .prefix('/api/documents')
+
 router.get('/drug-reference', [DrugReferenceController, 'index'])
 router.get('/drug-reference/interactions', [DrugReferenceController, 'interactions'])
 router.get('/drug-reference/:id', [DrugReferenceController, 'show'])

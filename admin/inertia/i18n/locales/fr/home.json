@@ -8,6 +8,10 @@
       "label": "Répertoire des médicaments",
       "description": "Notices de médicaments de la FDA hors ligne. Recherche par nom de médicament ou par symptôme"
     },
+    "documents": {
+      "label": "Rechercher dans les documents",
+      "description": "Trouvez du texte dans vos PDF, livres et notes, sans IA"
+    },
     "easySetup": {
       "label": "Configuration rapide",
       "description": "Vous ne savez pas par où commencer ? Utilisez l'assistant de configuration pour paramétrer rapidement votre NOMAD !"

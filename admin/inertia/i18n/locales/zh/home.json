@@ -8,6 +8,10 @@
       "label": "药品参考",
       "description": "离线 FDA 药品说明书。可按药品名称或症状搜索"
     },
+    "documents": {
+      "label": "搜索文档",
+      "description": "无需 AI，即可在 PDF、书籍和笔记中查找文字"
+    },
     "easySetup": {
       "label": "快速设置",
       "description": "不知从何开始？使用设置向导快速配置您的 NOMAD！"

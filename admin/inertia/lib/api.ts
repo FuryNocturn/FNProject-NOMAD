@@ -1215,6 +1215,33 @@ class API {
     })()
   }
 
+  async searchDocuments(q: string) {
+    return catchInternal(async () => {
+      const response = await this.client.get<{
+        results: { source: string; fileName: string; snippet: string }[]
+      }>('/documents/search', { params: { q } })
+      return response.data.results
+    })()
+  }
+
+  async getDocumentIndexStatus() {
+    return catchInternal(async () => {
+      const response = await this.client.get<{
+        running: boolean
+        documents: number
+        lastRun: { at: string; indexed: number; removed: number; failed: number } | null
+      }>('/documents/status')
+      return response.data
+    })()
+  }
+
+  async reindexDocuments() {
+    return catchInternal(async () => {
+      const response = await this.client.post<{ started: boolean }>('/documents/reindex')
+      return response.data
+    })()
+  }
+
   async getSetting(key: string) {
     return catchInternal(async () => {
       const response = await this.client.get<{ key: string; value: any }>(

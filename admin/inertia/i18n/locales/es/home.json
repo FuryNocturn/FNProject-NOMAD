@@ -8,6 +8,10 @@
       "label": "Referencia de fármacos",
       "description": "Prospectos de la FDA sin conexión. Busca por nombre del fármaco o por síntoma"
     },
+    "documents": {
+      "label": "Buscar en documentos",
+      "description": "Encuentra texto en tus PDF, libros y notas, sin IA"
+    },
     "easySetup": {
       "label": "Configuración rápida",
       "description": "¿No sabes por dónde empezar? Usa el asistente para configurar tu NOMAD en pocos pasos"

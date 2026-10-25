@@ -1,0 +1,12 @@
+{
+  "headTitle": "搜索文档",
+  "title": "搜索你的文档",
+  "subtitle": "在知识库文件（PDF、Word、EPUB、文本）以及已连接的外部文档文件夹中查找词语。无需 AI 助手即可使用。",
+  "indexing": "正在为文档建立索引…",
+  "indexed_other": "已索引 {{count}} 个文档",
+  "reindex": "更新索引",
+  "placeholder": "要查找的词语…",
+  "search": "搜索",
+  "noResults": "没有文档包含“{{query}}”。",
+  "empty": "还没有文档。请从知识库上传文件，或将其放入 storage/kb_uploads。"
+}

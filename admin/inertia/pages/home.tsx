@@ -1,6 +1,7 @@
 import {
   IconBolt,
   IconBox,
+  IconFileSearch,
   IconHelp,
   IconMapRoute,
   IconPill,
@@ -55,6 +56,17 @@ const DRUG_REFERENCE_ITEM: BuiltInItem = {
   icon: <IconPill size={48} />,
   installed: true,
   displayOrder: 5,
+  poweredBy: null,
+}
+
+// Keyword search over your own documents; works without AI (#1182)
+const DOCUMENTS_ITEM: BuiltInItem = {
+  tileKey: 'documents',
+  to: '/documents',
+  target: '',
+  icon: <IconFileSearch size={48} />,
+  installed: true,
+  displayOrder: 6,
   poweredBy: null,
 }
 
@@ -229,6 +241,8 @@ export default function Home(props: {
   if (props.drugReferenceInstalled) {
     items.push(translateTile(DRUG_REFERENCE_ITEM))
   }
+
+  items.push(translateTile(DOCUMENTS_ITEM))
 
   // Add system items
   items.push(...SYSTEM_ITEMS.map(translateTile))

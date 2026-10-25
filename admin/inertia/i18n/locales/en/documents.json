@@ -1,0 +1,13 @@
+{
+  "headTitle": "Search Documents",
+  "title": "Search your documents",
+  "subtitle": "Finds words in the files of your knowledge base (PDF, Word, EPUB, text) and in the external documents folder if one is connected. Works without the AI Assistant.",
+  "indexing": "Indexing documents…",
+  "indexed_one": "{{count}} document indexed",
+  "indexed_other": "{{count}} documents indexed",
+  "reindex": "Update index",
+  "placeholder": "Words to look for…",
+  "search": "Search",
+  "noResults": "No documents contain “{{query}}”.",
+  "empty": "No documents yet. Upload files from the Knowledge Base, or put them in storage/kb_uploads."
+}
