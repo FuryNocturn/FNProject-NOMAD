@@ -2844,13 +2844,25 @@ export class RagService {
         logger.error('[RAG] Error re-running Nomad docs discovery after reset:', error)
       })
 
-      const filesInStorage = await this._discoverKbFiles()
+      // Rebuild what the user chose to index, not every file on disk: the same
+      // decision the sync makes for a file with no chunks left. Without this a
+      // Manual-policy install re-embedded every pending ZIM (Wikipedia included).
+      const discovered = await this._discoverKbFiles()
+      const stateByPath = new Map(
+        (await KbIngestState.query().select('file_path', 'state')).map((r) => [r.file_path, r])
+      )
+      const policyRaw = await KVStore.getValue('rag.defaultIngestPolicy')
+      const policy: IngestPolicy = policyRaw === 'Manual' ? 'Manual' : 'Always'
+      const filesInStorage = discovered.filter(
+        (f) => decideScanAction(stateByPath.get(f) ?? null, false, policy).kind === 'dispatch'
+      )
       const { queuedCount, failedPaths } = await this._dispatchEmbedJobsFor(filesInStorage, {
         force: true,
       })
 
       logger.info(
-        `[RAG] Reset complete — dispatched ${queuedCount}/${filesInStorage.length} files` +
+        `[RAG] Reset complete — dispatched ${queuedCount}/${filesInStorage.length} files ` +
+          `(${discovered.length - filesInStorage.length} left as the user had them)` +
           (failedPaths.length > 0 ? ` (${failedPaths.length} failed)` : '')
       )
 
