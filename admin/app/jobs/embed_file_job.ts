@@ -24,6 +24,9 @@ export interface EmbedFileJobParams {
   // batch's chunk count was stored while Qdrant held the full set).
   chunksSoFar?: number
   collection?: string
+  // Dirents already finished. Present from the second batch on, so extraction
+  // can seek instead of recounting batchOffset.
+  resumeAtDirent?: number
 }
 
 export class EmbedFileJob {
@@ -57,7 +60,8 @@ export class EmbedFileJob {
   }
 
   async handle(job: Job) {
-    const { filePath, fileName, batchOffset, totalArticles, collection } = job.data as EmbedFileJobParams
+    const { filePath, fileName, batchOffset, totalArticles, collection, resumeAtDirent } =
+      job.data as EmbedFileJobParams
 
     // Only the direct KB-upload controller passes `collection` on dispatch; the other
     // six dispatch sites (download auto-index, scan/sync, re-embed, local ZIM upload,
@@ -156,7 +160,8 @@ export class EmbedFileJob {
         allowDeletion,
         batchOffset,
         onProgress,
-        effectiveCollection
+        effectiveCollection,
+        resumeAtDirent
       )
 
       if (!result.success) {
@@ -215,6 +220,7 @@ export class EmbedFileJob {
           // Carry the collection across batches, otherwise only batch 1 of a ZIM
           // would be tagged and the rest would land uncategorized.
           ...(effectiveCollection ? { collection: effectiveCollection } : {}),
+          ...(result.resumeAtDirent !== undefined ? { resumeAtDirent: result.resumeAtDirent } : {}),
         })
 
         // Calculate progress based on articles processed.
