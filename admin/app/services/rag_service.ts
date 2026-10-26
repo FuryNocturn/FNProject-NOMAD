@@ -2701,9 +2701,8 @@ export class RagService {
    * no chunks left, so under Manual pending ZIMs (Wikipedia included) stay out.
    */
   private async _filesChosenForIndexing(discovered: string[]): Promise<string[]> {
-    const stateByPath = new Map(
-      (await KbIngestState.query().select('file_path', 'state')).map((r) => [r.file_path, r])
-    )
+    const rows = await KbIngestState.query().select('file_path', 'state')
+    const stateByPath = new Map(rows.map((r) => [r.file_path, r]))
     const policyRaw = await KVStore.getValue('rag.defaultIngestPolicy')
     const policy: IngestPolicy = policyRaw === 'Manual' ? 'Manual' : 'Always'
     return discovered.filter(

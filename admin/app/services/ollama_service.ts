@@ -1172,6 +1172,16 @@ export class OllamaService {
     return { embeddings: results.data.map((e) => e.embedding as number[]) }
   }
 
+  /** See shouldPaceEmbedding: pause between ZIM batches only for NOMAD's own CPU-bound Ollama. */
+  public async shouldPaceEmbeddings(): Promise<boolean> {
+    await this._ensureDependencies()
+    if (!this.baseUrl) return true
+    await this._isNativeBackend()
+    // null = probe could not reach the backend; its identity is still unknown
+    if (this.isOllamaNative !== true) return shouldPaceEmbedding(this.isOllamaNative, false)
+    return shouldPaceEmbedding(true, await this.isEmbeddingGpuAccelerated())
+  }
+
   /**
    * Returns true if Ollama is currently running an embedding model with non-zero VRAM
    * (i.e., GPU-offloaded). Returns false if the model is running CPU-only OR if it's
@@ -1186,16 +1196,6 @@ export class OllamaService {
    * Only the Ollama-native endpoint is supported — backends that expose
    * `/v1/embeddings` (LM Studio, llama.cpp) don't surface placement info.
    */
-  /** See shouldPaceEmbedding: pause between ZIM batches only for NOMAD's own CPU-bound Ollama. */
-  public async shouldPaceEmbeddings(): Promise<boolean> {
-    await this._ensureDependencies()
-    if (!this.baseUrl) return true
-    await this._isNativeBackend()
-    // null = probe could not reach the backend; its identity is still unknown
-    if (this.isOllamaNative !== true) return shouldPaceEmbedding(this.isOllamaNative, false)
-    return shouldPaceEmbedding(true, await this.isEmbeddingGpuAccelerated())
-  }
-
   public async isEmbeddingGpuAccelerated(): Promise<boolean> {
     await this._ensureDependencies()
     if (!this.baseUrl) return false
