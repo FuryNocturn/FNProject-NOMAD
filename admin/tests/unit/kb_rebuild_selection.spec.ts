@@ -1,5 +1,5 @@
 /**
- * Reset & Rebuild re-embeds a file only when the sync would dispatch it with
+ * Reset & Rebuild and Re-embed All re-embed a file only when the sync would dispatch it with
  * no chunks left: `decideScanAction(row, false, policy).kind === 'dispatch'`.
  * Guards against re-embedding every pending ZIM on a Manual-policy install.
  */
