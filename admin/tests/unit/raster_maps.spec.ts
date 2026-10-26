@@ -1,7 +1,7 @@
 import * as assert from 'node:assert/strict'
 import { test } from 'node:test'
 
-import { withArchive } from '../../app/utils/map_archive_manifest.js'
+import { withArchive, withoutArchive } from '../../app/utils/map_archive_manifest.js'
 import { parseMapArchiveManifest } from '../../app/utils/map_styles.js'
 import type { RasterMapArchiveMetadata } from '../../types/maps.js'
 
@@ -33,8 +33,16 @@ test('raster manifest: a new archive is added and parses as raster', () => {
 })
 
 test('raster manifest: re-adding replaces the entry and keeps the others', () => {
-  const other = { ...archive, filename: 'ign-mtn_spain_z14.pmtiles', resourceId: 'ign-mtn_spain_z14', role: 'topographic' as const }
-  const manifest = withArchive(withArchive(withArchive(null, archive), other), { ...archive, maxzoom: 15 })
+  const other = {
+    ...archive,
+    filename: 'ign-mtn_spain_z14.pmtiles',
+    resourceId: 'ign-mtn_spain_z14',
+    role: 'topographic' as const,
+  }
+  const manifest = withArchive(withArchive(withArchive(null, archive), other), {
+    ...archive,
+    maxzoom: 15,
+  })
   assert.equal(Object.keys(manifest.archives).length, 2)
   assert.equal(manifest.archives[archive.filename].maxzoom, 15)
 })
@@ -42,4 +50,21 @@ test('raster manifest: re-adding replaces the entry and keeps the others', () =>
 test('raster manifest: a corrupt existing manifest is replaced, not merged', () => {
   const manifest = withArchive({ schemaVersion: 7, archives: 'x' }, archive)
   assert.deepEqual(Object.keys(manifest.archives), [archive.filename])
+})
+
+test('raster manifest: deleting a map drops only its entry', () => {
+  const other = {
+    ...archive,
+    filename: 'ign-mtn_spain_z14.pmtiles',
+    resourceId: 'ign-mtn_spain_z14',
+    role: 'topographic' as const,
+  }
+  const manifest = withoutArchive(withArchive(withArchive(null, archive), other), archive.filename)
+  assert.deepEqual(Object.keys(manifest!.archives), [other.filename])
+})
+
+test('raster manifest: nothing to rewrite when the entry is absent or the manifest is unknown', () => {
+  assert.equal(withoutArchive(withArchive(null, archive), 'other.pmtiles'), null)
+  assert.equal(withoutArchive(null, archive.filename), null)
+  assert.equal(withoutArchive({ schemaVersion: 7, archives: {} }, archive.filename), null)
 })
