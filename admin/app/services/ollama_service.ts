@@ -24,6 +24,7 @@ import { BROADCAST_CHANNELS } from '../../constants/broadcast.js'
 import env from '#start/env'
 import { NOMAD_API_DEFAULT_BASE_URL } from '../../constants/misc.js'
 import { isEmbeddingModelName, pickEmbeddingModel } from '../utils/misc.js'
+import { shouldPaceEmbedding } from '../utils/embedding_pacing.js'
 import KVStore from '#models/kv_store'
 import type { ModelCapabilities } from '../utils/model_capabilities.js'
 import {
@@ -1185,6 +1186,16 @@ export class OllamaService {
    * Only the Ollama-native endpoint is supported — backends that expose
    * `/v1/embeddings` (LM Studio, llama.cpp) don't surface placement info.
    */
+  /** See shouldPaceEmbedding: pause between ZIM batches only for NOMAD's own CPU-bound Ollama. */
+  public async shouldPaceEmbeddings(): Promise<boolean> {
+    await this._ensureDependencies()
+    if (!this.baseUrl) return true
+    await this._isNativeBackend()
+    // null = probe could not reach the backend; its identity is still unknown
+    if (this.isOllamaNative !== true) return shouldPaceEmbedding(this.isOllamaNative, false)
+    return shouldPaceEmbedding(true, await this.isEmbeddingGpuAccelerated())
+  }
+
   public async isEmbeddingGpuAccelerated(): Promise<boolean> {
     await this._ensureDependencies()
     if (!this.baseUrl) return false
