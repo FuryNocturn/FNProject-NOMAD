@@ -8,6 +8,7 @@
     "clearAll": "Alle löschen",
     "noResponse": "Entschuldigung, ich konnte keine Antwort erzeugen.",
     "requestError": "Entschuldigung, bei der Verarbeitung deiner Anfrage ist ein Fehler aufgetreten. Bitte versuche es erneut.",
+    "modelError": "Beim Modell ist ein Fehler aufgetreten. Bitte versuche es erneut.",
     "startError": "Entschuldigung, beim Starten dieses Chats ist ein Fehler aufgetreten. Bitte versuche es erneut.",
     "newChat": "Neuer Chat",
     "switchTitle": "Zu {{model}} wechseln?",

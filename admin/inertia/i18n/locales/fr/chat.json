@@ -8,6 +8,7 @@
     "clearAll": "Tout effacer",
     "noResponse": "Désolé, je n'ai pas pu générer de réponse.",
     "requestError": "Désolé, une erreur s'est produite lors du traitement de votre demande. Veuillez réessayer.",
+    "modelError": "Le modèle a rencontré une erreur. Veuillez réessayer.",
     "startError": "Désolé, une erreur s'est produite au démarrage de cette discussion. Veuillez réessayer.",
     "newChat": "Nouvelle discussion",
     "switchTitle": "Passer à {{model}} ?",

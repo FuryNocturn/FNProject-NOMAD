@@ -8,6 +8,7 @@
     "clearAll": "全部清除",
     "noResponse": "抱歉，我无法生成回复。",
     "requestError": "抱歉，处理您的请求时出错。请重试。",
+    "modelError": "模型出错。请重试。",
     "startError": "抱歉，启动此聊天时出错。请重试。",
     "newChat": "新建聊天",
     "switchTitle": "切换到 {{model}}？",
