@@ -53,5 +53,8 @@
   "nomad_translate": {
     "name": "Biblioteca traducida",
     "description": "Lee la Biblioteca de información en otro idioma. Traducción automática sin conexión, en CPU"
+  },
+  "nomad_arcade": {
+    "description": "Juegos de un jugador sin conexión: tres en raya, cuatro en raya, sudoku, buscaminas y más"
   }
 }

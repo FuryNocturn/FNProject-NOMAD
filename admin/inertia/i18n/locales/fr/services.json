@@ -53,5 +53,8 @@
   "nomad_translate": {
     "name": "Bibliothèque traduite",
     "description": "Lisez la Bibliothèque d'informations dans une autre langue. Traduction automatique qui fonctionne hors ligne, sur CPU"
+  },
+  "nomad_arcade": {
+    "description": "Jeux solo hors ligne : morpion, puissance 4, sudoku, démineur et plus encore"
   }
 }

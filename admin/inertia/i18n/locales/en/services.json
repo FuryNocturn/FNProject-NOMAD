@@ -53,5 +53,8 @@
   "nomad_translate": {
     "name": "Translated Library",
     "description": "Read the Information Library in another language. Machine translation that works offline, on CPU"
+  },
+  "nomad_arcade": {
+    "description": "Offline single-player games: tic-tac-toe, connect four, sudoku, minesweeper and more"
   }
 }

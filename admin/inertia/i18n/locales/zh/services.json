@@ -53,5 +53,8 @@
   "nomad_translate": {
     "name": "翻译图书馆",
     "description": "以其他语言阅读信息图书馆。离线机器翻译，仅用 CPU 即可运行"
+  },
+  "nomad_arcade": {
+    "description": "离线单人游戏：井字棋、四子棋、数独、扫雷等"
   }
 }
