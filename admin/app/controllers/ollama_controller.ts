@@ -262,8 +262,9 @@ export default class OllamaController {
 
       if (reqData.stream) {
         logger.debug(`[OllamaController] Initiating streaming response for model: "${reqData.model}" with think: ${think}`)
-        // Headers already flushed and the disconnect listener attached above.
-        if (response.response.destroyed) {
+        // Headers already flushed and the disconnect listener attached above. A Stop during
+        // query rewriting or retrieval must keep the generation below from starting at all.
+        if (response.response.destroyed || abortController.signal.aborted) {
           logger.debug('[OllamaController] Client disconnected before generation started')
           return
         }

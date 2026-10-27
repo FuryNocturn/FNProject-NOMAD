@@ -8,6 +8,7 @@ import remarkGfm from 'remark-gfm'
 import { ChatMessage } from '../../../types/chat'
 import useKiwixBaseUrl from '~/hooks/useKiwixBaseUrl'
 import { kiwixArticleUrl } from '~/lib/kiwix_links'
+import AgentSteps from './AgentSteps'
 
 export interface ChatMessageBubbleProps {
   message: ChatMessage
@@ -63,7 +64,7 @@ export default function ChatMessageBubble({ message, onContinue }: ChatMessageBu
   return (
     <div
       className={classNames(
-        'max-w-[70%] rounded-lg px-4 py-3',
+        message.steps ? 'max-w-[85%] rounded-lg px-4 py-3' : 'max-w-[70%] rounded-lg px-4 py-3',
         message.role === 'user' ? 'bg-desert-green text-white' : 'bg-surface-secondary text-text-primary'
       )}
     >
@@ -78,6 +79,9 @@ export default function ChatMessageBubble({ message, onContinue }: ChatMessageBu
             />
           ))}
         </div>
+      )}
+      {message.role === 'assistant' && message.steps && (
+        <AgentSteps steps={message.steps} running={message.isStreaming && !message.content} />
       )}
       {message.isThinking && message.thinking && (
         <div className="mb-3 rounded border border-amber-200 bg-amber-50 px-3 py-2 text-xs">
@@ -201,7 +205,18 @@ export default function ChatMessageBubble({ message, onContinue }: ChatMessageBu
           <ul className="space-y-0.5">
             {message.sources.map((src, idx) => (
               <li key={idx}>
-                {src.title}
+                {src.source && /^(https?:\/\/|\/)/.test(src.source) ? (
+                  <a
+                    href={src.source}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-desert-green underline hover:text-desert-green/80"
+                  >
+                    {src.title}
+                  </a>
+                ) : (
+                  src.title
+                )}
                 {src.date && <span className="text-text-secondary"> ({src.date})</span>}
                 {src.articles && src.articles.length > 0 && (
                   <ul className="ml-3 mt-0.5 space-y-0.5">

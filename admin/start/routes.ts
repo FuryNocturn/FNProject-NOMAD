@@ -18,6 +18,7 @@ import HomeController from '#controllers/home_controller'
 import MapsController from '#controllers/maps_controller'
 import NomadMdController from '#controllers/nomad_md_controller'
 import OllamaController from '#controllers/ollama_controller'
+import AgentController from '#controllers/agent_controller'
 import OpenApiController from '#controllers/openapi_controller'
 import RagController from '#controllers/rag_controller'
 import RasterMapsController from '#controllers/raster_maps_controller'
@@ -77,6 +78,7 @@ import {
   unloadChatModelsSchema,
   getAvailableModelsSchema,
 } from '#validators/ollama'
+import { agentChatSchema } from '#validators/agent'
 import { getSettingSchema, updateSettingSchema } from '#validators/settings'
 import {
   createSessionSchema,
@@ -367,6 +369,16 @@ router
     })
   })
   .prefix('/api/ollama')
+
+router
+  .group(() => {
+    documented(router.post('/chat', [AgentController, 'chat']), {
+      summary: 'Chat with the tool-calling agent (SSE stream of steps and tokens)',
+      tags: ['ai'],
+      request: agentChatSchema,
+    })
+  })
+  .prefix('/api/agent')
 
 router
   .group(() => {
