@@ -10,7 +10,10 @@
  *   OpenAI-compatible API; pausing only slowed GPU embedding ~2x;
  * - backend not identified yet (`null`, e.g. unreachable): keep pacing.
  */
-export function shouldPaceEmbedding(ollamaNative: boolean | null, gpuAccelerated: boolean): boolean {
+export function shouldPaceEmbedding(
+  ollamaNative: boolean | null,
+  gpuAccelerated: boolean
+): boolean {
   if (ollamaNative === false) return false
   if (ollamaNative === null) return true
   return !gpuAccelerated

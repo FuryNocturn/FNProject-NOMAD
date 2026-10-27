@@ -17,3 +17,9 @@ test('chat stream preserves an actionable server error message', () => {
   )
   assert.equal(chatStreamErrorMessage({ done: true }), null)
 })
+
+test('chat stream translates the generic error when a t function is given', () => {
+  const t = ((key: string) => `t:${key}`) as any
+  assert.equal(chatStreamErrorMessage({ error: true }, t), 't:chat.main.modelError')
+  assert.equal(chatStreamErrorMessage({ error: true, message: 'from server' }, t), 'from server')
+})

@@ -12,6 +12,7 @@ import type { Country, CountryCode, CountryGroup, MapExtractPreflight } from '..
 import { EmbedJobWithProgress, FileWarningsResult, StoredFileInfo } from '../../types/rag'
 import type { CategoryWithStatus, CollectionWithStatus, ContentUpdateCheckResult, CreatorPackWithStatus, ResourceUpdateInfo } from '../../types/collections'
 import { catchInternal } from './util'
+import i18n from '~/i18n'
 import { NomadChatResponse, NomadInstalledModel, NomadOllamaModel, OllamaChatRequest } from '../../types/ollama'
 import BenchmarkResult from '#models/benchmark_result'
 import { BenchmarkType, RunBenchmarkResponse, SubmitBenchmarkResponse, UpdateBuilderTagResponse } from '../../types/benchmark'
@@ -399,7 +400,7 @@ class API {
             data = JSON.parse(line.slice(6))
           } catch { continue /* skip malformed chunks */ }
 
-          const streamError = chatStreamErrorMessage(data)
+          const streamError = chatStreamErrorMessage(data, i18n.t)
           if (streamError) throw new Error(streamError)
 
           // Citation metadata (#1179) arrives as a distinct trailing event with no

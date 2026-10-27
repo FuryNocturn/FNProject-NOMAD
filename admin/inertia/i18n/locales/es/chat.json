@@ -8,6 +8,7 @@
     "clearAll": "Borrar todo",
     "noResponse": "Lo siento, no he podido generar una respuesta.",
     "requestError": "Lo siento, se produjo un error al procesar tu solicitud. Inténtalo de nuevo.",
+    "modelError": "El modelo ha tenido un error. Inténtalo de nuevo.",
     "startError": "Lo siento, se produjo un error al iniciar este chat. Inténtalo de nuevo.",
     "newChat": "Nuevo chat",
     "switchTitle": "¿Cambiar a {{model}}?",

@@ -22,6 +22,7 @@ import { assertNotPrivateUrl, ssrfSafeRequestOptions } from '#validators/common'
 import { filenameFromUrl, resolveInside } from '../utils/remote_filename.js'
 import InstalledResource from '#models/installed_resource'
 import { CollectionManifestService } from './collection_manifest_service.js'
+import { removeMapArchive } from '../utils/map_archive_manifest.js'
 import { decideSupersededDeletion } from '../utils/superseded_resource.js'
 import type { CollectionWithStatus, MapsSpec } from '../../types/collections.js'
 import type { Country, CountryCode, CountryGroup, MapExtractPreflight } from '../../types/maps.js'
@@ -847,6 +848,14 @@ export class MapService implements IMapService {
     }
 
     await deleteFileIfExists(fullPath)
+
+    // A stale entry would describe a file that no longer exists; the map is
+    // already gone, so a manifest failure is only logged.
+    await removeMapArchive(basePath, fileName).catch((error) => {
+      logger.warn(
+        `[MapService] Could not remove ${fileName} from the map archive manifest: ${error}`
+      )
+    })
 
     // Clean up InstalledResource entry
     const parsed = CollectionManifestService.parseMapFilename(fileName)
