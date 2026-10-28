@@ -71,3 +71,26 @@ export function Scoreboard({ tally }: { tally: Tally }) {
 
 export const formatTime = (seconds: number) =>
   `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`
+
+/** A face-up playing card (or its back when `hidden`). */
+export function PlayingCard({ card, hidden, held, onClick }: {
+  card?: { r: number; s: number }
+  hidden?: boolean
+  held?: boolean
+  onClick?: () => void
+}) {
+  const Tag = onClick ? 'button' : 'div'
+  if (!card || hidden) return <Tag className="pcard back" onClick={onClick} />
+  const red = card.s === 1 || card.s === 2
+  const rank = card.r <= 10 ? String(card.r) : ['J', 'Q', 'K', 'A'][card.r - 11]
+  const suit = ['♠', '♥', '♦', '♣'][card.s]
+  return (
+    <Tag className={`pcard ${red ? 'red' : 'black'} ${held ? 'held' : ''}`} onClick={onClick} {...(onClick ? { type: 'button' } : {})}>
+      <span className="corner">
+        {rank}
+        {suit}
+      </span>
+      <span className="pip">{suit}</span>
+    </Tag>
+  )
+}

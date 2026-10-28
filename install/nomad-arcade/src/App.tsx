@@ -10,6 +10,12 @@ import Reversi from './games/reversi/Reversi'
 import Snake from './games/snake/Snake'
 import Memory from './games/memory/Memory'
 import WordSearch from './games/wordsearch/WordSearch'
+import Chess from './games/chess/Chess'
+import Checkers from './games/checkers/Checkers'
+import Parchis from './games/parchis/Parchis'
+import Domino from './games/domino/Domino'
+import Poker from './games/poker/Poker'
+import Blackjack from './games/blackjack/Blackjack'
 
 const GAMES = [
   { id: 'tictactoe', icon: '⭕', Component: TicTacToe },
@@ -22,6 +28,12 @@ const GAMES = [
   { id: 'snake', icon: '🐍', Component: Snake },
   { id: 'memory', icon: '🧠', Component: Memory },
   { id: 'wordsearch', icon: '🔤', Component: WordSearch },
+  { id: 'chess', icon: '♟️', Component: Chess },
+  { id: 'checkers', icon: '⚪', Component: Checkers },
+  { id: 'parchis', icon: '🎲', Component: Parchis },
+  { id: 'domino', icon: '🔳', Component: Domino },
+  { id: 'poker', icon: '♠️', Component: Poker },
+  { id: 'blackjack', icon: '♥️', Component: Blackjack },
 ] as const
 
 type GameId = (typeof GAMES)[number]['id']

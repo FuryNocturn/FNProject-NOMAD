@@ -6,7 +6,12 @@ code and no volumes. Saved games live in each browser's localStorage.
 
 Games:
 
-- Against the computer, three difficulties: tic-tac-toe, connect four and reversi.
+- Against the computer, three difficulties: tic-tac-toe, connect four, reversi,
+  chess (full rules; checked with perft) and Spanish draughts (flying kings,
+  compulsory capture of the most pieces).
+- Table games against computer players: parchís (four players, Spanish rules),
+  partnership dominoes to 100, poker (no-limit Texas Hold'em and Omaha with side
+  pots, plus Jacks or Better video poker) and blackjack (double, split). Play chips only.
 - Puzzles: sudoku (generated with a single solution, three difficulties),
   minesweeper (three sizes) and 2048.
 - Cards and words: Klondike solitaire (draw 1 or 3, undo, auto-finish), word
