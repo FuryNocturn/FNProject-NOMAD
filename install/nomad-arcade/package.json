@@ -6,7 +6,9 @@
   "license": "Apache-2.0",
   "type": "module",
   "scripts": {
+    "predev": "node scripts/build-words.mjs",
     "dev": "vite",
+    "prebuild": "node scripts/build-words.mjs",
     "build": "tsc --noEmit && vite build",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
@@ -19,6 +21,8 @@
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^4.7.0",
+    "an-array-of-english-words": "^2.0.0",
+    "an-array-of-spanish-words": "^2.0.0",
     "typescript": "~5.8.3",
     "vite": "^6.4.3",
     "vitest": "^3.2.4"

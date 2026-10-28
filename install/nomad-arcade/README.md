@@ -16,9 +16,26 @@ Games:
   minesweeper (three sizes) and 2048.
 - Cards and words: Klondike solitaire (draw 1 or 3, undo, auto-finish), word
   search (themed word lists per language) and memory.
-- Arcade: snake.
+- Arcade: snake, match 3 (striped gems and bombs, levels), garden defence
+  (lane defence with sunflowers, pea shooters, walnuts and cherries; our own
+  take on the genre) and Simon.
+- More solitaires and puzzles: Spider (1, 2 or 4 suits), FreeCell (the classic
+  numbered deals #1-32000), mahjong solitaire (always solvable deals), nonograms
+  (generated, solvable by logic alone), hangman.
+- More board games: the Game of the Goose (2-4 players), Battleship against a
+  hunting computer, and Word Tiles, a crossword tile game against the computer.
+- Brick Game: the handheld classic (Tetris, Breakout, racing, snake, tanks),
+  vendored from [Retro-Brick-Game](https://github.com/Nabeelshar/Retro-Brick-Game)
+  (MIT) and served at `/brick/`. See `vendor/brick-game/NOMAD.md`.
 
 Spanish and English.
+
+## Third-party content
+
+- Word Tiles dictionaries: `an-array-of-spanish-words` and
+  `an-array-of-english-words` (MIT). `scripts/build-words.mjs` turns them into
+  `public/words/<lang>.txt` on `npm run dev` / `npm run build` (not committed).
+- Brick Game: see above.
 
 ## Develop
 

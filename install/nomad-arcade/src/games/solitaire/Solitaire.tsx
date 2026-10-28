@@ -19,7 +19,7 @@ import {
   toFoundation,
 } from './logic'
 
-function CardFace({ card, selected, onClick, onDoubleClick }: {
+export function CardFace({ card, selected, onClick, onDoubleClick }: {
   card: Card
   selected?: boolean
   onClick?: () => void
