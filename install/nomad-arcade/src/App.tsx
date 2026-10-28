@@ -4,12 +4,24 @@ import TicTacToe from './games/tictactoe/TicTacToe'
 import Connect4 from './games/connect4/Connect4'
 import Sudoku from './games/sudoku/Sudoku'
 import Minesweeper from './games/minesweeper/Minesweeper'
+import Solitaire from './games/solitaire/Solitaire'
+import G2048 from './games/g2048/G2048'
+import Reversi from './games/reversi/Reversi'
+import Snake from './games/snake/Snake'
+import Memory from './games/memory/Memory'
+import WordSearch from './games/wordsearch/WordSearch'
 
 const GAMES = [
   { id: 'tictactoe', icon: '⭕', Component: TicTacToe },
   { id: 'connect4', icon: '🔴', Component: Connect4 },
   { id: 'sudoku', icon: '🔢', Component: Sudoku },
   { id: 'minesweeper', icon: '💣', Component: Minesweeper },
+  { id: 'solitaire', icon: '🃏', Component: Solitaire },
+  { id: 'g2048', icon: '🧮', Component: G2048 },
+  { id: 'reversi', icon: '⚫', Component: Reversi },
+  { id: 'snake', icon: '🐍', Component: Snake },
+  { id: 'memory', icon: '🧠', Component: Memory },
+  { id: 'wordsearch', icon: '🔤', Component: WordSearch },
 ] as const
 
 type GameId = (typeof GAMES)[number]['id']

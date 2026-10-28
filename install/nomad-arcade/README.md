@@ -4,9 +4,16 @@ Offline single-player games for Project NOMAD, installed from the Supply Depot
 (`nomad_arcade`, port 8510). A static React site served by nginx: no server
 code and no volumes. Saved games live in each browser's localStorage.
 
-Games: tic-tac-toe and connect four (against the computer, three difficulties),
-sudoku (generated with a single solution, three difficulties) and minesweeper
-(three sizes). Spanish and English.
+Games:
+
+- Against the computer, three difficulties: tic-tac-toe, connect four and reversi.
+- Puzzles: sudoku (generated with a single solution, three difficulties),
+  minesweeper (three sizes) and 2048.
+- Cards and words: Klondike solitaire (draw 1 or 3, undo, auto-finish), word
+  search (themed word lists per language) and memory.
+- Arcade: snake.
+
+Spanish and English.
 
 ## Develop
 
