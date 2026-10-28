@@ -53,5 +53,8 @@
   "nomad_translate": {
     "name": "Übersetzte Bibliothek",
     "description": "Lies die Informationsbibliothek in einer anderen Sprache. Maschinelle Übersetzung, die offline auf der CPU funktioniert"
+  },
+  "nomad_arcade": {
+    "description": "Offline-Spiele für eine Person: Tic-Tac-Toe, Vier gewinnt, Sudoku, Minesweeper und mehr"
   }
 }
