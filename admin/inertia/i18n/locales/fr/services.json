@@ -56,5 +56,17 @@
   },
   "nomad_arcade": {
     "description": "Jeux solo hors ligne : morpion, puissance 4, sudoku, démineur et plus encore"
+  },
+  "nomad_crafts": {
+    "description": "Outils créatifs et bureautiques dans le navigateur : retouche photo, vectoriel, documents, tableurs, présentations, PDF, vidéo, audio et CAO"
+  },
+  "nomad_photoprism": {
+    "description": "Photothèque avec recherche, albums, cartes et étiquetage automatique, directement sur votre NOMAD"
+  },
+  "nomad_openwebrx": {
+    "description": "Récepteur radio dans le navigateur pour une clé SDR USB : FM, AM, ondes courtes, bandes radioamateur et modes numériques"
+  },
+  "nomad_kismet": {
+    "description": "Moniteur Wi-Fi : voyez les réseaux et appareils alentour et auditez votre propre réseau (Linux, adaptateur en mode moniteur)"
   }
 }

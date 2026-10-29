@@ -364,3 +364,67 @@ These 50 languages are available. Chinese is not available yet.
 **Your data:** language models live in `storage/translate/models`. Nothing you read is stored or sent anywhere.
 
 **Works offline:** yes, once the models have downloaded.
+
+## Craft Suite {% #craft-suite %}
+
+Thirteen creative and office tools that run in your browser: an image editor in the style of Photoshop (PhotoCraft), photo developing (LightCraft), vector illustration (VectorCraft), page layout (DesignCraft), interface design (FigCraft), a word processor (WordCraft), spreadsheets (GridCraft), slides (DeckCraft), a PDF editor (PDFCraft), video editing (FilmCraft), motion graphics (EffectCraft), audio recording and mixing (SoundCraft) and technical drawing (CADCraft). Open the app and pick a tool from its home page.
+
+**Source:** [github.com/storytold](https://github.com/storytold) (MIT and Apache-2.0)
+
+**First time you open it:** No login. Each tool loads in a few seconds the first time (they are large WebAssembly apps) and much faster after that.
+
+**Your data:** The tools don't store anything on your NOMAD. Open files from your computer and save or export them back to it from each tool's menus. Tool settings live in your browser.
+
+**Graphics:** Opened from another device on your network over plain HTTP, the tools draw with WebGL2. On the NOMAD itself (`localhost`) or over HTTPS they can use the faster WebGPU.
+
+**Works offline:** Fully offline. Everything the tools need is inside the app. Links to each project's website need the internet.
+
+## PhotoPrism {% #photoprism %}
+
+A photo library for the pictures you keep on your NOMAD: browse by date, place and album, search, and let it tag photos automatically (it recognises things like beaches, cats or mountains on the NOMAD itself, with no cloud).
+
+**Official site:** [photoprism.app](https://www.photoprism.app) · **Source:** [github.com/photoprism/photoprism](https://github.com/photoprism/photoprism)
+
+**First time you open it:** Log in with username `admin` and password `nomadphotos`. It's the same default on every NOMAD, so **change it** straight away: open **Settings** in the left menu, then the **Account** tab, and click **Change Password**. Your password is kept in `storage/photoprism/storage`, so it survives app updates.
+
+**Adding photos:** Either upload from the browser (the **Upload** button at the top of the photo views), or copy photos into `storage/photoprism/import` on your NOMAD and use **Library > Import**. Photos in `storage/photoprism/originals` are indexed where they are with **Library > Index**.
+
+**Your data:** Your photos live in `storage/photoprism/originals`. The index, thumbnails and settings live in `storage/photoprism/storage`. Back up both folders to keep everything.
+
+**Resources:** Indexing a large collection is heavy: give it at least 2 GB of memory and expect the first index of thousands of photos to take a while.
+
+**Works offline:** Browsing, search, albums and automatic tagging all run on your NOMAD, with no cloud service.
+
+## OpenWebRX {% #openwebrx %}
+
+A radio receiver in your browser. Plug a USB SDR receiver (an RTL-SDR dongle is the usual cheap choice) into your NOMAD and listen to FM and AM broadcast, shortwave, amateur radio bands, aircraft and weather frequencies, and decode digital modes, from any device on your network.
+
+**Official site:** [openwebrx.de](https://www.openwebrx.de) · **Source:** [github.com/jketterl/openwebrx](https://github.com/jketterl/openwebrx)
+
+**What you need:** a USB SDR receiver and NOMAD running on **Linux**. Without a receiver the app opens but has nothing to tune. On Windows with Docker Desktop, USB devices are not passed through to apps, so the receiver won't be seen.
+
+**First time you open it:** The receiver page needs no login. To set up your receiver and bands, open **Settings** (the gear icon) and log in with username `admin` and password `nomadradio`. It's the same default on every NOMAD, so change it. OpenWebRX has no page for that; run this on the NOMAD machine and type the new password when asked:
+
+```bash
+docker exec -it nomad_openwebrx python3 /opt/openwebrx/openwebrx.py admin resetpassword admin
+```
+
+**Your data:** Settings and users live in `storage/openwebrx/settings`; extra configuration files in `storage/openwebrx/config`.
+
+**Works offline:** Yes. Reception and decoding happen on your NOMAD.
+
+## Kismet {% #kismet %}
+
+A Wi-Fi monitor. It lists the networks and devices around you, their channels and encryption, and raises alerts for suspicious activity such as an access point copying your network's name. Use it to check **your own** networks: which devices are on them, whether the encryption is weak, and whether something unknown is nearby.
+
+**Official site:** [kismetwireless.net](https://www.kismetwireless.net) · **Source:** [github.com/kismetwireless/kismet](https://github.com/kismetwireless/kismet)
+
+**What you need:** NOMAD running on **Linux**, and a USB Wi-Fi adapter that supports **monitor mode** for capturing (most built-in laptop cards don't). Kismet runs on the machine's own network so it can reach the adapters; its page is at port **2501** of your NOMAD. On Windows with Docker Desktop it starts, but cannot see any adapter.
+
+**First time you open it:** Kismet asks you to create its admin login. There are no default credentials. Then open **Data Sources** and enable your adapter. This setup is for Wi-Fi: Bluetooth capture needs more access to the machine than the app is given, so a Bluetooth source may not start.
+
+**Your data:** Settings and your login live in `storage/kismet/home`. Each session is recorded to a `.kismet` log file in `storage/kismet/logs`; delete old logs from time to time, they grow while Kismet runs.
+
+**Use it lawfully:** listening to what is around you is legal in most places; connecting to or interfering with networks that are not yours is not.
+
+**Works offline:** Yes, fully. Everything is captured and shown on your NOMAD.

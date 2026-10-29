@@ -56,5 +56,17 @@
   },
   "nomad_arcade": {
     "description": "オフラインで遊べる一人用ゲーム：三目並べ、四目並べ、数独、マインスイーパーなど"
+  },
+  "nomad_crafts": {
+    "description": "ブラウザで使えるクリエイティブ・オフィスツール：写真編集、ベクター、文書、表計算、スライド、PDF、動画、音声、CAD"
+  },
+  "nomad_photoprism": {
+    "description": "検索、アルバム、地図、自動タグ付けを備えた、NOMAD上で動く写真ライブラリ"
+  },
+  "nomad_openwebrx": {
+    "description": "USB SDRドングル用のブラウザで使えるラジオ受信機：FM、AM、短波、アマチュア無線、デジタルモード"
+  },
+  "nomad_kismet": {
+    "description": "Wi-Fiモニター：周囲のネットワークや機器を確認し、自分のネットワークを監査（Linux、モニターモード対応アダプター）"
   }
 }

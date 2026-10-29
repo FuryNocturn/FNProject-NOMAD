@@ -56,5 +56,17 @@
   },
   "nomad_arcade": {
     "description": "Jogos para um jogador sem conexão: jogo da velha, quatro em linha, sudoku, campo minado e mais"
+  },
+  "nomad_crafts": {
+    "description": "Ferramentas criativas e de escritório no navegador: edição de fotos, vetores, documentos, planilhas, apresentações, PDF, vídeo, áudio e CAD"
+  },
+  "nomad_photoprism": {
+    "description": "Biblioteca de fotos com busca, álbuns, mapas e marcação automática que roda no seu NOMAD"
+  },
+  "nomad_openwebrx": {
+    "description": "Receptor de rádio no navegador para um dongle SDR USB: FM, AM, ondas curtas, faixas de radioamador e modos digitais"
+  },
+  "nomad_kismet": {
+    "description": "Monitor de Wi-Fi: veja as redes e dispositivos ao redor e audite sua própria rede (Linux, adaptador em modo monitor)"
   }
 }
