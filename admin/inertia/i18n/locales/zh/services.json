@@ -56,5 +56,17 @@
   },
   "nomad_arcade": {
     "description": "离线单人游戏：井字棋、四子棋、数独、扫雷等"
+  },
+  "nomad_crafts": {
+    "description": "浏览器中的创意与办公工具：照片编辑、矢量、文档、表格、幻灯片、PDF、视频、音频和 CAD"
+  },
+  "nomad_photoprism": {
+    "description": "在你的 NOMAD 上运行的照片库，支持搜索、相册、地图和自动标签"
+  },
+  "nomad_openwebrx": {
+    "description": "浏览器中的无线电接收机，配合 USB SDR 接收器：FM、AM、短波、业余波段和数字模式"
+  },
+  "nomad_kismet": {
+    "description": "Wi-Fi 监视器：查看周围的网络和设备并审计你自己的网络（Linux，支持监听模式的网卡）"
   }
 }

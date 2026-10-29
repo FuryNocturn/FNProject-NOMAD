@@ -20,4 +20,8 @@ export const SERVICE_NAMES = {
   JELLYFIN: 'nomad_jellyfin',
   TRANSLATE: 'nomad_translate',
   ARCADE: 'nomad_arcade',
+  CRAFTS: 'nomad_crafts',
+  PHOTOPRISM: 'nomad_photoprism',
+  OPENWEBRX: 'nomad_openwebrx',
+  KISMET: 'nomad_kismet',
 }

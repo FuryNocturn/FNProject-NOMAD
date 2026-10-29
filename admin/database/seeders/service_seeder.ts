@@ -615,6 +615,150 @@ export default class ServiceSeeder extends BaseSeeder {
       category: 'media',
       depends_on: null,
     },
+    {
+      service_name: SERVICE_NAMES.CRAFTS,
+      friendly_name: 'Craft Suite',
+      powered_by: 'storytold',
+      display_order: 41,
+      description:
+        'Creative and office tools in the browser: photo editing, vectors, documents, spreadsheets, slides, PDF, video, audio and CAD',
+      icon: 'IconPalette',
+      // shortcut: built locally from install/nomad-crafts (docker build -t nomad-crafts:0.1.0
+      // install/nomad-crafts), which downloads the pinned release zips and checks their sha256.
+      // A fresh machine needs that build first, until the image is published to a registry.
+      container_image: 'nomad-crafts:0.1.0',
+      source_repo: 'https://github.com/storytold',
+      container_command: null,
+      container_config: JSON.stringify({
+        HostConfig: {
+          RestartPolicy: { Name: 'unless-stopped' },
+          PortBindings: { '80/tcp': [{ HostPort: '8520' }] },
+        },
+        ExposedPorts: { '80/tcp': {} },
+      }),
+      ui_location: '8520',
+      installed: false,
+      installation_status: 'idle',
+      is_dependency_service: false,
+      is_custom: false,
+      category: 'productivity',
+      depends_on: null,
+    },
+    {
+      service_name: SERVICE_NAMES.PHOTOPRISM,
+      friendly_name: 'PhotoPrism',
+      powered_by: 'PhotoPrism',
+      display_order: 42,
+      description:
+        'Photo library with search, albums, maps and automatic tagging that runs on your NOMAD',
+      icon: 'IconPhoto',
+      container_image: 'photoprism/photoprism:261007',
+      source_repo: 'https://github.com/photoprism/photoprism',
+      container_command: null,
+      container_config: JSON.stringify({
+        HostConfig: {
+          RestartPolicy: { Name: 'unless-stopped' },
+          PortBindings: { '2342/tcp': [{ HostPort: '8530' }] },
+          Binds: [
+            `${ServiceSeeder.NOMAD_STORAGE_ABS_PATH}/photoprism/originals:/photoprism/originals`,
+            `${ServiceSeeder.NOMAD_STORAGE_ABS_PATH}/photoprism/import:/photoprism/import`,
+            `${ServiceSeeder.NOMAD_STORAGE_ABS_PATH}/photoprism/storage:/photoprism/storage`,
+          ],
+        },
+        ExposedPorts: { '2342/tcp': {} },
+        // SQLite keeps it to one container. The admin password only applies to the first
+        // start; it is documented in the Supply Depot guide with a note to change it.
+        Env: [
+          'PHOTOPRISM_AUTH_MODE=password',
+          'PHOTOPRISM_ADMIN_USER=admin',
+          'PHOTOPRISM_ADMIN_PASSWORD=nomadphotos',
+          'PHOTOPRISM_DATABASE_DRIVER=sqlite',
+          'PHOTOPRISM_DISABLE_TLS=true',
+          'PHOTOPRISM_UPLOAD_NSFW=true',
+        ],
+      }),
+      ui_location: '8530',
+      installed: false,
+      installation_status: 'idle',
+      is_dependency_service: false,
+      is_custom: false,
+      category: 'media',
+      depends_on: null,
+      // Indexing runs image classification on the CPU.
+      metadata: JSON.stringify({ minMemoryMB: 2048, minDiskMB: 4096 }),
+    },
+    {
+      service_name: SERVICE_NAMES.OPENWEBRX,
+      friendly_name: 'OpenWebRX',
+      powered_by: 'OpenWebRX',
+      display_order: 43,
+      description:
+        'Radio receiver in your browser for a USB SDR dongle: FM, AM, shortwave, amateur bands and digital modes',
+      icon: 'IconRadio',
+      container_image: 'jketterl/openwebrx:1.2.2',
+      source_repo: 'https://github.com/jketterl/openwebrx',
+      container_command: null,
+      container_config: JSON.stringify({
+        HostConfig: {
+          RestartPolicy: { Name: 'unless-stopped' },
+          PortBindings: { '8073/tcp': [{ HostPort: '8540' }] },
+          // The USB bus is shared as a folder plus a cgroup rule for USB devices (major 189),
+          // so a dongle plugged in later works without a restart, and a machine with no USB
+          // bus (Docker Desktop) still starts the app.
+          Binds: [
+            '/dev/bus/usb:/dev/bus/usb',
+            `${ServiceSeeder.NOMAD_STORAGE_ABS_PATH}/openwebrx/settings:/var/lib/openwebrx`,
+            `${ServiceSeeder.NOMAD_STORAGE_ABS_PATH}/openwebrx/config:/etc/openwebrx`,
+          ],
+          DeviceCgroupRules: ['c 189:* rmw'],
+        },
+        ExposedPorts: { '8073/tcp': {} },
+        // Admin login for the settings pages; documented in the guide with a note to change it.
+        Env: ['OPENWEBRX_ADMIN_USER=admin', 'OPENWEBRX_ADMIN_PASSWORD=nomadradio'],
+      }),
+      ui_location: '8540',
+      installed: false,
+      installation_status: 'idle',
+      is_dependency_service: false,
+      is_custom: false,
+      category: 'networking',
+      depends_on: null,
+    },
+    {
+      service_name: SERVICE_NAMES.KISMET,
+      friendly_name: 'Kismet',
+      powered_by: 'Kismet',
+      display_order: 44,
+      description:
+        'Wi-Fi monitor: see the networks and devices around you and audit your own network (Linux, monitor-mode adapter)',
+      icon: 'IconWifi',
+      // shortcut: built locally from install/nomad-kismet (docker build -t nomad-kismet:0.1.0
+      // install/nomad-kismet) from Kismet's official Debian repository. A fresh machine needs
+      // that build first, until the image is published to a registry.
+      container_image: 'nomad-kismet:0.1.0',
+      source_repo: 'https://github.com/kismetwireless/kismet',
+      container_command: null,
+      container_config: JSON.stringify({
+        HostConfig: {
+          RestartPolicy: { Name: 'unless-stopped' },
+          // Host networking so Kismet can see the machine's Wi-Fi adapters and put one in
+          // monitor mode (NET_ADMIN, NET_RAW). The web UI listens on the host's port 2501.
+          NetworkMode: 'host',
+          CapAdd: ['NET_ADMIN', 'NET_RAW'],
+          Binds: [
+            `${ServiceSeeder.NOMAD_STORAGE_ABS_PATH}/kismet/home:/root/.kismet`,
+            `${ServiceSeeder.NOMAD_STORAGE_ABS_PATH}/kismet/logs:/logs`,
+          ],
+        },
+      }),
+      ui_location: '2501',
+      installed: false,
+      installation_status: 'idle',
+      is_dependency_service: false,
+      is_custom: false,
+      category: 'networking',
+      depends_on: null,
+    },
   ]
 
   async run() {

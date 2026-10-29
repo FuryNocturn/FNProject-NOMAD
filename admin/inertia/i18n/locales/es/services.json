@@ -56,5 +56,17 @@
   },
   "nomad_arcade": {
     "description": "Juegos de un jugador sin conexión: tres en raya, cuatro en raya, sudoku, buscaminas y más"
+  },
+  "nomad_crafts": {
+    "description": "Herramientas creativas y de oficina en el navegador: edición de fotos, vectores, documentos, hojas de cálculo, presentaciones, PDF, vídeo, audio y CAD"
+  },
+  "nomad_photoprism": {
+    "description": "Biblioteca de fotos con búsqueda, álbumes, mapas y etiquetado automático que funciona en tu NOMAD"
+  },
+  "nomad_openwebrx": {
+    "description": "Receptor de radio en el navegador para un receptor SDR USB: FM, AM, onda corta, bandas de radioaficionado y modos digitales"
+  },
+  "nomad_kismet": {
+    "description": "Monitor de wifi: mira las redes y dispositivos de alrededor y audita tu propia red (Linux, adaptador en modo monitor)"
   }
 }

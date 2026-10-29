@@ -943,14 +943,16 @@ export class DockerService {
         ...(containerConfig?.ExposedPorts && { ExposedPorts: containerConfig.ExposedPorts }),
         Env: env,
         ...(service.container_command ? { Cmd: service.container_command.split(' ') } : {}),
-        // Ensure container is attached to the Nomad docker network in production
-        ...(process.env.NODE_ENV === 'production' && {
-          NetworkingConfig: {
-            EndpointsConfig: {
-              [DockerService.NOMAD_NETWORK]: {},
+        // Ensure container is attached to the Nomad docker network in production. Apps on the
+        // host network (Kismet, to reach the Wi-Fi adapters) cannot join another network.
+        ...(process.env.NODE_ENV === 'production' &&
+          hostConfig?.NetworkMode !== 'host' && {
+            NetworkingConfig: {
+              EndpointsConfig: {
+                [DockerService.NOMAD_NETWORK]: {},
+              },
             },
-          },
-        }),
+          }),
       })
 
       let container = await this.docker.createContainer(
@@ -2550,9 +2552,10 @@ export class DockerService {
         ...(containerConfig?.ExposedPorts && { ExposedPorts: containerConfig.ExposedPorts }),
         ...(recreateEnv.length ? { Env: recreateEnv } : {}),
         ...(service.container_command ? { Cmd: service.container_command.split(' ') } : {}),
-        ...(process.env.NODE_ENV === 'production' && {
-          NetworkingConfig: { EndpointsConfig: { [DockerService.NOMAD_NETWORK]: {} } },
-        }),
+        ...(process.env.NODE_ENV === 'production' &&
+          runtime.hostConfig?.NetworkMode !== 'host' && {
+            NetworkingConfig: { EndpointsConfig: { [DockerService.NOMAD_NETWORK]: {} } },
+          }),
       })
       await newContainer.start()
 
