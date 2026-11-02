@@ -587,6 +587,34 @@ export default class ServiceSeeder extends BaseSeeder {
       // are about 45-140 MB per language on disk.
       metadata: JSON.stringify({ minMemoryMB: 1536, minDiskMB: 1024 }),
     },
+    {
+      service_name: SERVICE_NAMES.ARCADE,
+      friendly_name: 'Arcade',
+      powered_by: 'NOMAD',
+      display_order: 40,
+      description: 'Offline single-player games: tic-tac-toe, connect four, sudoku, minesweeper and more',
+      icon: 'IconDeviceGamepad2',
+      // shortcut: the image is built locally from install/nomad-arcade (docker build -t
+      // nomad-arcade:0.1.0 install/nomad-arcade); the installer uses a local image when
+      // present. A fresh machine needs that build first, until the image is published to a registry.
+      container_image: 'nomad-arcade:0.1.0',
+      source_repo: 'https://github.com/FuryNocturn/FNProject-NOMAD/tree/main/install/nomad-arcade',
+      container_command: null,
+      container_config: JSON.stringify({
+        HostConfig: {
+          RestartPolicy: { Name: 'unless-stopped' },
+          PortBindings: { '80/tcp': [{ HostPort: '8510' }] },
+        },
+        ExposedPorts: { '80/tcp': {} },
+      }),
+      ui_location: '8510',
+      installed: false,
+      installation_status: 'idle',
+      is_dependency_service: false,
+      is_custom: false,
+      category: 'media',
+      depends_on: null,
+    },
   ]
 
   async run() {

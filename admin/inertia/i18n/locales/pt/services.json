@@ -53,5 +53,8 @@
   "nomad_translate": {
     "name": "Biblioteca traduzida",
     "description": "Leia a Biblioteca de informações em outro idioma. Tradução automática que funciona offline, na CPU"
+  },
+  "nomad_arcade": {
+    "description": "Jogos para um jogador sem conexão: jogo da velha, quatro em linha, sudoku, campo minado e mais"
   }
 }
