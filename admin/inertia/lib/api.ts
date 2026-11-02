@@ -1446,6 +1446,17 @@ class API {
     })()
   }
 
+  async getServiceCredentials(service_name: string) {
+    return catchInternal(async () => {
+      const response = await this.client.get<{
+        success: boolean
+        username: string
+        password: string
+      }>(`/system/services/${service_name}/credentials`)
+      return response.data
+    })()
+  }
+
   async getCustomApp(service_name: string) {
     return catchInternal(async () => {
       const response = await this.client.get<{

@@ -95,6 +95,7 @@
       "restart": "Neu starten",
       "logs": "Protokolle",
       "stats": "Statistiken",
+      "access": "Zugang",
       "edit": "Bearbeiten",
       "setCustomUrl": "Eigene URL festlegen",
       "migrateToGen2": "So migrierst du Inhalte zu Gen 2",
@@ -197,6 +198,17 @@
     "cpu": "CPU",
     "memory": "Arbeitsspeicher",
     "updates": "Aktualisiert sich alle 2 Sekunden."
+  },
+  "access": {
+    "title": "Zugang — {{name}}",
+    "close": "Schließen",
+    "username": "Benutzername",
+    "password": "Passwort",
+    "copy": "Kopieren",
+    "copied": "Kopiert",
+    "note": "NOMAD hat diesen Zugang bei der Installation der App angelegt. Wenn du das Passwort in der App geändert hast, ist dies das ursprüngliche.",
+    "loading": "Wird geladen…",
+    "failed": "Der Zugang für diese App konnte nicht geladen werden."
   },
   "logs": {
     "title": "Protokolle – {{name}}",

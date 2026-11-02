@@ -39,6 +39,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 import logger from '@adonisjs/core/services/logger'
 import Service from '#models/service'
 import { DEFAULT_LINK_TILE_COLOR } from '../../constants/link_tile_colors.js'
+import { hasAppCredentials } from '../utils/app_credentials.js'
 
 @inject()
 export default class SystemController {
@@ -707,6 +708,20 @@ export default class SystemController {
             return response.status(404).send({ success: false, message: result.message })
         }
         return response.send({ success: true, running: result.running ?? false, stats: result.stats ?? null })
+    }
+
+    /**
+     * The admin login NOMAD created for an installed app (PhotoPrism, OpenWebRX, Kismet), for
+     * Manage > Access. Read-only; 404 for any other app so it can't be used to mint passwords.
+     */
+    async getServiceCredentials({ params, response }: HttpContext) {
+        const service = await Service.query().where('service_name', params.name).first()
+        if (!service || !service.installed || !hasAppCredentials(service.service_name)) {
+            return response.status(404).send({ success: false, message: 'No login for this app' })
+        }
+        const credentials = await this.dockerService.getAppCredentials(service.service_name)
+        response.header('Cache-Control', 'no-store')
+        return response.send({ success: true, ...credentials })
     }
 
     /** Return an app's current configuration in the editable form-shape. */

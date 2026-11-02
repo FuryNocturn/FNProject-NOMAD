@@ -385,7 +385,7 @@ A photo library for the pictures you keep on your NOMAD: browse by date, place a
 
 **Official site:** [photoprism.app](https://www.photoprism.app) · **Source:** [github.com/photoprism/photoprism](https://github.com/photoprism/photoprism)
 
-**First time you open it:** Log in with username `admin` and password `nomadphotos`. It's the same default on every NOMAD, so **change it** straight away: open **Settings** in the left menu, then the **Account** tab, and click **Change Password**. Your password is kept in `storage/photoprism/storage`, so it survives app updates.
+**First time you open it:** Log in as `admin`. NOMAD creates a random password for your NOMAD when it installs the app: find it in the Supply Depot under **Manage > Access** on the PhotoPrism card. You can change it in **Settings** (left menu) > **Account** > **Change Password**; Manage > Access keeps showing the original one. Your password is kept in `storage/photoprism/storage`, so it survives app updates.
 
 **Adding photos:** Either upload from the browser (the **Upload** button at the top of the photo views), or copy photos into `storage/photoprism/import` on your NOMAD and use **Library > Import**. Photos in `storage/photoprism/originals` are indexed where they are with **Library > Index**.
 
@@ -403,7 +403,7 @@ A radio receiver in your browser. Plug a USB SDR receiver (an RTL-SDR dongle is 
 
 **What you need:** a USB SDR receiver and NOMAD running on **Linux**. Without a receiver the app opens but has nothing to tune. On Windows with Docker Desktop, USB devices are not passed through to apps, so the receiver won't be seen.
 
-**First time you open it:** The receiver page needs no login. To set up your receiver and bands, open **Settings** (the gear icon) and log in with username `admin` and password `nomadradio`. It's the same default on every NOMAD, so change it. OpenWebRX has no page for that; run this on the NOMAD machine and type the new password when asked:
+**First time you open it:** The receiver page needs no login. To set up your receiver and bands, open **Settings** (the gear icon) and log in as `admin` with the random password NOMAD created at install: it is in the Supply Depot under **Manage > Access** on the OpenWebRX card. To change it (Manage > Access keeps showing the original one), run this on the NOMAD machine and type the new password when asked:
 
 ```bash
 docker exec -it nomad_openwebrx python3 /opt/openwebrx/openwebrx.py admin resetpassword admin
@@ -421,9 +421,9 @@ A Wi-Fi monitor. It lists the networks and devices around you, their channels an
 
 **What you need:** NOMAD running on **Linux**, and a USB Wi-Fi adapter that supports **monitor mode** for capturing (most built-in laptop cards don't). Kismet runs on the machine's own network so it can reach the adapters; its page is at port **2501** of your NOMAD. On Windows with Docker Desktop it starts, but cannot see any adapter.
 
-**First time you open it:** Kismet asks you to create its admin login. There are no default credentials. Then open **Data Sources** and enable your adapter. This setup is for Wi-Fi: Bluetooth capture needs more access to the machine than the app is given, so a Bluetooth source may not start.
+**First time you open it:** Log in as `admin` with the random password NOMAD created at install (Supply Depot > **Manage > Access** on the Kismet card), so nobody else on your network can claim the admin account first. Then open **Data Sources** and enable your adapter. This setup is for Wi-Fi: Bluetooth capture needs more access to the machine than the app is given, so a Bluetooth source may not start.
 
-**Your data:** Settings and your login live in `storage/kismet/home`. Each session is recorded to a `.kismet` log file in `storage/kismet/logs`; delete old logs from time to time, they grow while Kismet runs.
+**Your data:** Settings and your login live in `storage/kismet/home` (the login in `kismet_httpd.conf`). Each session is recorded to a `.kismet` log file in `storage/kismet/logs`; delete old logs from time to time, they grow while Kismet runs.
 
 **Use it lawfully:** listening to what is around you is legal in most places; connecting to or interfering with networks that are not yours is not.
 

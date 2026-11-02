@@ -4,8 +4,9 @@
 # device that is not published for every platform). Run with host networking
 # and NET_ADMIN/NET_RAW so it can see and
 # put the host's Wi-Fi adapters in monitor mode (Linux only; a monitor-mode
-# capable adapter is needed to capture). On first visit the web UI asks you to
-# create the admin login, so there are no default credentials.
+# capable adapter is needed to capture). NOMAD writes the web login
+# (kismet_httpd.conf, random password per install) into /root/.kismet before the
+# first start, so nobody can claim the admin account on first visit.
 FROM debian:bookworm-slim
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \

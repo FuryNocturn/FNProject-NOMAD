@@ -95,6 +95,7 @@
       "restart": "Restart",
       "logs": "Logs",
       "stats": "Stats",
+      "access": "Access",
       "edit": "Edit",
       "setCustomUrl": "Set custom URL",
       "migrateToGen2": "How to migrate content to Gen 2",
@@ -197,6 +198,17 @@
     "cpu": "CPU",
     "memory": "Memory",
     "updates": "Updates every 2 seconds."
+  },
+  "access": {
+    "title": "Login — {{name}}",
+    "close": "Close",
+    "username": "Username",
+    "password": "Password",
+    "copy": "Copy",
+    "copied": "Copied",
+    "note": "NOMAD created this login when it installed the app. If you changed the password inside the app, this is the original one.",
+    "loading": "Loading…",
+    "failed": "Could not load the login for this app."
   },
   "logs": {
     "title": "Logs — {{name}}",

@@ -95,6 +95,7 @@
       "restart": "Redémarrer",
       "logs": "Journaux",
       "stats": "Statistiques",
+      "access": "Accès",
       "edit": "Modifier",
       "setCustomUrl": "Définir une URL personnalisée",
       "migrateToGen2": "Comment migrer le contenu vers la 2e génération",
@@ -197,6 +198,17 @@
     "cpu": "CPU",
     "memory": "Mémoire",
     "updates": "Mise à jour toutes les 2 secondes."
+  },
+  "access": {
+    "title": "Accès — {{name}}",
+    "close": "Fermer",
+    "username": "Utilisateur",
+    "password": "Mot de passe",
+    "copy": "Copier",
+    "copied": "Copié",
+    "note": "NOMAD a créé cet accès en installant l’application. Si vous avez changé le mot de passe dans l’application, celui-ci est l’original.",
+    "loading": "Chargement…",
+    "failed": "Impossible de charger l’accès de cette application."
   },
   "logs": {
     "title": "Journaux — {{name}}",

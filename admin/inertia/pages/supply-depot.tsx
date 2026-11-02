@@ -12,6 +12,7 @@ import {
   IconClockBolt,
   IconCloudDownload,
   IconFileText,
+  IconKey,
   IconPackage,
   IconPencil,
   IconPlayerPlay,
@@ -32,6 +33,8 @@ import CustomAppModal, { CustomAppInitial } from '~/components/CustomAppModal'
 import AppUrlModal from '~/components/AppUrlModal'
 import ServiceLogsModal from '~/components/ServiceLogsModal'
 import ServiceStatsModal from '~/components/ServiceStatsModal'
+import ServiceCredentialsModal from '~/components/ServiceCredentialsModal'
+import { hasAppCredentials } from '../../constants/app_credentials'
 import StyledSectionHeader from '~/components/StyledSectionHeader'
 import UpdateServiceModal from '~/components/UpdateServiceModal'
 import useErrorNotification from '~/hooks/useErrorNotification'
@@ -89,6 +92,7 @@ type Modal =
   | { type: 'uninstall'; service: ServiceSlim }
   | { type: 'logs'; service: ServiceSlim }
   | { type: 'stats'; service: ServiceSlim }
+  | { type: 'access'; service: ServiceSlim }
   | { type: 'update'; service: ServiceSlim }
   | null
 
@@ -504,6 +508,7 @@ export default function SupplyDepotPage(props: { system: { services: ServiceSlim
                       onUninstall={() => setModal({ type: 'uninstall', service })}
                       onLogs={() => setModal({ type: 'logs', service })}
                       onStats={() => setModal({ type: 'stats', service })}
+                      onAccess={() => setModal({ type: 'access', service })}
                       onEdit={() => handleEdit(service)}
                       onSetUrl={() => handleSetUrl(service)}
                       onUpdate={() => handleUpdate(service)}
@@ -541,6 +546,7 @@ export default function SupplyDepotPage(props: { system: { services: ServiceSlim
                       onUninstall={() => setModal({ type: 'uninstall', service })}
                       onLogs={() => setModal({ type: 'logs', service })}
                       onStats={() => setModal({ type: 'stats', service })}
+                      onAccess={() => setModal({ type: 'access', service })}
                       onEdit={() => handleEdit(service)}
                       onSetUrl={() => handleSetUrl(service)}
                       onUpdate={() => handleUpdate(service)}
@@ -792,6 +798,16 @@ export default function SupplyDepotPage(props: { system: { services: ServiceSlim
         />
       )}
 
+      {/* Admin login NOMAD generated for the app */}
+      {modal?.type === 'access' && (
+        <ServiceCredentialsModal
+          serviceName={modal.service.service_name}
+          friendlyName={svcName(modal.service)}
+          open
+          onClose={() => setModal(null)}
+        />
+      )}
+
       {/* Versioned update modal (curated apps with an available update) */}
       {modal?.type === 'update' && (
         <UpdateServiceModal
@@ -857,6 +873,7 @@ interface AppCardProps {
   onUninstall: () => void
   onLogs: () => void
   onStats: () => void
+  onAccess: () => void
   onEdit: () => void
   onSetUrl: () => void
   onUpdate: () => void
@@ -884,6 +901,7 @@ function AppCard({
   onUninstall,
   onLogs,
   onStats,
+  onAccess,
   onEdit,
   onSetUrl,
   onUpdate,
@@ -1096,6 +1114,9 @@ function AppCard({
                   <DropdownItem icon={<IconRefresh className="h-4 w-4" />} label={t('apps.supplyDepot.card.restart')} onClick={onRestart} />
                   <DropdownItem icon={<IconFileText className="h-4 w-4" />} label={t('apps.supplyDepot.card.logs')} onClick={onLogs} />
                   <DropdownItem icon={<IconChartBar className="h-4 w-4" />} label={t('apps.supplyDepot.card.stats')} onClick={onStats} />
+                  {hasAppCredentials(service.service_name) && (
+                    <DropdownItem icon={<IconKey className="h-4 w-4" />} label={t('apps.supplyDepot.card.access')} onClick={onAccess} />
+                  )}
                   <DropdownItem icon={<IconPencil className="h-4 w-4" />} label={t('apps.supplyDepot.card.edit')} onClick={onEdit} />
                   <DropdownItem icon={<IconWorld className="h-4 w-4" />} label={t('apps.supplyDepot.card.setCustomUrl')} onClick={onSetUrl} />
                   {

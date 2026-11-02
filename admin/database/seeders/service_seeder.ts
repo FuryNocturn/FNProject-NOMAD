@@ -666,12 +666,12 @@ export default class ServiceSeeder extends BaseSeeder {
           ],
         },
         ExposedPorts: { '2342/tcp': {} },
-        // SQLite keeps it to one container. The admin password only applies to the first
-        // start; it is documented in the Supply Depot guide with a note to change it.
+        // SQLite keeps it to one container. The admin password is generated per install and
+        // injected by DockerService (app/utils/app_credentials.ts); it only applies to the first
+        // start, and Manage > Access shows it.
         Env: [
           'PHOTOPRISM_AUTH_MODE=password',
           'PHOTOPRISM_ADMIN_USER=admin',
-          'PHOTOPRISM_ADMIN_PASSWORD=nomadphotos',
           'PHOTOPRISM_DATABASE_DRIVER=sqlite',
           'PHOTOPRISM_DISABLE_TLS=true',
           'PHOTOPRISM_UPLOAD_NSFW=true',
@@ -713,8 +713,9 @@ export default class ServiceSeeder extends BaseSeeder {
           DeviceCgroupRules: ['c 189:* rmw'],
         },
         ExposedPorts: { '8073/tcp': {} },
-        // Admin login for the settings pages; documented in the guide with a note to change it.
-        Env: ['OPENWEBRX_ADMIN_USER=admin', 'OPENWEBRX_ADMIN_PASSWORD=nomadradio'],
+        // Admin login for the settings pages; the password is generated per install and injected
+        // by DockerService (app/utils/app_credentials.ts). Manage > Access shows it.
+        Env: ['OPENWEBRX_ADMIN_USER=admin'],
       }),
       ui_location: '8540',
       installed: false,

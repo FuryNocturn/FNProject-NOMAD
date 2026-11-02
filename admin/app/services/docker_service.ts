@@ -29,6 +29,14 @@ import { BROADCAST_CHANNELS } from '../../constants/broadcast.js'
 import { KIWIX_LIBRARY_CMD } from '../../constants/kiwix.js'
 import { DEFAULT_OLLAMA_CONTEXT_LENGTH } from '../../constants/ollama.js'
 import { withLogRotation } from '../utils/log_rotation.js'
+import {
+  APP_CREDENTIALS,
+  generateAppPassword,
+  hasAppCredentials,
+  isUsableAppPassword,
+  kismetHttpdConf,
+  withAppPasswordEnv,
+} from '../utils/app_credentials.js'
 
 // Written by install_nomad.sh with the host AMD GPU's gfx target.
 const AMD_GFX_MARKER_PATH = '/app/storage/.nomad-amd-gfx'
@@ -919,6 +927,7 @@ export class DockerService {
         // persist, and reuse so updates/reinstalls don't invalidate issued API keys.
         appEnv.push(`HBOX_AUTH_API_KEY_PEPPER=${await this._resolveHomeboxPepper()}`)
       }
+      await this._prepareAppCredentials(service.service_name)
 
       this._broadcast(
         service.service_name,
@@ -957,9 +966,11 @@ export class DockerService {
 
       let container = await this.docker.createContainer(
         buildCreateOptions(finalImage, gpuHostConfig, [
-          ...(containerConfig?.Env ?? []),
-          ...ollamaEnv,
-          ...appEnv,
+          ...(await this._withAppCredentialEnv(service.service_name, [
+            ...(containerConfig?.Env ?? []),
+            ...ollamaEnv,
+            ...appEnv,
+          ])),
         ])
       )
       createdContainerId = container.id
@@ -1024,9 +1035,11 @@ export class DockerService {
         finalImage = service.container_image
         container = await this.docker.createContainer(
           buildCreateOptions(finalImage, cpuHostConfig, [
-            ...(containerConfig?.Env ?? []),
-            ...cpuOllamaEnv,
-            ...appEnv,
+            ...(await this._withAppCredentialEnv(service.service_name, [
+              ...(containerConfig?.Env ?? []),
+              ...cpuOllamaEnv,
+              ...appEnv,
+            ])),
           ])
         )
         createdContainerId = container.id
@@ -1706,6 +1719,53 @@ export class DockerService {
     return pepper
   }
 
+  /**
+   * The admin login NOMAD created for an app (PhotoPrism, OpenWebRX, Kismet), generating and
+   * persisting the password on first use. Stable across updates and reinstalls, like the
+   * Homebox pepper. Null for apps without one.
+   */
+  public async getAppCredentials(
+    serviceName: string
+  ): Promise<{ username: string; password: string } | null> {
+    if (!hasAppCredentials(serviceName)) return null
+    const { username, kvKey } = APP_CREDENTIALS[serviceName]
+    const existing = await KVStore.getValue(kvKey)
+    if (isUsableAppPassword(existing)) return { username, password: existing }
+    const password = generateAppPassword()
+    await KVStore.setValue(kvKey, password)
+    logger.info(`[DockerService] Generated and persisted the admin password for ${serviceName}`)
+    return { username, password }
+  }
+
+  private async _withAppCredentialEnv(serviceName: string, env: string[]): Promise<string[]> {
+    const credentials = await this.getAppCredentials(serviceName)
+    return credentials ? withAppPasswordEnv(serviceName, env, credentials.password) : env
+  }
+
+  /**
+   * Kismet takes its login from ~/.kismet/kismet_httpd.conf, bind-mounted from storage, rather
+   * than from the env. Written before the container starts, and only when missing, so a
+   * password the user changed in Kismet is kept.
+   */
+  private async _prepareAppCredentials(serviceName: string): Promise<void> {
+    if (serviceName !== SERVICE_NAMES.KISMET) return
+    const credentials = await this.getAppCredentials(serviceName)
+    if (!credentials) return
+    const dir = join(DockerService.ADMIN_STORAGE_DEST, 'kismet', 'home')
+    const file = join(dir, 'kismet_httpd.conf')
+    try {
+      await access(file)
+      return
+    } catch {
+      // Missing: write it below
+    }
+    await mkdir(dir, { recursive: true })
+    await writeFile(file, kismetHttpdConf(credentials.username, credentials.password), {
+      mode: 0o600,
+    })
+    logger.info('[DockerService] Wrote the Kismet web login (kismet_httpd.conf)')
+  }
+
   private async _resolveAmdHsaOverride({
     quiet = false,
     containerEnv,
@@ -2004,6 +2064,9 @@ export class DockerService {
       ) {
         finalEnv = [...finalEnv, `HBOX_AUTH_API_KEY_PEPPER=${await this._resolveHomeboxPepper()}`]
       }
+      // Generated admin login: also replaces the fixed default an older catalog put in the env.
+      finalEnv = await this._withAppCredentialEnv(serviceName, finalEnv)
+      await this._prepareAppCredentials(serviceName)
 
       const newContainerConfig: any = {
         Image: runtimeImage,
@@ -2530,6 +2593,8 @@ export class DockerService {
       ) {
         recreateEnv = [...recreateEnv, `HBOX_AUTH_API_KEY_PEPPER=${await this._resolveHomeboxPepper()}`]
       }
+      recreateEnv = await this._withAppCredentialEnv(serviceName, recreateEnv)
+      await this._prepareAppCredentials(serviceName)
 
       // GPU passthrough and the Ollama runtime env, built exactly as on install (no-op for others).
       const runtime = await this._prepareGpuRuntime(

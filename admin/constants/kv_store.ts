@@ -34,6 +34,7 @@ export const SETTINGS_KEYS: KVStoreKey[] = [
     'contentAutoUpdate.cooloffHours',
     'contentAutoUpdate.maxBytesPerWindow',
     'benchmark.rerunBannerDismissed',
-    // 'apps.homebox.apiKeyPepper' is a secret managed by DockerService and is
-    // deliberately NOT exposed through the generic settings endpoint.
+    // 'apps.homebox.apiKeyPepper' and the 'apps.*.adminPassword' keys are secrets
+    // managed by DockerService and are deliberately NOT exposed through the
+    // generic settings endpoint.
 ];
