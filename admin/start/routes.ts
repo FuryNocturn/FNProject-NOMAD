@@ -652,6 +652,10 @@ router
       summary: 'Get service stats',
       tags: ['system'],
     })
+    documented(router.get('/services/:name/credentials', [SystemController, 'getServiceCredentials']), {
+      summary: 'Get the admin login NOMAD created for an app',
+      tags: ['system'],
+    })
     documented(router.get('/services/:name/available-versions', [SystemController, 'getAvailableVersions']), {
       summary: 'List available service versions',
       tags: ['system'],

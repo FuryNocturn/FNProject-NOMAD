@@ -87,6 +87,10 @@ export const KV_STORE_SCHEMA = {
   'ai.autoFixGpuPassthrough':   'boolean',
   'gpu.autoRemediatedAt':       'string',
   'apps.homebox.apiKeyPepper':  'string',
+  // Admin passwords NOMAD generates at install (app/utils/app_credentials.ts); secrets, not settings.
+  'apps.photoprism.adminPassword': 'string',
+  'apps.openwebrx.adminPassword':  'string',
+  'apps.kismet.adminPassword':     'string',
   'benchmark.rerunBannerDismissed': 'boolean',
   // Drug Reference v1 — export_date of the last successfully completed
   // openFDA drug-label ingest (e.g. "2026-06-06"). Written by

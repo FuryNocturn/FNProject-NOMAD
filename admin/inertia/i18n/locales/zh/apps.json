@@ -95,6 +95,7 @@
       "restart": "重启",
       "logs": "日志",
       "stats": "统计",
+      "access": "访问",
       "edit": "编辑",
       "setCustomUrl": "设置自定义 URL",
       "migrateToGen2": "如何将内容迁移到第二代",
@@ -197,6 +198,17 @@
     "cpu": "CPU",
     "memory": "内存",
     "updates": "每 2 秒更新一次。"
+  },
+  "access": {
+    "title": "访问 — {{name}}",
+    "close": "关闭",
+    "username": "用户名",
+    "password": "密码",
+    "copy": "复制",
+    "copied": "已复制",
+    "note": "NOMAD 在安装此应用时创建了这个登录。如果你在应用中修改过密码，这里显示的是初始密码。",
+    "loading": "加载中…",
+    "failed": "无法加载此应用的登录信息。"
   },
   "logs": {
     "title": "日志 — {{name}}",

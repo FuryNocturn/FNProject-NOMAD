@@ -95,6 +95,7 @@
       "restart": "Reiniciar",
       "logs": "Registros",
       "stats": "Estadísticas",
+      "access": "Acceso",
       "edit": "Editar",
       "setCustomUrl": "Definir URL personalizada",
       "migrateToGen2": "Cómo migrar el contenido a Gen 2",
@@ -197,6 +198,17 @@
     "cpu": "CPU",
     "memory": "Memoria",
     "updates": "Se actualiza cada 2 segundos."
+  },
+  "access": {
+    "title": "Acceso — {{name}}",
+    "close": "Cerrar",
+    "username": "Usuario",
+    "password": "Contraseña",
+    "copy": "Copiar",
+    "copied": "Copiado",
+    "note": "NOMAD creó este acceso al instalar la app. Si cambiaste la contraseña dentro de la app, esta es la original.",
+    "loading": "Cargando…",
+    "failed": "No se pudo cargar el acceso de esta app."
   },
   "logs": {
     "title": "Registros — {{name}}",

@@ -56,5 +56,17 @@
   },
   "nomad_arcade": {
     "description": "Offline-Spiele für eine Person: Tic-Tac-Toe, Vier gewinnt, Sudoku, Minesweeper und mehr"
+  },
+  "nomad_crafts": {
+    "description": "Kreativ- und Office-Werkzeuge im Browser: Bildbearbeitung, Vektoren, Dokumente, Tabellen, Folien, PDF, Video, Audio und CAD"
+  },
+  "nomad_photoprism": {
+    "description": "Fotobibliothek mit Suche, Alben, Karten und automatischer Verschlagwortung direkt auf deinem NOMAD"
+  },
+  "nomad_openwebrx": {
+    "description": "Funkempfänger im Browser für einen USB-SDR-Stick: UKW, MW, Kurzwelle, Amateurfunkbänder und digitale Betriebsarten"
+  },
+  "nomad_kismet": {
+    "description": "WLAN-Monitor: Netze und Geräte in der Umgebung sehen und das eigene Netz prüfen (Linux, Adapter mit Monitor-Modus)"
   }
 }

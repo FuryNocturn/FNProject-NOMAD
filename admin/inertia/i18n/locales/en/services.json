@@ -56,5 +56,17 @@
   },
   "nomad_arcade": {
     "description": "Offline single-player games: tic-tac-toe, connect four, sudoku, minesweeper and more"
+  },
+  "nomad_crafts": {
+    "description": "Creative and office tools in the browser: photo editing, vectors, documents, spreadsheets, slides, PDF, video, audio and CAD"
+  },
+  "nomad_photoprism": {
+    "description": "Photo library with search, albums, maps and automatic tagging that runs on your NOMAD"
+  },
+  "nomad_openwebrx": {
+    "description": "Radio receiver in your browser for a USB SDR dongle: FM, AM, shortwave, amateur bands and digital modes"
+  },
+  "nomad_kismet": {
+    "description": "Wi-Fi monitor: see the networks and devices around you and audit your own network (Linux, monitor-mode adapter)"
   }
 }
