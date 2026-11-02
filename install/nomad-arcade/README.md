@@ -24,6 +24,10 @@ Games:
   (generated, solvable by logic alone), hangman.
 - More board games: the Game of the Goose (2-4 players), Battleship against a
   hunting computer, and Word Tiles, a crossword tile game against the computer.
+- Spanish-deck card games against computer players: brisca, tute (cantes,
+  arrastre, tute; best of 3 hands), chinchón (2-4 players, classic or with two
+  jokers) and mus (partnerships, 8 or 4 kings, envites and órdago, partner's
+  signals).
 - Brick Game: the handheld classic (Tetris, Breakout, racing, snake, tanks),
   vendored from [Retro-Brick-Game](https://github.com/Nabeelshar/Retro-Brick-Game)
   (MIT) and served at `/brick/`. See `vendor/brick-game/NOMAD.md`.
