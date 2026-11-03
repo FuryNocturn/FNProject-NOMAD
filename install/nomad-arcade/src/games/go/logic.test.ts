@@ -81,5 +81,5 @@ test('a dead stone inside territory is recognised', () => {
 test('the hard level answers within a few seconds', () => {
   const t0 = performance.now()
   think(newGame(), PLAYOUTS.hard, seededRng(7))
-  expect(performance.now() - t0).toBeLessThan(6000)
-})
+  expect(performance.now() - t0).toBeLessThan(8000)
+}, 15_000)

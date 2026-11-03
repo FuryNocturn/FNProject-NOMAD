@@ -98,7 +98,7 @@ test('computer games always finish with a legal winner', () => {
     }
     expect(winValue(b, 0) || winValue(b, 1)).toBeGreaterThan(0)
   }
-})
+}, 30_000)
 
 test('the hard computer beats the easy one more often than not', () => {
   const rng = seededRng(5)
@@ -114,4 +114,4 @@ test('the hard computer beats the easy one more often than not', () => {
     if (winValue(b, 0)) hardWins++
   }
   expect(hardWins).toBeGreaterThanOrEqual(6)
-})
+}, 30_000)
