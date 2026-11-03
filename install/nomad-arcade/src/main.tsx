@@ -6,6 +6,7 @@ import './styles.css'
 import './styles-tables.css'
 import './styles-batch4.css'
 import './styles-cards.css'
+import './styles-board.css'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
