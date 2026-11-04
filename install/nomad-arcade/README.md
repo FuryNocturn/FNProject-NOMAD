@@ -36,6 +36,11 @@ Games:
   generator pulls the crates back from the goals), the sliding 15 puzzle
   (3×3 to 5×5), calcudoku (KenKen-style cages, 4×4 to 6×6, one solution)
   and pipes (turn the pieces until every one is connected).
+- Action, on a canvas at 60 fps (keyboard and touch, pauses when the tab is
+  hidden), with our own names and art: Paddle Duel (against the computer),
+  Orbital Defence (a fleet that sweeps and descends, shields, waves), Bubbles
+  (match three, hanging bubbles fall) and Gem Maze (generated mazes, guards
+  that chase you).
 - Brick Game: the handheld classic (Tetris, Breakout, racing, snake, tanks),
   vendored from [Retro-Brick-Game](https://github.com/Nabeelshar/Retro-Brick-Game)
   (MIT) and served at `/brick/`. See `vendor/brick-game/NOMAD.md`.

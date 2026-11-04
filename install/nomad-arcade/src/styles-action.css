@@ -1,0 +1,37 @@
+/* Action games on a canvas: paddle duel, orbital defence, bubbles, gem maze. */
+
+.act-wrap {
+  position: relative;
+  /* Fit the window height too, so the whole board shows without scrolling. */
+  width: min(400px, 100%, calc((100vh - 200px) * 2 / 3));
+  min-width: 260px;
+  margin: 0 auto;
+}
+
+.act-wrap.square { width: min(480px, 100%, calc(100vh - 260px)); }
+
+.act-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2 / 3;
+  border-radius: 12px;
+  touch-action: none;
+  user-select: none;
+}
+
+.act-canvas.square { aspect-ratio: 1; }
+
+.act-overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 12px;
+  background: #0008;
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+}

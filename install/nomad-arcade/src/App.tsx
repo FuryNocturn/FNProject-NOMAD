@@ -39,6 +39,10 @@ import Sokoban from './games/sokoban/Sokoban'
 import Slide from './games/slide/Slide'
 import Calcudoku from './games/calcudoku/Calcudoku'
 import Pipes from './games/pipes/Pipes'
+import Paddle from './games/paddle/Paddle'
+import Invaders from './games/invaders/Invaders'
+import Bubbles from './games/bubbles/Bubbles'
+import Maze from './games/maze/Maze'
 
 const GAMES = [
   { id: 'tictactoe', icon: '⭕', Component: TicTacToe },
@@ -80,6 +84,10 @@ const GAMES = [
   { id: 'slide', icon: '🔟', Component: Slide },
   { id: 'calcudoku', icon: '➗', Component: Calcudoku },
   { id: 'pipes', icon: '🚰', Component: Pipes },
+  { id: 'paddle', icon: '🏓', Component: Paddle },
+  { id: 'invaders', icon: '👾', Component: Invaders },
+  { id: 'bubbles', icon: '🔵', Component: Bubbles },
+  { id: 'maze', icon: '💎', Component: Maze },
 ] as const
 
 /** Games built separately and served next to Arcade (see vendor/). */

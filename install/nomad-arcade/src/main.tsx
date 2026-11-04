@@ -8,6 +8,7 @@ import './styles-batch4.css'
 import './styles-cards.css'
 import './styles-board.css'
 import './styles-puzzles.css'
+import './styles-action.css'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
