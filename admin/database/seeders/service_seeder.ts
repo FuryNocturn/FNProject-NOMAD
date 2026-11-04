@@ -594,11 +594,9 @@ export default class ServiceSeeder extends BaseSeeder {
       display_order: 40,
       description: 'Offline single-player games: tic-tac-toe, connect four, sudoku, minesweeper and more',
       icon: 'IconDeviceGamepad2',
-      // shortcut: the image is built locally from install/nomad-arcade (docker build -t
-      // nomad-arcade:0.1.0 install/nomad-arcade); the installer uses a local image when
-      // present. A fresh machine needs that build first, until the image is published to a registry.
-      container_image: 'nomad-arcade:0.1.0',
-      source_repo: 'https://github.com/FuryNocturn/FNProject-NOMAD/tree/main/install/nomad-arcade',
+      // Built and published by github.com/FuryNocturn/FNProject-NOMAD-Arcade.
+      container_image: 'ghcr.io/furynocturn/nomad-arcade:0.2.2',
+      source_repo: 'https://github.com/FuryNocturn/FNProject-NOMAD-Arcade',
       container_command: null,
       container_config: JSON.stringify({
         HostConfig: {
@@ -623,10 +621,9 @@ export default class ServiceSeeder extends BaseSeeder {
       description:
         'Creative and office tools in the browser: photo editing, vectors, documents, spreadsheets, slides, PDF, video, audio and CAD',
       icon: 'IconPalette',
-      // shortcut: built locally from install/nomad-crafts (docker build -t nomad-crafts:0.1.0
-      // install/nomad-crafts), which downloads the pinned release zips and checks their sha256.
-      // A fresh machine needs that build first, until the image is published to a registry.
-      container_image: 'nomad-crafts:0.1.0',
+      // Built by github.com/FuryNocturn/FNProject-NOMAD-APP (nomad-crafts), which downloads
+      // storytold's pinned release zips and checks their sha256.
+      container_image: 'ghcr.io/furynocturn/nomad-crafts:0.1.0',
       source_repo: 'https://github.com/storytold',
       container_command: null,
       container_config: JSON.stringify({
@@ -733,10 +730,9 @@ export default class ServiceSeeder extends BaseSeeder {
       description:
         'Wi-Fi monitor: see the networks and devices around you and audit your own network (Linux, monitor-mode adapter)',
       icon: 'IconWifi',
-      // shortcut: built locally from install/nomad-kismet (docker build -t nomad-kismet:0.1.0
-      // install/nomad-kismet) from Kismet's official Debian repository. A fresh machine needs
-      // that build first, until the image is published to a registry.
-      container_image: 'nomad-kismet:0.1.0',
+      // Built by github.com/FuryNocturn/FNProject-NOMAD-APP (nomad-kismet) from Kismet's
+      // official Debian repository; amd64 only.
+      container_image: 'ghcr.io/furynocturn/nomad-kismet:0.1.0',
       source_repo: 'https://github.com/kismetwireless/kismet',
       container_command: null,
       container_config: JSON.stringify({
