@@ -28,6 +28,10 @@ Games:
   arrastre, tute; best of 3 hands), chinchón (2-4 players, classic or with two
   jokers) and mus (partnerships, 8 or 4 kings, envites and órdago, partner's
   signals).
+- Classic board games against the computer: backgammon (full rules, gammons,
+  no doubling cube), gomoku (five in a row on 15×15), Go 9×9 (area scoring,
+  Monte Carlo opponent; you check the dead stones at the end) and Mastermind
+  (three code sizes).
 - Brick Game: the handheld classic (Tetris, Breakout, racing, snake, tanks),
   vendored from [Retro-Brick-Game](https://github.com/Nabeelshar/Retro-Brick-Game)
   (MIT) and served at `/brick/`. See `vendor/brick-game/NOMAD.md`.

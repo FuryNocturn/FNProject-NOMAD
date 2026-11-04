@@ -31,6 +31,10 @@ import Brisca from './games/brisca/Brisca'
 import Tute from './games/tute/Tute'
 import Chinchon from './games/chinchon/Chinchon'
 import Mus from './games/mus/Mus'
+import Backgammon from './games/backgammon/Backgammon'
+import Gomoku from './games/gomoku/Gomoku'
+import Go from './games/go/Go'
+import Mastermind from './games/mastermind/Mastermind'
 
 const GAMES = [
   { id: 'tictactoe', icon: '⭕', Component: TicTacToe },
@@ -64,6 +68,10 @@ const GAMES = [
   { id: 'tute', icon: '👑', Component: Tute },
   { id: 'chinchon', icon: '🏆', Component: Chinchon },
   { id: 'mus', icon: '🗡️', Component: Mus },
+  { id: 'backgammon', icon: '🎯', Component: Backgammon },
+  { id: 'gomoku', icon: '✖️', Component: Gomoku },
+  { id: 'go', icon: '🔘', Component: Go },
+  { id: 'mastermind', icon: '🟣', Component: Mastermind },
 ] as const
 
 /** Games built separately and served next to Arcade (see vendor/). */

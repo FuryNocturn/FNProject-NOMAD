@@ -145,3 +145,63 @@ export function PlayingCard({ card, hidden, held, onClick }: {
     </Tag>
   )
 }
+
+/**
+ * A board of lines with stones on the intersections (Go, gomoku). `stones[i]`
+ * is 0, 1 (black) or 2 (white); `marks` draws small squares (dead stones, territory).
+ */
+export function StoneBoard({ size, stones, onPlay, playable, last, highlight, faded, marks, label, stars }: {
+  size: number
+  stones: number[]
+  onPlay?: (i: number) => void
+  playable?: (i: number) => boolean
+  last?: number | null
+  highlight?: number[]
+  faded?: Set<number>
+  marks?: (0 | 1 | 2)[]
+  label: (i: number) => string
+  stars: number[]
+}) {
+  const cell = 10
+  const pad = 7
+  const span = (size - 1) * cell
+  const xy = (i: number) => [pad + (i % size) * cell, pad + Math.floor(i / size) * cell]
+  return (
+    <svg className="stone-board" viewBox={`0 0 ${span + 2 * pad} ${span + 2 * pad}`} role="grid">
+      <rect width={span + 2 * pad} height={span + 2 * pad} rx="3" className="sb-wood" />
+      {Array.from({ length: size }, (_, k) => (
+        <g key={k} className="sb-line">
+          <line x1={pad} y1={pad + k * cell} x2={pad + span} y2={pad + k * cell} />
+          <line x1={pad + k * cell} y1={pad} x2={pad + k * cell} y2={pad + span} />
+        </g>
+      ))}
+      {stars.map((i) => {
+        const [x, y] = xy(i)
+        return <circle key={i} cx={x} cy={y} r="1.2" className="sb-star" />
+      })}
+      {stones.map((v, i) => {
+        const [x, y] = xy(i)
+        const can = !v && !!onPlay && (!playable || playable(i))
+        return (
+          <g key={i}>
+            {v ? <circle cx={x} cy={y} r="4.6" className={`sb-stone s${v} ${highlight?.includes(i) ? 'win' : ''} ${faded?.has(i) ? 'faded' : ''}`} /> : null}
+            {last === i && v ? <circle cx={x} cy={y} r="1.6" className={`sb-last s${v}`} /> : null}
+            {marks?.[i] ? <rect x={x - 2} y={y - 2} width="4" height="4" className={`sb-mark s${marks[i]}`} /> : null}
+            {(can || (onPlay && marks)) && (
+              <rect
+                x={x - cell / 2}
+                y={y - cell / 2}
+                width={cell}
+                height={cell}
+                className={`sb-hit ${can ? 'can' : ''}`}
+                role="button"
+                aria-label={label(i)}
+                onClick={() => onPlay!(i)}
+              />
+            )}
+          </g>
+        )
+      })}
+    </svg>
+  )
+}
