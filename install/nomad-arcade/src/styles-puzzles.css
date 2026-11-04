@@ -1,0 +1,163 @@
+/* Puzzles: Sokoban, sliding puzzle, calcudoku, pipes. */
+
+/* ── Sokoban ──────────────────────────────────────── */
+
+.sk-board {
+  display: grid;
+  width: min(480px, 100%);
+  margin: 0 auto;
+  border-radius: 8px;
+  overflow: hidden;
+  touch-action: none;
+  user-select: none;
+}
+
+.sk-cell { position: relative; }
+.sk-cell.wall { background: #5d4a3a; }
+.sk-cell.floor { background: #e9e1cf; }
+.sk-cell.goal::after {
+  content: '';
+  position: absolute;
+  inset: 34%;
+  border-radius: 50%;
+  background: #d84315;
+}
+.sk-cell.box::before {
+  content: '';
+  position: absolute;
+  inset: 8%;
+  border-radius: 4px;
+  background: #b8862f;
+  border: 3px solid #7a5518;
+  z-index: 1;
+}
+.sk-cell.box.goal::before { background: #6aa84f; border-color: #3d6b2a; }
+.sk-cell.player::before {
+  content: '';
+  position: absolute;
+  inset: 16%;
+  border-radius: 50%;
+  background: #1e5fa8;
+  box-shadow: inset 0 -3px 0 #0004;
+  z-index: 1;
+}
+.sk-board.done { outline: 4px solid #6aa84f; }
+
+.sk-pad {
+  display: grid;
+  grid-template-columns: repeat(3, 56px);
+  grid-template-areas: '. up .' 'left down right';
+  gap: 6px;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.sk-pad button {
+  height: 48px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 1.1rem;
+}
+
+.sk-up { grid-area: up; }
+.sk-left { grid-area: left; }
+.sk-down { grid-area: down; }
+.sk-right { grid-area: right; }
+
+/* ── Sliding puzzle ───────────────────────────────── */
+
+.sl-board {
+  display: grid;
+  gap: 6px;
+  width: min(420px, 100%);
+  aspect-ratio: 1;
+  margin: 0 auto;
+  padding: 6px;
+  border-radius: 12px;
+  background: var(--surface-2);
+}
+
+.sl-tile {
+  border: 0;
+  border-radius: 8px;
+  background: var(--accent);
+  color: var(--accent-text);
+  font-size: clamp(1rem, 6vw, 1.8rem);
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: inset 0 -4px 0 #0003;
+}
+
+.sl-tile.home { background: #6aa84f; color: #fff; }
+.sl-board.done .sl-tile { background: #6aa84f; color: #fff; }
+
+/* ── Calcudoku ────────────────────────────────────── */
+
+.cd-board {
+  display: grid;
+  width: min(460px, 100%);
+  aspect-ratio: 1;
+  margin: 0 auto;
+  background: var(--surface);
+}
+
+.cd-cell {
+  position: relative;
+  padding: 0;
+  border: 0;
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.cd-cell.t-thick { border-top: 3px solid var(--text); }
+.cd-cell.l-thick { border-left: 3px solid var(--text); }
+.cd-cell.b-thick { border-bottom: 3px solid var(--text); }
+.cd-cell.r-thick { border-right: 3px solid var(--text); }
+.cd-cell.selected { background: var(--accent-soft); }
+.cd-cell.bad .cd-value { color: #c62828; }
+.cd-board.solved .cd-cell { background: #e3f1dc; color: #2b2a20; }
+
+.cd-clue {
+  position: absolute;
+  top: 2px;
+  left: 4px;
+  font-size: clamp(0.6rem, 2.6vw, 0.85rem);
+  font-weight: 700;
+}
+
+.cd-value { font-size: clamp(1.1rem, 6vw, 1.9rem); font-weight: 700; }
+
+/* ── Pipes ────────────────────────────────────────── */
+
+.pp-board {
+  display: grid;
+  gap: 0;
+  width: min(480px, 100%);
+  aspect-ratio: 1;
+  margin: 0 auto;
+  padding: 4px;
+  border-radius: 10px;
+  background: #33402a;
+}
+
+.pp-tile {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: #4d5c40;
+  box-shadow: inset 0 0 0 1px #3c4832;
+  cursor: pointer;
+}
+
+.pp-tile svg { display: block; width: 100%; height: 100%; }
+.pp-tile path { stroke: #9aa58c; stroke-width: 18; stroke-linecap: butt; fill: none; }
+.pp-tile circle, .pp-tile rect { fill: #9aa58c; }
+.pp-tile.wet path { stroke: #4fc3f7; }
+.pp-tile.wet circle { fill: #4fc3f7; }
+.pp-tile.source rect { fill: #0288d1; }
+.pp-board.done .pp-tile { background: #4e6b3a; }
