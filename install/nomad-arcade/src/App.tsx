@@ -35,6 +35,10 @@ import Backgammon from './games/backgammon/Backgammon'
 import Gomoku from './games/gomoku/Gomoku'
 import Go from './games/go/Go'
 import Mastermind from './games/mastermind/Mastermind'
+import Sokoban from './games/sokoban/Sokoban'
+import Slide from './games/slide/Slide'
+import Calcudoku from './games/calcudoku/Calcudoku'
+import Pipes from './games/pipes/Pipes'
 
 const GAMES = [
   { id: 'tictactoe', icon: '⭕', Component: TicTacToe },
@@ -72,6 +76,10 @@ const GAMES = [
   { id: 'gomoku', icon: '✖️', Component: Gomoku },
   { id: 'go', icon: '🔘', Component: Go },
   { id: 'mastermind', icon: '🟣', Component: Mastermind },
+  { id: 'sokoban', icon: '📦', Component: Sokoban },
+  { id: 'slide', icon: '🔟', Component: Slide },
+  { id: 'calcudoku', icon: '➗', Component: Calcudoku },
+  { id: 'pipes', icon: '🚰', Component: Pipes },
 ] as const
 
 /** Games built separately and served next to Arcade (see vendor/). */
