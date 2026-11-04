@@ -1,5 +1,11 @@
 import { createContext, type ReactNode, useContext } from 'react'
 import { usePersistentState } from './lib/storage'
+import de from './locales/de'
+import fr from './locales/fr'
+import ja from './locales/ja'
+import pt from './locales/pt'
+import ru from './locales/ru'
+import zh from './locales/zh'
 
 const es = {
   'app.title': 'Arcade',
@@ -523,7 +529,7 @@ const es = {
   'brick.blurb': 'La maquinita: Tetris, Breakout, carreras, serpiente y tanques.',
 }
 
-type Key = keyof typeof es
+export type Key = keyof typeof es
 
 const en: Record<Key, string> = {
   'app.title': 'Arcade',
@@ -1047,13 +1053,32 @@ const en: Record<Key, string> = {
   'brick.blurb': 'The handheld classic: Tetris, Breakout, racing, snake and tanks.',
 }
 
-export const LANGUAGES = { es: 'Español', en: 'English' } as const
+export const LANGUAGES = {
+  es: 'Español',
+  en: 'English',
+  de: 'Deutsch',
+  fr: 'Français',
+  pt: 'Português',
+  ru: 'Русский',
+  zh: '中文',
+  ja: '日本語',
+} as const
 export type Lang = keyof typeof LANGUAGES
-const DICTS: Record<Lang, Record<Key, string>> = { es, en }
+export const DICTS: Record<Lang, Record<Key, string>> = { es, en, de, fr, pt, ru, zh, ja }
+
+/**
+ * Word games (word search, hangman, Word Tiles) only have Spanish and English
+ * word lists: Spanish for Spanish, English for every other language.
+ */
+export type WordLang = 'es' | 'en'
+export const wordLang = (lang: Lang): WordLang => (lang === 'es' ? 'es' : 'en')
 
 export type T = (key: Key, vars?: Record<string, string | number>) => string
 
-const detect = (): Lang => (navigator.language?.toLowerCase().startsWith('es') ? 'es' : 'en')
+const detect = (): Lang => {
+  const code = navigator.language?.toLowerCase().slice(0, 2)
+  return code && code in LANGUAGES ? (code as Lang) : 'en'
+}
 
 const I18nContext = createContext<{ lang: Lang; setLang: (l: Lang) => void; t: T } | null>(null)
 

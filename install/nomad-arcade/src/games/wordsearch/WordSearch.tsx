@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import { GameShell, Segmented } from '../../components'
-import { type Lang, useI18n } from '../../i18n'
+import { type WordLang, useI18n, wordLang } from '../../i18n'
 import { usePersistentState } from '../../lib/storage'
 import { type Difficulty, type Puzzle, findPlacement, generate, lineBetween } from './logic'
 import { ALPHABET, THEMES, THEME_LABELS } from './words'
 
-type State = { lang: Lang; theme: string; difficulty: Difficulty; puzzle: Puzzle; found: string[] }
+type State = { lang: WordLang; theme: string; difficulty: Difficulty; puzzle: Puzzle; found: string[] }
 
-function fresh(lang: Lang, theme: string, difficulty: Difficulty): State {
+function fresh(lang: WordLang, theme: string, difficulty: Difficulty): State {
   const themes = THEMES[lang] as Record<string, readonly string[]>
   const id = theme in themes ? theme : Object.keys(themes)[0]
   return { lang, theme: id, difficulty, puzzle: generate(themes[id], difficulty, ALPHABET[lang], Math.random), found: [] }
@@ -17,7 +17,8 @@ function fresh(lang: Lang, theme: string, difficulty: Difficulty): State {
 const HUES = [40, 140, 200, 280, 330, 90, 20, 250]
 
 export default function WordSearch() {
-  const { t, lang } = useI18n()
+  const { t, lang: uiLang } = useI18n()
+  const lang = wordLang(uiLang)
   const [st, setSt] = usePersistentState<State>('wordsearch', () => fresh(lang, '', 'easy'))
   const [start, setStart] = useState<number | null>(null)
   const { puzzle, found } = st

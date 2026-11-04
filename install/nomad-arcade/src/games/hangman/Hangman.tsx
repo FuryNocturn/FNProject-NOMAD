@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { GameShell, Scoreboard, emptyTally, type Tally } from '../../components'
-import { useI18n } from '../../i18n'
+import { type WordLang, useI18n, wordLang } from '../../i18n'
 import { randomInt } from '../../lib/rng'
 import { usePersistentState } from '../../lib/storage'
 import { ALPHABET, THEMES, THEME_LABELS } from '../wordsearch/words'
@@ -8,7 +8,7 @@ import { MAX_MISSES, type State, guess, masked, misses, newGame, status } from '
 
 type Saved = { game: State; tally: Tally; recorded: boolean }
 
-function pickWord(lang: 'es' | 'en'): State {
+function pickWord(lang: WordLang): State {
   const themes = THEMES[lang] as Record<string, readonly string[]>
   const ids = Object.keys(themes)
   const theme = ids[randomInt(Math.random, ids.length)]
@@ -40,7 +40,8 @@ function Gallows({ n }: { n: number }) {
 }
 
 export default function Hangman() {
-  const { t, lang } = useI18n()
+  const { t, lang: uiLang } = useI18n()
+  const lang = wordLang(uiLang)
   const [st, setSt] = usePersistentState<Saved>('hangman', () => ({ game: pickWord(lang), tally: emptyTally(), recorded: false }))
   const g = st.game
   const s = status(g)
