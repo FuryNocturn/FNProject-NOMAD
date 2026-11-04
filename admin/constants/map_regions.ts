@@ -21,6 +21,18 @@ export interface PmtilesExtractArgOptions {
   overfetch?: number
 }
 
+/**
+ * Last "fetching chunks NN%" in a piece of `pmtiles extract` stderr, or null.
+ * The CLI's own progress works on any filesystem; the output file's allocated
+ * size does not (on a Windows drive mounted into Docker every byte counts as
+ * allocated from the start, so the old estimate jumped straight to 99%).
+ */
+export function parsePmtilesPercent(text: string): number | null {
+  const all = [...text.matchAll(/fetching chunks\s+(\d{1,3})%/g)]
+  if (!all.length) return null
+  return Math.min(100, Number(all[all.length - 1][1]))
+}
+
 export function buildPmtilesExtractArgs(opts: PmtilesExtractArgOptions): string[] {
   const args = ['extract', opts.sourceUrl, opts.outputFilepath]
   if (opts.regionFilepath) args.push(`--region=${opts.regionFilepath}`)
