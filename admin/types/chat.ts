@@ -34,6 +34,8 @@ export interface ChatMessage {
   sources?: ChatSource[]
   // Generation stopped at the length limit, so the answer ends mid-thought.
   truncated?: boolean
+  // The user pressed Stop while this answer was still streaming.
+  stopped?: boolean
 }
 
 export interface ChatImageAttachment {

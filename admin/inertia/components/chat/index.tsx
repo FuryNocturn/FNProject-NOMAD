@@ -55,6 +55,19 @@ export default function Chat({
 
   useEffect(() => () => abortCurrentStream(), [abortCurrentStream])
 
+  // Stop button (#1539). Aborting the fetch closes the connection, and the
+  // server's close handler aborts the generation. Keep whatever was
+  // already streamed and mark it as stopped.
+  const handleStopGenerating = useCallback(() => {
+    abortActiveStream(streamAbortRef)
+    setIsStreamingResponse(false)
+    setMessages((prev) =>
+      prev.map((m) => (m.isStreaming ? { ...m, isStreaming: false, stopped: true } : m))
+    )
+  }, [])
+
+  const isGenerating = isStreamingResponse || messages.some((m) => m.isStreaming)
+
   useEffect(() => {
     if (!enabled) {
       abortCurrentStream()
@@ -759,6 +772,8 @@ export default function Chat({
             onSendMessage={handleSendMessage}
             visionCapability={selectedModelVisionCapability}
             isLoading={isStreamingResponse || isCreatingSession || chatMutation.isPending}
+            isGenerating={isGenerating}
+            onStopGenerating={streamingEnabled !== false ? handleStopGenerating : undefined}
             chatSuggestions={chatSuggestions}
             chatSuggestionsEnabled={suggestionsEnabled}
             chatSuggestionsLoading={chatSuggestionsLoading}
