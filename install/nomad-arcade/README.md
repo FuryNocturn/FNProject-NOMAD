@@ -45,7 +45,10 @@ Games:
   vendored from [Retro-Brick-Game](https://github.com/Nabeelshar/Retro-Brick-Game)
   (MIT) and served at `/brick/`. See `vendor/brick-game/NOMAD.md`.
 
-Spanish and English.
+Interface in Spanish, English, German, French, Portuguese, Russian, Chinese
+and Japanese (`src/locales/`; `src/i18n.test.ts` checks every language has
+the same keys and placeholders). The word games only have Spanish and English
+word lists: Spanish in Spanish, English in every other language.
 
 ## Third-party content
 

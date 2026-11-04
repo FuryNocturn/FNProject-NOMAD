@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { GameShell, Segmented } from '../../components'
-import { useI18n } from '../../i18n'
+import { useI18n, wordLang } from '../../i18n'
 import { usePersistentState } from '../../lib/storage'
 import {
   CENTER,
@@ -35,7 +35,7 @@ type Saved = { game: State; difficulty: Difficulty; won: number; played: number;
 
 export default function Words() {
   const { t, lang: uiLang } = useI18n()
-  const [st, setSt] = usePersistentState<Saved>('words', () => ({ game: newGame(uiLang, Math.random), difficulty: 'medium', won: 0, played: 0, recorded: false }))
+  const [st, setSt] = usePersistentState<Saved>('words', () => ({ game: newGame(wordLang(uiLang), Math.random), difficulty: 'medium', won: 0, played: 0, recorded: false }))
   const g = st.game
   const [dict, setDict] = useState<Dictionary | null>(null)
   const [failed, setFailed] = useState(false)
