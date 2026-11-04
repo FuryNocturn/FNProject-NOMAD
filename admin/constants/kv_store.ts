@@ -15,6 +15,7 @@ export const SETTINGS_KEYS: KVStoreKey[] = [
     'ai.autoThinking',
     'ai.tasksModel',
     'ai.contextWindow',
+    'ai.remoteOllamaMemoryGB',
     'ai.keepAlive',
     'ai.responseStyle',
     'ai.amdHsaOverride',
