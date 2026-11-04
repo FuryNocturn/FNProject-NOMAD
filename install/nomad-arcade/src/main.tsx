@@ -5,6 +5,7 @@ import { I18nProvider } from './i18n'
 import './styles.css'
 import './styles-tables.css'
 import './styles-batch4.css'
+import './styles-cards.css'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

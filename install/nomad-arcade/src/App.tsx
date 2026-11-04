@@ -27,6 +27,10 @@ import Hangman from './games/hangman/Hangman'
 import Battleship from './games/battleship/Battleship'
 import Nonogram from './games/nonogram/Nonogram'
 import Simon from './games/simon/Simon'
+import Brisca from './games/brisca/Brisca'
+import Tute from './games/tute/Tute'
+import Chinchon from './games/chinchon/Chinchon'
+import Mus from './games/mus/Mus'
 
 const GAMES = [
   { id: 'tictactoe', icon: '⭕', Component: TicTacToe },
@@ -56,6 +60,10 @@ const GAMES = [
   { id: 'battleship', icon: '🚢', Component: Battleship },
   { id: 'nonogram', icon: '🧩', Component: Nonogram },
   { id: 'simon', icon: '🔴', Component: Simon },
+  { id: 'brisca', icon: '🎴', Component: Brisca },
+  { id: 'tute', icon: '👑', Component: Tute },
+  { id: 'chinchon', icon: '🏆', Component: Chinchon },
+  { id: 'mus', icon: '🗡️', Component: Mus },
 ] as const
 
 /** Games built separately and served next to Arcade (see vendor/). */
