@@ -6,7 +6,7 @@ import { basename, dirname, join } from 'path'
 import { QueueService } from '#services/queue_service'
 import logger from '@adonisjs/core/services/logger'
 import { DownloadProgressData } from '../../types/downloads.js'
-import { PMTILES_BINARY_PATH, buildPmtilesExtractArgs } from '../../constants/map_regions.js'
+import { PMTILES_BINARY_PATH, buildPmtilesExtractArgs, parsePmtilesPercent } from '../../constants/map_regions.js'
 import { deleteFileIfExists, getAllocatedBytes } from '../utils/fs.js'
 import { isSafeOldContentPath } from '../utils/superseded_resource.js'
 import { jobTargetPaths, shouldPruneOrphanPmtiles } from '../utils/download_targets.js'
@@ -93,6 +93,9 @@ export class RunExtractPmtilesJob {
     let userCancelled = false
     let proc: ChildProcess | null = null
     let lastReportedBytes = -1
+    // Progress printed by pmtiles itself; preferred over the file size when present.
+    let cliPercent: number | null = null
+    let lastReportedPercent: number | null = null
 
     // One 2s tick polls the Redis cancel signal and reads file-size for progress. pmtiles
     // writes incrementally but rewrites directories near the end so progress isn't strictly
@@ -114,16 +117,23 @@ export class RunExtractPmtilesJob {
       try {
         const fileStat = await stat(stagingPath)
         const downloadedBytes = getAllocatedBytes(fileStat)
-        if (downloadedBytes === lastReportedBytes) return
+        // On a Windows-mounted drive the size never changes, so the CLI percent counts too.
+        if (downloadedBytes === lastReportedBytes && cliPercent === lastReportedPercent) return
         lastReportedBytes = downloadedBytes
+        lastReportedPercent = cliPercent
 
         const totalBytes = estimatedBytes ?? 0
         const percent =
-          totalBytes > 0 ? Math.min(99, Math.floor((downloadedBytes / totalBytes) * 100)) : 0
+          cliPercent !== null
+            ? Math.min(99, cliPercent)
+            : totalBytes > 0
+              ? Math.min(99, Math.floor((downloadedBytes / totalBytes) * 100))
+              : 0
 
         await this.safeUpdateProgress(job, {
           percent,
-          downloadedBytes,
+          // With the CLI percent, report bytes in step with it rather than a file size that may be wrong.
+          downloadedBytes: cliPercent !== null && totalBytes > 0 ? Math.round((totalBytes * percent) / 100) : downloadedBytes,
           totalBytes,
           lastProgressTime: Date.now(),
         } as DownloadProgressData)
@@ -144,12 +154,14 @@ export class RunExtractPmtilesJob {
       proc = spawn(PMTILES_BINARY_PATH, args, { stdio: ['ignore', 'pipe', 'pipe'] })
       RunExtractPmtilesJob.childProcesses.set(job.id!, proc)
 
-      proc.stdout?.on('data', (chunk) => {
-        logger.debug(`[RunExtractPmtilesJob:${job.id}] ${chunk.toString().trimEnd()}`)
-      })
-      proc.stderr?.on('data', (chunk) => {
-        logger.debug(`[RunExtractPmtilesJob:${job.id}] ${chunk.toString().trimEnd()}`)
-      })
+      // The progress bar goes to stdout when not on a terminal (stderr on one): read both.
+      const onOutput = (chunk: Buffer) => {
+        const text = chunk.toString()
+        cliPercent = parsePmtilesPercent(text) ?? cliPercent
+        logger.debug(`[RunExtractPmtilesJob:${job.id}] ${text.trimEnd()}`)
+      }
+      proc.stdout?.on('data', onOutput)
+      proc.stderr?.on('data', onOutput)
 
       const exitCode: number = await new Promise((resolve, reject) => {
         proc!.on('close', (code) => resolve(code ?? -1))
