@@ -207,7 +207,30 @@ export class RunDownloadJob {
                   storageBaseDir: storageRoot,
                 })
                 if (decision.delete && decision.path) {
-                  if (isSafeOldContentPath(decision.path, resourceMetadata.resource_id, storageRoot)) {
+                  let previousIds: string[] = []
+                  if (filetype === 'zim') {
+                    try {
+                      const { default: CollectionManifest } = await import('#models/collection_manifest')
+                      const { buildPreviousIdMap, previousIdsFor } = await import(
+                        '../utils/resource_aliases.js'
+                      )
+                      const manifest = await CollectionManifest.find('zim_categories')
+                      previousIds = previousIdsFor(
+                        resourceMetadata.resource_id,
+                        buildPreviousIdMap(manifest?.spec_data as any)
+                      )
+                    } catch (aliasError) {
+                      console.warn('[RunDownloadJob] Could not read former ids:', aliasError)
+                    }
+                  }
+                  if (
+                    isSafeOldContentPath(
+                      decision.path,
+                      resourceMetadata.resource_id,
+                      storageRoot,
+                      previousIds
+                    )
+                  ) {
                     try {
                       await deleteFileIfExists(decision.path)
                       console.log(`[RunDownloadJob] Deleted old file: ${decision.path}`)
