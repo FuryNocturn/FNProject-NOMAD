@@ -648,7 +648,17 @@ export class RagService {
       }
       // Render and OCR one page at a time so only one page image is in memory,
       // reusing a single tesseract worker for the whole document.
-      const convert = fromBuffer(fileBuffer, { quality: 50, density: 200, format: 'png' })
+      const convert = fromBuffer(fileBuffer, {
+        quality: 50,
+        density: 200,
+        format: 'png',
+        // pdf2pic resizes every page to width x height after rendering, and its defaults (768x512,
+        // aspect ratio ignored) squash a portrait page into a landscape thumbnail before OCR (#1566).
+        // Keep the page's aspect ratio and the 200 dpi render: 1700 px is 8.5 in at 200 dpi.
+        width: 1700,
+        height: 1700,
+        preserveAspectRatio: true,
+      })
       const worker = await createWorker('eng')
       extractedText = ''
       try {
