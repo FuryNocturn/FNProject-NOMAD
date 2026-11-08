@@ -71,5 +71,11 @@
   },
   "nomad_almanac": {
     "description": "Lever du soleil et de la lune, déclinaison magnétique et prédictions de marée pour tout lieu sur Terre, hors ligne"
+  },
+  "nomad_radio": {
+    "description": "Référence de fréquences, préfixes d’indicatifs et entraînement à l’examen de radioamateur, hors ligne"
+  },
+  "nomad_food": {
+    "description": "Table de composition des aliments, planificateur de rations et conserves maison testées selon l’USDA, hors ligne"
   }
 }

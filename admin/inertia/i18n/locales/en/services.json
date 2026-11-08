@@ -71,5 +71,11 @@
   },
   "nomad_almanac": {
     "description": "Sunrise, moonrise, compass declination and tide predictions for any place on Earth, offline"
+  },
+  "nomad_radio": {
+    "description": "Frequency reference, callsign prefix lookup and amateur radio license exam practice, offline"
+  },
+  "nomad_food": {
+    "description": "Food composition table, ration planner and tested home-canning guidance from USDA data, offline"
   }
 }

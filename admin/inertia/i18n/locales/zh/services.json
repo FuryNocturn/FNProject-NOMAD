@@ -71,5 +71,11 @@
   },
   "nomad_almanac": {
     "description": "地球上任意地点的日出月出、磁偏角和潮汐预报，离线可用"
+  },
+  "nomad_radio": {
+    "description": "频率参考、呼号前缀查询和业余无线电执照考试练习，离线可用"
+  },
+  "nomad_food": {
+    "description": "食物成分表、口粮计划和基于 USDA 数据的经过验证的家庭罐藏指南，离线可用"
   }
 }

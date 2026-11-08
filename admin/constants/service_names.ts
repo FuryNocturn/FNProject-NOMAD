@@ -25,4 +25,6 @@ export const SERVICE_NAMES = {
   OPENWEBRX: 'nomad_openwebrx',
   KISMET: 'nomad_kismet',
   ALMANAC: 'nomad_almanac',
+  RADIO: 'nomad_radio',
+  FOOD: 'nomad_food',
 }

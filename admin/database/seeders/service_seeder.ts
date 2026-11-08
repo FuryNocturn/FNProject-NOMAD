@@ -783,6 +783,60 @@ export default class ServiceSeeder extends BaseSeeder {
       category: 'utility',
       depends_on: null,
     },
+    {
+      service_name: SERVICE_NAMES.RADIO,
+      friendly_name: 'Radio Reference',
+      powered_by: 'NOMAD',
+      display_order: 46,
+      description: 'Frequency reference, callsign prefix lookup and amateur radio license exam practice, offline',
+      icon: 'IconAntenna',
+      // Built and published by github.com/FuryNocturn/FNProject-NOMAD-Radio. A static site:
+      // all data (band plans, prefixes, US NCVEC and German BNetzA question pools) is in the image.
+      container_image: 'ghcr.io/furynocturn/nomad-radio:0.1.0',
+      source_repo: 'https://github.com/FuryNocturn/FNProject-NOMAD-Radio',
+      container_command: null,
+      container_config: JSON.stringify({
+        HostConfig: {
+          RestartPolicy: { Name: 'unless-stopped' },
+          PortBindings: { '80/tcp': [{ HostPort: '8560' }] },
+        },
+        ExposedPorts: { '80/tcp': {} },
+      }),
+      ui_location: '8560',
+      installed: false,
+      installation_status: 'idle',
+      is_dependency_service: false,
+      is_custom: false,
+      category: 'utility',
+      depends_on: null,
+    },
+    {
+      service_name: SERVICE_NAMES.FOOD,
+      friendly_name: 'Food & Preserving',
+      powered_by: 'NOMAD',
+      display_order: 47,
+      description: 'Food composition table, ration planner and tested home-canning guidance from USDA data, offline',
+      icon: 'IconChefHat',
+      // Built and published by github.com/FuryNocturn/FNProject-NOMAD-Food. A static site:
+      // all data (USDA FoodData Central, USDA canning guide) is in the image.
+      container_image: 'ghcr.io/furynocturn/nomad-food:0.1.0',
+      source_repo: 'https://github.com/FuryNocturn/FNProject-NOMAD-Food',
+      container_command: null,
+      container_config: JSON.stringify({
+        HostConfig: {
+          RestartPolicy: { Name: 'unless-stopped' },
+          PortBindings: { '80/tcp': [{ HostPort: '8570' }] },
+        },
+        ExposedPorts: { '80/tcp': {} },
+      }),
+      ui_location: '8570',
+      installed: false,
+      installation_status: 'idle',
+      is_dependency_service: false,
+      is_custom: false,
+      category: 'utility',
+      depends_on: null,
+    },
   ]
 
   async run() {
