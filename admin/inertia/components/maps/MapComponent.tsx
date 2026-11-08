@@ -379,7 +379,6 @@ export default function MapComponent({
         .map((layer) => layer.id)
     )
     flyToLocationParams()
-    const layers = mapRef.current?.getMap().getStyle()?.layers ?? []
     const roles = [
       ...new Set(
         layers
