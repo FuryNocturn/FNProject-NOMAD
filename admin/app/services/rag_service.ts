@@ -14,6 +14,7 @@ import {
 } from '../utils/fs.js'
 import { PDFParse } from 'pdf-parse'
 import { createWorker } from 'tesseract.js'
+import { tesseractWorkerOptions } from '../utils/ocr_lang_data.js'
 import { fromBuffer } from 'pdf2pic'
 import JSZip from 'jszip'
 import * as cheerio from 'cheerio'
@@ -46,6 +47,7 @@ const EXCLUDE_EVAL_FILTER = {
 }
 import type { KbIngestStateValue } from '../../types/kb_ingest_state.js'
 import { ZIMExtractionService } from './zim_extraction_service.js'
+import { decidePdfOcr } from '../utils/pdf_ocr_decision.js'
 import { ZIM_BATCH_SIZE } from '../../constants/zim_extraction.js'
 import { hasMoreArticleBatches } from '../utils/zim_batch_decision.js'
 import { chunkPointId } from '../utils/point_id.js'
@@ -649,17 +651,36 @@ export class RagService {
     }
   }
 
+  /**
+   * Text layer of each page, index 0 = page 1, with no page separators: the
+   * default `getText()` joins pages with `-- 1 of 13 --` markers, which both
+   * leaked into the embedded text and defeated the OCR check (#1457).
+   */
+  private async extractPDFPages(filebuffer: Buffer): Promise<string[]> {
+    const parser = new PDFParse({ data: filebuffer })
+    try {
+      const data = await parser.getText()
+      return data.pages.map((page) => page.text)
+    } finally {
+      await parser.destroy()
+    }
+  }
+
   private async extractTXTText(filebuffer: Buffer): Promise<string> {
     return filebuffer.toString('utf-8')
   }
 
-  private async extractImageText(filebuffer: Buffer): Promise<string> {
-    const worker = await createWorker('eng')
+  private async extractImageText(
+    filebuffer: Buffer,
+    sharedWorker?: Awaited<ReturnType<typeof createWorker>>
+  ): Promise<string> {
+    // Bundled model, read from node_modules; no CDN download, no cache in cwd (#1457).
+    const worker = sharedWorker ?? (await createWorker('eng', 1, tesseractWorkerOptions()))
     try {
       const result = await worker.recognize(filebuffer)
       return result.data.text
     } finally {
-      await worker.terminate()
+      if (!sharedWorker) await worker.terminate()
     }
   }
 
@@ -669,19 +690,25 @@ export class RagService {
   }
 
   /**
-   * Will process the PDF and attempt to extract text.
-   * If the extracted text is minimal, it will fallback to OCR on each page.
+   * Extract a PDF's text, OCR'ing the pages that have no text layer.
+   *
+   * Pages are judged one by one (see `decidePdfOcr`): a scanned book is OCR'd
+   * in full, a text PDF is never rasterized, and a mix gets OCR only where
+   * needed. One tesseract worker serves the whole document. Returns each
+   * page's text, index 0 = page 1; uploads and the PDFs inside ZIMs (#1445)
+   * both read through here.
    */
-  private async processPDFFile(fileBuffer: Buffer): Promise<string> {
-    const { text, pages } = await this.extractPDFText(fileBuffer)
-    let extractedText = text
+  private async extractPDFPageTexts(fileBuffer: Buffer): Promise<string[]> {
+    const pages = await this.extractPDFPages(fileBuffer)
+    const plan = decidePdfOcr(pages)
 
-    // Check if there was no extracted text or it was very minimal
-    if (!extractedText || extractedText.trim().length < 100) {
-      logger.debug('[RAG] PDF text extraction minimal, attempting OCR on pages')
-      const pageCount = Math.min(pages, MAX_OCR_PAGES)
-      if (pages > MAX_OCR_PAGES) {
-        logger.warn(`[RAG] Scanned PDF has ${pages} pages; OCR limited to the first ${MAX_OCR_PAGES}`)
+    if (plan.ocrPages.length > 0) {
+      const ocrPages = plan.ocrPages.slice(0, MAX_OCR_PAGES)
+      logger.info(
+        `[RAG] PDF has ${plan.ocrPages.length} of ${pages.length} pages without a text layer, running OCR on them`
+      )
+      if (plan.ocrPages.length > MAX_OCR_PAGES) {
+        logger.warn(`[RAG] OCR limited to the first ${MAX_OCR_PAGES} pages without text`)
       }
       // Render and OCR one page at a time so only one page image is in memory,
       // reusing a single tesseract worker for the whole document.
@@ -696,22 +723,23 @@ export class RagService {
         height: 1700,
         preserveAspectRatio: true,
       })
-      const worker = await createWorker('eng')
-      extractedText = ''
+      const worker = await createWorker('eng', 1, tesseractWorkerOptions())
       try {
-        for (let page = 1; page <= pageCount; page++) {
-          const image = await convert(page, { responseType: 'buffer' })
-          if (!image.buffer) continue
+        for (const pageNumber of ocrPages) {
+          const image = await convert(pageNumber, { responseType: 'buffer' })
+          if (!image.buffer) {
+            logger.warn(`[RAG] PDF page ${pageNumber} could not be rasterized for OCR, skipping it`)
+            continue
+          }
           const preprocessedImg = await this.preprocessImage(image.buffer)
-          const result = await worker.recognize(preprocessedImg)
-          extractedText += result.data.text + '\n'
+          pages[pageNumber - 1] = await this.extractImageText(preprocessedImg, worker)
         }
       } finally {
         await worker.terminate()
       }
     }
 
-    return extractedText
+    return pages
   }
 
   /**
@@ -727,7 +755,7 @@ export class RagService {
     collection?: string,
     resumeAtDirent?: number
   ): Promise<ProcessZIMFileResponse> {
-    const zimExtractionService = new ZIMExtractionService()
+    const zimExtractionService = new ZIMExtractionService((pdf) => this.extractPDFPageTexts(pdf))
 
     // Process in batches to avoid lock timeout
     const startOffset = batchOffset || 0
@@ -1090,7 +1118,7 @@ export class RagService {
             extractedText = await this.processImageFile(fileBuffer!)
             break
           case 'pdf':
-            extractedText = await this.processPDFFile(fileBuffer!)
+            extractedText = (await this.extractPDFPageTexts(fileBuffer!)).join('\n\n')
             break
           case 'docx':
             extractedText = await this.processDocxFile(fileBuffer!)
