@@ -85,3 +85,9 @@ test('isSafeOldContentPath requires the storage root and the resource id prefix'
   assert.equal(isSafeOldContentPath(resolve('/etc/res_2026-01.zim'), 'res', ZIM), false)
   assert.equal(isSafeOldContentPath(join(ZIM, '..', 'res_x.zim'), 'res', ZIM), false)
 })
+
+test('isSafeOldContentPath accepts a renamed resource file under its former id only', () => {
+  assert.equal(isSafeOldContentPath(join(ZIM, 'old_2026-01.zim'), 'res', ZIM, ['old']), true)
+  assert.equal(isSafeOldContentPath(join(ZIM, 'old_2026-01.zim'), 'res', ZIM), false)
+  assert.equal(isSafeOldContentPath(resolve('/etc/old_2026-01.zim'), 'res', ZIM, ['old']), false)
+})

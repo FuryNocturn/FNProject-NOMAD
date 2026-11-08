@@ -8,7 +8,9 @@ import { useModals } from '~/context/ModalContext'
 import api from '~/lib/api'
 import type { GpuHealthStatus } from '../../types/system'
 
-const DISMISS_KEY = 'nomad:gpu-banner-dismissed'
+// Exported so the benchmark GPU pre-flight (#1083) can un-dismiss the banner
+// before sending the user to it for the fix.
+export const GPU_BANNER_DISMISS_KEY = 'nomad:gpu-banner-dismissed'
 const HSA_OVERRIDE_PATTERN = /^\d{1,2}\.\d{1,2}\.\d{1,2}$/
 
 /**
@@ -33,7 +35,7 @@ export default function GpuPassthroughAlert({
   const [reinstalling, setReinstalling] = useState(false)
   const [dismissed, setDismissed] = useState(() => {
     try {
-      return localStorage.getItem(DISMISS_KEY) === 'true'
+      return localStorage.getItem(GPU_BANNER_DISMISS_KEY) === 'true'
     } catch {
       return false
     }
@@ -47,7 +49,7 @@ export default function GpuPassthroughAlert({
   const handleDismiss = () => {
     setDismissed(true)
     try {
-      localStorage.setItem(DISMISS_KEY, 'true')
+      localStorage.setItem(GPU_BANNER_DISMISS_KEY, 'true')
     } catch {}
   }
 
@@ -63,7 +65,7 @@ export default function GpuPassthroughAlert({
         type: 'success',
       })
       try {
-        localStorage.removeItem(DISMISS_KEY)
+        localStorage.removeItem(GPU_BANNER_DISMISS_KEY)
       } catch {}
       setTimeout(() => window.location.reload(), 5000)
     } catch (error) {

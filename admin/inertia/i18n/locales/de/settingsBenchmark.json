@@ -194,5 +194,11 @@
   "empty": {
     "title": "Keine Benchmark-Ergebnisse",
     "message": "Führe deinen ersten Benchmark aus, um die Leistungswerte deines Servers zu sehen."
+  },
+  "gpuWarning": {
+    "title": "{{name}} kann nicht auf die GPU zugreifen",
+    "confirm": "Trotzdem auf der CPU ausführen",
+    "body": "Dein System hat eine {{vendor}}-GPU, aber {{name}} kann derzeit nicht darauf zugreifen. Der KI-Teil des Benchmarks läuft nur auf der CPU, daher fällt dein KI-Wert deutlich niedriger aus, als deine Hardware schafft.",
+    "fixLink": "GPU-Zugriff auf der Seite System reparieren →"
   }
 }

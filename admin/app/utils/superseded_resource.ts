@@ -1,4 +1,5 @@
 import { basename, resolve, sep } from 'node:path'
+import { filenameBelongsToResource } from './resource_aliases.js'
 
 /**
  * Decides whether a curated resource's PREVIOUSLY-installed file should be
@@ -79,9 +80,11 @@ export function decideSupersededDeletion(inputs: SupersededInputs): SupersededDe
 export function isSafeOldContentPath(
   oldFilePath: string,
   resourceId: string,
-  storageRoot: string
+  storageRoot: string,
+  previousIds: string[] = []
 ): boolean {
   const resolved = resolve(oldFilePath)
   if (!resolved.startsWith(resolve(storageRoot) + sep)) return false
-  return basename(resolved).startsWith(`${resourceId}_`)
+  // A renamed resource's previous file still carries its former id (#1171).
+  return filenameBelongsToResource(basename(resolved), [resourceId, ...previousIds])
 }

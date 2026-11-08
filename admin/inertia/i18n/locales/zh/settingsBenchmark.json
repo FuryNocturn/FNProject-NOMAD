@@ -194,5 +194,11 @@
   "empty": {
     "title": "没有性能测试结果",
     "message": "运行您的第一次性能测试，即可查看服务器的性能得分。"
+  },
+  "gpuWarning": {
+    "title": "{{name}} 无法使用 GPU",
+    "confirm": "仍然使用 CPU 运行",
+    "body": "你的系统有一块 {{vendor}} GPU，但 {{name}} 目前无法访问它。基准测试的 AI 部分将只在 CPU 上运行，因此 AI 得分会远低于你的硬件实际能力。",
+    "fixLink": "在“系统”页面修复 GPU 访问 →"
   }
 }
