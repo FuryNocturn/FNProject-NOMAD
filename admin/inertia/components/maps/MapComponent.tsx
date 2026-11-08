@@ -33,6 +33,8 @@ export type MapCommand =
       lat: number
       lng: number
       action: 'fly' | 'marker'
+      /** Zoom to fly to; defaults to the current zoom */
+      zoom?: number
     }
   | {
       id: number
@@ -313,7 +315,7 @@ export default function MapComponent({
 
       mapRef.current?.flyTo({
         center: [mapCommand.lng, mapCommand.lat],
-        zoom: currentZoom,
+        zoom: mapCommand.zoom ?? currentZoom,
         duration: 1500,
       })
 
