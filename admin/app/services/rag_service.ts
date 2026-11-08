@@ -74,6 +74,13 @@ export type EmbedFileResult = ProcessAndEmbedFileResponse & { permanent?: boolea
 // OCR'd at 200 dpi, which is slow on CPU-only installs).
 const MAX_OCR_PAGES = 300
 
+/** An embedded chunk, ready for Qdrant. */
+type KnowledgePoint = {
+  id: string
+  vector: number[]
+  payload: Record<string, any> & { source: string; active: boolean }
+}
+
 @inject()
 export class RagService {
   private qdrant: QdrantClient | null = null
@@ -105,6 +112,11 @@ export class RagService {
   public static CHAR_TO_TOKEN_RATIO = 2 // Conservative chars-per-token estimate; technical docs
   // (numbers, symbols, abbreviations) tokenize denser
   // than plain prose (~3), so 2 avoids context overflows
+  // Points a ZIM upsert collects from several chunks at most: up to ~15 KB each as JSON,
+  // so under 4 MB per request, well below Qdrant's 32 MB request limit even for a
+  // book-sized article. A chunk with more points still goes alone, as before.
+  public static MAX_POINTS_PER_UPSERT = 256
+  public static ZIM_CHUNKS_IN_FLIGHT = 8 // ZIM chunks embedded at once when the embedder can take them
   public static EMBEDDING_BATCH_SIZE = 8 // Conservative batch size for low-end hardware
 
   constructor(
@@ -382,6 +394,23 @@ export class RagService {
     return [...new Set(keywords)]
   }
 
+  /**
+   * Heading line put in front of a chunk's text for embedding: "Article > Section\n".
+   * Built from the ZIM extractor's `hierarchy`, or from the article and section
+   * titles when only those are present. Empty for content with no headings, so
+   * plain uploads embed exactly as before.
+   */
+  private embeddingContextFor(metadata: Record<string, any>): string {
+    const hierarchy = typeof metadata.hierarchy === 'string' ? metadata.hierarchy.trim() : ''
+    const context =
+      hierarchy ||
+      [metadata.article_title, metadata.section_title]
+        .filter((part): part is string => typeof part === 'string' && part.trim().length > 0)
+        .map((part) => part.trim())
+        .join(' > ')
+    return context ? `${context}\n` : ''
+  }
+
   public async embedAndStoreText(
     text: string,
     metadata: Record<string, any> = {},
@@ -390,6 +419,20 @@ export class RagService {
     // content overwrites its points instead of adding duplicates.
     pointIdSeed?: string
   ): Promise<{ chunks: number } | null> {
+    const points = await this.embedText(text, metadata, onProgress, pointIdSeed)
+    if (!points || !(await this.storePoints(points))) {
+      return null
+    }
+    return { chunks: points.length }
+  }
+
+  /** Chunks and embeds text into points for Qdrant without storing them. Null on failure. */
+  private async embedText(
+    text: string,
+    metadata: Record<string, any>,
+    onProgress?: (percent: number) => Promise<void>,
+    pointIdSeed?: string
+  ): Promise<KnowledgePoint[] | null> {
     try {
       await this._ensureCollection(RagService.CONTENT_COLLECTION_NAME)
       const embedding = await this._getEmbeddingModel()
@@ -439,13 +482,20 @@ export class RagService {
       // Extract text from chunk results
       const chunks = chunkResults.map((chunk) => chunk.text)
 
+      // Heading context for the embedding only. A section's text rarely names its
+      // subject (a recipe's ingredient list, a drug's dosage table), so embedded
+      // bare it sits far from any query that asks for the subject by name, and
+      // index pages that merely list the name outrank it. The stored `text`
+      // stays bare; only the vector sees the heading.
+      const embeddingContext = this.embeddingContextFor(metadata)
+
       // Prepare all chunk texts with prefix and truncation
       const prefixedChunks: string[] = []
       for (let i = 0; i < chunks.length; i++) {
         let chunkText = chunks[i]
 
-        // Final safety check: ensure chunk + prefix fits
-        const prefixText = embedding.documentPrefix
+        // Final safety check: ensure chunk + prefix + heading context fits
+        const prefixText = embedding.documentPrefix + embeddingContext
         const withPrefix = prefixText + chunkText
         const estimatedTokens = this.estimateTokenCount(withPrefix)
 
@@ -458,7 +508,7 @@ export class RagService {
           chunkText = this.truncateToTokenLimit(chunkText, maxTokensForText)
         }
 
-        prefixedChunks.push(embedding.documentPrefix + chunkText)
+        prefixedChunks.push(prefixText + chunkText)
       }
 
       // Batch embed chunks for performance
@@ -543,29 +593,40 @@ export class RagService {
         }
       })
 
+      logger.debug(`[RAG] Successfully embedded ${chunks.length} chunks`)
+      logger.debug(`[RAG] First chunk preview: "${chunks[0].substring(0, 100)}..."`)
+
+      return points
+    } catch (error) {
+      console.error(error)
+      logger.error('[RAG] Error embedding text:', error)
+      return null
+    }
+  }
+
+  /** Stores points of one source in a single upsert. False on failure. */
+  private async storePoints(points: KnowledgePoint[]): Promise<boolean> {
+    if (points.length === 0) return true
+    try {
       await this.qdrant!.upsert(RagService.CONTENT_COLLECTION_NAME, { points })
 
-      // A toggle can land between the read above and the upsert, and its
+      // A toggle can land between embedText()'s read and the upsert, and its
       // setPayload then misses these points. The toggles write the row before
       // Qdrant, so re-reading after the upsert closes the gap: either this read
       // sees the new value, or the toggle's setPayload runs after the upsert and
       // covers these points itself.
-      const currentActive = await this._readActiveFlag(sanitizedSource)
-      if (currentActive !== active) {
+      const currentActive = await this._readActiveFlag(points[0].payload.source)
+      if (points.some((p) => p.payload.active !== currentActive)) {
         await this.qdrant!.setPayload(RagService.CONTENT_COLLECTION_NAME, {
           payload: { active: currentActive },
           points: points.map((p) => p.id),
         })
       }
-
-      logger.debug(`[RAG] Successfully embedded and stored ${chunks.length} chunks`)
-      logger.debug(`[RAG] First chunk preview: "${chunks[0].substring(0, 100)}..."`)
-
-      return { chunks: chunks.length }
+      return true
     } catch (error) {
       console.error(error)
-      logger.error('[RAG] Error embedding text:', error)
-      return null
+      logger.error('[RAG] Error storing chunks:', error)
+      return false
     }
   }
 
@@ -624,7 +685,17 @@ export class RagService {
       }
       // Render and OCR one page at a time so only one page image is in memory,
       // reusing a single tesseract worker for the whole document.
-      const convert = fromBuffer(fileBuffer, { quality: 50, density: 200, format: 'png' })
+      const convert = fromBuffer(fileBuffer, {
+        quality: 50,
+        density: 200,
+        format: 'png',
+        // pdf2pic resizes every page to width x height after rendering, and its defaults (768x512,
+        // aspect ratio ignored) squash a portrait page into a landscape thumbnail before OCR (#1566).
+        // Keep the page's aspect ratio and the 200 dpi render: 1700 px is 8.5 in at 200 dpi.
+        width: 1700,
+        height: 1700,
+        preserveAspectRatio: true,
+      })
       const worker = await createWorker('eng')
       extractedText = ''
       try {
@@ -695,16 +766,30 @@ export class RagService {
       `[RAG] Extracted ${zimChunks.length} chunks from ZIM file with enhanced metadata (file totalArticles=${totalArticles})`
     )
 
-    // Process each chunk individually with its metadata
+    // Embed each chunk with its own metadata, but store an article's chunks in one
+    // upsert instead of one per chunk (upstream #1541)
     let totalChunks = 0
+    let articlePoints: KnowledgePoint[] = []
+    const storeArticlePoints = async (): Promise<boolean> => {
+      const ok = await this.storePoints(articlePoints)
+      if (ok) totalChunks += articlePoints.length
+      articlePoints = []
+      return ok
+    }
+    const batchFailed = (title: string) => ({
+      success: false as const,
+      message: `Failed to embed ZIM article "${title}" (batch offset ${startOffset}); the batch will be retried.`,
+    })
     // Section ordinal within its article: with the article path it gives each chunk
     // a stable point id (documentId is random per extraction, so it cannot).
     const sectionOrdinals = new Map<string, number>()
-    for (let i = 0; i < zimChunks.length; i++) {
-      const zimChunk = zimChunks[i]
+    const seeds = zimChunks.map((zimChunk) => {
       const sectionOrdinal = sectionOrdinals.get(zimChunk.documentId) ?? 0
       sectionOrdinals.set(zimChunk.documentId, sectionOrdinal + 1)
-      const result = await this.embedAndStoreText(zimChunk.text, {
+      return `${filepath}\u0000${zimChunk.articlePath}\u0000${sectionOrdinal}`
+    })
+    const embedChunk = (zimChunk: (typeof zimChunks)[number], seed: string) =>
+      this.embedText(zimChunk.text, {
         source: filepath,
         content_type: 'zim_article',
         // Without this the ZIM path writes points with no `collection` at all, so
@@ -734,21 +819,41 @@ export class RagService {
 
         // Extraction metadata - not overly relevant for search, but could be useful for debugging and future features...
         extraction_strategy: zimChunk.strategy,
-      }, undefined, `${filepath}\u0000${zimChunk.articlePath}\u0000${sectionOrdinal}`)
+      }, undefined, seed)
 
-      // Fail the whole batch rather than skip the article: the job retries from the
-      // same offset, and the deterministic point ids make the re-run overwrite the
-      // articles that already made it instead of duplicating them.
-      if (!result) {
-        return {
-          success: false,
-          message: `Failed to embed ZIM article "${zimChunk.articleTitle}" (batch offset ${startOffset}); the batch will be retried.`,
+    // Several chunks are embedded at once when the embedder can take them (upstream #1517,
+    // #1515): a GPU-backed Ollama, or LM Studio / llama.cpp, which queue requests themselves.
+    // One at a time leaves the GPU idle while each chunk waits on the embedder. The first
+    // chunk runs alone so the collection and the embedding model are checked once. Results
+    // are handled in order, so an article's points still go out in one upsert.
+    let inFlight = 1
+    for (let i = 0; i < zimChunks.length; ) {
+      const window = zimChunks.slice(i, i + inFlight)
+      const results = await Promise.all(window.map((zimChunk, k) => embedChunk(zimChunk, seeds[i + k])))
+      for (let k = 0; k < window.length; k++, i++) {
+        const zimChunk = zimChunks[i]
+        const points = results[k]
+        // Fail the whole batch rather than skip the article: the job retries from the
+        // same offset, and the deterministic point ids make the re-run overwrite the
+        // articles that already made it instead of duplicating them.
+        if (!points) return batchFailed(zimChunk.articleTitle)
+        if (articlePoints.length + points.length > RagService.MAX_POINTS_PER_UPSERT) {
+          if (!(await storeArticlePoints())) return batchFailed(zimChunk.articleTitle)
+        }
+        articlePoints.push(...points)
+
+        // The extractor emits an article's chunks back to back
+        if (zimChunks[i + 1]?.documentId !== zimChunk.documentId) {
+          if (!(await storeArticlePoints())) return batchFailed(zimChunk.articleTitle)
+        }
+
+        if (onProgress) {
+          await onProgress(((i + 1) / zimChunks.length) * 100)
         }
       }
-      totalChunks += result.chunks
-
-      if (onProgress) {
-        await onProgress(((i + 1) / zimChunks.length) * 100)
+      // Asked after the first chunk, which loads the model (Ollama's /api/ps lists it only while loaded)
+      if (inFlight === 1 && i < zimChunks.length) {
+        inFlight = (await this.ollamaService.canEmbedConcurrently()) ? RagService.ZIM_CHUNKS_IN_FLIGHT : 1
       }
     }
 
@@ -1587,7 +1692,7 @@ export class RagService {
    * either direction. Vectors stay in Qdrant permanently either way; only
    * `searchSimilarDocuments()`'s query-time filter is affected. See #1119.
    *
-   * The row goes first so an in-flight embedAndStoreText() call always ends up
+   * The row goes first so an in-flight storePoints() call always ends up
    * with the right value: its post-upsert re-read either sees this write, or
    * the setPayload below runs after its upsert and covers the new points.
    */
