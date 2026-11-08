@@ -1183,6 +1183,20 @@ export class OllamaService {
   }
 
   /**
+   * Whether ZIM ingestion may send several embedding requests at once: a GPU-backed
+   * native Ollama, or an OpenAI-compatible backend (LM Studio, llama.cpp) that queues
+   * them itself. An unknown backend or CPU-bound Ollama gets one at a time.
+   */
+  public async canEmbedConcurrently(): Promise<boolean> {
+    await this._ensureDependencies()
+    if (!this.baseUrl) return false
+    await this._isNativeBackend()
+    if (this.isOllamaNative === false) return true
+    if (this.isOllamaNative !== true) return false
+    return this.isEmbeddingGpuAccelerated()
+  }
+
+  /**
    * Returns true if Ollama is currently running an embedding model with non-zero VRAM
    * (i.e., GPU-offloaded). Returns false if the model is running CPU-only OR if it's
    * not currently loaded OR if /api/ps is unreachable.

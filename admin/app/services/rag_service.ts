@@ -116,6 +116,7 @@ export class RagService {
   // so under 4 MB per request, well below Qdrant's 32 MB request limit even for a
   // book-sized article. A chunk with more points still goes alone, as before.
   public static MAX_POINTS_PER_UPSERT = 256
+  public static ZIM_CHUNKS_IN_FLIGHT = 8 // ZIM chunks embedded at once when the embedder can take them
   public static EMBEDDING_BATCH_SIZE = 8 // Conservative batch size for low-end hardware
 
   constructor(
@@ -782,11 +783,13 @@ export class RagService {
     // Section ordinal within its article: with the article path it gives each chunk
     // a stable point id (documentId is random per extraction, so it cannot).
     const sectionOrdinals = new Map<string, number>()
-    for (let i = 0; i < zimChunks.length; i++) {
-      const zimChunk = zimChunks[i]
+    const seeds = zimChunks.map((zimChunk) => {
       const sectionOrdinal = sectionOrdinals.get(zimChunk.documentId) ?? 0
       sectionOrdinals.set(zimChunk.documentId, sectionOrdinal + 1)
-      const points = await this.embedText(zimChunk.text, {
+      return `${filepath}\u0000${zimChunk.articlePath}\u0000${sectionOrdinal}`
+    })
+    const embedChunk = (zimChunk: (typeof zimChunks)[number], seed: string) =>
+      this.embedText(zimChunk.text, {
         source: filepath,
         content_type: 'zim_article',
         // Without this the ZIM path writes points with no `collection` at all, so
@@ -816,24 +819,41 @@ export class RagService {
 
         // Extraction metadata - not overly relevant for search, but could be useful for debugging and future features...
         extraction_strategy: zimChunk.strategy,
-      }, undefined, `${filepath}\u0000${zimChunk.articlePath}\u0000${sectionOrdinal}`)
+      }, undefined, seed)
 
-      // Fail the whole batch rather than skip the article: the job retries from the
-      // same offset, and the deterministic point ids make the re-run overwrite the
-      // articles that already made it instead of duplicating them.
-      if (!points) return batchFailed(zimChunk.articleTitle)
-      if (articlePoints.length + points.length > RagService.MAX_POINTS_PER_UPSERT) {
-        if (!(await storeArticlePoints())) return batchFailed(zimChunk.articleTitle)
+    // Several chunks are embedded at once when the embedder can take them (upstream #1517,
+    // #1515): a GPU-backed Ollama, or LM Studio / llama.cpp, which queue requests themselves.
+    // One at a time leaves the GPU idle while each chunk waits on the embedder. The first
+    // chunk runs alone so the collection and the embedding model are checked once. Results
+    // are handled in order, so an article's points still go out in one upsert.
+    let inFlight = 1
+    for (let i = 0; i < zimChunks.length; ) {
+      const window = zimChunks.slice(i, i + inFlight)
+      const results = await Promise.all(window.map((zimChunk, k) => embedChunk(zimChunk, seeds[i + k])))
+      for (let k = 0; k < window.length; k++, i++) {
+        const zimChunk = zimChunks[i]
+        const points = results[k]
+        // Fail the whole batch rather than skip the article: the job retries from the
+        // same offset, and the deterministic point ids make the re-run overwrite the
+        // articles that already made it instead of duplicating them.
+        if (!points) return batchFailed(zimChunk.articleTitle)
+        if (articlePoints.length + points.length > RagService.MAX_POINTS_PER_UPSERT) {
+          if (!(await storeArticlePoints())) return batchFailed(zimChunk.articleTitle)
+        }
+        articlePoints.push(...points)
+
+        // The extractor emits an article's chunks back to back
+        if (zimChunks[i + 1]?.documentId !== zimChunk.documentId) {
+          if (!(await storeArticlePoints())) return batchFailed(zimChunk.articleTitle)
+        }
+
+        if (onProgress) {
+          await onProgress(((i + 1) / zimChunks.length) * 100)
+        }
       }
-      articlePoints.push(...points)
-
-      // The extractor emits an article's chunks back to back
-      if (zimChunks[i + 1]?.documentId !== zimChunk.documentId) {
-        if (!(await storeArticlePoints())) return batchFailed(zimChunk.articleTitle)
-      }
-
-      if (onProgress) {
-        await onProgress(((i + 1) / zimChunks.length) * 100)
+      // Asked after the first chunk, which loads the model (Ollama's /api/ps lists it only while loaded)
+      if (inFlight === 1 && i < zimChunks.length) {
+        inFlight = (await this.ollamaService.canEmbedConcurrently()) ? RagService.ZIM_CHUNKS_IN_FLIGHT : 1
       }
     }
 
