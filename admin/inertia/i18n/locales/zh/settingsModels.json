@@ -121,7 +121,9 @@
       "urlLabel": "远程 Ollama/OpenAI API URL",
       "urlPlaceholder": "http://192.168.1.100:11434  （兼容 OpenAI API 的应用请使用 :1234）",
       "saveTest": "保存并测试",
-      "clear": "清除"
+      "clear": "清除",
+      "memoryLabel": "远程机器内存（GB）",
+      "memoryHelp": "NOMAD 无法检测远程机器的内存。请填写该电脑有多少 GB 内存，以便为每个模型设定合适的上下文窗口。留空表示不限制内存；模型自身的上下文大小和“上下文窗口”设置仍然有效。"
     },
     "catalog": {
       "alertTitle": "仅在使用 Ollama 后端时才支持下载模型。",

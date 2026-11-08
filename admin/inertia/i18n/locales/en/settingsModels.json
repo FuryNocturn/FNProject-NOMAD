@@ -121,7 +121,9 @@
       "urlLabel": "Remote Ollama/OpenAI API URL",
       "urlPlaceholder": "http://192.168.1.100:11434  (or :1234 for OpenAI API Compatible Apps)",
       "saveTest": "Save & Test",
-      "clear": "Clear"
+      "clear": "Clear",
+      "memoryLabel": "Remote machine memory (GB)",
+      "memoryHelp": "NOMAD can't detect a remote machine's memory. Enter how many gigabytes that computer has so each model's context window can be sized to fit. Leave this empty to apply no memory limit; the model's own context size and the Context Window setting still apply."
     },
     "catalog": {
       "alertTitle": "Model downloading is only supported when using a Ollama backend.",
