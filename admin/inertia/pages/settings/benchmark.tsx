@@ -1033,7 +1033,7 @@ export default function BenchmarkPage(props: {
       </div>
       <StyledModal
         open={gpuWarningFor !== null}
-        title={`GPU Not Accessible to ${aiAssistantName}`}
+        title={t('settingsBenchmark.gpuWarning.title', { name: aiAssistantName })}
         onClose={() => setGpuWarningFor(null)}
         onCancel={() => setGpuWarningFor(null)}
         onConfirm={() => {
@@ -1041,15 +1041,15 @@ export default function BenchmarkPage(props: {
           setGpuWarningFor(null)
           if (type) runBenchmark.mutate(type)
         }}
-        cancelText="Cancel"
-        confirmText="Run on CPU Anyway"
+        cancelText={t('common.cancel')}
+        confirmText={t('settingsBenchmark.gpuWarning.confirm')}
       >
         <div className="space-y-3 text-text-primary">
           <p>
-            Your system has {systemInfo?.gpuHealth?.gpuVendor === 'amd' ? 'an AMD' : 'an NVIDIA'}{' '}
-            GPU, but {aiAssistantName} can't currently access it. The AI portion of the benchmark
-            will run on CPU only, so your AI score will be much lower than your hardware is capable
-            of.
+            {t('settingsBenchmark.gpuWarning.body', {
+              vendor: systemInfo?.gpuHealth?.gpuVendor === 'amd' ? 'AMD' : 'NVIDIA',
+              name: aiAssistantName,
+            })}
           </p>
           <Link
             href="/settings/system"
@@ -1062,7 +1062,7 @@ export default function BenchmarkPage(props: {
             }}
             className="text-sm text-desert-green hover:underline inline-block font-medium"
           >
-            Fix GPU access on the System page →
+            {t('settingsBenchmark.gpuWarning.fixLink')}
           </Link>
         </div>
       </StyledModal>

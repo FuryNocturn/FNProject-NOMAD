@@ -194,5 +194,11 @@
   "empty": {
     "title": "No Benchmark Results",
     "message": "Run your first benchmark to see your server's performance scores."
+  },
+  "gpuWarning": {
+    "title": "GPU Not Accessible to {{name}}",
+    "confirm": "Run on CPU Anyway",
+    "body": "Your system has an {{vendor}} GPU, but {{name}} can't currently access it. The AI portion of the benchmark will run on CPU only, so your AI score will be much lower than your hardware is capable of.",
+    "fixLink": "Fix GPU access on the System page →"
   }
 }

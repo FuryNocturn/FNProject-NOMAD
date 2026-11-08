@@ -194,5 +194,11 @@
   "empty": {
     "title": "Aucun résultat de benchmark",
     "message": "Lancez votre premier benchmark pour voir les scores de performance de votre serveur."
+  },
+  "gpuWarning": {
+    "title": "{{name}} n’a pas accès au GPU",
+    "confirm": "Lancer sur le CPU quand même",
+    "body": "Votre système a un GPU {{vendor}}, mais {{name}} ne peut pas y accéder pour le moment. La partie IA du benchmark tournera uniquement sur le CPU : votre score IA sera bien plus bas que ce que votre matériel permet.",
+    "fixLink": "Corriger l’accès au GPU sur la page Système →"
   }
 }

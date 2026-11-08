@@ -194,5 +194,11 @@
   "empty": {
     "title": "Sin resultados de benchmark",
     "message": "Ejecuta tu primer benchmark para ver las puntuaciones de rendimiento de tu servidor."
+  },
+  "gpuWarning": {
+    "title": "{{name}} no puede usar la GPU",
+    "confirm": "Ejecutar con CPU de todos modos",
+    "body": "Tu equipo tiene una GPU {{vendor}}, pero {{name}} no puede usarla ahora mismo. La parte de IA de la prueba se hará solo con la CPU, así que la puntuación de IA saldrá mucho más baja de lo que da tu hardware.",
+    "fixLink": "Arreglar el acceso a la GPU en la página Sistema →"
   }
 }
