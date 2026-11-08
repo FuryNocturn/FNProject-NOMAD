@@ -841,7 +841,8 @@ export class OllamaService {
   }): Promise<AsyncIterable<any>> {
     await this._ensureDependencies()
     if (!(await this._isNativeBackend()) || !this.ollama) {
-      throw new Error('The chat agent needs the local Ollama backend (tool calling).')
+      // LM Studio, llama.cpp and other OpenAI-compatible backends (fork addition).
+      return this._chatStreamWithToolsCompat(req)
     }
     const iterator = await this.ollama.chat({
       model: req.model,
@@ -857,6 +858,97 @@ export class OllamaService {
       else req.signal.addEventListener('abort', () => iterator.abort(), { once: true })
     }
     return iterator
+  }
+
+  /**
+   * Tool calling through the OpenAI-compatible API, returned in the shape the agent
+   * reads from Ollama: `{ message: { content, thinking, tool_calls? } }`, with each
+   * tool call as `{ function: { name, arguments: object } }`.
+   *
+   * The agent keeps its conversation in Ollama's format (tool calls without ids,
+   * tool results with `tool_name`), so ids are assigned here: each assistant tool
+   * call gets `call_<n>`, and the tool messages after it answer them in order.
+   */
+  private async _chatStreamWithToolsCompat(req: {
+    model: string
+    messages: Array<Record<string, unknown>>
+    tools: Array<Record<string, unknown>>
+    signal?: AbortSignal
+  }): Promise<AsyncIterable<any>> {
+    if (!this.openai) {
+      throw new Error('AI client is not initialized.')
+    }
+    const messages: Array<Record<string, unknown>> = []
+    let pendingIds: string[] = []
+    let callCount = 0
+    for (const m of req.messages) {
+      const calls = m.role === 'assistant' ? (m.tool_calls as any[] | undefined) : undefined
+      if (calls?.length) {
+        const toolCalls = calls.map((c) => ({
+          id: `call_${callCount++}`,
+          type: 'function',
+          function: {
+            name: c.function?.name,
+            arguments:
+              typeof c.function?.arguments === 'string'
+                ? c.function.arguments
+                : JSON.stringify(c.function?.arguments ?? {}),
+          },
+        }))
+        pendingIds = toolCalls.map((c) => c.id)
+        messages.push({ role: 'assistant', content: m.content ?? '', tool_calls: toolCalls })
+      } else if (m.role === 'tool') {
+        messages.push({ role: 'tool', tool_call_id: pendingIds.shift() ?? `call_${callCount++}`, content: m.content })
+      } else {
+        messages.push({ role: m.role, content: m.content })
+      }
+    }
+
+    const stream = (await this.openai.chat.completions.create(
+      {
+        model: req.model,
+        messages: messages as any,
+        ...(req.tools.length ? { tools: req.tools as any } : {}),
+        stream: true,
+      },
+      { signal: req.signal }
+    )) as unknown as Stream<ChatCompletionChunk>
+
+    async function* normalize(): AsyncGenerator<any> {
+      const splitter = new ThinkTagSplitter()
+      // Tool calls arrive in pieces (name first, then the JSON arguments in fragments).
+      const calls: Array<{ name: string; args: string }> = []
+      for await (const chunk of stream) {
+        const delta: any = chunk.choices?.[0]?.delta
+        if (!delta) continue
+        for (const tc of delta.tool_calls ?? []) {
+          const i = tc.index ?? calls.length
+          calls[i] ??= { name: '', args: '' }
+          if (tc.function?.name) calls[i].name += tc.function.name
+          if (tc.function?.arguments) calls[i].args += tc.function.arguments
+        }
+        const split = splitter.push(delta.content ?? '')
+        const thinking = (delta.reasoning ?? delta.thinking ?? '') + split.thinking
+        if (split.content || thinking) yield { message: { content: split.content, thinking } }
+      }
+      const tail = splitter.flush()
+      if (tail.content || tail.thinking) yield { message: { content: tail.content, thinking: tail.thinking } }
+      const toolCalls = calls
+        .filter((c) => c?.name)
+        .map((c) => {
+          let args: Record<string, any> = {}
+          try {
+            args = c.args.trim() ? JSON.parse(c.args) : {}
+          } catch {
+            // A malformed argument string still reaches the tool, which reports it as an error.
+            args = { _raw: c.args }
+          }
+          return { function: { name: c.name, arguments: args } }
+        })
+      if (toolCalls.length) yield { message: { content: '', tool_calls: toolCalls } }
+    }
+
+    return normalize()
   }
 
   private async _chatStreamCompat(
