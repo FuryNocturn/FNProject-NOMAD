@@ -17,6 +17,7 @@ import { join, resolve, sep } from 'path'
 import urlJoin from 'url-join'
 import { RunDownloadJob } from '#jobs/run_download_job'
 import { RunExtractPmtilesJob } from '#jobs/run_extract_pmtiles_job'
+import { IndexMapPlacesJob } from '#jobs/index_map_places_job'
 import logger from '@adonisjs/core/services/logger'
 import { assertNotPrivateUrl, ssrfSafeRequestOptions } from '#validators/common'
 import { filenameFromUrl, resolveInside } from '../utils/remote_filename.js'
@@ -294,6 +295,9 @@ export class MapService implements IMapService {
         logger.error(`[MapService] Failed to create InstalledResource for ${filename}:`, error)
       }
     }
+
+    // Make the downloaded regions searchable (and drop superseded files' places).
+    await IndexMapPlacesJob.dispatch()
   }
 
   async downloadRemote(url: string): Promise<{ filename: string; jobId?: string }> {
@@ -900,6 +904,9 @@ export class MapService implements IMapService {
         .delete()
       logger.info(`[MapService] Deleted InstalledResource entry for: ${parsed.resource_id}`)
     }
+
+    // Drop the deleted region's places from search.
+    await IndexMapPlacesJob.dispatch()
   }
 
   /**
