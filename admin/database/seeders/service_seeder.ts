@@ -756,6 +756,33 @@ export default class ServiceSeeder extends BaseSeeder {
       category: 'networking',
       depends_on: null,
     },
+    {
+      service_name: SERVICE_NAMES.ALMANAC,
+      friendly_name: 'Almanac',
+      powered_by: 'NOMAD',
+      display_order: 45,
+      description: 'Sunrise, moonrise, compass declination and tide predictions for any place on Earth, offline',
+      icon: 'IconSun',
+      // Built and published by github.com/FuryNocturn/FNProject-NOMAD-Almanac. A static site:
+      // all data (WMM2025, NOAA and Kartverket tide stations, EOT20 coastal model) is in the image.
+      container_image: 'ghcr.io/furynocturn/nomad-almanac:0.2.0',
+      source_repo: 'https://github.com/FuryNocturn/FNProject-NOMAD-Almanac',
+      container_command: null,
+      container_config: JSON.stringify({
+        HostConfig: {
+          RestartPolicy: { Name: 'unless-stopped' },
+          PortBindings: { '80/tcp': [{ HostPort: '8550' }] },
+        },
+        ExposedPorts: { '80/tcp': {} },
+      }),
+      ui_location: '8550',
+      installed: false,
+      installation_status: 'idle',
+      is_dependency_service: false,
+      is_custom: false,
+      category: 'utility',
+      depends_on: null,
+    },
   ]
 
   async run() {

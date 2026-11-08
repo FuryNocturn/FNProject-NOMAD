@@ -68,5 +68,8 @@
   },
   "nomad_kismet": {
     "description": "Wi-Fi 监视器：查看周围的网络和设备并审计你自己的网络（Linux，支持监听模式的网卡）"
+  },
+  "nomad_almanac": {
+    "description": "地球上任意地点的日出月出、磁偏角和潮汐预报，离线可用"
   }
 }
