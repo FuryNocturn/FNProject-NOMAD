@@ -44,5 +44,13 @@
   "removeLink": "このリンクを削除",
   "removeLinkFailed": "このリンクを削除できませんでした。",
   "addLink": "リンクを追加",
-  "addLinkHint": "ネットワーク上の他のものへのショートカット"
+  "addLinkHint": "ネットワーク上の他のものへのショートカット",
+  "librarySearch": {
+    "label": "すべての本を検索",
+    "help": "ライブラリの {{count}} 冊の本を全文検索します。結果は新しいタブで開きます。",
+    "placeholder": "例：トマトの疫病",
+    "language": "言語：",
+    "search": "検索",
+    "omitted": "検索リクエストのサイズを抑えるため除外した小さな本：{{count}} 冊。"
+  }
 }

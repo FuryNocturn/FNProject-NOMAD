@@ -21,20 +21,38 @@ import CoordinateOverlay from './CoordinateOverlay'
 import ViewMapMarkerPopup from './ViewMapMarkerPopup'
 import MapMarkerFormPopup from './MapMarkerFormPopup'
 import ScaleUnitToggle from './ScaleUnitSelector'
+import { EMPTY_MEASUREMENT, MeasureLayers, MeasurePanel, type Measurement } from './MeasureTool'
+import PlaceInfoPopup from './PlaceInfoPopup'
+import { PLACE_SOURCE_LAYERS, pickPlace, type PlaceInfo } from '~/lib/map_place_info'
 
 type ScaleUnit = 'imperial' | 'metric' | 'nautical'
 
-type MapCommand = {
-  id: number
-  lat: number
-  lng: number
-  action: 'fly' | 'marker'
-}
+export type MapCommand =
+  | {
+      id: number
+      lat: number
+      lng: number
+      action: 'fly' | 'marker'
+      /** Zoom to fly to; defaults to the current zoom */
+      zoom?: number
+    }
+  | {
+      id: number
+      action: 'fit'
+      /** east may exceed 180 for a region that crosses the antimeridian */
+      bounds: { west: number; south: number; east: number; north: number }
+    }
+
+/** Keeps a framed region clear of the title bar (top) and the map controls (sides). */
+const FIT_REGION_PADDING = { top: 96, bottom: 48, left: 48, right: 96 }
 
 type MapComponentProps = {
   mapCommand?: MapCommand | null
   isHoveringUI?: boolean
   showCoordinatesEnabled?: boolean
+  /** Measure mode: map clicks add measurement points instead of opening the new-pin form. */
+  measureEnabled?: boolean
+  onMeasureDone?: () => void
 }
 
 type MapLocationParams = {
@@ -47,6 +65,10 @@ const SAVED_MAP_VIEW_KEY = 'nomad:map-view'
 const MAP_MODE_KEY = 'nomad:map-mode'
 const MAP_MODES = ['street', 'aerial', 'hybrid', 'topographic'] as const
 type MapMode = (typeof MAP_MODES)[number]
+/** Lowest screen y a clicked place may sit at so its popup clears the title bar. */
+const PLACE_POPUP_MIN_Y = 260
+/** Same for the (taller) new-pin form opened by "Save as pin". */
+const MARKER_FORM_MIN_Y = 440
 const DEFAULT_MAP_VIEW = { longitude: -101, latitude: 40, zoom: 3.5 }
 
 type SavedMapView = { longitude: number; latitude: number; zoom: number }
@@ -138,6 +160,8 @@ export default function MapComponent({
                                        mapCommand,
                                        isHoveringUI = false,
                                        showCoordinatesEnabled = true,
+                                       measureEnabled = false,
+                                       onMeasureDone,
                                      }: MapComponentProps) {
   const mapRef = useRef<MapRef>(null)
   const animationFrameRef = useRef<number | null>(null)
@@ -148,11 +172,27 @@ export default function MapComponent({
 
   const [targetIndicator, setTargetIndicator] = useState<{ lng: number; lat: number } | null>(null)
   const [isDraggingMap, setIsDraggingMap] = useState(false)
-  const [placingMarker, setPlacingMarker] = useState<{ lng: number; lat: number } | null>(null)
+  const [placingMarker, setPlacingMarker] = useState<{
+    lng: number
+    lat: number
+    /** Prefilled name when the pin comes from "Save as pin" on a place */
+    name?: string
+  } | null>(null)
   const [selectedMarkerId, setSelectedMarkerId] = useState<number | null>(null)
   const [editingMarkerId, setEditingMarkerId] = useState<number | null>(null)
   const [hasUnsavedMarkerChanges, setHasUnsavedMarkerChanges] = useState(false)
   const [showCoordinates, setShowCoordinates] = useState(false)
+  const [measurement, setMeasurement] = useState<Measurement>(EMPTY_MEASUREMENT)
+  const measurementRef = useRef(measurement)
+  measurementRef.current = measurement
+  // Label/icon layers whose features can be clicked for details (see map_place_info).
+  const [placeLayerIds, setPlaceLayerIds] = useState<string[]>([])
+  const [isHoveringPlace, setIsHoveringPlace] = useState(false)
+  const [selectedPlace, setSelectedPlace] = useState<{
+    lng: number
+    lat: number
+    place: PlaceInfo
+  } | null>(null)
 
   const getInitialScaleUnit = (): ScaleUnit => {
     const stored = localStorage.getItem('nomad:map-scale-unit')
@@ -252,6 +292,19 @@ export default function MapComponent({
 
     handledMapCommandIdRef.current = mapCommand.id
 
+    if (mapCommand.action === 'fit') {
+      const { west, south, east, north } = mapCommand.bounds
+      setTargetIndicator(null)
+      mapRef.current?.fitBounds(
+        [
+          [west, south],
+          [east, north],
+        ],
+        { padding: FIT_REGION_PADDING, duration: 1500 }
+      )
+      return
+    }
+
     if (mapCommand.action === 'fly') {
       const currentZoom = mapRef.current?.getZoom() ?? 12
 
@@ -262,7 +315,7 @@ export default function MapComponent({
 
       mapRef.current?.flyTo({
         center: [mapCommand.lng, mapCommand.lat],
-        zoom: currentZoom,
+        zoom: mapCommand.zoom ?? currentZoom,
         duration: 1500,
       })
 
@@ -312,8 +365,20 @@ export default function MapComponent({
   }, [])
 
   const handleMapLoad = useCallback(() => {
-    flyToLocationParams()
+    // Every downloaded region adds its own copy of each layer, so collect the label/icon
+    // layers by their tile layer rather than by id.
     const layers = mapRef.current?.getMap().getStyle()?.layers ?? []
+    setPlaceLayerIds(
+      layers
+        .filter(
+          (layer) =>
+            layer.type === 'symbol' &&
+            'source-layer' in layer &&
+            (PLACE_SOURCE_LAYERS as readonly string[]).includes(layer['source-layer'] ?? '')
+        )
+        .map((layer) => layer.id)
+    )
+    flyToLocationParams()
     const roles = [
       ...new Set(
         layers
@@ -330,9 +395,80 @@ export default function MapComponent({
     if (!usable) setMapMode('street')
   }, [flyToLocationParams, applyMapMode, mapMode])
 
+  // Measure mode starts empty every time it is turned on, and leaves nothing behind when off.
+  useEffect(() => {
+    setMeasurement(EMPTY_MEASUREMENT)
+  }, [measureEnabled])
+
+  const undoMeasurePoint = useCallback(() => {
+    setMeasurement((m) =>
+      // Undo on a closed shape reopens it first, so the last point isn't lost unexpectedly.
+      m.closed ? { ...m, closed: false } : { points: m.points.slice(0, -1), closed: false }
+    )
+  }, [])
+
+  useEffect(() => {
+    if (!measureEnabled) return
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      const target = event.target as HTMLElement | null
+      if (target?.closest('input, textarea, select, [contenteditable="true"]')) return
+
+      if (event.key === 'Escape') {
+        // Esc clears the measurement; on an empty one it leaves measure mode.
+        if (measurementRef.current.points.length === 0) onMeasureDone?.()
+        else setMeasurement(EMPTY_MEASUREMENT)
+      } else if (event.key === 'Backspace' || event.key === 'Delete') {
+        event.preventDefault()
+        undoMeasurePoint()
+      }
+    }
+
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [measureEnabled, undoMeasurePoint, onMeasureDone])
+
   const handleMapClick = useCallback(
     (e: MapLayerMouseEvent) => {
+      if (measureEnabled) {
+        const point: [number, number] = [e.lngLat.lng, e.lngLat.lat]
+        // A click after closing a shape starts a new measurement.
+        setMeasurement((m) =>
+          m.closed ? { points: [point], closed: false } : { points: [...m.points, point], closed: false }
+        )
+        return
+      }
+
       if (!confirmDiscardMarkerChanges()) return
+
+      // A click on a labelled place or point of interest shows its details; anywhere else
+      // keeps opening the new-pin form.
+      const place = pickPlace(
+        (e.features ?? []).map((feature) => ({
+          sourceLayer: feature.sourceLayer,
+          properties: feature.properties,
+          point:
+            feature.geometry.type === 'Point'
+              ? (feature.geometry.coordinates as [number, number])
+              : null,
+        }))
+      )
+      if (place) {
+        const [lng, lat] = place.point ?? [e.lngLat.lng, e.lngLat.lat]
+        setSelectedPlace({ lng, lat, place })
+        // The popup opens above the place; near the top it would sit under the title bar.
+        const y = mapRef.current?.project([lng, lat]).y ?? e.point.y
+        if (y < PLACE_POPUP_MIN_Y) {
+          mapRef.current?.panBy([0, y - PLACE_POPUP_MIN_Y], { duration: 300 })
+        }
+        setPlacingMarker(null)
+        setSelectedMarkerId(null)
+        setEditingMarkerId(null)
+        setHasUnsavedMarkerChanges(false)
+        setTargetIndicator(null)
+        return
+      }
+      setSelectedPlace(null)
 
       setPlacingMarker({ lng: e.lngLat.lng, lat: e.lngLat.lat })
       setSelectedMarkerId(null)
@@ -340,7 +476,7 @@ export default function MapComponent({
       setHasUnsavedMarkerChanges(false)
       setTargetIndicator(null)
     },
-    [confirmDiscardMarkerChanges]
+    [confirmDiscardMarkerChanges, measureEnabled]
   )
 
   const handleMouseMove = useCallback(
@@ -418,7 +554,10 @@ export default function MapComponent({
           ref={mapRef}
           reuseMaps
           style={{ width: '100%', height: '100vh' }}
-          cursor={isDraggingMap ? 'grabbing' : 'crosshair'}
+          cursor={isDraggingMap ? 'grabbing' : isHoveringPlace ? 'pointer' : 'crosshair'}
+          // undefined (not []) until the style loads: an empty layer filter can match everything.
+          interactiveLayerIds={placeLayerIds.length > 0 ? placeLayerIds : undefined}
+          onMouseEnter={() => setIsHoveringPlace(true)}
           mapStyle={`${window.location.protocol}//${window.location.hostname}:${window.location.port}/api/maps/styles`}
           mapLib={maplibregl}
           initialViewState={initialViewState}
@@ -451,8 +590,12 @@ export default function MapComponent({
             hideCoordinates()
           }}
           onClick={handleMapClick}
+          // Double-clicking while measuring would add two points and zoom at the same time.
+          doubleClickZoom={!measureEnabled}
           onMouseMove={handleMouseMove}
-          onMouseLeave={hideCoordinates}
+          // With interactiveLayerIds set this fires when the pointer leaves a clickable label;
+          // leaving the map itself is handled by the wrapper's onMouseLeave.
+          onMouseLeave={() => setIsHoveringPlace(false)}
         >
           <NavigationControl style={{ marginTop: '110px', marginRight: '36px' }} />
           <FullscreenControl style={{ marginTop: '30px', marginRight: '36px' }} />
@@ -515,6 +658,20 @@ export default function MapComponent({
             onMouseEnter={hideCoordinates}
           />
 
+          {measureEnabled && (
+            <MeasureLayers
+              measurement={measurement}
+              unit={scaleUnit}
+              onMovePoint={(index, point) =>
+                setMeasurement((m) => ({
+                  ...m,
+                  points: m.points.map((p, i) => (i === index ? point : p)),
+                }))
+              }
+              onClose={() => setMeasurement((m) => ({ ...m, closed: true }))}
+            />
+          )}
+
           {markers
             .filter((marker) => marker.visible)
             .map((marker) => (
@@ -529,6 +686,7 @@ export default function MapComponent({
                   if (!confirmDiscardMarkerChanges()) return
 
                   setSelectedMarkerId(marker.id === selectedMarkerId ? null : marker.id)
+                  setSelectedPlace(null)
                   setPlacingMarker(null)
                   setEditingMarkerId(null)
                   setHasUnsavedMarkerChanges(false)
@@ -546,10 +704,35 @@ export default function MapComponent({
               </Marker>
             ))}
 
+          {selectedPlace && (
+            <PlaceInfoPopup
+              place={selectedPlace.place}
+              longitude={selectedPlace.lng}
+              latitude={selectedPlace.lat}
+              onMouseEnter={hideCoordinates}
+              onClose={() => setSelectedPlace(null)}
+              onSaveAsPin={() => {
+                const y = mapRef.current?.project([selectedPlace.lng, selectedPlace.lat]).y
+                if (y !== undefined && y < MARKER_FORM_MIN_Y) {
+                  mapRef.current?.panBy([0, y - MARKER_FORM_MIN_Y], { duration: 300 })
+                }
+                setPlacingMarker({
+                  lng: selectedPlace.lng,
+                  lat: selectedPlace.lat,
+                  name: selectedPlace.place.name,
+                })
+                setSelectedPlace(null)
+              }}
+            />
+          )}
+
           {placingMarker && (
             <MapMarkerFormPopup
+              // Remount per location so a prefilled name never carries over to the next pin.
+              key={`${placingMarker.lng},${placingMarker.lat}`}
               longitude={placingMarker.lng}
               latitude={placingMarker.lat}
+              initialName={placingMarker.name}
               onDirtyChange={setHasUnsavedMarkerChanges}
               onMouseEnter={hideCoordinates}
               onSave={async ({ name, notes, color, customColor, icon }) => {
@@ -625,6 +808,17 @@ export default function MapComponent({
           )}
         </Map>
       </div>
+
+      {measureEnabled && (
+        <MeasurePanel
+          measurement={measurement}
+          unit={scaleUnit}
+          onUndo={undoMeasurePoint}
+          onClear={() => setMeasurement(EMPTY_MEASUREMENT)}
+          onDone={() => onMeasureDone?.()}
+          onMouseEnter={hideCoordinates}
+        />
+      )}
 
       <div onMouseEnter={hideCoordinates}>
         <MarkerPanel

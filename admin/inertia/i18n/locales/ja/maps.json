@@ -12,7 +12,8 @@
     "hideCoordinates": "座標を非表示",
     "showCoordinates": "座標を表示",
     "manageRegions": "地図地域を管理",
-    "goToMapSettings": "地図設定へ移動"
+    "goToMapSettings": "地図設定へ移動",
+    "flyToRegionOrCoordinates": "地域または座標へ移動"
   },
   "form": {
     "namePlaceholder": "この場所に名前を付ける",
@@ -107,5 +108,34 @@
     "aerial": "航空写真",
     "hybrid": "ハイブリッド",
     "topographic": "地形図"
+  },
+  "measure": {
+    "title": "計測",
+    "start": "距離と面積を計測",
+    "stop": "計測を終了",
+    "help": "地図をクリックして点を追加します。最初の点をもう一度クリックすると面積を計測します。",
+    "distance": "距離：",
+    "perimeter": "周囲：",
+    "area": "面積：",
+    "undo": "元に戻す",
+    "undoTitle": "最後の点を取り消す（Backspace）",
+    "clear": "クリア",
+    "clearTitle": "クリア（Esc）",
+    "dragHint": "点をドラッグして調整",
+    "closeShape": "図形を閉じて面積を計測",
+    "dragToMove": "ドラッグして移動"
+  },
+  "place": {
+    "copyCoordinates": "座標をコピー",
+    "close": "閉じる",
+    "saveAsPin": "ピンとして保存"
+  },
+  "jump": {
+    "aria": "ダウンロード済みの地域、場所、座標へ移動",
+    "placeholder": "移動先：場所、地域、または lat,lng",
+    "regions": "ダウンロード済みの地域",
+    "places": "場所",
+    "noPlaces": "ダウンロード済みの地域に該当する場所はありません。",
+    "readFailed": "{{region}} の地図ファイルを読み込めませんでした。"
   }
 }

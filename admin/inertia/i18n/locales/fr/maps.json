@@ -12,7 +12,8 @@
     "hideCoordinates": "Masquer les coordonnées",
     "showCoordinates": "Afficher les coordonnées",
     "manageRegions": "Gérer les régions de carte",
-    "goToMapSettings": "Aller aux paramètres des cartes"
+    "goToMapSettings": "Aller aux paramètres des cartes",
+    "flyToRegionOrCoordinates": "Aller à la région ou aux coordonnées"
   },
   "form": {
     "namePlaceholder": "Nommer cet emplacement",
@@ -107,5 +108,34 @@
     "aerial": "Aérienne",
     "hybrid": "Hybride",
     "topographic": "Topographique"
+  },
+  "measure": {
+    "title": "Mesurer",
+    "start": "Mesurer une distance ou une surface",
+    "stop": "Arrêter la mesure",
+    "help": "Cliquez sur la carte pour ajouter des points. Cliquez de nouveau sur le premier pour mesurer une surface.",
+    "distance": "Distance :",
+    "perimeter": "Périmètre :",
+    "area": "Surface :",
+    "undo": "Annuler",
+    "undoTitle": "Annuler le dernier point (Retour arrière)",
+    "clear": "Effacer",
+    "clearTitle": "Effacer (Échap)",
+    "dragHint": "Faites glisser les points pour ajuster",
+    "closeShape": "Fermer la forme pour mesurer sa surface",
+    "dragToMove": "Glisser pour déplacer"
+  },
+  "place": {
+    "copyCoordinates": "Copier les coordonnées",
+    "close": "Fermer",
+    "saveAsPin": "Enregistrer comme repère"
+  },
+  "jump": {
+    "aria": "Aller à une région téléchargée, un lieu ou des coordonnées",
+    "placeholder": "Aller à : lieu, région ou lat,lng",
+    "regions": "Régions téléchargées",
+    "places": "Lieux",
+    "noPlaces": "Aucun lieu trouvé dans vos régions téléchargées.",
+    "readFailed": "Impossible de lire la carte de {{region}}."
   }
 }

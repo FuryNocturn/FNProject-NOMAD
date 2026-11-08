@@ -44,5 +44,13 @@
   "removeLink": "Remover este link",
   "removeLinkFailed": "Falha ao remover este link.",
   "addLink": "Adicionar um link",
-  "addLinkHint": "Um atalho para outro recurso da sua rede"
+  "addLinkHint": "Um atalho para outro recurso da sua rede",
+  "librarySearch": {
+    "label": "Procurar em todos os livros",
+    "help": "Pesquisa de texto nos {{count}} livros da Biblioteca. Os resultados abrem noutro separador.",
+    "placeholder": "p. ex. míldio do tomate",
+    "language": "Idioma:",
+    "search": "Procurar",
+    "omitted": "Livros pequenos deixados de fora para não exceder o tamanho da pesquisa: {{count}}."
+  }
 }

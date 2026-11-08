@@ -44,5 +44,13 @@
   "removeLink": "Remove this link",
   "removeLinkFailed": "Failed to remove this link.",
   "addLink": "Add a Link",
-  "addLinkHint": "A shortcut to something else on your network"
+  "addLinkHint": "A shortcut to something else on your network",
+  "librarySearch": {
+    "label": "Search all books",
+    "help": "Full-text search across all {{count}} books in the Information Library. Results open in a new tab.",
+    "placeholder": "e.g. tomato blight",
+    "language": "Language:",
+    "search": "Search",
+    "omitted": "Smaller books left out to keep the search within size limits: {{count}}."
+  }
 }

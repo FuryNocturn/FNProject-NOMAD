@@ -44,5 +44,13 @@
   "removeLink": "移除此链接",
   "removeLinkFailed": "移除此链接失败。",
   "addLink": "添加链接",
-  "addLinkHint": "指向您网络中其他内容的快捷方式"
+  "addLinkHint": "指向您网络中其他内容的快捷方式",
+  "librarySearch": {
+    "label": "搜索所有书籍",
+    "help": "在资料库的 {{count}} 本书中全文搜索。结果在新标签页中打开。",
+    "placeholder": "例如：番茄晚疫病",
+    "language": "语言：",
+    "search": "搜索",
+    "omitted": "为控制搜索请求大小而略过的小书：{{count}} 本。"
+  }
 }

@@ -44,5 +44,13 @@
   "removeLink": "Diesen Link entfernen",
   "removeLinkFailed": "Der Link konnte nicht entfernt werden.",
   "addLink": "Link hinzufügen",
-  "addLinkHint": "Eine Verknüpfung zu etwas anderem in deinem Netzwerk"
+  "addLinkHint": "Eine Verknüpfung zu etwas anderem in deinem Netzwerk",
+  "librarySearch": {
+    "label": "In allen Büchern suchen",
+    "help": "Volltextsuche in allen {{count}} Büchern der Bibliothek. Ergebnisse öffnen sich in einem neuen Tab.",
+    "placeholder": "z. B. Kraut- und Braunfäule",
+    "language": "Sprache:",
+    "search": "Suchen",
+    "omitted": "Kleinere Bücher, die ausgelassen werden, damit die Suche nicht zu groß wird: {{count}}."
+  }
 }

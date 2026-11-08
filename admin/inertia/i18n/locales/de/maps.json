@@ -12,7 +12,8 @@
     "hideCoordinates": "Koordinaten ausblenden",
     "showCoordinates": "Koordinaten anzeigen",
     "manageRegions": "Kartenregionen verwalten",
-    "goToMapSettings": "Zu den Karteneinstellungen"
+    "goToMapSettings": "Zu den Karteneinstellungen",
+    "flyToRegionOrCoordinates": "Zur Region oder zu den Koordinaten fliegen"
   },
   "form": {
     "namePlaceholder": "Diesen Ort benennen",
@@ -107,5 +108,34 @@
     "aerial": "Luftbild",
     "hybrid": "Hybrid",
     "topographic": "Topografisch"
+  },
+  "measure": {
+    "title": "Messen",
+    "start": "Entfernung und Fläche messen",
+    "stop": "Messen beenden",
+    "help": "Klicke auf die Karte, um Punkte zu setzen. Klicke erneut auf den ersten Punkt, um eine Fläche zu messen.",
+    "distance": "Entfernung:",
+    "perimeter": "Umfang:",
+    "area": "Fläche:",
+    "undo": "Rückgängig",
+    "undoTitle": "Letzten Punkt entfernen (Rücktaste)",
+    "clear": "Löschen",
+    "clearTitle": "Löschen (Esc)",
+    "dragHint": "Punkte zum Anpassen ziehen",
+    "closeShape": "Form schließen, um die Fläche zu messen",
+    "dragToMove": "Zum Verschieben ziehen"
+  },
+  "place": {
+    "copyCoordinates": "Koordinaten kopieren",
+    "close": "Schließen",
+    "saveAsPin": "Als Markierung speichern"
+  },
+  "jump": {
+    "aria": "Zu einer heruntergeladenen Region, einem Ort oder Koordinaten springen",
+    "placeholder": "Springe zu: Ort, Region oder lat,lng",
+    "regions": "Heruntergeladene Regionen",
+    "places": "Orte",
+    "noPlaces": "Keine Orte in deinen heruntergeladenen Regionen gefunden.",
+    "readFailed": "Die Kartendatei für {{region}} konnte nicht gelesen werden."
   }
 }

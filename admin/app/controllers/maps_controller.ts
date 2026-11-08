@@ -6,9 +6,12 @@ import {
   filenameParamValidator,
   mapExtractPreflightValidator,
   mapExtractValidator,
+  mapPlaceSearchValidator,
   remoteDownloadValidator,
   remoteDownloadValidatorOptional,
 } from '#validators/common'
+import { MapPlaceIndexService } from '#services/map_place_index_service'
+import { IndexMapPlacesJob } from '#jobs/index_map_places_job'
 import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
 import vine from '@vinejs/vine'
@@ -19,17 +22,35 @@ export default class MapsController {
 
   async index({ inertia }: HttpContext) {
     const baseAssetsCheck = await this.mapService.ensureBaseAssets()
-    const [regionFiles, worldBasemapExists] = await Promise.all([
+    const [regionFiles, worldBasemapExists, regions] = await Promise.all([
       this.mapService.listRegions(),
       this.mapService.checkWorldBasemapExists(),
+      this.mapService.listRegionsForNavigation(),
     ])
     return inertia.render('maps', {
       maps: {
         baseAssetsExist: baseAssetsCheck,
         worldBasemapExists,
         regionFiles: regionFiles.files,
+        regions,
       },
     })
+  }
+
+  /**
+   * Offline place search across the downloaded regions. `status` tells the UI whether some
+   * regions aren't searchable yet; if so, indexing is (re)queued here as a safety net.
+   */
+  async searchPlaces({ request }: HttpContext) {
+    const { q, lat, lng, limit } = await request.validateUsing(mapPlaceSearchValidator)
+    const service = new MapPlaceIndexService()
+    const near = lat !== undefined && lng !== undefined ? { lat, lng } : null
+    const [results, status] = await Promise.all([
+      service.search(q, near, limit ?? 10),
+      service.status(),
+    ])
+    if (status.pending > 0) await IndexMapPlacesJob.dispatch()
+    return { results, status }
   }
 
   async downloadBaseAssets({ request }: HttpContext) {

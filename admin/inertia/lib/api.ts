@@ -8,7 +8,13 @@ import { ServiceSlim } from '../../types/services'
 import { FileEntry } from '../../types/files'
 import { AppAutoUpdateStatus, AutoUpdateStatus, CheckLatestVersionResult, ContentAutoUpdateStatus, SystemInformationResponse, SystemUpdateStatus } from '../../types/system'
 import { DownloadJobWithProgress, WikipediaState } from '../../types/downloads'
-import type { Country, CountryCode, CountryGroup, MapExtractPreflight } from '../../types/maps'
+import type {
+  Country,
+  CountryCode,
+  CountryGroup,
+  MapExtractPreflight,
+  MapPlaceSearchResponse,
+} from '../../types/maps'
 import { EmbedJobWithProgress, FileWarningsResult, StoredFileInfo } from '../../types/rag'
 import type { CategoryWithStatus, CollectionWithStatus, ContentUpdateCheckResult, CreatorPackWithStatus, ResourceUpdateInfo } from '../../types/collections'
 import { catchInternal } from './util'
@@ -19,6 +25,7 @@ import { BenchmarkType, RunBenchmarkResponse, SubmitBenchmarkResponse, UpdateBui
 import type { CreateMapMarkerPayload, MapMarkerResponse, UpdateMapMarkerPayload } from '../../types/maps'
 import type { ChatSource } from '../../types/chat'
 import { chatStreamErrorMessage } from './chat_stream.js'
+import type { SearchableBook } from '../../app/utils/kiwix_search.js'
 
 type OllamaChatRequestWithImages = OllamaChatRequest & { images?: File[] }
 
@@ -776,6 +783,28 @@ class API {
     })()
   }
 
+  /**
+   * Offline place search. Superseded requests (the user kept typing) are aborted through
+   * `signal` and resolve to undefined without the usual error toast.
+   */
+  async searchMapPlaces(
+    params: { q: string; lat?: number; lng?: number; limit?: number },
+    signal?: AbortSignal
+  ) {
+    return catchInternal(async () => {
+      try {
+        const response = await this.client.get<MapPlaceSearchResponse>('/maps/search', {
+          params,
+          signal,
+        })
+        return response.data
+      } catch (error) {
+        if (axios.isCancel(error)) return undefined
+        throw error
+      }
+    })()
+  }
+
   async listCountryGroups() {
     return catchInternal(async () => {
       const response = await this.client.get<{ groups: CountryGroup[] }>('/maps/country-groups')
@@ -973,6 +1002,15 @@ class API {
   async listZimFiles() {
     return catchInternal(async () => {
       return await this.client.get<ListZimFilesResponse>('/zim/list')
+    })()
+  }
+
+  async listSearchableBooks() {
+    return catchInternal(async () => {
+      const response = await this.client.get<{ books: SearchableBook[] }>(
+        '/zim/searchable-books'
+      )
+      return response.data.books
     })()
   }
 

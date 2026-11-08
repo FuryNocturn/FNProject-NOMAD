@@ -44,5 +44,13 @@
   "removeLink": "Supprimer ce lien",
   "removeLinkFailed": "Échec de la suppression de ce lien.",
   "addLink": "Ajouter un lien",
-  "addLinkHint": "Un raccourci vers autre chose sur votre réseau"
+  "addLinkHint": "Un raccourci vers autre chose sur votre réseau",
+  "librarySearch": {
+    "label": "Chercher dans tous les livres",
+    "help": "Recherche plein texte dans les {{count}} livres de la Bibliothèque. Les résultats s’ouvrent dans un nouvel onglet.",
+    "placeholder": "ex. mildiou de la tomate",
+    "language": "Langue :",
+    "search": "Chercher",
+    "omitted": "Petits livres laissés de côté pour limiter la taille de la recherche : {{count}}."
+  }
 }
