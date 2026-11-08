@@ -71,5 +71,11 @@
   },
   "nomad_almanac": {
     "description": "Sonnen- und Mondaufgang, Missweisung des Kompasses und Gezeitenvorhersagen für jeden Ort der Erde, offline"
+  },
+  "nomad_radio": {
+    "description": "Frequenzreferenz, Rufzeichen-Präfixe und Übungen für die Amateurfunkprüfung, offline"
+  },
+  "nomad_food": {
+    "description": "Nährwerttabelle, Rationsplaner und geprüfte Einkochanleitungen nach USDA-Daten, offline"
   }
 }

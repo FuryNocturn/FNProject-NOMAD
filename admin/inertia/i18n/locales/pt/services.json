@@ -71,5 +71,11 @@
   },
   "nomad_almanac": {
     "description": "Nascer do sol e da lua, declinação da bússola e previsões de maré para qualquer lugar da Terra, offline"
+  },
+  "nomad_radio": {
+    "description": "Referência de frequências, prefixos de indicativos e treino para o exame de radioamador, sem ligação"
+  },
+  "nomad_food": {
+    "description": "Tabela de composição de alimentos, planeador de rações e conservas caseiras testadas segundo o USDA, sem ligação"
   }
 }

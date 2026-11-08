@@ -71,5 +71,11 @@
   },
   "nomad_almanac": {
     "description": "Salida y puesta del sol y la luna, declinación de la brújula y mareas para cualquier lugar de la Tierra, sin conexión"
+  },
+  "nomad_radio": {
+    "description": "Referencia de frecuencias, prefijos de indicativos y entrenador del examen de radioaficionado, sin conexión"
+  },
+  "nomad_food": {
+    "description": "Tabla de composición de alimentos, planificador de raciones y conservas caseras probadas según el USDA, sin conexión"
   }
 }
