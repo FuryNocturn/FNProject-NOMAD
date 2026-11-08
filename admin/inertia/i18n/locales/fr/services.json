@@ -68,5 +68,8 @@
   },
   "nomad_kismet": {
     "description": "Moniteur Wi-Fi : voyez les réseaux et appareils alentour et auditez votre propre réseau (Linux, adaptateur en mode moniteur)"
+  },
+  "nomad_almanac": {
+    "description": "Lever du soleil et de la lune, déclinaison magnétique et prédictions de marée pour tout lieu sur Terre, hors ligne"
   }
 }

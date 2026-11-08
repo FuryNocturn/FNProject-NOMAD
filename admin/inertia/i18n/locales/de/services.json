@@ -68,5 +68,8 @@
   },
   "nomad_kismet": {
     "description": "WLAN-Monitor: Netze und Geräte in der Umgebung sehen und das eigene Netz prüfen (Linux, Adapter mit Monitor-Modus)"
+  },
+  "nomad_almanac": {
+    "description": "Sonnen- und Mondaufgang, Missweisung des Kompasses und Gezeitenvorhersagen für jeden Ort der Erde, offline"
   }
 }

@@ -68,5 +68,8 @@
   },
   "nomad_kismet": {
     "description": "Monitor de wifi: mira las redes y dispositivos de alrededor y audita tu propia red (Linux, adaptador en modo monitor)"
+  },
+  "nomad_almanac": {
+    "description": "Salida y puesta del sol y la luna, declinación de la brújula y mareas para cualquier lugar de la Tierra, sin conexión"
   }
 }

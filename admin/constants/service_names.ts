@@ -24,4 +24,5 @@ export const SERVICE_NAMES = {
   PHOTOPRISM: 'nomad_photoprism',
   OPENWEBRX: 'nomad_openwebrx',
   KISMET: 'nomad_kismet',
+  ALMANAC: 'nomad_almanac',
 }

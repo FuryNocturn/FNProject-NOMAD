@@ -68,5 +68,8 @@
   },
   "nomad_kismet": {
     "description": "Wi-Fi monitor: see the networks and devices around you and audit your own network (Linux, monitor-mode adapter)"
+  },
+  "nomad_almanac": {
+    "description": "Sunrise, moonrise, compass declination and tide predictions for any place on Earth, offline"
   }
 }
