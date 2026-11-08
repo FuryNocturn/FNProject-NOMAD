@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Popup } from 'react-map-gl/maplibre'
 import { IconCheck, IconCopy } from '@tabler/icons-react'
 
@@ -47,6 +48,7 @@ export default function PlaceInfoPopup({
   onSaveAsPin,
   onMouseEnter,
 }: PlaceInfoPopupProps) {
+  const { t } = useTranslation()
   const [copied, setCopied] = useState(false)
   const coordinates = formatLatLng(latitude, longitude)
 
@@ -87,8 +89,8 @@ export default function PlaceInfoPopup({
               }
             }}
             className="text-gray-500 hover:text-gray-800"
-            title="Copy coordinates"
-            aria-label="Copy coordinates"
+            title={t('maps.place.copyCoordinates')}
+            aria-label={t('maps.place.copyCoordinates')}
           >
             {copied ? <IconCheck size={14} /> : <IconCopy size={14} />}
           </button>
@@ -100,14 +102,14 @@ export default function PlaceInfoPopup({
             onClick={onClose}
             className="w-16 rounded bg-[#424420] px-2.5 py-1 text-xs text-white hover:bg-[#525530] border-none outline-none"
           >
-            Close
+            {t('maps.place.close')}
           </button>
           <button
             type="button"
             onClick={onSaveAsPin}
             className="rounded bg-[#424420] px-2.5 py-1 text-xs text-white hover:bg-[#525530] border-none outline-none"
           >
-            Save as pin
+            {t('maps.place.saveAsPin')}
           </button>
         </div>
       </div>

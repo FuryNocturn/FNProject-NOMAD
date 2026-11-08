@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useQuery } from '@tanstack/react-query'
 import { IconSearch } from '@tabler/icons-react'
 import Input from '~/components/inputs/Input'
@@ -29,6 +30,7 @@ function languageLabel(code: string): string {
  * to the same place as the dashboard tile.
  */
 export default function LibrarySearch({ kiwixBaseUrl }: { kiwixBaseUrl: string }) {
+  const { t } = useTranslation()
   const [pattern, setPattern] = useState('')
   const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null)
 
@@ -71,9 +73,9 @@ export default function LibrarySearch({ kiwixBaseUrl }: { kiwixBaseUrl: string }
       <div className="flex flex-wrap items-end gap-3">
         <Input
           name="library-search"
-          label="Search all books"
-          helpText={`Full-text search across ${bookCount} ${bookCount === 1 ? 'book' : 'books'} in the Information Library. Results open in a new tab.`}
-          placeholder="e.g. tomato blight"
+          label={t('home.librarySearch.label')}
+          helpText={t('home.librarySearch.help', { count: bookCount })}
+          placeholder={t('home.librarySearch.placeholder')}
           value={pattern}
           onChange={(e) => setPattern(e.target.value)}
           className="flex-1 min-w-[14rem]"
@@ -87,7 +89,7 @@ export default function LibrarySearch({ kiwixBaseUrl }: { kiwixBaseUrl: string }
               htmlFor="library-search-language"
               className="text-sm font-medium text-text-secondary"
             >
-              Language:
+              {t('home.librarySearch.language')}
             </label>
             <select
               id="library-search-language"
@@ -104,13 +106,12 @@ export default function LibrarySearch({ kiwixBaseUrl }: { kiwixBaseUrl: string }
           </div>
         )}
         <StyledButton icon="IconSearch" disabled={!result} onClick={search}>
-          Search
+          {t('home.librarySearch.search')}
         </StyledButton>
       </div>
       {result && result.omittedCount > 0 && (
         <p className="mt-2 text-sm text-text-muted">
-          {result.omittedCount} smaller {result.omittedCount === 1 ? 'book is' : 'books are'} left
-          out to keep the search request within size limits.
+          {t('home.librarySearch.omitted', { count: result.omittedCount })}
         </p>
       )}
     </form>

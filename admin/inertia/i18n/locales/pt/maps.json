@@ -12,7 +12,8 @@
     "hideCoordinates": "Ocultar coordenadas",
     "showCoordinates": "Mostrar coordenadas",
     "manageRegions": "Gerenciar regiões do mapa",
-    "goToMapSettings": "Ir para Configurações de mapas"
+    "goToMapSettings": "Ir para Configurações de mapas",
+    "flyToRegionOrCoordinates": "Ir para a região ou as coordenadas"
   },
   "form": {
     "namePlaceholder": "Dê um nome a este local",
@@ -107,5 +108,34 @@
     "aerial": "Aérea",
     "hybrid": "Híbrida",
     "topographic": "Topográfica"
+  },
+  "measure": {
+    "title": "Medir",
+    "start": "Medir distância e área",
+    "stop": "Parar de medir",
+    "help": "Clica no mapa para adicionar pontos. Clica de novo no primeiro para medir uma área.",
+    "distance": "Distância:",
+    "perimeter": "Perímetro:",
+    "area": "Área:",
+    "undo": "Desfazer",
+    "undoTitle": "Desfazer o último ponto (Retrocesso)",
+    "clear": "Limpar",
+    "clearTitle": "Limpar (Esc)",
+    "dragHint": "Arrasta os pontos para ajustar",
+    "closeShape": "Fechar a forma para medir a área",
+    "dragToMove": "Arrasta para mover"
+  },
+  "place": {
+    "copyCoordinates": "Copiar coordenadas",
+    "close": "Fechar",
+    "saveAsPin": "Guardar como marcador"
+  },
+  "jump": {
+    "aria": "Ir para uma região descarregada, um lugar ou coordenadas",
+    "placeholder": "Ir para: lugar, região ou lat,lng",
+    "regions": "Regiões descarregadas",
+    "places": "Lugares",
+    "noPlaces": "Nenhum lugar encontrado nas tuas regiões descarregadas.",
+    "readFailed": "Não foi possível ler o mapa de {{region}}."
   }
 }

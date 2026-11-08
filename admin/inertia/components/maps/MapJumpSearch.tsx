@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Combobox, ComboboxInput, ComboboxOption, ComboboxOptions } from '@headlessui/react'
 import {
   IconBuildingCommunity,
@@ -66,6 +67,7 @@ export default function MapJumpSearch({
   onSubmitText,
   getNear,
 }: MapJumpSearchProps) {
+  const { t } = useTranslation()
   const [places, setPlaces] = useState<PlaceResult[]>([])
   const [status, setStatus] = useState<MapPlaceIndexStatus | null>(null)
   const [searching, setSearching] = useState(false)
@@ -128,8 +130,8 @@ export default function MapJumpSearch({
     >
       <div className="relative">
         <ComboboxInput
-          aria-label="Jump to a downloaded region, a place, or coordinates"
-          placeholder={regions.length > 0 ? 'Jump to: place, region or lat,lng' : 'lat,lng'}
+          aria-label={t('maps.jump.aria')}
+          placeholder={regions.length > 0 ? t('maps.jump.placeholder') : 'lat,lng'}
           autoComplete="off"
           value={text}
           onChange={(event) => onTextChange(event.target.value)}
@@ -147,7 +149,7 @@ export default function MapJumpSearch({
         >
           {matchingRegions.length > 0 && (
             <div className="px-3 pb-1 pt-1.5 text-[11px] font-semibold uppercase tracking-wide text-text-muted">
-              Downloaded regions
+              {t('maps.jump.regions')}
             </div>
           )}
           {matchingRegions.map((region) => (
@@ -163,7 +165,7 @@ export default function MapJumpSearch({
 
           {places.length > 0 && (
             <div className="px-3 pb-1 pt-2 text-[11px] font-semibold uppercase tracking-wide text-text-muted">
-              Places
+              {t('maps.jump.places')}
             </div>
           )}
           {places.map((place) => {
@@ -197,7 +199,7 @@ export default function MapJumpSearch({
           )}
           {showNoResults && (
             <div className="px-3 py-2 text-xs text-text-muted">
-              No places found in your downloaded regions.
+              {t('maps.jump.noPlaces')}
             </div>
           )}
           {searchable && indexing && (

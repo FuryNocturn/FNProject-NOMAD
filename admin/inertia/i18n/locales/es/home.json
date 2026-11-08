@@ -44,5 +44,13 @@
   "removeLink": "Quitar este enlace",
   "removeLinkFailed": "No se pudo quitar este enlace.",
   "addLink": "Añadir un enlace",
-  "addLinkHint": "Un acceso directo a otra cosa de tu red"
+  "addLinkHint": "Un acceso directo a otra cosa de tu red",
+  "librarySearch": {
+    "label": "Buscar en todos los libros",
+    "help": "Búsqueda de texto en los {{count}} libros de la Biblioteca. Los resultados se abren en otra pestaña.",
+    "placeholder": "p. ej. mildiu del tomate",
+    "language": "Idioma:",
+    "search": "Buscar",
+    "omitted": "Libros pequeños que se quedan fuera para no pasarse del tamaño de búsqueda: {{count}}."
+  }
 }

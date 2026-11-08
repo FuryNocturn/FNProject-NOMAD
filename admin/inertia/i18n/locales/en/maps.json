@@ -12,7 +12,8 @@
     "hideCoordinates": "Hide coordinates",
     "showCoordinates": "Show coordinates",
     "manageRegions": "Manage Map Regions",
-    "goToMapSettings": "Go to Map Settings"
+    "goToMapSettings": "Go to Map Settings",
+    "flyToRegionOrCoordinates": "Fly to region or coordinates"
   },
   "form": {
     "namePlaceholder": "Name this location",
@@ -107,5 +108,34 @@
     "aerial": "Aerial",
     "hybrid": "Hybrid",
     "topographic": "Topographic"
+  },
+  "measure": {
+    "title": "Measure",
+    "start": "Measure distance and area",
+    "stop": "Stop measuring",
+    "help": "Click the map to add points. Click the first point again to measure an area.",
+    "distance": "Distance:",
+    "perimeter": "Perimeter:",
+    "area": "Area:",
+    "undo": "Undo",
+    "undoTitle": "Undo last point (Backspace)",
+    "clear": "Clear",
+    "clearTitle": "Clear (Esc)",
+    "dragHint": "Drag points to adjust",
+    "closeShape": "Close the shape to measure its area",
+    "dragToMove": "Drag to move"
+  },
+  "place": {
+    "copyCoordinates": "Copy coordinates",
+    "close": "Close",
+    "saveAsPin": "Save as pin"
+  },
+  "jump": {
+    "aria": "Jump to a downloaded region, a place, or coordinates",
+    "placeholder": "Jump to: place, region or lat,lng",
+    "regions": "Downloaded regions",
+    "places": "Places",
+    "noPlaces": "No places found in your downloaded regions.",
+    "readFailed": "Could not read the map file for {{region}}."
   }
 }

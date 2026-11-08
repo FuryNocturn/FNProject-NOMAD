@@ -1,4 +1,5 @@
 import { Layer, Marker, Source } from 'react-map-gl/maplibre'
+import { useTranslation } from 'react-i18next'
 import { IconArrowBackUp, IconRulerMeasure, IconTrash, IconX } from '@tabler/icons-react'
 
 import {
@@ -68,6 +69,7 @@ type MeasureLayersProps = {
 
 /** The measured path drawn on the map: line, filled area, draggable points and segment labels. */
 export function MeasureLayers({ measurement, unit, onMovePoint, onClose }: MeasureLayersProps) {
+  const { t } = useTranslation()
   const { points, closed } = measurement
   const color = accentColor()
   const ring = closed && points.length > 2 ? [...points, points[0]] : points
@@ -126,7 +128,7 @@ export function MeasureLayers({ measurement, unit, onMovePoint, onClose }: Measu
             }}
           >
             <div
-              title={canClose ? 'Close the shape to measure its area' : 'Drag to move'}
+              title={canClose ? t('maps.measure.closeShape') : t('maps.measure.dragToMove')}
               className={`rounded-full border-2 border-white shadow ${
                 canClose ? 'h-4 w-4 cursor-pointer' : 'h-3 w-3 cursor-grab'
               }`}
@@ -160,6 +162,7 @@ export function MeasurePanel({
   onDone,
   onMouseEnter,
 }: MeasurePanelProps) {
+  const { t } = useTranslation()
   const { points, closed } = measurement
   const distance = pathLengthMeters(points, closed)
   const area = closed ? polygonAreaSqMeters(points) : 0
@@ -171,12 +174,12 @@ export function MeasurePanel({
     >
       <div className="flex items-center gap-2">
         <IconRulerMeasure size={18} className="text-desert-orange" />
-        <span className="text-sm font-medium text-text-primary">Measure</span>
+        <span className="text-sm font-medium text-text-primary">{t('maps.measure.title')}</span>
         <button
           type="button"
           onClick={onDone}
           className="ml-auto text-text-muted hover:text-text-primary"
-          title="Stop measuring"
+          title={t('maps.measure.stop')}
         >
           <IconX size={16} />
         </button>
@@ -184,15 +187,15 @@ export function MeasurePanel({
 
       {points.length < 2 ? (
         <p className="mt-1.5 text-xs text-text-secondary">
-          Click the map to add points. Click the first point again to measure an area.
+          {t('maps.measure.help')}
         </p>
       ) : (
         <dl className="mt-1.5 grid grid-cols-[auto_1fr] gap-x-3 gap-y-0.5 text-sm">
-          <dt className="text-text-secondary">{closed ? 'Perimeter:' : 'Distance:'}</dt>
+          <dt className="text-text-secondary">{closed ? t('maps.measure.perimeter') : t('maps.measure.distance')}</dt>
           <dd className="font-medium text-text-primary">{formatDistance(distance, unit)}</dd>
           {closed && (
             <>
-              <dt className="text-text-secondary">Area:</dt>
+              <dt className="text-text-secondary">{t('maps.measure.area')}</dt>
               <dd className="font-medium text-text-primary">{formatArea(area, unit)}</dd>
             </>
           )}
@@ -205,20 +208,20 @@ export function MeasurePanel({
           onClick={onUndo}
           disabled={points.length === 0}
           className={panelButtonClass}
-          title="Undo last point (Backspace)"
+          title={t('maps.measure.undoTitle')}
         >
-          <IconArrowBackUp size={14} /> Undo
+          <IconArrowBackUp size={14} /> {t('maps.measure.undo')}
         </button>
         <button
           type="button"
           onClick={onClear}
           disabled={points.length === 0}
           className={panelButtonClass}
-          title="Clear (Esc)"
+          title={t('maps.measure.clearTitle')}
         >
-          <IconTrash size={14} /> Clear
+          <IconTrash size={14} /> {t('maps.measure.clear')}
         </button>
-        <span className="ml-auto text-[11px] text-text-muted">Drag points to adjust</span>
+        <span className="ml-auto text-[11px] text-text-muted">{t('maps.measure.dragHint')}</span>
       </div>
     </div>
   )

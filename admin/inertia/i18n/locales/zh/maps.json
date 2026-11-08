@@ -12,7 +12,8 @@
     "hideCoordinates": "隐藏坐标",
     "showCoordinates": "显示坐标",
     "manageRegions": "管理地图区域",
-    "goToMapSettings": "前往地图设置"
+    "goToMapSettings": "前往地图设置",
+    "flyToRegionOrCoordinates": "飞到区域或坐标"
   },
   "form": {
     "namePlaceholder": "为此位置命名",
@@ -107,5 +108,34 @@
     "aerial": "航空",
     "hybrid": "混合",
     "topographic": "地形"
+  },
+  "measure": {
+    "title": "测量",
+    "start": "测量距离和面积",
+    "stop": "停止测量",
+    "help": "在地图上点击添加点。再次点击第一个点可测量面积。",
+    "distance": "距离：",
+    "perimeter": "周长：",
+    "area": "面积：",
+    "undo": "撤销",
+    "undoTitle": "撤销上一个点（退格键）",
+    "clear": "清除",
+    "clearTitle": "清除（Esc）",
+    "dragHint": "拖动点进行调整",
+    "closeShape": "闭合图形以测量面积",
+    "dragToMove": "拖动以移动"
+  },
+  "place": {
+    "copyCoordinates": "复制坐标",
+    "close": "关闭",
+    "saveAsPin": "保存为标记"
+  },
+  "jump": {
+    "aria": "跳转到已下载的区域、地点或坐标",
+    "placeholder": "跳转到：地点、区域或 lat,lng",
+    "regions": "已下载的区域",
+    "places": "地点",
+    "noPlaces": "在你下载的区域中没有找到地点。",
+    "readFailed": "无法读取 {{region}} 的地图文件。"
   }
 }

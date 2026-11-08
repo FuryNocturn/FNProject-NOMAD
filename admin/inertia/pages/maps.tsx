@@ -66,7 +66,7 @@ export default function Maps(props: {
     } catch {
       addNotification({
         type: 'error',
-        message: `Could not read the map file for ${region.label}.`,
+        message: t('maps.jump.readFailed', { region: region.label }),
       })
     }
   }
@@ -177,7 +177,8 @@ export default function Maps(props: {
                   ? 'bg-desert-green text-white'
                   : 'bg-surface-primary text-text-secondary hover:bg-surface-secondary'
               }`}
-              title={measureEnabled ? 'Stop measuring' : 'Measure distance and area'}
+              title={measureEnabled ? t('maps.measure.stop') : t('maps.measure.start')}
+              aria-label={measureEnabled ? t('maps.measure.stop') : t('maps.measure.start')}
               aria-pressed={measureEnabled}
             >
               <IconRulerMeasure size={18}/>
