@@ -6,6 +6,7 @@ import {
   IconFileText,
   IconSearch,
 } from '@tabler/icons-react'
+import { useTranslation } from 'react-i18next'
 import type { AgentStepView } from '../../../types/chat'
 
 /**
@@ -13,11 +14,12 @@ import type { AgentStepView } from '../../../types/chat'
  * it runs, with the hits as links.
  */
 
-const TOOL_LABEL: Record<string, { icon: typeof IconSearch; verb: string }> = {
-  search_library: { icon: IconSearch, verb: 'Searching the library' },
-  read_article: { icon: IconBook, verb: 'Reading' },
-  list_books: { icon: IconBooks, verb: 'Listing the books' },
-  search_knowledge_base: { icon: IconFileText, verb: 'Searching your documents' },
+// The verb is the i18n key chat.agent.tool.<name>.
+const TOOL_ICON: Record<string, typeof IconSearch> = {
+  search_library: IconSearch,
+  read_article: IconBook,
+  list_books: IconBooks,
+  search_knowledge_base: IconFileText,
 }
 
 function argText(step: AgentStepView): string {
@@ -28,17 +30,18 @@ function argText(step: AgentStepView): string {
 }
 
 export default function AgentSteps({ steps, running }: { steps: AgentStepView[]; running?: boolean }) {
+  const { t } = useTranslation()
   if (steps.length === 0 && !running) return null
   return (
     <div className="mb-3">
       <details open={running} className="rounded border border-border-subtle bg-surface-primary/60 text-xs">
         <summary className="cursor-pointer select-none px-3 py-2 font-medium text-text-muted hover:text-text-primary">
-          {running ? 'Working…' : `${steps.length} step${steps.length === 1 ? '' : 's'}`}
+          {running ? t('chat.agent.working') : t('chat.agent.steps', { count: steps.length })}
         </summary>
         <ol className="space-y-2 border-t border-border-subtle px-3 py-2">
           {steps.map((step) => {
-            const meta = TOOL_LABEL[step.tool] ?? { icon: IconSearch, verb: step.tool }
-            const Icon = meta.icon
+            const Icon = TOOL_ICON[step.tool] ?? IconSearch
+            const verb = TOOL_ICON[step.tool] ? t(`chat.agent.tool.${step.tool}`) : step.tool
             return (
               <li key={step.id}>
                 {step.note && <div className="mb-0.5 italic text-text-muted">{step.note}</div>}
@@ -55,7 +58,7 @@ export default function AgentSteps({ steps, running }: { steps: AgentStepView[];
                   <Icon className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-text-muted" />
                   <div className="min-w-0">
                     <div>
-                      <span className="font-medium">{meta.verb}</span>
+                      <span className="font-medium">{verb}</span>
                       {argText(step) && <span className="text-text-secondary"> {argText(step)}</span>}
                       {step.summary && <span className="text-text-muted"> → {step.summary}</span>}
                       {step.ms !== undefined && <span className="text-text-muted"> ({(step.ms / 1000).toFixed(1)} s)</span>}

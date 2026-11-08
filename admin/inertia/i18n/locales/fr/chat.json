@@ -30,7 +30,9 @@
     "closeChat": "Fermer la discussion",
     "deleteChatTitle": "Supprimer cette conversation ?",
     "deleteChatBody": "« {{title}} » et tous ses messages seront supprimés. Impossible d’annuler.",
-    "deleteChat": "Supprimer"
+    "deleteChat": "Supprimer",
+    "agent": "Agent :",
+    "agentHelp": "Activé, l’assistant cherche lui-même dans la bibliothèque hors ligne, lit des articles et montre chaque étape. Vous pouvez l’arrêter à tout moment. Désactivé, le chat classique est utilisé."
   },
   "interface": {
     "tooManyImages": "Vous pouvez joindre jusqu'à {{max}} images.",
@@ -78,5 +80,15 @@
     "temporary": "Les images sont envoyées uniquement avec cette requête. Elles ne sont pas enregistrées et disparaîtront après leur envoi ou le rechargement de cette page.",
     "unsupported": "Ce modèle ne peut pas utiliser d'images. Choisissez un modèle marqué « Prend en charge les images » dans Modèles et paramètres.",
     "unknown": "NOMAD ne peut pas confirmer si ce modèle accepte les images. Vous pouvez essayer d'envoyer une image, mais la requête échouera si le modèle ne gère que le texte."
+  },
+  "agent": {
+    "working": "En cours…",
+    "steps": "Étapes : {{count}}",
+    "tool": {
+      "search_library": "Recherche dans la bibliothèque",
+      "read_article": "Lecture",
+      "list_books": "Liste des livres",
+      "search_knowledge_base": "Recherche dans vos documents"
+    }
   }
 }

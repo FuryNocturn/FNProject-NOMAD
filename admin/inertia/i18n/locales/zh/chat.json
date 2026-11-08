@@ -30,7 +30,9 @@
     "closeChat": "关闭聊天",
     "deleteChatTitle": "删除此对话？",
     "deleteChatBody": "“{{title}}”及其所有消息将被删除，且无法撤销。",
-    "deleteChat": "删除"
+    "deleteChat": "删除",
+    "agent": "智能体：",
+    "agentHelp": "开启后，助手会自己搜索离线资料库、阅读文章并显示每一步，你可以随时停止。关闭时使用普通聊天。"
   },
   "interface": {
     "tooManyImages": "最多可附加 {{max}} 张图片。",
@@ -78,5 +80,15 @@
     "temporary": "图片仅随本次请求发送，不会被保存，发送后或刷新此页面后即会消失。",
     "unsupported": "此模型无法使用图片。请在“模型与设置”中选择标有“支持图片”的模型。",
     "unknown": "NOMAD 无法确认此模型是否支持图片。您可以尝试发送图片，但如果该模型仅支持文本，请求将会失败。"
+  },
+  "agent": {
+    "working": "处理中…",
+    "steps": "步骤：{{count}}",
+    "tool": {
+      "search_library": "正在搜索资料库",
+      "read_article": "正在阅读",
+      "list_books": "正在列出书籍",
+      "search_knowledge_base": "正在搜索你的文档"
+    }
   }
 }

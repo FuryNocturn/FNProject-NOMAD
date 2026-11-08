@@ -30,7 +30,9 @@
     "closeChat": "Fechar chat",
     "deleteChatTitle": "Apagar esta conversa?",
     "deleteChatBody": "«{{title}}» e todas as suas mensagens serão apagadas. Não é possível desfazer.",
-    "deleteChat": "Apagar"
+    "deleteChat": "Apagar",
+    "agent": "Agente:",
+    "agentHelp": "Ativado, o assistente procura ele próprio na biblioteca offline, lê artigos e mostra cada passo. Podes pará-lo a qualquer momento. Desativado, usa-se o chat clássico."
   },
   "interface": {
     "tooManyImages": "Você pode anexar até {{max}} imagens.",
@@ -78,5 +80,15 @@
     "temporary": "As imagens são enviadas apenas com esta solicitação. Elas não são salvas e desaparecerão depois que você as enviar ou recarregar esta página.",
     "unsupported": "Este modelo não consegue usar imagens. Escolha um modelo marcado como “Suporta imagens” em Modelos e configurações.",
     "unknown": "O NOMAD não consegue confirmar se este modelo aceita imagens. Você pode tentar enviar uma imagem, mas a solicitação falhará se o modelo for apenas de texto."
+  },
+  "agent": {
+    "working": "A trabalhar…",
+    "steps": "Passos: {{count}}",
+    "tool": {
+      "search_library": "A procurar na biblioteca",
+      "read_article": "A ler",
+      "list_books": "A listar os livros",
+      "search_knowledge_base": "A procurar nos teus documentos"
+    }
   }
 }

@@ -30,7 +30,9 @@
     "closeChat": "Chat schließen",
     "deleteChatTitle": "Diesen Chat löschen?",
     "deleteChatBody": "„{{title}}“ wird mit allen Nachrichten gelöscht. Das lässt sich nicht rückgängig machen.",
-    "deleteChat": "Löschen"
+    "deleteChat": "Löschen",
+    "agent": "Agent:",
+    "agentHelp": "Eingeschaltet durchsucht der Assistent selbst die Offline-Bibliothek, liest Artikel und zeigt jeden Schritt. Du kannst ihn jederzeit stoppen. Ausgeschaltet wird der klassische Chat verwendet."
   },
   "interface": {
     "tooManyImages": "Du kannst bis zu {{max}} Bilder anhängen.",
@@ -78,5 +80,15 @@
     "temporary": "Bilder werden nur mit dieser Anfrage gesendet. Sie werden nicht gespeichert und verschwinden, nachdem du sie gesendet oder diese Seite neu geladen hast.",
     "unsupported": "Dieses Modell kann keine Bilder verwenden. Wähle ein Modell, das in „Modelle & Einstellungen“ mit „Unterstützt Bilder“ markiert ist.",
     "unknown": "NOMAD kann nicht bestätigen, ob dieses Modell Bilder akzeptiert. Du kannst es mit einem Bild versuchen, die Anfrage schlägt jedoch fehl, wenn das Modell nur Text unterstützt."
+  },
+  "agent": {
+    "working": "Arbeitet…",
+    "steps": "Schritte: {{count}}",
+    "tool": {
+      "search_library": "Durchsuche die Bibliothek",
+      "read_article": "Lese",
+      "list_books": "Liste die Bücher auf",
+      "search_knowledge_base": "Durchsuche deine Dokumente"
+    }
   }
 }
