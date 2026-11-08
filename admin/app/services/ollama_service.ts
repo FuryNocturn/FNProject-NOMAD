@@ -9,6 +9,7 @@ import {
   readModelfileNumCtx,
   readServedContextLength,
 } from '../utils/context_window.js'
+import { selectRecommendedModels } from '../utils/model_recommendation.js'
 import { compatSamplerParams, nativeSamplerOptions, readModelfileSamplers } from '../utils/sampler.js'
 import { NomadOllamaModel, SamplerProfile } from '../../types/ollama.js'
 import { EMBEDDING_MODEL_NAME, FALLBACK_RECOMMENDED_OLLAMA_MODELS } from '../../constants/ollama.js'
@@ -822,6 +823,134 @@ export class OllamaService {
     return normalize()
   }
 
+  /**
+   * Raw native `/api/chat` stream with tool definitions, for the chat agent.
+   * Native-only on purpose: tool calls stream as structured `tool_calls` on
+   * Ollama's own endpoint, and the agent also needs `num_ctx`, which the
+   * OpenAI-compatible layer drops (see _compatParams). The caller's signal is
+   * bridged onto the iterator exactly like _chatStreamNative does (#1065).
+   */
+  public async chatStreamWithTools(req: {
+    model: string
+    messages: Array<Record<string, unknown>>
+    tools: Array<Record<string, unknown>>
+    think?: boolean
+    keepAlive?: string | number
+    numCtx?: number
+    signal?: AbortSignal
+  }): Promise<AsyncIterable<any>> {
+    await this._ensureDependencies()
+    if (!(await this._isNativeBackend()) || !this.ollama) {
+      // LM Studio, llama.cpp and other OpenAI-compatible backends (fork addition).
+      return this._chatStreamWithToolsCompat(req)
+    }
+    const iterator = await this.ollama.chat({
+      model: req.model,
+      messages: req.messages as any,
+      tools: req.tools as any,
+      stream: true,
+      think: req.think ?? false,
+      ...(req.keepAlive !== undefined ? { keep_alive: req.keepAlive } : {}),
+      ...(req.numCtx ? { options: { num_ctx: req.numCtx } } : {}),
+    })
+    if (req.signal) {
+      if (req.signal.aborted) iterator.abort()
+      else req.signal.addEventListener('abort', () => iterator.abort(), { once: true })
+    }
+    return iterator
+  }
+
+  /**
+   * Tool calling through the OpenAI-compatible API, returned in the shape the agent
+   * reads from Ollama: `{ message: { content, thinking, tool_calls? } }`, with each
+   * tool call as `{ function: { name, arguments: object } }`.
+   *
+   * The agent keeps its conversation in Ollama's format (tool calls without ids,
+   * tool results with `tool_name`), so ids are assigned here: each assistant tool
+   * call gets `call_<n>`, and the tool messages after it answer them in order.
+   */
+  private async _chatStreamWithToolsCompat(req: {
+    model: string
+    messages: Array<Record<string, unknown>>
+    tools: Array<Record<string, unknown>>
+    signal?: AbortSignal
+  }): Promise<AsyncIterable<any>> {
+    if (!this.openai) {
+      throw new Error('AI client is not initialized.')
+    }
+    const messages: Array<Record<string, unknown>> = []
+    let pendingIds: string[] = []
+    let callCount = 0
+    for (const m of req.messages) {
+      const calls = m.role === 'assistant' ? (m.tool_calls as any[] | undefined) : undefined
+      if (calls?.length) {
+        const toolCalls = calls.map((c) => ({
+          id: `call_${callCount++}`,
+          type: 'function',
+          function: {
+            name: c.function?.name,
+            arguments:
+              typeof c.function?.arguments === 'string'
+                ? c.function.arguments
+                : JSON.stringify(c.function?.arguments ?? {}),
+          },
+        }))
+        pendingIds = toolCalls.map((c) => c.id)
+        messages.push({ role: 'assistant', content: m.content ?? '', tool_calls: toolCalls })
+      } else if (m.role === 'tool') {
+        messages.push({ role: 'tool', tool_call_id: pendingIds.shift() ?? `call_${callCount++}`, content: m.content })
+      } else {
+        messages.push({ role: m.role, content: m.content })
+      }
+    }
+
+    const stream = (await this.openai.chat.completions.create(
+      {
+        model: req.model,
+        messages: messages as any,
+        ...(req.tools.length ? { tools: req.tools as any } : {}),
+        stream: true,
+      },
+      { signal: req.signal }
+    )) as unknown as Stream<ChatCompletionChunk>
+
+    async function* normalize(): AsyncGenerator<any> {
+      const splitter = new ThinkTagSplitter()
+      // Tool calls arrive in pieces (name first, then the JSON arguments in fragments).
+      const calls: Array<{ name: string; args: string }> = []
+      for await (const chunk of stream) {
+        const delta: any = chunk.choices?.[0]?.delta
+        if (!delta) continue
+        for (const tc of delta.tool_calls ?? []) {
+          const i = tc.index ?? calls.length
+          calls[i] ??= { name: '', args: '' }
+          if (tc.function?.name) calls[i].name += tc.function.name
+          if (tc.function?.arguments) calls[i].args += tc.function.arguments
+        }
+        const split = splitter.push(delta.content ?? '')
+        const thinking = (delta.reasoning ?? delta.thinking ?? '') + split.thinking
+        if (split.content || thinking) yield { message: { content: split.content, thinking } }
+      }
+      const tail = splitter.flush()
+      if (tail.content || tail.thinking) yield { message: { content: tail.content, thinking: tail.thinking } }
+      const toolCalls = calls
+        .filter((c) => c?.name)
+        .map((c) => {
+          let args: Record<string, any> = {}
+          try {
+            args = c.args.trim() ? JSON.parse(c.args) : {}
+          } catch {
+            // A malformed argument string still reaches the tool, which reports it as an error.
+            args = { _raw: c.args }
+          }
+          return { function: { name: c.name, arguments: args } }
+        })
+      if (toolCalls.length) yield { message: { content: '', tool_calls: toolCalls } }
+    }
+
+    return normalize()
+  }
+
   private async _chatStreamCompat(
     chatRequest: ChatInput
   ): Promise<AsyncIterable<NomadChatStreamChunk>> {
@@ -1373,19 +1502,33 @@ export class OllamaService {
       query,
       limit,
       force,
+      memoryBudgetBytes,
     }: {
       sort?: 'pulls' | 'name'
       recommendedOnly?: boolean
       query: string | null
       limit?: number
       force?: boolean
+      /**
+       * Memory available for inference on the Ollama host, in bytes. When set,
+       * recommendations are limited to tags that fit it (#1477); when undefined
+       * (remote Ollama, unknown hardware) they are not filtered.
+       */
+      memoryBudgetBytes?: number
     } = {
       sort: 'pulls',
       recommendedOnly: false,
       query: null,
       limit: 15,
     }
-  ): Promise<{ models: NomadOllamaModel[]; hasMore: boolean } | null> {
+  ): Promise<{
+    models: NomadOllamaModel[]
+    hasMore: boolean
+    /** Set when recommendations were filtered by memory: the budget used. */
+    memoryBudgetBytes?: number
+    /** True when a budget was known and no recommended model fits it. */
+    noneFitMemory?: boolean
+  } | null> {
     try {
       const models = await this.retrieveAndRefreshModels(sort, force)
       if (!models || models.length === 0) {
@@ -1407,26 +1550,28 @@ export class OllamaService {
       }
 
       const sortedByPulls = sort === 'pulls' ? models : this.sortModels(models, 'pulls')
-      const firstThree = sortedByPulls.slice(0, 3)
-
-      const recommendedModels = firstThree.map((model) => {
-        return {
-          ...model,
-          tags: model.tags && model.tags.length > 0 ? [model.tags[0]] : [],
-        }
-      })
+      // Pick the largest tag of each model that fits this machine's memory and
+      // skip models where nothing fits, rather than the top three by pulls at
+      // their first tag regardless of hardware (#1477).
+      const { models: recommendedModels, noneFit } = selectRecommendedModels(
+        sortedByPulls,
+        memoryBudgetBytes
+      )
+      const memoryInfo = memoryBudgetBytes ? { memoryBudgetBytes, noneFitMemory: noneFit } : {}
 
       if (query) {
         const filteredRecommendedModels = this.fuseSearchModels(recommendedModels, query)
         return {
           models: filteredRecommendedModels,
           hasMore: filteredRecommendedModels.length > (limit || 15),
+          ...memoryInfo,
         }
       }
 
       return {
         models: recommendedModels,
         hasMore: recommendedModels.length > (limit || 15),
+        ...memoryInfo,
       }
     } catch (error) {
       logger.error(

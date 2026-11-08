@@ -121,7 +121,9 @@
       "urlLabel": "URL de la API de Ollama/OpenAI remota",
       "urlPlaceholder": "http://192.168.1.100:11434  (o :1234 para apps compatibles con la API de OpenAI)",
       "saveTest": "Guardar y probar",
-      "clear": "Borrar"
+      "clear": "Borrar",
+      "memoryLabel": "Memoria del equipo remoto (GB)",
+      "memoryHelp": "NOMAD no puede saber cuánta memoria tiene un equipo remoto. Indica cuántos gigabytes tiene para ajustar la ventana de contexto de cada modelo. Déjalo vacío para no poner límite de memoria; se siguen aplicando el contexto propio del modelo y el ajuste de ventana de contexto."
     },
     "catalog": {
       "alertTitle": "La descarga de modelos solo se admite con un backend de Ollama.",

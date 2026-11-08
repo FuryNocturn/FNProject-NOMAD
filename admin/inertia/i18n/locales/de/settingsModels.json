@@ -121,7 +121,9 @@
       "urlLabel": "Remote-URL von Ollama/OpenAI-API",
       "urlPlaceholder": "http://192.168.1.100:11434  (oder :1234 für OpenAI-API-kompatible Apps)",
       "saveTest": "Speichern & testen",
-      "clear": "Zurücksetzen"
+      "clear": "Zurücksetzen",
+      "memoryLabel": "Speicher des entfernten Rechners (GB)",
+      "memoryHelp": "NOMAD kann den Speicher eines entfernten Rechners nicht erkennen. Gib an, wie viele Gigabyte er hat, damit das Kontextfenster jedes Modells passend bemessen wird. Leer lassen für keine Speichergrenze; die eigene Kontextgröße des Modells und die Einstellung Kontextfenster gelten weiterhin."
     },
     "catalog": {
       "alertTitle": "Das Herunterladen von Modellen wird nur mit einem Ollama-Backend unterstützt.",

@@ -1,7 +1,9 @@
 import { ChatService } from '#services/chat_service'
+import { ContextWindowService } from '#services/context_window_service'
 import { DockerService } from '#services/docker_service'
 import { OllamaService, type NomadChatUsage } from '#services/ollama_service'
 import { TokenCalibrationService } from '#services/token_calibration_service'
+import { invalidateContextWindowCache } from '#services/context_window_service'
 import { RagPipelineService } from '#services/rag_pipeline_service'
 import { RagService } from '#services/rag_service'
 import Service from '#models/service'
@@ -37,7 +39,8 @@ export default class OllamaController {
     private ollamaService: OllamaService,
     private ragPipelineService: RagPipelineService,
     private ragService: RagService,
-    private tokenCalibration: TokenCalibrationService
+    private tokenCalibration: TokenCalibrationService,
+    private contextWindowService: ContextWindowService
   ) { }
 
   async availableModels({ request }: HttpContext) {
@@ -48,7 +51,30 @@ export default class OllamaController {
       query: reqData.query || null,
       limit: reqData.limit || 15,
       force: reqData.force,
+      memoryBudgetBytes: reqData.recommendedOnly
+        ? await this._recommendationBudgetBytes()
+        : undefined,
     })
+  }
+
+  /**
+   * Memory budget to filter recommended models against (#1477): the same figure
+   * the context-window resolver uses (VRAM Ollama reports, else half of system
+   * RAM). Undefined, meaning "don't filter", when the AI backend is remote,
+   * because then neither the local Ollama logs nor this host's RAM describe the
+   * machine the model would run on.
+   */
+  private async _recommendationBudgetBytes(): Promise<number | undefined> {
+    try {
+      const remoteUrl = await KVStore.getValue('ai.remoteOllamaUrl')
+      if (typeof remoteUrl === 'string' && remoteUrl.trim()) return undefined
+      return await this.contextWindowService.getAvailableBytes()
+    } catch (error) {
+      logger.warn(
+        `[OllamaController] Could not determine memory budget for recommendations: ${error instanceof Error ? error.message : error}`
+      )
+      return undefined
+    }
   }
 
   /**
@@ -236,8 +262,9 @@ export default class OllamaController {
 
       if (reqData.stream) {
         logger.debug(`[OllamaController] Initiating streaming response for model: "${reqData.model}" with think: ${think}`)
-        // Headers already flushed and the disconnect listener attached above.
-        if (response.response.destroyed) {
+        // Headers already flushed and the disconnect listener attached above. A Stop during
+        // query rewriting or retrieval must keep the generation below from starting at all.
+        if (response.response.destroyed || abortController.signal.aborted) {
           logger.debug('[OllamaController] Client disconnected before generation started')
           return
         }
@@ -447,6 +474,10 @@ export default class OllamaController {
     // the service marked installed. Otherwise fall back to uninstalled.
     if (!remoteUrl || remoteUrl.trim() === '') {
       await KVStore.clearValue('ai.remoteOllamaUrl')
+      // This path writes the URL directly, not through updateSetting, so the
+      // context-window memo has to be dropped here too. The next turn should
+      // size from this host again.
+      invalidateContextWindowCache()
       const hasLocalContainer = await this._startLocalOllamaContainerIfExists()
       ollamaService.installed = hasLocalContainer
       ollamaService.installation_status = 'idle'
@@ -488,6 +519,9 @@ export default class OllamaController {
 
     // Save remote URL and mark service as installed
     await KVStore.setValue('ai.remoteOllamaUrl', remoteUrl.trim())
+    // Same clear as ContextWindowService.invalidate(). A window sized from
+    // this host's RAM must not stick once inference moves off the box.
+    invalidateContextWindowCache()
     ollamaService.installed = true
     ollamaService.installation_status = 'idle'
     await ollamaService.save()

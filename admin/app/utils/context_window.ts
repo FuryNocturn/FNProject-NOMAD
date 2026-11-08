@@ -217,7 +217,34 @@ export function estimateKvBytesPerToken(paramBillions: number | undefined): numb
  * activations, the graph, and whatever else shares the device. Without this the
  * arithmetic says a window fits right up to the byte and the model fails to load.
  */
-const MEMORY_SAFETY_FRACTION = 0.8
+export const MEMORY_SAFETY_FRACTION = 0.8
+
+/**
+ * Share of system RAM assumed available for CPU inference. The rest of the NOMAD
+ * stack (MySQL, Redis, Qdrant, Kiwix, the admin app itself) lives in the same
+ * pool, and a machine that starts swapping is worse than one with a small window.
+ */
+export const CPU_RAM_SHARE = 0.5
+
+/**
+ * Memory available for inference, in bytes.
+ *
+ * Prefers the VRAM figure Ollama itself reports at startup — it is the number
+ * that actually governs whether a model fits, and it already accounts for
+ * whichever device Ollama chose. Falls back to a conservative share of system
+ * RAM for CPU-only hosts (or when the GPU probe found nothing).
+ *
+ * Pure so that both the context-window resolver and the model recommender
+ * (#1477) budget against the same number without one service depending on the
+ * other.
+ */
+export function inferenceMemoryBudget(
+  vramMiB: number | null | undefined,
+  totalRamBytes: number
+): number {
+  if (typeof vramMiB === 'number' && vramMiB > 0) return vramMiB * 1024 * 1024
+  return totalRamBytes * CPU_RAM_SHARE
+}
 
 export type ContextWindowInputs = {
   /** Trained context length from /api/show. The hard ceiling. */
@@ -307,4 +334,46 @@ export function parseUserContextCap(raw: string | null | undefined): number | un
   if (!raw || raw === 'auto') return undefined
   const value = Number.parseInt(raw, 10)
   return Number.isFinite(value) && value >= MIN_CONTEXT ? value : undefined
+}
+
+export type AvailableBytesInput = {
+  /** `ai.remoteOllamaUrl`. Non-empty means inference is not on this machine. */
+  remoteOllamaUrl?: string | null
+  /** `ai.remoteOllamaMemoryGB`, gigabytes as stored. Ignored when Ollama is local. */
+  remoteOllamaMemoryGB?: string | null
+  /** VRAM reported by a local Ollama container, in bytes. Ignored when remote. */
+  probedBytes?: number
+  /**
+   * Share of this host's RAM, in bytes. The local fallback when the probe
+   * finds nothing. Never used for a remote host.
+   */
+  hostShareBytes?: number
+}
+
+/**
+ * Bytes of inference memory the context-window math may spend.
+ *
+ * A remote URL means the model is not running here, so neither a local
+ * container probe nor this host's RAM describes the machine that will OOM.
+ * Using them pins every window to the 4096 floor. The operator's gigabytes
+ * are the ceiling instead, and an empty value means no memory ceiling at all
+ * — model max, modelfile num_ctx, and the user cap still apply. Local
+ * installs are unchanged: probed VRAM, then the host share.
+ */
+export function selectAvailableBytes(input: AvailableBytesInput): number | undefined {
+  if (input.remoteOllamaUrl?.trim()) {
+    const gb = parseRemoteOllamaMemoryGb(input.remoteOllamaMemoryGB)
+    return gb === undefined ? undefined : gb * 1024 ** 3
+  }
+  if (input.probedBytes && input.probedBytes > 0) return input.probedBytes
+  return input.hostShareBytes
+}
+
+/** Parse `ai.remoteOllamaMemoryGB`. Empty or garbage means the operator did not say. */
+export function parseRemoteOllamaMemoryGb(raw: string | null | undefined): number | undefined {
+  if (raw === null || raw === undefined) return undefined
+  const trimmed = raw.trim()
+  if (!trimmed) return undefined
+  const value = Number(trimmed)
+  return Number.isFinite(value) && value > 0 ? value : undefined
 }

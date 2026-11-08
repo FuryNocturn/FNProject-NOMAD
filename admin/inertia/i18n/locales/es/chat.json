@@ -30,7 +30,9 @@
     "closeChat": "Cerrar el chat",
     "deleteChatTitle": "¿Borrar este chat?",
     "deleteChatBody": "Se borrará «{{title}}» con todos sus mensajes. No se puede deshacer.",
-    "deleteChat": "Borrar"
+    "deleteChat": "Borrar",
+    "agent": "Agente:",
+    "agentHelp": "Activado, el asistente busca él mismo en la biblioteca sin conexión, lee artículos y muestra cada paso. Puedes pararlo cuando quieras. Desactivado, se usa el chat de siempre."
   },
   "interface": {
     "tooManyImages": "Puedes adjuntar hasta {{max}} imágenes.",
@@ -78,5 +80,15 @@
     "temporary": "Las imágenes solo se envían con esta petición. No se guardan y desaparecerán cuando las envíes o recargues la página.",
     "unsupported": "Este modelo no puede usar imágenes. Elige un modelo marcado como «Admite imágenes» en Modelos y ajustes.",
     "unknown": "NOMAD no puede confirmar si este modelo acepta imágenes. Puedes probar con una imagen, pero la petición fallará si el modelo solo admite texto."
+  },
+  "agent": {
+    "working": "Trabajando…",
+    "steps": "Pasos: {{count}}",
+    "tool": {
+      "search_library": "Buscando en la biblioteca",
+      "read_article": "Leyendo",
+      "list_books": "Listando los libros",
+      "search_knowledge_base": "Buscando en tus documentos"
+    }
   }
 }

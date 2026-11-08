@@ -36,6 +36,26 @@ export interface ChatMessage {
   truncated?: boolean
   // The user pressed Stop while this answer was still streaming.
   stopped?: boolean
+  // Tool steps of the chat agent behind this answer (see app/services/agent_service.ts).
+  steps?: AgentStepView[]
+}
+
+export interface AgentStepLink {
+  title: string
+  url: string
+  kind: 'library' | 'file'
+}
+
+export interface AgentStepView {
+  id: string
+  round: number
+  tool: string
+  args: Record<string, unknown>
+  status: 'running' | 'done' | 'error'
+  summary?: string
+  links?: AgentStepLink[]
+  note?: string
+  ms?: number
 }
 
 export interface ChatImageAttachment {

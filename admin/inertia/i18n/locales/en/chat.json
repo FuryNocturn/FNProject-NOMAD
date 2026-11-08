@@ -30,7 +30,9 @@
     "closeChat": "Close chat",
     "deleteChatTitle": "Delete this chat?",
     "deleteChatBody": "“{{title}}” and all its messages will be deleted. This cannot be undone.",
-    "deleteChat": "Delete"
+    "deleteChat": "Delete",
+    "agent": "Agent:",
+    "agentHelp": "When on, the assistant searches the offline library itself, reads articles and shows every step. You can stop it at any time. When off, the classic chat is used."
   },
   "interface": {
     "tooManyImages": "You can attach up to {{max}} images.",
@@ -78,5 +80,15 @@
     "temporary": "Images are sent only with this request. They are not saved and will disappear after you send them or reload this page.",
     "unsupported": "This model cannot use images. Choose a model marked “Supports images” in Models & Settings.",
     "unknown": "NOMAD cannot confirm whether this model accepts images. You can try an image, but the request will fail if the model is text-only."
+  },
+  "agent": {
+    "working": "Working…",
+    "steps": "Steps: {{count}}",
+    "tool": {
+      "search_library": "Searching the library",
+      "read_article": "Reading",
+      "list_books": "Listing the books",
+      "search_knowledge_base": "Searching your documents"
+    }
   }
 }

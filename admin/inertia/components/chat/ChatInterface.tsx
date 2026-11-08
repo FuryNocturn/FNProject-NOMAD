@@ -74,6 +74,16 @@ export default function ChatInterface({
     })
   }, [visionCapability])
 
+  // Esc stops a running reply, wherever the focus is inside the page.
+  useEffect(() => {
+    if (!isGenerating || !onStopGenerating) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onStopGenerating()
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [isGenerating, onStopGenerating])
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }

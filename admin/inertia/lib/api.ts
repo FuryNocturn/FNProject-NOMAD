@@ -331,6 +331,9 @@ class API {
       const response = await this.client.get<{
         models: NomadOllamaModel[]
         hasMore: boolean
+        // Present only on recommendedOnly requests filtered by memory (#1477).
+        memoryBudgetBytes?: number
+        noneFitMemory?: boolean
       }>('/ollama/models', {
         params: { sort: 'pulls', ...params },
       })
@@ -421,6 +424,58 @@ class API {
             data.message?.thinking ?? '',
             data.done ?? false
           )
+        }
+      }
+    } finally {
+      reader.releaseLock()
+    }
+  }
+
+  /**
+   * Tool-calling agent chat (POST /api/agent/chat). Each SSE frame is one
+   * AgentEvent (round, token, round_note, step_start, step_end, done, error),
+   * handed to `onEvent` as parsed JSON. Aborting `signal` closes the stream,
+   * which makes the server stop the model at once.
+   */
+  async streamAgentChat(
+    body: {
+      model: string
+      messages: Array<{ role: 'user' | 'assistant'; content: string }>
+      sessionId?: number
+    },
+    onEvent: (event: any) => void,
+    signal?: AbortSignal
+  ): Promise<void> {
+    const response = await fetch('/api/agent/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'text/event-stream' },
+      body: JSON.stringify(body),
+      signal,
+    })
+    if (!response.ok || !response.body) {
+      const errorBody = await response.json().catch(() => null)
+      throw new Error(errorBody?.message ?? `HTTP error: ${response.status}`)
+    }
+    const reader = response.body.getReader()
+    const decoder = new TextDecoder()
+    let buffer = ''
+    try {
+      while (true) {
+        const { done, value } = await reader.read()
+        if (done) break
+        buffer += decoder.decode(value, { stream: true })
+        const lines = buffer.split('\n')
+        buffer = lines.pop() || ''
+        for (const line of lines) {
+          if (!line.startsWith('data: ')) continue
+          let data: any
+          try {
+            data = JSON.parse(line.slice(6))
+          } catch {
+            continue
+          }
+          if (data.type === 'error') throw new Error(data.message || 'Agent run failed')
+          onEvent(data)
         }
       }
     } finally {
