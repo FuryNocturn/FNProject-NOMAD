@@ -74,6 +74,13 @@ export type EmbedFileResult = ProcessAndEmbedFileResponse & { permanent?: boolea
 // OCR'd at 200 dpi, which is slow on CPU-only installs).
 const MAX_OCR_PAGES = 300
 
+/** An embedded chunk, ready for Qdrant. */
+type KnowledgePoint = {
+  id: string
+  vector: number[]
+  payload: Record<string, any> & { source: string; active: boolean }
+}
+
 @inject()
 export class RagService {
   private qdrant: QdrantClient | null = null
@@ -105,6 +112,10 @@ export class RagService {
   public static CHAR_TO_TOKEN_RATIO = 2 // Conservative chars-per-token estimate; technical docs
   // (numbers, symbols, abbreviations) tokenize denser
   // than plain prose (~3), so 2 avoids context overflows
+  // Points a ZIM upsert collects from several chunks at most: up to ~15 KB each as JSON,
+  // so under 4 MB per request, well below Qdrant's 32 MB request limit even for a
+  // book-sized article. A chunk with more points still goes alone, as before.
+  public static MAX_POINTS_PER_UPSERT = 256
   public static EMBEDDING_BATCH_SIZE = 8 // Conservative batch size for low-end hardware
 
   constructor(
@@ -407,6 +418,20 @@ export class RagService {
     // content overwrites its points instead of adding duplicates.
     pointIdSeed?: string
   ): Promise<{ chunks: number } | null> {
+    const points = await this.embedText(text, metadata, onProgress, pointIdSeed)
+    if (!points || !(await this.storePoints(points))) {
+      return null
+    }
+    return { chunks: points.length }
+  }
+
+  /** Chunks and embeds text into points for Qdrant without storing them. Null on failure. */
+  private async embedText(
+    text: string,
+    metadata: Record<string, any>,
+    onProgress?: (percent: number) => Promise<void>,
+    pointIdSeed?: string
+  ): Promise<KnowledgePoint[] | null> {
     try {
       await this._ensureCollection(RagService.CONTENT_COLLECTION_NAME)
       const embedding = await this._getEmbeddingModel()
@@ -567,29 +592,40 @@ export class RagService {
         }
       })
 
+      logger.debug(`[RAG] Successfully embedded ${chunks.length} chunks`)
+      logger.debug(`[RAG] First chunk preview: "${chunks[0].substring(0, 100)}..."`)
+
+      return points
+    } catch (error) {
+      console.error(error)
+      logger.error('[RAG] Error embedding text:', error)
+      return null
+    }
+  }
+
+  /** Stores points of one source in a single upsert. False on failure. */
+  private async storePoints(points: KnowledgePoint[]): Promise<boolean> {
+    if (points.length === 0) return true
+    try {
       await this.qdrant!.upsert(RagService.CONTENT_COLLECTION_NAME, { points })
 
-      // A toggle can land between the read above and the upsert, and its
+      // A toggle can land between embedText()'s read and the upsert, and its
       // setPayload then misses these points. The toggles write the row before
       // Qdrant, so re-reading after the upsert closes the gap: either this read
       // sees the new value, or the toggle's setPayload runs after the upsert and
       // covers these points itself.
-      const currentActive = await this._readActiveFlag(sanitizedSource)
-      if (currentActive !== active) {
+      const currentActive = await this._readActiveFlag(points[0].payload.source)
+      if (points.some((p) => p.payload.active !== currentActive)) {
         await this.qdrant!.setPayload(RagService.CONTENT_COLLECTION_NAME, {
           payload: { active: currentActive },
           points: points.map((p) => p.id),
         })
       }
-
-      logger.debug(`[RAG] Successfully embedded and stored ${chunks.length} chunks`)
-      logger.debug(`[RAG] First chunk preview: "${chunks[0].substring(0, 100)}..."`)
-
-      return { chunks: chunks.length }
+      return true
     } catch (error) {
       console.error(error)
-      logger.error('[RAG] Error embedding text:', error)
-      return null
+      logger.error('[RAG] Error storing chunks:', error)
+      return false
     }
   }
 
@@ -729,8 +765,20 @@ export class RagService {
       `[RAG] Extracted ${zimChunks.length} chunks from ZIM file with enhanced metadata (file totalArticles=${totalArticles})`
     )
 
-    // Process each chunk individually with its metadata
+    // Embed each chunk with its own metadata, but store an article's chunks in one
+    // upsert instead of one per chunk (upstream #1541)
     let totalChunks = 0
+    let articlePoints: KnowledgePoint[] = []
+    const storeArticlePoints = async (): Promise<boolean> => {
+      const ok = await this.storePoints(articlePoints)
+      if (ok) totalChunks += articlePoints.length
+      articlePoints = []
+      return ok
+    }
+    const batchFailed = (title: string) => ({
+      success: false as const,
+      message: `Failed to embed ZIM article "${title}" (batch offset ${startOffset}); the batch will be retried.`,
+    })
     // Section ordinal within its article: with the article path it gives each chunk
     // a stable point id (documentId is random per extraction, so it cannot).
     const sectionOrdinals = new Map<string, number>()
@@ -738,7 +786,7 @@ export class RagService {
       const zimChunk = zimChunks[i]
       const sectionOrdinal = sectionOrdinals.get(zimChunk.documentId) ?? 0
       sectionOrdinals.set(zimChunk.documentId, sectionOrdinal + 1)
-      const result = await this.embedAndStoreText(zimChunk.text, {
+      const points = await this.embedText(zimChunk.text, {
         source: filepath,
         content_type: 'zim_article',
         // Without this the ZIM path writes points with no `collection` at all, so
@@ -773,13 +821,16 @@ export class RagService {
       // Fail the whole batch rather than skip the article: the job retries from the
       // same offset, and the deterministic point ids make the re-run overwrite the
       // articles that already made it instead of duplicating them.
-      if (!result) {
-        return {
-          success: false,
-          message: `Failed to embed ZIM article "${zimChunk.articleTitle}" (batch offset ${startOffset}); the batch will be retried.`,
-        }
+      if (!points) return batchFailed(zimChunk.articleTitle)
+      if (articlePoints.length + points.length > RagService.MAX_POINTS_PER_UPSERT) {
+        if (!(await storeArticlePoints())) return batchFailed(zimChunk.articleTitle)
       }
-      totalChunks += result.chunks
+      articlePoints.push(...points)
+
+      // The extractor emits an article's chunks back to back
+      if (zimChunks[i + 1]?.documentId !== zimChunk.documentId) {
+        if (!(await storeArticlePoints())) return batchFailed(zimChunk.articleTitle)
+      }
 
       if (onProgress) {
         await onProgress(((i + 1) / zimChunks.length) * 100)
@@ -1621,7 +1672,7 @@ export class RagService {
    * either direction. Vectors stay in Qdrant permanently either way; only
    * `searchSimilarDocuments()`'s query-time filter is affected. See #1119.
    *
-   * The row goes first so an in-flight embedAndStoreText() call always ends up
+   * The row goes first so an in-flight storePoints() call always ends up
    * with the right value: its post-upsert re-read either sees this write, or
    * the setPayload below runs after its upsert and covers the new points.
    */
