@@ -27,7 +27,10 @@
     "knowledgeBaseTooltip": "开启后，助手会在回答前先在您的知识库中搜索相关文档。关闭后速度更快、对硬件更省资源，适合知识库较小或为空的情况。此选项与 AI 助手设置中的相同。",
     "thinking": "思考：",
     "thinkingTooltip": "开启后，该模型会先进行推理再回答。速度较慢，但在处理复杂问题时往往效果更好。您的选择会针对该模型保存；其他模型的默认值在 AI 助手设置中设定。",
-    "closeChat": "关闭聊天"
+    "closeChat": "关闭聊天",
+    "deleteChatTitle": "删除此对话？",
+    "deleteChatBody": "“{{title}}”及其所有消息将被删除，且无法撤销。",
+    "deleteChat": "删除"
   },
   "interface": {
     "tooManyImages": "最多可附加 {{max}} 张图片。",
@@ -65,7 +68,8 @@
     "backToHome": "返回首页",
     "modelsSettings": "模型与设置",
     "knowledgeBase": "知识库",
-    "clearHistory": "清除记录"
+    "clearHistory": "清除记录",
+    "deleteChat": "删除对话“{{title}}”"
   },
   "button": {
     "open": "打开聊天"

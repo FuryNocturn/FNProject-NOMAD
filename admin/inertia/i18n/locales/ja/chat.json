@@ -27,7 +27,10 @@
     "knowledgeBaseTooltip": "オンにすると、アシスタントは回答する前にナレッジベースから関連するドキュメントを検索します。オフにすると高速になりハードウェアへの負荷も減るため、ナレッジベースが小さい場合や空の場合に有効です。AI アシスタント設定と同じ設定です。",
     "thinking": "思考:",
     "thinkingTooltip": "オンにすると、このモデルは回答する前に推論を行います。時間はかかりますが、難しい質問ではより良い結果になることがよくあります。この選択はモデルごとに記憶されます。他のモデルの既定値は AI アシスタント設定で指定します。",
-    "closeChat": "チャットを閉じる"
+    "closeChat": "チャットを閉じる",
+    "deleteChatTitle": "このチャットを削除しますか？",
+    "deleteChatBody": "「{{title}}」とそのすべてのメッセージが削除されます。元に戻せません。",
+    "deleteChat": "削除"
   },
   "interface": {
     "tooManyImages": "添付できる画像は最大 {{max}} 枚です。",
@@ -65,7 +68,8 @@
     "backToHome": "ホームに戻る",
     "modelsSettings": "モデルと設定",
     "knowledgeBase": "ナレッジベース",
-    "clearHistory": "履歴を消去"
+    "clearHistory": "履歴を消去",
+    "deleteChat": "チャット「{{title}}」を削除"
   },
   "button": {
     "open": "チャットを開く"
