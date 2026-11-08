@@ -27,7 +27,10 @@
     "knowledgeBaseTooltip": "Quando ativada, o assistente pesquisa na sua base de conhecimento por documentos relevantes antes de responder. Desativá-la é mais rápido e mais leve para o hardware, o que ajuda quando sua base de conhecimento é pequena ou está vazia. É a mesma configuração das configurações do Assistente de IA.",
     "thinking": "Raciocínio:",
     "thinkingTooltip": "Quando ativado, este modelo elabora seu raciocínio antes de responder. Fica mais lento, mas muitas vezes é melhor em perguntas difíceis. Sua escolha é lembrada para este modelo; o padrão para os outros modelos é definido nas configurações do Assistente de IA.",
-    "closeChat": "Fechar chat"
+    "closeChat": "Fechar chat",
+    "deleteChatTitle": "Apagar esta conversa?",
+    "deleteChatBody": "«{{title}}» e todas as suas mensagens serão apagadas. Não é possível desfazer.",
+    "deleteChat": "Apagar"
   },
   "interface": {
     "tooManyImages": "Você pode anexar até {{max}} imagens.",
@@ -43,7 +46,8 @@
     "attachedImages": "Imagens anexadas",
     "removeImage": "Remover {{name}}",
     "attachImages": "Anexar imagens",
-    "placeholder": "Digite sua mensagem para {{name}}... (Shift+Enter para nova linha)"
+    "placeholder": "Digite sua mensagem para {{name}}... (Shift+Enter para nova linha)",
+    "stop": "Parar a resposta"
   },
   "bubble": {
     "reasoning": "Raciocínio",
@@ -52,7 +56,8 @@
     "continue": "Continuar",
     "sources": "Fontes",
     "copy": "Copiar",
-    "copied": "Copiado"
+    "copied": "Copiado",
+    "stopped": "Paraste esta resposta."
   },
   "sidebar": {
     "ariaLabel": "Conversas do chat",
@@ -63,7 +68,8 @@
     "backToHome": "Voltar ao início",
     "modelsSettings": "Modelos e configurações",
     "knowledgeBase": "Base de conhecimento",
-    "clearHistory": "Limpar histórico"
+    "clearHistory": "Limpar histórico",
+    "deleteChat": "Apagar a conversa «{{title}}»"
   },
   "button": {
     "open": "Abrir chat"

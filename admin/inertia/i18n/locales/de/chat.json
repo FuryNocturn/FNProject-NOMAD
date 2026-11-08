@@ -27,7 +27,10 @@
     "knowledgeBaseTooltip": "Wenn aktiviert, durchsucht der Assistent vor der Antwort deine Wissensdatenbank nach relevanten Dokumenten. Deaktiviert ist es schneller und schont die Hardware, was hilfreich ist, wenn deine Wissensdatenbank klein oder leer ist. Dies ist dieselbe Einstellung wie in den Einstellungen des KI-Assistenten.",
     "thinking": "Denken:",
     "thinkingTooltip": "Wenn aktiviert, durchdenkt dieses Modell seine Argumentation, bevor es antwortet. Langsamer, aber oft besser bei kniffligen Fragen. Deine Auswahl wird für dieses Modell gespeichert; der Standard für andere Modelle wird in den Einstellungen des KI-Assistenten festgelegt.",
-    "closeChat": "Chat schließen"
+    "closeChat": "Chat schließen",
+    "deleteChatTitle": "Diesen Chat löschen?",
+    "deleteChatBody": "„{{title}}“ wird mit allen Nachrichten gelöscht. Das lässt sich nicht rückgängig machen.",
+    "deleteChat": "Löschen"
   },
   "interface": {
     "tooManyImages": "Du kannst bis zu {{max}} Bilder anhängen.",
@@ -43,7 +46,8 @@
     "attachedImages": "Angehängte Bilder",
     "removeImage": "{{name}} entfernen",
     "attachImages": "Bilder anhängen",
-    "placeholder": "Schreibe deine Nachricht an {{name}} ... (Umschalt+Eingabe für neue Zeile)"
+    "placeholder": "Schreibe deine Nachricht an {{name}} ... (Umschalt+Eingabe für neue Zeile)",
+    "stop": "Antwort stoppen"
   },
   "bubble": {
     "reasoning": "Überlegungen",
@@ -52,7 +56,8 @@
     "continue": "Fortsetzen",
     "sources": "Quellen",
     "copy": "Kopieren",
-    "copied": "Kopiert"
+    "copied": "Kopiert",
+    "stopped": "Du hast diese Antwort gestoppt."
   },
   "sidebar": {
     "ariaLabel": "Chat-Unterhaltungen",
@@ -63,7 +68,8 @@
     "backToHome": "Zurück zur Startseite",
     "modelsSettings": "Modelle & Einstellungen",
     "knowledgeBase": "Wissensdatenbank",
-    "clearHistory": "Verlauf löschen"
+    "clearHistory": "Verlauf löschen",
+    "deleteChat": "Chat „{{title}}“ löschen"
   },
   "button": {
     "open": "Chat öffnen"

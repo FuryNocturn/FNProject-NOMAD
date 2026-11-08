@@ -27,7 +27,10 @@
     "knowledgeBaseTooltip": "When on, the assistant searches your knowledge base for relevant documents before answering. Turning this off is faster and lighter on hardware, which helps when your knowledge base is small or empty. This is the same setting as in AI Assistant settings.",
     "thinking": "Thinking:",
     "thinkingTooltip": "When on, this model works through its reasoning before answering. Slower, but often better on tricky questions. Your choice is remembered for this model; the default for other models is set in AI Assistant settings.",
-    "closeChat": "Close chat"
+    "closeChat": "Close chat",
+    "deleteChatTitle": "Delete this chat?",
+    "deleteChatBody": "“{{title}}” and all its messages will be deleted. This cannot be undone.",
+    "deleteChat": "Delete"
   },
   "interface": {
     "tooManyImages": "You can attach up to {{max}} images.",
@@ -43,7 +46,8 @@
     "attachedImages": "Attached images",
     "removeImage": "Remove {{name}}",
     "attachImages": "Attach images",
-    "placeholder": "Type your message to {{name}}... (Shift+Enter for new line)"
+    "placeholder": "Type your message to {{name}}... (Shift+Enter for new line)",
+    "stop": "Stop generating"
   },
   "bubble": {
     "reasoning": "Reasoning",
@@ -52,7 +56,8 @@
     "continue": "Continue",
     "sources": "Sources",
     "copy": "Copy",
-    "copied": "Copied"
+    "copied": "Copied",
+    "stopped": "You stopped this answer."
   },
   "sidebar": {
     "ariaLabel": "Chat conversations",
@@ -63,7 +68,8 @@
     "backToHome": "Back to Home",
     "modelsSettings": "Models & Settings",
     "knowledgeBase": "Knowledge Base",
-    "clearHistory": "Clear History"
+    "clearHistory": "Clear History",
+    "deleteChat": "Delete chat “{{title}}”"
   },
   "button": {
     "open": "Open chat"

@@ -27,7 +27,10 @@
     "knowledgeBaseTooltip": "Lorsque cette option est activée, l'assistant recherche des documents pertinents dans votre base de connaissances avant de répondre. La désactiver est plus rapide et moins gourmand en ressources, ce qui aide lorsque votre base de connaissances est petite ou vide. Il s'agit du même réglage que dans les paramètres de l'Assistant IA.",
     "thinking": "Réflexion :",
     "thinkingTooltip": "Lorsque cette option est activée, ce modèle déroule son raisonnement avant de répondre. Plus lent, mais souvent meilleur sur les questions délicates. Votre choix est mémorisé pour ce modèle ; la valeur par défaut des autres modèles se définit dans les paramètres de l'Assistant IA.",
-    "closeChat": "Fermer la discussion"
+    "closeChat": "Fermer la discussion",
+    "deleteChatTitle": "Supprimer cette conversation ?",
+    "deleteChatBody": "« {{title}} » et tous ses messages seront supprimés. Impossible d’annuler.",
+    "deleteChat": "Supprimer"
   },
   "interface": {
     "tooManyImages": "Vous pouvez joindre jusqu'à {{max}} images.",
@@ -43,7 +46,8 @@
     "attachedImages": "Images jointes",
     "removeImage": "Retirer {{name}}",
     "attachImages": "Joindre des images",
-    "placeholder": "Écrivez votre message à {{name}}... (Maj+Entrée pour un saut de ligne)"
+    "placeholder": "Écrivez votre message à {{name}}... (Maj+Entrée pour un saut de ligne)",
+    "stop": "Arrêter la réponse"
   },
   "bubble": {
     "reasoning": "Raisonnement",
@@ -52,7 +56,8 @@
     "continue": "Continuer",
     "sources": "Sources",
     "copy": "Copier",
-    "copied": "Copié"
+    "copied": "Copié",
+    "stopped": "Vous avez arrêté cette réponse."
   },
   "sidebar": {
     "ariaLabel": "Conversations de discussion",
@@ -63,7 +68,8 @@
     "backToHome": "Retour à l'accueil",
     "modelsSettings": "Modèles et paramètres",
     "knowledgeBase": "Base de connaissances",
-    "clearHistory": "Effacer l'historique"
+    "clearHistory": "Effacer l'historique",
+    "deleteChat": "Supprimer la conversation « {{title}} »"
   },
   "button": {
     "open": "Ouvrir la discussion"

@@ -55,6 +55,19 @@ export default function Chat({
 
   useEffect(() => () => abortCurrentStream(), [abortCurrentStream])
 
+  // Stop button (#1539). Aborting the fetch closes the connection, and the
+  // server's close handler aborts the generation. Keep whatever was
+  // already streamed and mark it as stopped.
+  const handleStopGenerating = useCallback(() => {
+    abortActiveStream(streamAbortRef)
+    setIsStreamingResponse(false)
+    setMessages((prev) =>
+      prev.map((m) => (m.isStreaming ? { ...m, isStreaming: false, stopped: true } : m))
+    )
+  }, [])
+
+  const isGenerating = isStreamingResponse || messages.some((m) => m.isStreaming)
+
   useEffect(() => {
     if (!enabled) {
       abortCurrentStream()
@@ -196,6 +209,22 @@ export default function Chat({
       queryClient.invalidateQueries({ queryKey: ['chatSessions'] })
       setActiveSessionId(null)
       setMessages([])
+      closeAllModals()
+    },
+  })
+
+  const deleteSessionMutation = useMutation({
+    mutationFn: (sessionId: string) => api.deleteChatSession(sessionId),
+    onSuccess: (_data, sessionId) => {
+      queryClient.invalidateQueries({ queryKey: ['chatSessions'] })
+      // Deleting the open chat leaves an empty new one, as "New Chat" does.
+      if (sessionId === activeSessionId) {
+        abortCurrentStream()
+        setIsStreamingResponse(false)
+        latestSelectRef.current = null
+        setActiveSessionId(null)
+        setMessages([])
+      }
       closeAllModals()
     },
   })
@@ -346,6 +375,26 @@ export default function Chat({
       'confirm-clear-history-modal'
     )
   }, [openModal, closeAllModals, deleteAllSessionsMutation, t])
+
+  const handleDeleteSession = useCallback(
+    (sessionId: string, title: string) => {
+      openModal(
+        <StyledModal
+          title={t('chat.main.deleteChatTitle')}
+          onConfirm={() => deleteSessionMutation.mutate(sessionId)}
+          onCancel={closeAllModals}
+          open={true}
+          confirmText={t('chat.main.deleteChat')}
+          cancelText={t('common.cancel')}
+          confirmVariant="danger"
+        >
+          <p className="text-text-primary">{t('chat.main.deleteChatBody', { title })}</p>
+        </StyledModal>,
+        'confirm-delete-chat-modal'
+      )
+    },
+    [openModal, closeAllModals, deleteSessionMutation, t]
+  )
 
   const handleSessionSelect = useCallback(
     async (sessionId: string) => {
@@ -625,6 +674,7 @@ export default function Chat({
           onSessionSelect={handleSessionSelect}
           onNewChat={handleNewChat}
           onClearHistory={handleClearHistory}
+          onDeleteSession={handleDeleteSession}
           isInModal={isInModal}
           isMobileOpen={isMobileSidebarOpen}
           onMobileClose={() => setIsMobileSidebarOpen(false)}
@@ -759,6 +809,8 @@ export default function Chat({
             onSendMessage={handleSendMessage}
             visionCapability={selectedModelVisionCapability}
             isLoading={isStreamingResponse || isCreatingSession || chatMutation.isPending}
+            isGenerating={isGenerating}
+            onStopGenerating={streamingEnabled !== false ? handleStopGenerating : undefined}
             chatSuggestions={chatSuggestions}
             chatSuggestionsEnabled={suggestionsEnabled}
             chatSuggestionsLoading={chatSuggestionsLoading}
