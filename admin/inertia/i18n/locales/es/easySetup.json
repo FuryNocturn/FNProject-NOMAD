@@ -87,7 +87,8 @@
     "autoIndexDescription": "Cuando añadas nuevos ZIM, documentos o contenido seleccionado, ¿quieres que {{name}} los indexe automáticamente para poder buscar en ellos al responder a tus preguntas?",
     "always": "Sí, siempre",
     "manual": "Preguntarme antes",
-    "changeLater": "Puedes cambiarlo en cualquier momento desde el panel de base de conocimiento del chat de IA."
+    "changeLater": "Puedes cambiarlo en cualquier momento desde el panel de base de conocimiento del chat de IA.",
+    "noneFitMemory": "Ninguno de los modelos de IA recomendados cabe en la memoria disponible de este equipo (unos {{size}}). Después de la configuración puedes buscar modelos más pequeños en Ajustes > Asistente de IA."
   },
   "review": {
     "title": "Revisa tu selección",

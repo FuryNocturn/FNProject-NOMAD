@@ -87,7 +87,8 @@
     "autoIndexDescription": "When you add new ZIMs, documents, or curated content, should {{name}} index them automatically so it can search them while answering your questions?",
     "always": "Yes, always",
     "manual": "Ask me first",
-    "changeLater": "You can change this any time from the Knowledge Base panel inside AI Chat."
+    "changeLater": "You can change this any time from the Knowledge Base panel inside AI Chat.",
+    "noneFitMemory": "None of the recommended AI models fit in this machine's available memory (about {{size}}). You can browse smaller models in Settings > AI Assistant after setup."
   },
   "review": {
     "title": "Review Your Selections",

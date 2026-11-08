@@ -87,7 +87,8 @@
     "autoIndexDescription": "Wenn du neue ZIMs, Dokumente oder kuratierte Inhalte hinzufügst, soll {{name}} sie automatisch indexieren, damit er sie bei der Beantwortung deiner Fragen durchsuchen kann?",
     "always": "Ja, immer",
     "manual": "Erst nachfragen",
-    "changeLater": "Du kannst das jederzeit im Bereich „Wissensdatenbank“ im KI-Chat ändern."
+    "changeLater": "Du kannst das jederzeit im Bereich „Wissensdatenbank“ im KI-Chat ändern.",
+    "noneFitMemory": "Keines der empfohlenen KI-Modelle passt in den verfügbaren Speicher dieses Geräts (etwa {{size}}). Kleinere Modelle findest du nach der Einrichtung unter Einstellungen > KI-Assistent."
   },
   "review": {
     "title": "Auswahl überprüfen",

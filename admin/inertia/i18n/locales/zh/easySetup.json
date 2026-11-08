@@ -87,7 +87,8 @@
     "autoIndexDescription": "当您添加新的 ZIM、文档或精选内容时，是否让 {{name}} 自动为其建立索引，以便在回答您的问题时进行搜索？",
     "always": "是，始终自动",
     "manual": "先询问我",
-    "changeLater": "您可以随时在 AI 聊天中的知识库面板里更改此设置。"
+    "changeLater": "您可以随时在 AI 聊天中的知识库面板里更改此设置。",
+    "noneFitMemory": "推荐的 AI 模型都无法放入本机的可用内存（约 {{size}}）。设置完成后，可在“设置 > AI 助手”中浏览更小的模型。"
   },
   "review": {
     "title": "确认您的选择",
