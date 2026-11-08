@@ -45,7 +45,8 @@
     "attachedImages": "Прикреплённые изображения",
     "removeImage": "Удалить {{name}}",
     "attachImages": "Прикрепить изображения",
-    "placeholder": "Введите сообщение для {{name}}... (Shift+Enter для новой строки)"
+    "placeholder": "Введите сообщение для {{name}}... (Shift+Enter для новой строки)",
+    "stop": "Остановить ответ"
   },
   "bubble": {
     "reasoning": "Рассуждение",
@@ -54,7 +55,8 @@
     "continue": "Продолжить",
     "sources": "Источники",
     "copy": "Копировать",
-    "copied": "Скопировано"
+    "copied": "Скопировано",
+    "stopped": "Вы остановили этот ответ."
   },
   "sidebar": {
     "ariaLabel": "Беседы чата",

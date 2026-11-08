@@ -324,8 +324,8 @@ export default function ChatInterface({
               type="button"
               onClick={onStopGenerating}
               className="p-3 rounded-lg transition-all duration-200 flex-shrink-0 mb-2 bg-desert-green text-white hover:bg-desert-green/90 hover:scale-105"
-              aria-label="Stop generating"
-              title="Stop generating"
+              aria-label={t('chat.interface.stop')}
+              title={t('chat.interface.stop')}
             >
               <IconPlayerStopFilled className="h-6 w-6" aria-hidden="true" />
             </button>

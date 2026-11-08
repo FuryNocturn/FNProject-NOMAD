@@ -43,7 +43,8 @@
     "attachedImages": "Images jointes",
     "removeImage": "Retirer {{name}}",
     "attachImages": "Joindre des images",
-    "placeholder": "Écrivez votre message à {{name}}... (Maj+Entrée pour un saut de ligne)"
+    "placeholder": "Écrivez votre message à {{name}}... (Maj+Entrée pour un saut de ligne)",
+    "stop": "Arrêter la réponse"
   },
   "bubble": {
     "reasoning": "Raisonnement",
@@ -52,7 +53,8 @@
     "continue": "Continuer",
     "sources": "Sources",
     "copy": "Copier",
-    "copied": "Copié"
+    "copied": "Copié",
+    "stopped": "Vous avez arrêté cette réponse."
   },
   "sidebar": {
     "ariaLabel": "Conversations de discussion",

@@ -43,7 +43,8 @@
     "attachedImages": "Attached images",
     "removeImage": "Remove {{name}}",
     "attachImages": "Attach images",
-    "placeholder": "Type your message to {{name}}... (Shift+Enter for new line)"
+    "placeholder": "Type your message to {{name}}... (Shift+Enter for new line)",
+    "stop": "Stop generating"
   },
   "bubble": {
     "reasoning": "Reasoning",
@@ -52,7 +53,8 @@
     "continue": "Continue",
     "sources": "Sources",
     "copy": "Copy",
-    "copied": "Copied"
+    "copied": "Copied",
+    "stopped": "You stopped this answer."
   },
   "sidebar": {
     "ariaLabel": "Chat conversations",
