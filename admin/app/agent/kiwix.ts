@@ -118,17 +118,45 @@ async function get(pathAndQuery: string, signal?: AbortSignal): Promise<string> 
   return res.text()
 }
 
+/**
+ * Book names grouped by their exact language list. kiwix-serve refuses a search
+ * that mixes books in different languages ("Two or more books in different
+ * languages would participate in search"), and filtering by one language is not
+ * enough when a multilingual book lists several. Each group can be searched at once.
+ */
+export function booksByLanguage(books: Pick<LibraryBook, 'name' | 'language'>[]): string[][] {
+  const groups = new Map<string, string[]>()
+  for (const b of books) {
+    if (!b.name) continue
+    const key = b.language || '?'
+    groups.set(key, [...(groups.get(key) ?? []), b.name])
+  }
+  return [...groups.values()]
+}
+
 export async function searchLibrary(
   query: string,
   opts: { book?: string; limit?: number; signal?: AbortSignal } = {}
 ): Promise<LibraryHit[]> {
-  const params = new URLSearchParams({
-    pattern: query,
-    format: 'xml',
-    pageLength: String(Math.min(Math.max(opts.limit ?? 8, 1), 20)),
-  })
-  if (opts.book) params.set('books.name', opts.book)
-  return parseSearchXml(await get(`/search?${params}`, opts.signal))
+  const pageLength = Math.min(Math.max(opts.limit ?? 8, 1), 20)
+  const search = (books: string[]) => {
+    const params = new URLSearchParams({ pattern: query, format: 'xml', pageLength: String(pageLength) })
+    for (const name of books) params.append('books.name', name)
+    return get(`/search?${params}`, opts.signal).then(parseSearchXml)
+  }
+  if (opts.book) return search([opts.book])
+
+  // Fork: a library with books in several languages is searched one language group
+  // at a time, and the hits are interleaved so each group's best results come first.
+  const groups = booksByLanguage(await listBooks(opts.signal))
+  if (groups.length <= 1) return search(groups[0] ?? [])
+  const settled = await Promise.allSettled(groups.map((g) => search(g)))
+  const lists = settled.flatMap((r) => (r.status === 'fulfilled' ? [r.value] : []))
+  if (lists.length === 0) throw (settled[0] as PromiseRejectedResult).reason
+  const hits: LibraryHit[] = []
+  for (let i = 0; hits.length < pageLength && lists.some((l) => i < l.length); i++)
+    for (const l of lists) if (i < l.length && hits.length < pageLength) hits.push(l[i])
+  return hits
 }
 
 export async function listBooks(signal?: AbortSignal): Promise<LibraryBook[]> {
