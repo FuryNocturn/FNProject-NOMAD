@@ -18,6 +18,8 @@ type MapMarkerFormPopupProps = {
     longitude: number
     latitude: number
     initialMarker?: MapMarker
+    /** Prefilled name for a new marker (e.g. "Save as pin" on a place); not counted as an edit */
+    initialName?: string
     onSave: (values: {
         id?: number
         name: string
@@ -35,13 +37,15 @@ export default function MapMarkerFormPopup({
                                                longitude,
                                                latitude,
                                                initialMarker,
+                                               initialName,
                                                onSave,
                                                onCancel,
                                                onDirtyChange,
                                                onMouseEnter,
                                            }: MapMarkerFormPopupProps) {
     const {t} = useTranslation()
-    const [name, setName] = useState(initialMarker?.name ?? '')
+    const baselineName = initialMarker?.name ?? initialName ?? ''
+    const [name, setName] = useState(baselineName)
     const [notes, setNotes] = useState(initialMarker?.notes ?? '')
     const [color, setColor] = useState<PinColorId>(initialMarker?.color ?? 'orange')
     const [customColor, setCustomColor] = useState<string | null>(initialMarker?.customColor ?? null)
@@ -72,7 +76,7 @@ export default function MapMarkerFormPopup({
     }, [])
 
     const isDirty =
-        name !== (initialMarker?.name ?? '') ||
+        name !== baselineName ||
         notes !== (initialMarker?.notes ?? '') ||
         color !== (initialMarker?.color ?? 'orange') ||
         customColor !== (initialMarker?.customColor ?? null) ||
